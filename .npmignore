@@ -1,0 +1,12 @@
+*.iml
+.idea
+.babelrc
+.npmignore
+.gitignore
+.eslintrc.json
+src
+test
+examples
+webpack.config.example.js
+.DS_Store
+db.json

@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.fr {
+    float: right;
+}
+
+.react-table {
+    margin: 10px;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    border-spacing: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background-color: transparent;
+}
+
+.table thead {
+    display: table-header-group
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+    padding: 8px;
+    position: relative;
+    vertical-align: top;
+    line-height: 1.42857143;
+    border-top: 1px solid #ddd
+}
+
+.table > colgroup + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > td,
+.table > thead:first-child > tr:first-child > th {
+    border-top: 0
+}
+
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > td,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > thead > tr > th {
+    border: 1px solid #ddd;
+    border-left: 0;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9
+}
+
+.el-table-wrapper {
+    position: relative;
+    border: 1px solid #ddd;
+}
+
+.el-table {
+    color: #333;
+    width: 100%;
+    font-size: 14px;
+    line-height: 40px;
+}
+
+.el-table.table-fixed,
+.el-table.table-fixed .table {
+    width: auto;
+}
+
+.el-table .table-container {
+    overflow: auto;
+    position: relative;
+}
+
+.el-table-wrapper .el-table-footer {
+    padding: 10px;
+}
+
+.react-table .el-table-title {
+    padding: 10px 0;
+}
+
+.table-fixed .table-container,
+.table-container.table-header-container {
+    overflow: hidden;
+}
+
+.el-table .table > thead > tr > th {
+    background: #fff;
+}
+
+.el-table .table-bordered > tbody > tr > td:last-child,
+.el-table .table-bordered > thead > tr > th:last-child {
+    border-right-width: 0;
+}
+
+.table-fixed {
+    top: 0;
+    position: absolute;
+}
+
+.table-left-fixed {
+    left: 0;
+    border-right: 0;
+    box-shadow: 4px 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.table-left-fixed .table {
+    border-right: 0
+}
+
+.table-right-fixed {
+    right: 0;
+    border-left: 0;
+}
+
+.table-right-fixed {
+    border-left: 0;
+    box-shadow: -4px 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.react-table.ellipsis .table th,
+.react-table.ellipsis .table td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.react-table.break .table th,
+.react-table.break .table td {
+    white-space: normal;
+    word-break: break-all;
+    vertical-align: top;
+}
+
+.el-table.table-nestedHead {
+    border: 1px solid #ddd;
+    border-bottom: 0;
+    overflow: hidden;
+}
+
+.table-nestedHead .table-bordered {
+    border-bottom: 0;
+}
+
+.table-nestedHead .table-bordered thead > tr > th {
+    border-bottom: 0;
+}
+
+.table-body-container .table-bordered > tbody > tr:first-child > td {
+    border-top: 0;
+}
+
+.table-nestedHead .table-bordered > thead > tr:last-child > th {
+    border-top: 0;
+}
+
+.el-table .table-striped > tbody > tr:nth-of-type(even) {
+    background: #fff;
+}
