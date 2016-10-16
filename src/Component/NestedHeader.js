@@ -15,12 +15,10 @@ export default class NestedTreeHeader extends Component {
 
     nestedHeadRender() {
         let output = [];
-        const {nestedHead, selectRow} = this.props;
-        const select = selectRow.mode !== 'none';
+        const {nestedHead} = this.props;
         nestedHead.map((throws, index) => {
             let item =
                 <tr key={'trow' + index}>
-                    {select && <th key='trow-1'/>}
                     {throws.map((cell, i) => {
                         let obj = isObj(cell);
                         return <th colSpan={obj && cell.colspan || null}
@@ -34,11 +32,8 @@ export default class NestedTreeHeader extends Component {
     }
 
     colgroupRender() {
-        const {cols, selectRow} = this.props;
+        const {cols} = this.props;
         let output = [];
-        if (selectRow.mode !== 'none' && !selectRow.hideSelectColumn) {
-            output.push(<col key="select" style={{textAlign: 'center', width: 36}}/>);
-        }
         cols.map((item, i)=> {
             output.push(<col key={i} style={{display: item.hidden && 'none'}}/>)
         });

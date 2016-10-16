@@ -2,10 +2,14 @@
  * Created by Elly on 2016/5/27.
  */
 
-import TreeTable from './Component/TreeTable';
-import TreeHeadCol from './Component/TreeHeadCol';
+import Table from './Component/Table';
+import HeadCol from './Component/HeadCol';
+import Pagination from './Component/Pagination/Pagination';
+import Dropdown from './Component/Pagination/DropdownList';
 
 export {
-    TreeTable,
-    TreeHeadCol
+    Table,
+    HeadCol,
+    Pagination,
+    Dropdown
 };

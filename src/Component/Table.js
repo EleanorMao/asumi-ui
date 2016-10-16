@@ -7,9 +7,9 @@ import React, {
     Component,
     PropTypes
 } from 'react';
-import TreeRow          from './TreeRow';
-import TreeHeader       from './TreeHeader';
-import NestedTreeHeader from './NestedTreeHeader';
+import Row          from './Row';
+import Header       from './Header';
+import NestedHeader from './NestedHeader';
 import Paging           from './Pagination/Pagination';
 import Dropdown         from './Pagination/DropdownList';
 import {empty, sort, diff, getScrollBarWidth} from './Util';
@@ -265,7 +265,7 @@ export default class TreeTable extends Component {
         if (!remote) {
             this.setState(prevState=> {
                 prevState.length = length;
-                if (!remote && (page - 1) * length > prevState.renderedList.length) {
+                if (!remote && (page - 1) * length > prevState.data.length) {
                     prevState.currentPage = 1;
                 }
                 return prevState;
@@ -320,7 +320,7 @@ export default class TreeTable extends Component {
                 let node = data[i];
                 let key = node[isKey];
                 output.push(
-                    <TreeRow
+                    <Row
                         key={key}
                         data={node}
                         cols={cols}
@@ -413,7 +413,7 @@ export default class TreeTable extends Component {
             dataSize,
             pagination
         } = this.props;
-        if (pagination && options.paginationShowsTotal && data.length) {
+        if (pagination && options.paginationShowsTotal) {
             const len = remote ? options.sizePerPage : this.state.length;
             const current = remote ? (options.page - 1) * len : (this.state.currentPage - 1) * len;
             const start = remote ? current + 1 : Math.min(data.length, current + 1);
@@ -496,7 +496,7 @@ export default class TreeTable extends Component {
     }
 
     pagingRowRender() {
-        if (!this.props.pagination) return null;
+        if (!this.props.pagination || !this.props.data.length) return null;
         return (
             <div className="row">
                 <div className="col-sm-6">
@@ -562,7 +562,7 @@ export default class TreeTable extends Component {
                 {this.titleRender()}
                 {
                     !!nestedHead.length &&
-                    <NestedTreeHeader
+                    <NestedHeader
                         ref="nested" nestedHead={nestedHead}
                         selectRow={selectRow} lineWrap={lineWrap}
                         cols={this.columnData}
@@ -570,7 +570,7 @@ export default class TreeTable extends Component {
                 }
                 <div className="el-table-wrapper" style={{width: width || '100%'}}>
                     <div className="el-table">
-                        <TreeHeader
+                        <Header
                             ref="thead"
                             onSelectAll={this.handleSelectAll.bind(this)}
                             selectRow={selectRow} checked={checked}
@@ -579,13 +579,13 @@ export default class TreeTable extends Component {
                             onSort={this.handleSort.bind(this)}
                         >
                             {children}
-                        </TreeHeader>
+                        </Header>
                         {this.bodyRender(renderList, height, selectRow)}
                     </div>
                     {
                         !!this.leftColumnData.length &&
                         <div className="el-table table-fixed table-left-fixed">
-                            <TreeHeader
+                            <Header
                                 ref="lthead" left={this.leftColumnData.length}
                                 onSelectAll={this.handleSelectAll.bind(this)}
                                 selectRow={selectRow} checked={checked}
@@ -594,21 +594,21 @@ export default class TreeTable extends Component {
                                 onSort={this.handleSort.bind(this)}
                             >
                                 {children}
-                            </TreeHeader>
+                            </Header>
                             {this.leftBodyRender(renderList, height, selectRow)}
                         </div>
                     }
                     {
                         !!this.rightColumnData.length &&
                         <div className="el-table table-fixed table-right-fixed">
-                            <TreeHeader
+                            <Header
                                 ref="rthead" right={this.rightColumnData.length}
                                 sortName={remote ? sortName : sortField}
                                 sortOrder={remote ? sortOrder : order}
                                 onSort={this.handleSort.bind(this)}
                             >
                                 {children}
-                            </TreeHeader>
+                            </Header>
                             {this.rightBodyRender(renderList, height)}
                         </div>
                     }
