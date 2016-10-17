@@ -60,9 +60,9 @@ export default class TreeHeader extends Component {
             selectRow,
             onSelectAll
         } = this.props;
-        let i = 0;
+        let i = 0, colSpan, target;
         let renderChildren = isArr(children) ? children : [children];
-        renderChildren = sort(renderChildren, 123).sorted;
+        renderChildren = sort(renderChildren).sorted;
         return (
             <div className="table-container table-header-container" ref="header">
                 <table className="table table-bordered">
@@ -73,6 +73,14 @@ export default class TreeHeader extends Component {
                         {  React.Children.map(renderChildren, (elm)=> {
                             if (left && elm.props.dataFixed !== 'left') return;
                             if (right && elm.props.dataFixed !== 'right') return;
+                            if (colSpan && target < i && i < colSpan) {
+                                i++;
+                                return;
+                            }
+                            if (elm.props.colSpan) {
+                                target = i;
+                                colSpan = elm.props.colSpan + i;
+                            }
                             return React.cloneElement(elm, {key: i++, onSort, sortName, sortOrder});
                         })}
                     </tr>

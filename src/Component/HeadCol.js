@@ -32,6 +32,7 @@ class TreeHeadCol extends Component {
             width,
             hidden,
             onSort,
+            colSpan,
             children,
             dataSort,
             sortName,
@@ -48,8 +49,10 @@ class TreeHeadCol extends Component {
         };
 
         return (
-            <th style={style}
-                onClick={dataSort ? ()=>onSort(dataField,sortOrder === 'asc' ? 'desc': 'asc') : ()=>{return false;}}>
+            <th style={style} colSpan={colSpan}
+                onClick={dataSort ? ()=>onSort(dataField, sortOrder === 'asc' ? 'desc' : 'asc') : ()=> {
+                    return false;
+                }}>
                 <span>{children}</span>{dataSort && this.caretRender(dataField, sortName, sortOrder)}
             </th>
         );
@@ -57,6 +60,7 @@ class TreeHeadCol extends Component {
 }
 
 TreeHeadCol.defaultProps = {
+    colSpan: null,
     dataSort: false,
     dataFixed: 'auto',
     showArrow: undefined
@@ -65,6 +69,7 @@ TreeHeadCol.defaultProps = {
 TreeHeadCol.propTypes = {
     hidden: PropTypes.bool,
     dataSort: PropTypes.bool,
+    colSpan: PropTypes.number,
     dataFormat: PropTypes.func,
     dataFixed: PropTypes.oneOf(['left', 'right', 'auto']),
     dataAlign: PropTypes.oneOf(['left', 'right', 'center']),

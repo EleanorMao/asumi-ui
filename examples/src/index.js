@@ -54,7 +54,7 @@ class Main extends Component {
         };
         const options = {
             page: 1,
-            sizePerPage: 1,
+            sizePerPage:1,
             sizePageList: [10, 20, 30],
             paginationShowsTotal: true,
             onPageChange: function (page, sizePerPage) {
@@ -103,6 +103,20 @@ class Main extends Component {
         };
         return (
             <div>
+                <div style={style}>
+                    <Table
+                        isKey="id"
+                        data={list}
+                        title="colspan"
+                    >
+                        <HeadCol dataField="id" dataAlign="center" colSpan={2}>id</HeadCol>
+                        <HeadCol dataAlign='center' dataField='regionRoleName' colSpan={2}>区域角色</HeadCol>
+                        <HeadCol dataAlign='center' dataField='systemRoleName'>系统角色</HeadCol>
+                        <HeadCol dataAlign='center' dataField='region'>区域</HeadCol>
+                        <HeadCol dataAlign='center' dataField='createTime'>创建时间</HeadCol>
+                        <HeadCol dataAlign='center' dataField='description'>描述</HeadCol>
+                    </Table>
+                </div>
                 <div style={style}>
                     <Table
                         isKey="id"

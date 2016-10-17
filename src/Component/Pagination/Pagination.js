@@ -29,7 +29,10 @@ export default class Pagination extends Component {
             startLabel,
             sizePerPage,
             onPageChange,
-            paginationSize
+            hideEndLabel,
+            hideStartLabel,
+            paginationSize,
+            showTotalPages
         } = this.props;
         const totalPages = Math.ceil(dataSize / sizePerPage);
         if (current > paginationSize - 1) {
@@ -46,7 +49,7 @@ export default class Pagination extends Component {
         }
         let PageButtons = [
             <PageButton
-                label={startLabel} hidden={this.startPage === 1}
+                label={startLabel} hidden={hideStartLabel || this.startPage === 1}
                 key='start' onClick={() =>onPageChange(1, sizePerPage)}/>,
             <PageButton
                 label={prevLabel} hidden={current === 1}
@@ -63,14 +66,18 @@ export default class Pagination extends Component {
         );
         PageButtons.push(
             <PageButton
-                label={endLabel} hidden={this.lastPage === totalPages}
+                label={endLabel} hidden={hideEndLabel || this.lastPage === totalPages}
                 key='end' onClick={() =>onPageChange(totalPages, sizePerPage)}/>
         );
 
         return (
-            <ul className="pagination">
-                {PageButtons}
-            </ul>
+            <div>
+                <ul className="pagination">
+                    {PageButtons}
+                </ul>
+                {showTotalPages && 
+                <span className="ml-10">共 {totalPages} 页</span>}
+            </div>
         )
     }
 }
@@ -79,6 +86,9 @@ Pagination.propTypes = {
     current: PropTypes.number,
     dataSize: PropTypes.number,
     sizePerPage: PropTypes.number,
+    hideEndLabel: PropTypes.bool,
+    hideStartLabel: PropTypes.bool,
+    showTotalPages: PropTypes.bool,
     paginationSize: PropTypes.number
 }
 
@@ -86,8 +96,11 @@ Pagination.defaultProps = {
     current: 10,
     sizePerPage: 10,
     paginationSize: 6,
-    prevLabel: <span>&lt;</span>,
-    nextLabel: <span>&gt;</span>,
-    startLabel: <span>&lt;&lt;</span>,
-    endLabel: <span>&gt;&gt;</span>
+    hideEndLabel: true,
+    hideStartLabel: true,
+    showTotalPages: true,
+    prevLabel: '上一页',
+    nextLabel: '下一页',
+    startLabel: '首页',
+    endLabel: '尾页'
 }

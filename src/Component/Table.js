@@ -7,12 +7,17 @@ import React, {
     Component,
     PropTypes
 } from 'react';
-import Row          from './Row';
-import Header       from './Header';
+import Row from './Row';
+import Header from './Header';
 import NestedHeader from './NestedHeader';
-import Paging           from './Pagination/Pagination';
-import Dropdown         from './Pagination/DropdownList';
-import {empty, sort, diff, getScrollBarWidth} from './Util';
+import Paging from './Pagination/Pagination';
+import Dropdown from './Pagination/DropdownList';
+import {
+    empty,
+    sort,
+    diff,
+    getScrollBarWidth
+} from './Util';
 
 require('../style/table.css');
 
@@ -38,6 +43,7 @@ export default class TreeTable extends Component {
                 id: column.props.dataField,
                 name: column.props.children,
                 hidden: column.props.hidden,
+                colSpan: column.props.colSpan,
                 showArrow: column.props.showArrow,
                 dataAlign: column.props.dataAlign,
                 dataFixed: column.props.dataFixed,
@@ -136,8 +142,8 @@ export default class TreeTable extends Component {
             const ltbody = this.refs.ltbody && this.refs.ltbody.childNodes;
             const rtbody = this.refs.rtbody && this.refs.rtbody.childNodes;
             const headHeight = getComputedStyle(this.refs.thead.refs.thead).height;
-            if (this.refs.lthead)  this.refs.lthead.refs.thead.style.height = headHeight;
-            if (this.refs.rthead)  this.refs.rthead.refs.thead.style.height = headHeight;
+            if (this.refs.lthead) this.refs.lthead.refs.thead.style.height = headHeight;
+            if (this.refs.rthead) this.refs.rthead.refs.thead.style.height = headHeight;
             for (let i = 0; i < tbody.length; i++) {
                 let row = tbody[i];
                 let height = getComputedStyle(row).height;
@@ -159,7 +165,10 @@ export default class TreeTable extends Component {
     }
 
     _tryRender() {
-        const {selectRow, nestedHead} = this.props;
+        const {
+            selectRow,
+            nestedHead
+        } = this.props;
         const warning = 'color:red';
 
         if (nestedHead.length && (this.leftColumnData.length || this.rightColumnData.length)) {
@@ -199,7 +208,7 @@ export default class TreeTable extends Component {
     componentWillReceiveProps(nextProps) {
         this._initColumnData(nextProps);
 
-        this.setState(prevState=> {
+        this.setState(prevState => {
             prevState.data = nextProps.data.slice();
             prevState.length = nextProps.options.sizePerPage || 0;
             prevState.currentPage = nextProps.pagination && nextProps.options.page || this.state.currentPage;
@@ -216,7 +225,10 @@ export default class TreeTable extends Component {
     }
 
     handleSort(sortField, order) {
-        const {remote, onSortChange} = this.props;
+        const {
+            remote,
+            onSortChange
+        } = this.props;
         if (remote) {
             onSortChange(sortField, order)
         } else {
@@ -240,7 +252,7 @@ export default class TreeTable extends Component {
                 }
             });
 
-            this.setState(prevState=> {
+            this.setState(prevState => {
                 prevState.data = data;
                 prevState.order = order;
                 prevState.sortField = sortField;
@@ -260,10 +272,13 @@ export default class TreeTable extends Component {
     }
 
     handleFlip(length) {
-        const {remote, options} = this.props;
+        const {
+            remote,
+            options
+        } = this.props;
         const page = remote ? options.page : this.state.currentPage;
         if (!remote) {
-            this.setState(prevState=> {
+            this.setState(prevState => {
                 prevState.length = length;
                 if (!remote && (page - 1) * length > prevState.data.length) {
                     prevState.currentPage = 1;
@@ -319,8 +334,7 @@ export default class TreeTable extends Component {
             for (let i = 0; i < data.length; i++) {
                 let node = data[i];
                 let key = node[isKey];
-                output.push(
-                    <Row
+                output.push(<Row
                         key={key}
                         data={node}
                         cols={cols}
@@ -330,9 +344,9 @@ export default class TreeTable extends Component {
                         hover={isHover === key}
                         hoverStyle={hoverStyle}
                         hideSelectColumn={hideSelectColumn}
-                        onMouseOut={hover ? this.handleHover.bind(this, null) : ()=> {
+                        onMouseOut={hover ? this.handleHover.bind(this, null) : () => {
                         }}
-                        onMouseOver={hover ? this.handleHover.bind(this, key) : ()=> {
+                        onMouseOver={hover ? this.handleHover.bind(this, key) : () => {
                         }}
                         checked={selectRow.mode === 'checkbox' ?
                             !!~selectRow.selected.indexOf(key) : selectRow.selected[0] === key}
@@ -474,19 +488,25 @@ export default class TreeTable extends Component {
                             nextLabel={options.nextLabel}
                             startLabel={options.startLabel}
                             sizePerPage={options.sizePerPage}
+                            hideEndLabel={options.hideEndLabel}
                             paginationSize={options.paginationSize}
+                            hideStartLabel={options.hideStartLabel}
+                            showTotalPages={options.showTotalPages}
                             onPageChange={options.onPageChange}
                         />
                         :
                         <Paging
                             endLabel={options.endLabel}
-                            current={this.state.currentPage}
                             prevLabel={options.prevLabel}
                             nextLabel={options.nextLabel}
                             sizePerPage={this.state.length}
                             startLabel={options.startLabel}
+                            current={this.state.currentPage}
                             dataSize={this.props.data.length}
+                            hideEndLabel={options.hideEndLabel}
                             paginationSize={options.paginationSize}
+                            hideStartLabel={options.hideStartLabel}
+                            showTotalPages={options.showTotalPages}
                             onPageChange={this.handleClick.bind(this)}
                         />
                     }
@@ -633,7 +653,9 @@ TreeTable.defaultProps = {
     sortOrder: undefined,
     lineWrap: 'ellipsis',
     noDataText: <span>暂无数据</span>,
-    hoverStyle: {backgroundColor: '#f5f5f5'},
+    hoverStyle: {
+        backgroundColor: '#f5f5f5'
+    },
     selectRow: {
         mode: 'none',
         selected: [],
@@ -660,7 +682,6 @@ TreeTable.propTypes = {
     onSortChange: PropTypes.func,
     hoverStyle: PropTypes.object,
     isKey: PropTypes.string.isRequired,
-    childrenPropertyName: PropTypes.string,
     nestedHead: PropTypes.arrayOf(PropTypes.array),
     lineWrap: PropTypes.oneOf(['ellipsis', 'break']),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
