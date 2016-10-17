@@ -49,10 +49,11 @@ export default class Pagination extends Component {
         }
         let PageButtons = [
             <PageButton
-                label={startLabel} hidden={hideStartLabel || this.startPage === 1}
+                disabled={this.startPage === 1}
+                label={startLabel} hidden={hideStartLabel}
                 key='start' onClick={() =>onPageChange(1, sizePerPage)}/>,
             <PageButton
-                label={prevLabel} hidden={current === 1}
+                label={prevLabel} disabled={current === 1}
                 key='prev' onClick={() =>onPageChange(current - 1, sizePerPage)}/>
         ];
         for (let i = this.startPage; i < this.lastPage + 1; i++) {
@@ -61,12 +62,13 @@ export default class Pagination extends Component {
         }
         PageButtons.push(
             <PageButton
-                label={nextLabel} hidden={current === totalPages || totalPages < 1}
+                label={nextLabel} disabled={current === totalPages || totalPages < 1}
                 key='next' onClick={() =>onPageChange(current + 1, sizePerPage)}/>
         );
         PageButtons.push(
             <PageButton
-                label={endLabel} hidden={hideEndLabel || this.lastPage === totalPages}
+                label={endLabel} hidden={hideEndLabel}
+                disabled={this.lastPage === totalPages}
                 key='end' onClick={() =>onPageChange(totalPages, sizePerPage)}/>
         );
 
@@ -76,7 +78,7 @@ export default class Pagination extends Component {
                     {PageButtons}
                 </ul>
                 {showTotalPages && 
-                <span className="ml-10">共 {totalPages} 页</span>}
+                <span className="totalPages">共 {totalPages} 页</span>}
             </div>
         )
     }
@@ -99,8 +101,8 @@ Pagination.defaultProps = {
     hideEndLabel: true,
     hideStartLabel: true,
     showTotalPages: true,
-    prevLabel: '上一页',
-    nextLabel: '下一页',
+    prevLabel: <span><span className="caret left"></span>上一页</span>,
+    nextLabel: <span>下一页<span className="caret right"></span></span>,
     startLabel: '首页',
     endLabel: '尾页'
 }

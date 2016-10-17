@@ -1,4 +1,6 @@
-import React, {Component} from 'react';
+import React, {
+    Component
+} from 'react';
 import classSet from 'classnames';
 
 export default class PageButton extends Component {
@@ -7,7 +9,13 @@ export default class PageButton extends Component {
     }
 
     render() {
-        const {active, disabled, hidden, label, onClick} = this.props;
+        const {
+            active,
+            disabled,
+            hidden,
+            label,
+            onClick
+        } = this.props;
         const className = classSet({
             active: active,
             disabled: disabled,
@@ -17,7 +25,7 @@ export default class PageButton extends Component {
             <li className={ className }>
                 <a href="#" onClick={(e) => {
                     e.preventDefault();
-                    onClick()
+                    !disabled && onClick()
                 }}><span>{label}</span></a>
             </li>
         )

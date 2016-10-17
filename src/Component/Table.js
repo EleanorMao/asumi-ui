@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import Row from './Row';
 import Header from './Header';
+import classSet from 'classnames';
 import NestedHeader from './NestedHeader';
 import Paging from './Pagination/Pagination';
 import Dropdown from './Pagination/DropdownList';
@@ -301,7 +302,7 @@ export default class TreeTable extends Component {
     colgroupRender(data, mode) {
         let output = [];
         if (mode !== 'none') {
-            output.push(<col key="select" style={{textAlign: 'center', width: 36}}/>)
+            output.push(<col key="select" style={{textAlign: 'center', width: 46}}/>)
         }
         data.map((item, index) => {
             let style = {
@@ -366,11 +367,11 @@ export default class TreeTable extends Component {
         );
     }
 
-    bodyRender(data, height, selectRow) {
+    bodyRender(data, className, height, selectRow) {
         return (
             <div className="table-container table-body-container" style={{height: height || 'auto'}}
                  ref="container">
-                <table className="table table-bordered table-striped table-hover" ref="body">
+                <table className={className} ref="body">
                     <colgroup ref="colgroup">
                         {this.colgroupRender(this.columnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
                     </colgroup>
@@ -383,11 +384,11 @@ export default class TreeTable extends Component {
         )
     }
 
-    leftBodyRender(data, height, selectRow) {
+    leftBodyRender(data, className, height, selectRow) {
         if (this.leftColumnData.length) {
             return (
                 <div className="table-container table-body-container" style={{height: height || 'auto'}}>
-                    <table className="table table-bordered table-striped table-hover">
+                    <table className={className}>
                         <colgroup ref="left">
                             {this.colgroupRender(this.leftColumnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
                         </colgroup>
@@ -401,11 +402,11 @@ export default class TreeTable extends Component {
         }
     }
 
-    rightBodyRender(data, height) {
+    rightBodyRender(data, className, height) {
         if (this.rightColumnData.length) {
             return (
                 <div className="table-container table-body-container" style={{height: height || 'auto'}}>
-                    <table className="table table-bordered table-striped table-hover">
+                    <table className={className}>
                         <colgroup ref="right">
                             {this.colgroupRender(this.rightColumnData, 'none')}
                         </colgroup>
@@ -556,6 +557,7 @@ export default class TreeTable extends Component {
             isKey,
             remote,
             height,
+            striped,
             children,
             sortName,
             lineWrap,
@@ -573,6 +575,11 @@ export default class TreeTable extends Component {
         } = this.state;
 
         let checked = false;
+        const className = classSet({
+            'table': true,
+            'table-bordered': true,
+            'table-striped': striped
+        });
         const renderList = pagination && !remote ? this._sliceData(data, currentPage, length) : data.slice();
         if (selectRow.mode !== 'none') {
             checked = this._getAllValue(renderList.slice(), isKey).sort().toString() === selectRow.selected.slice().sort().toString();
@@ -600,7 +607,7 @@ export default class TreeTable extends Component {
                         >
                             {children}
                         </Header>
-                        {this.bodyRender(renderList, height, selectRow)}
+                        {this.bodyRender(renderList, className, height, selectRow)}
                     </div>
                     {
                         !!this.leftColumnData.length &&
@@ -615,7 +622,7 @@ export default class TreeTable extends Component {
                             >
                                 {children}
                             </Header>
-                            {this.leftBodyRender(renderList, height, selectRow)}
+                            {this.leftBodyRender(renderList, className, height, selectRow)}
                         </div>
                     }
                     {
@@ -629,7 +636,7 @@ export default class TreeTable extends Component {
                             >
                                 {children}
                             </Header>
-                            {this.rightBodyRender(renderList, height)}
+                            {this.rightBodyRender(renderList, className, height)}
                         </div>
                     }
                     {this.footerRender()}
@@ -646,6 +653,7 @@ TreeTable.defaultProps = {
     dataSize: 0,
     hover: true,
     remote: false,
+    striped: false,
     nestedHead: [],
     pagination: false,
     onSortChange: empty,
@@ -654,7 +662,7 @@ TreeTable.defaultProps = {
     lineWrap: 'ellipsis',
     noDataText: <span>暂无数据</span>,
     hoverStyle: {
-        backgroundColor: '#f5f5f5'
+        backgroundColor: '#f4f5f9'
     },
     selectRow: {
         mode: 'none',
@@ -677,6 +685,7 @@ TreeTable.propTypes = {
     data: PropTypes.array,
     remote: PropTypes.bool,
     hover: PropTypes.bool,
+    striped: PropTypes.bool,
     dataSize: PropTypes.number,
     pagination: PropTypes.bool,
     onSortChange: PropTypes.func,

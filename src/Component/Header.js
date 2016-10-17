@@ -16,7 +16,7 @@ export default class TreeHeader extends Component {
     selectRender(mode, onSelectAll, checked) {
         if (mode === 'checkbox') {
             return (
-                <th onClick={()=>onSelectAll(!checked)} style={{textAlign: 'center', width: 30}} data-input={mode}>
+                <th onClick={()=>onSelectAll(!checked)} style={{textAlign: 'center', width: 46}} data-input={mode}>
                     <input type={mode} checked={checked} readOnly={true}/>
                 </th>
             )
@@ -32,7 +32,7 @@ export default class TreeHeader extends Component {
         return (
             <colgroup ref="colgroup">
                 {selectRow.mode !== 'none' && !selectRow.hideSelectColumn &&
-                <col key="select" style={{textAlign: 'center', width: 36}}/>}
+                <col key="select" style={{textAlign: 'center', width: 46}}/>}
                 {  React.Children.map(renderChildren, (elm)=> {
                     if (left && elm.props.dataFixed !== 'left') return;
                     if (right && elm.props.dataFixed !== 'right') return;

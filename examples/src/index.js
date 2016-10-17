@@ -55,8 +55,6 @@ class Main extends Component {
         const options = {
             page: 1,
             sizePerPage:1,
-            sizePageList: [10, 20, 30],
-            paginationShowsTotal: true,
             onPageChange: function (page, sizePerPage) {
 
             }
@@ -64,7 +62,7 @@ class Main extends Component {
 
         const selectRow = {
             mode: "checkbox",
-            bgColor: "rgb(238, 193, 213)",
+            bgColor: "#ffd800",
             selected: this.state.selected,
             hideSelectColumn: false,
             onSelectAll: (checked, currentSelected) => {
