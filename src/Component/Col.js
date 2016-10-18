@@ -60,6 +60,7 @@ class TreeHeadCol extends Component {
 }
 
 TreeHeadCol.defaultProps = {
+    render: null,
     colSpan: null,
     dataSort: false,
     dataFixed: 'auto',

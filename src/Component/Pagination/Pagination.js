@@ -95,7 +95,7 @@ Pagination.propTypes = {
 }
 
 Pagination.defaultProps = {
-    current: 10,
+    current: 1,
     sizePerPage: 10,
     paginationSize: 6,
     hideEndLabel: true,

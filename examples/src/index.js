@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {
     Table,
-    HeadCol
+    Col
 } from '../../src/Index.js';
 import {
     data,
@@ -54,7 +54,7 @@ class Main extends Component {
         };
         const options = {
             page: 1,
-            sizePerPage:1,
+            sizePerPage: 1,
             onPageChange: function (page, sizePerPage) {
 
             }
@@ -105,14 +105,25 @@ class Main extends Component {
                     <Table
                         isKey="id"
                         data={list}
-                        title="colspan"
+                        title="colspan && rowspan"
                     >
-                        <HeadCol dataField="id" dataAlign="center" colSpan={2}>id</HeadCol>
-                        <HeadCol dataAlign='center' dataField='regionRoleName' colSpan={2}>区域角色</HeadCol>
-                        <HeadCol dataAlign='center' dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' dataField='region'>区域</HeadCol>
-                        <HeadCol dataAlign='center' dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' dataField='description'>描述</HeadCol>
+                        <Col dataField="id" dataAlign="center" colSpan={2}>id</Col>
+                        <Col dataAlign='center' dataField='regionRoleName' colSpan={2}>区域角色</Col>
+                        <Col dataAlign='center' dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' dataField='region' render={(index)=> {
+                            if (index == 3) {
+                                return {colSpan: 2, rowSpan: 2}
+                            }
+                            if (index == 4) {
+                                return {rowSpan: 0}
+                            }
+                        }}>区域</Col>
+                        <Col dataAlign='center' dataField='createTime' render={(index)=> {
+                            if (index == 4) {
+                                return {rowSpan: 0}
+                            }
+                        }}>创建时间</Col>
+                        <Col dataAlign='center' dataField='description'>描述</Col>
                     </Table>
                 </div>
                 <div style={style}>
@@ -124,35 +135,35 @@ class Main extends Component {
                         title="选择框+nestedHead+宽度"
                         nestedHead={[['喵', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]]}
                     >
-                        <HeadCol dataField="id" dataAlign="center" dataFixed="auto">id</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='regionRoleName'
-                                 dataFixed="auto">区域角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataSort={true}
-                                 dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='region'
-                                 dataFixed="auto">区域</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='description'
-                                 dataFixed="auto">描述</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataFormat={()=> {
+                        <Col dataField="id" dataAlign="center" dataFixed="auto">id</Col>
+                        <Col dataAlign='center' width="150px" dataField='regionRoleName'
+                             dataFixed="auto">区域角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataSort={true}
+                             dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='region'
+                             dataFixed="auto">区域</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='description'
+                             dataFixed="auto">描述</Col>
+                        <Col dataAlign='center' width="150px" dataFormat={()=> {
                             return <a href="#">freedom!</a>
-                        }}>操作</HeadCol>
+                        }}>操作</Col>
                     </Table>
                 </div>
                 <div style={style}>
@@ -161,28 +172,28 @@ class Main extends Component {
                         data={list}
                         pagination={false}
                         selectRow={selectRow}
-                        title="选择+自定义headcol+排序"
+                        title="选择+自定义Col+排序"
                     >
-                        <HeadCol dataField="id" dataAlign="center" dataFixed="left">id</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='regionRoleName'
-                                 dataFixed="left">区域角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataSort={true}
-                                 dataField='systemRoleName'>系统角色123</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='region'
-                                 dataFixed="left">区域</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='description'
-                                 dataFixed="auto">描述</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataFormat={()=> {
+                        <Col dataField="id" dataAlign="center" dataFixed="left">id</Col>
+                        <Col dataAlign='center' width="150px" dataField='regionRoleName'
+                             dataFixed="left">区域角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataSort={true}
+                             dataField='systemRoleName'>系统角色123</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='region'
+                             dataFixed="left">区域</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='description'
+                             dataFixed="auto">描述</Col>
+                        <Col dataAlign='center' width="150px" dataFormat={()=> {
                             return <a href="#">freedom!</a>
-                        }}>操作</HeadCol>
+                        }}>操作</Col>
                     </Table>
                 </div>
                 <div style={style}>
@@ -190,29 +201,30 @@ class Main extends Component {
                         isKey="id"
                         data={list}
                         pagination={true}
+                        topPagination={true}
                         options={options}
-                        title="选择+自定义headcol+排序"
+                        title="选择+自定义Col+排序"
                     >
-                        <HeadCol dataField="id" dataAlign="center" dataFixed="left">id</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='regionRoleName'
-                                 dataFixed="left">区域角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataSort={true}
-                                 dataField='systemRoleName'>系统角色123</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='region'
-                                 dataFixed="left">区域</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='createTime'>创建时间</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataField='description'
-                                 dataFixed="auto">描述</HeadCol>
-                        <HeadCol dataAlign='center' width="150px" dataFormat={()=> {
+                        <Col dataField="id" dataAlign="center" dataFixed="left">id</Col>
+                        <Col dataAlign='center' width="150px" dataField='regionRoleName'
+                             dataFixed="left">区域角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataSort={true}
+                             dataField='systemRoleName'>系统角色123</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
+                        <Col dataAlign='center' width="150px" dataField='region'
+                             dataFixed="left">区域</Col>
+                        <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
+                        <Col dataAlign='center' width="150px" dataField='description'
+                             dataFixed="auto">描述</Col>
+                        <Col dataAlign='center' width="150px" dataFormat={()=> {
                             return <a href="#">freedom!</a>
-                        }}>操作</HeadCol>
+                        }}>操作</Col>
                     </Table>
                 </div>
             </div>

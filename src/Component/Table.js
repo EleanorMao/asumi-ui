@@ -12,6 +12,7 @@ import Header from './Header';
 import classSet from 'classnames';
 import NestedHeader from './NestedHeader';
 import Paging from './Pagination/Pagination';
+import SimplePaging from './Pagination/SimplePagination';
 import Dropdown from './Pagination/DropdownList';
 import {
     empty,
@@ -30,8 +31,8 @@ export default class TreeTable extends Component {
             order: undefined,
             sortField: undefined,
             data: props.data.slice(),
-            currentPage: props.pagination && props.options.page || 1,
-            length: props.pagination && props.options.sizePerPage || 0
+            currentPage: (props.pagination || props.topPagination) && props.options.page || 1,
+            length: (props.pagination || props.topPagination) && props.options.sizePerPage || props.data.length
         }
     }
 
@@ -44,6 +45,7 @@ export default class TreeTable extends Component {
                 id: column.props.dataField,
                 name: column.props.children,
                 hidden: column.props.hidden,
+                render: column.props.render,
                 colSpan: column.props.colSpan,
                 showArrow: column.props.showArrow,
                 dataAlign: column.props.dataAlign,
@@ -211,8 +213,8 @@ export default class TreeTable extends Component {
 
         this.setState(prevState => {
             prevState.data = nextProps.data.slice();
-            prevState.length = nextProps.options.sizePerPage || 0;
-            prevState.currentPage = nextProps.pagination && nextProps.options.page || this.state.currentPage;
+            prevState.length = (nextProps.pagination || nextProps.topPagination) && nextProps.options.sizePerPage || nextProps.data.length;
+            prevState.currentPage = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
             return prevState;
         });
     }
@@ -335,10 +337,12 @@ export default class TreeTable extends Component {
             for (let i = 0; i < data.length; i++) {
                 let node = data[i];
                 let key = node[isKey];
-                output.push(<Row
+                output.push(
+                    <Row
                         key={key}
                         data={node}
                         cols={cols}
+                        colIndex={i}
                         isKey={isKey}
                         isSelect={isSelect}
                         selectRow={selectRow}
@@ -475,45 +479,75 @@ export default class TreeTable extends Component {
             remote,
             options,
             dataSize,
-            pagination
         } = this.props;
-        if (pagination) {
-            return (
-                <div className="fr">
-                    {  remote ?
-                        <Paging
-                            dataSize={dataSize}
-                            current={options.page}
-                            endLabel={options.endLabel}
-                            prevLabel={options.prevLabel}
-                            nextLabel={options.nextLabel}
-                            startLabel={options.startLabel}
-                            sizePerPage={options.sizePerPage}
-                            hideEndLabel={options.hideEndLabel}
-                            paginationSize={options.paginationSize}
-                            hideStartLabel={options.hideStartLabel}
-                            showTotalPages={options.showTotalPages}
-                            onPageChange={options.onPageChange}
-                        />
-                        :
-                        <Paging
-                            endLabel={options.endLabel}
-                            prevLabel={options.prevLabel}
-                            nextLabel={options.nextLabel}
-                            sizePerPage={this.state.length}
-                            startLabel={options.startLabel}
-                            current={this.state.currentPage}
-                            dataSize={this.props.data.length}
-                            hideEndLabel={options.hideEndLabel}
-                            paginationSize={options.paginationSize}
-                            hideStartLabel={options.hideStartLabel}
-                            showTotalPages={options.showTotalPages}
-                            onPageChange={this.handleClick.bind(this)}
-                        />
-                    }
-                </div>
-            )
-        }
+        return (
+            <div className="fr">
+                {  remote ?
+                    <Paging
+                        dataSize={dataSize}
+                        current={options.page}
+                        endLabel={options.endLabel}
+                        prevLabel={options.prevLabel}
+                        nextLabel={options.nextLabel}
+                        startLabel={options.startLabel}
+                        sizePerPage={options.sizePerPage}
+                        hideEndLabel={options.hideEndLabel}
+                        paginationSize={options.paginationSize}
+                        hideStartLabel={options.hideStartLabel}
+                        showTotalPages={options.showTotalPages}
+                        onPageChange={options.onPageChange}
+                    />
+                    :
+                    <Paging
+                        endLabel={options.endLabel}
+                        prevLabel={options.prevLabel}
+                        nextLabel={options.nextLabel}
+                        sizePerPage={this.state.length}
+                        startLabel={options.startLabel}
+                        current={this.state.currentPage}
+                        dataSize={this.props.data.length}
+                        hideEndLabel={options.hideEndLabel}
+                        paginationSize={options.paginationSize}
+                        hideStartLabel={options.hideStartLabel}
+                        showTotalPages={options.showTotalPages}
+                        onPageChange={this.handleClick.bind(this)}
+                    />
+                }
+            </div>
+        )
+    }
+
+    topPagingRender() {
+        const {
+            remote,
+            options,
+            dataSize
+        } = this.props;
+        return (
+            <div className="fr">
+                {  remote ?
+                    <SimplePaging
+                        dataSize={dataSize}
+                        current={options.page}
+                        showTotalPages={false}
+                        prevLabel={options.prevLabel}
+                        nextLabel={options.nextLabel}
+                        sizePerPage={options.sizePerPage}
+                        onPageChange={options.onPageChange}
+                    />
+                    :
+                    <SimplePaging
+                        showTotalPages={false}
+                        prevLabel={options.prevLabel}
+                        nextLabel={options.nextLabel}
+                        sizePerPage={this.state.length}
+                        current={this.state.currentPage}
+                        dataSize={this.props.data.length}
+                        onPageChange={this.handleClick.bind(this)}
+                    />
+                }
+            </div>
+        )
     }
 
     pagingRowRender() {
@@ -526,6 +560,18 @@ export default class TreeTable extends Component {
                 </div>
                 <div className="col-sm-6">
                     {this.pagingRender()}
+                </div>
+            </div>
+        )
+    }
+
+    topPagingRowRender() {
+        if (!this.props.topPagination || !this.props.data.length) return null;
+        return (
+            <div className="row">
+                <div className="col-sm-6"></div>
+                <div className="col-sm-6">
+                    {this.topPagingRender()}
                 </div>
             </div>
         )
@@ -564,7 +610,8 @@ export default class TreeTable extends Component {
             selectRow,
             sortOrder,
             nestedHead,
-            pagination
+            pagination,
+            topPagination
         } = this.props;
         const {
             data,
@@ -580,13 +627,14 @@ export default class TreeTable extends Component {
             'table-bordered': true,
             'table-striped': striped
         });
-        const renderList = pagination && !remote ? this._sliceData(data, currentPage, length) : data.slice();
+        const renderList = (topPagination || pagination) && !remote ? this._sliceData(data, currentPage, length) : data.slice();
         if (selectRow.mode !== 'none') {
             checked = this._getAllValue(renderList.slice(), isKey).sort().toString() === selectRow.selected.slice().sort().toString();
         }
         return (
             <div className={"react-table " + lineWrap}>
                 {this.titleRender()}
+                {this.topPagingRowRender()}
                 {
                     !!nestedHead.length &&
                     <NestedHeader
@@ -651,11 +699,12 @@ export default class TreeTable extends Component {
 TreeTable.defaultProps = {
     data: [],
     dataSize: 0,
-    hover: true,
+    hover: false,
     remote: false,
     striped: false,
     nestedHead: [],
     pagination: false,
+    topPagination: false,
     onSortChange: empty,
     sortName: undefined,
     sortOrder: undefined,
@@ -690,6 +739,7 @@ TreeTable.propTypes = {
     pagination: PropTypes.bool,
     onSortChange: PropTypes.func,
     hoverStyle: PropTypes.object,
+    topPagination: PropTypes.bool,
     isKey: PropTypes.string.isRequired,
     nestedHead: PropTypes.arrayOf(PropTypes.array),
     lineWrap: PropTypes.oneOf(['ellipsis', 'break']),
