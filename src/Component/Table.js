@@ -92,10 +92,9 @@ export default class TreeTable extends Component {
         const nestedRow = this.refs.nested && this.refs.nested.refs.colgroup.childNodes;
         const fixedLeftHeadRow = this.refs.lthead && this.refs.lthead.refs.colgroup.childNodes;
         const fixedRightHeadRow = this.refs.rthead && this.refs.rthead.refs.colgroup.childNodes;
+        const isNoData = this.refs.tbody.firstChild.childElementCount === 1;
         const length = cells.length;
-
         if (firstRow.length !== length) return;
-
         const scrollBarWidth = getScrollBarWidth();
         const haveScrollBar = this.refs.body.offsetWidth !== this.refs.thead.refs.header.offsetWidth;
         let lastChild = this._getLastChild(this.columnData);
@@ -118,12 +117,16 @@ export default class TreeTable extends Component {
                 cell.width = width + lastPaddingWidth + 'px';
             }
             const result = (width + lastPaddingWidth).toFixed(2) + 'px';
-            firstRow[i].style.width = result;
-            firstRow[i].style.maxWidth = result;
+
+            if (!isNoData) {
+                firstRow[i].style.width = result;
+                firstRow[i].style.maxWidth = result;
+            }
+
             if (nestedRow && nestedRow[i]) {
                 const display = computedStyle.display;
-                nestedRow[i].style.width = result;
-                nestedRow[i].style.maxWidth = result;
+                nestedRow[i].style.width = width.toFixed(2) + 'px';
+                nestedRow[i].style.maxWidth = width.toFixed(2) + 'px';
                 if (display === 'none') nestedRow[i].style.display = display;
             }
             if (fixedLeftRow && fixedLeftRow[i]) {
@@ -140,13 +143,13 @@ export default class TreeTable extends Component {
             }
         }
 
-        if (fixedLeftRow || fixedRightHeadRow) {
+        if (fixedLeftRow || fixedRightRow) {
             const tbody = this.refs.tbody.childNodes;
             const ltbody = this.refs.ltbody && this.refs.ltbody.childNodes;
             const rtbody = this.refs.rtbody && this.refs.rtbody.childNodes;
             const headHeight = getComputedStyle(this.refs.thead.refs.thead).height;
-            if (this.refs.lthead) this.refs.lthead.refs.thead.style.height = headHeight;
-            if (this.refs.rthead) this.refs.rthead.refs.thead.style.height = headHeight;
+            if (this.refs.lthead)  this.refs.lthead.refs.thead.style.height = headHeight;
+            if (this.refs.rthead)  this.refs.rthead.refs.thead.style.height = headHeight;
             for (let i = 0; i < tbody.length; i++) {
                 let row = tbody[i];
                 let height = getComputedStyle(row).height;
