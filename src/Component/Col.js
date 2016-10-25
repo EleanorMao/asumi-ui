@@ -79,4 +79,4 @@ Col.propTypes = {
     showArrow: PropTypes.oneOfType([PropTypes.func, PropTypes.bool])
 };
 
-export default TreeHeadCol;
+export default Col;

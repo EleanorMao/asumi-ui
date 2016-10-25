@@ -732,7 +732,7 @@ Table.defaultProps = {
     },
 };
 
-TreeTable.propTypes = {
+Table.propTypes = {
     data: PropTypes.array,
     remote: PropTypes.bool,
     hover: PropTypes.bool,
