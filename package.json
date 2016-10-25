@@ -1,5 +1,5 @@
 {
-  "name": "el-treetable",
+  "name": "@best/table",
   "version": "1.0.0",
   "description": "Table",
   "main": "lib/Index.js",
@@ -11,19 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EleanorMao/React-TreeTable.git"
+    "url": "git+https://git.coding.net/tsukito/ELLY-COMPONENT.git"
   },
   "keywords": [
     "react",
-    "tree",
     "table"
   ],
   "author": "Eleanor Mao",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/EleanorMao/React-TreeTable/issues"
-  },
-  "homepage": "https://github.com/EleanorMao/React-TreeTable#readme",
   "dependencies": {
     "classnames": "^2.2.5"
   },
