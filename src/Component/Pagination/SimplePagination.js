@@ -23,9 +23,9 @@ class SimplePagination extends Component {
         return (
             <div>
                 <ul className="pagination">
-                    <PageButton label={prevLabel} disabled={current - 1 <= 0}
+                    <PageButton label={prevLabel} disabled={current - 1 <= 0} pgBtn={true}
                                 onClick={() =>onPageChange(current - 1, sizePerPage)}/>
-                    <PageButton label={nextLabel} disabled={current + 1 > totalPages}
+                    <PageButton label={nextLabel} disabled={current + 1 > totalPages} pgBtn={true}
                                 onClick={() =>onPageChange(current + 1, sizePerPage)}/>
                 </ul>
                 {showTotalPages &&

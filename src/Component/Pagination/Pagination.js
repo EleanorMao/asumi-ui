@@ -50,10 +50,10 @@ export default class Pagination extends Component {
         let PageButtons = [
             <PageButton
                 disabled={this.startPage === 1}
-                label={startLabel} hidden={hideStartLabel}
+                label={startLabel} hidden={hideStartLabel}  pgBtn={true}
                 key='start' onClick={() =>onPageChange(1, sizePerPage)}/>,
             <PageButton
-                label={prevLabel} disabled={current === 1}
+                label={prevLabel} disabled={current === 1}  pgBtn={true}
                 key='prev' onClick={() =>onPageChange(current - 1, sizePerPage)}/>
         ];
         for (let i = this.startPage; i < this.lastPage + 1; i++) {
@@ -62,13 +62,13 @@ export default class Pagination extends Component {
         }
         PageButtons.push(
             <PageButton
-                label={nextLabel} disabled={current === totalPages || totalPages < 1}
+                label={nextLabel} disabled={current === totalPages || totalPages < 1} pgBtn={true}
                 key='next' onClick={() =>onPageChange(current + 1, sizePerPage)}/>
         );
         PageButtons.push(
             <PageButton
                 label={endLabel} hidden={hideEndLabel}
-                disabled={this.lastPage === totalPages}
+                disabled={this.lastPage === totalPages}  pgBtn={true}
                 key='end' onClick={() =>onPageChange(totalPages, sizePerPage)}/>
         );
 
@@ -98,8 +98,8 @@ Pagination.defaultProps = {
     current: 1,
     sizePerPage: 10,
     paginationSize: 6,
-    hideEndLabel: true,
-    hideStartLabel: true,
+    hideEndLabel: false,
+    hideStartLabel: false,
     showTotalPages: true,
     prevLabel: <span><span className="caret left"></span>上一页</span>,
     nextLabel: <span>下一页<span className="caret right"></span></span>,

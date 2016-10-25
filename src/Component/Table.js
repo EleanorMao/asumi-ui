@@ -557,11 +557,11 @@ export default class TreeTable extends Component {
         if (!this.props.pagination || !this.props.data.length) return null;
         return (
             <div className="row">
-                <div className="col-sm-6">
+                <div className="fl">
                     {this.dropDownListRender()}
                     {this.paginationTotalRender()}
                 </div>
-                <div className="col-sm-6">
+                <div className="fr">
                     {this.pagingRender()}
                 </div>
             </div>
@@ -572,8 +572,7 @@ export default class TreeTable extends Component {
         if (!this.props.topPagination || !this.props.data.length) return null;
         return (
             <div className="row">
-                <div className="col-sm-6"></div>
-                <div className="col-sm-6">
+                <div className="fr">
                     {this.topPagingRender()}
                 </div>
             </div>
