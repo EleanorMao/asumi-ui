@@ -40,6 +40,7 @@
     padding-left: 15px;
     float: right;
 }
+
 .react-table .fl {
     position: relative;
     min-height: 1px;
@@ -108,7 +109,7 @@
     line-height: 40px;
 }
 
-.el-table.table-fixed{
+.el-table.table-fixed {
     width: auto;
 }
 
@@ -210,7 +211,8 @@
     background: #fff;
 }
 
-.dropdown, .dropup {
+.dropdown,
+.dropup {
     position: relative;
 }
 
@@ -226,7 +228,7 @@
     border-bottom: 4px solid transparent;
 }
 
-.caret.left{
+.caret.left {
     border-right: 4px solid;
     border-bottom: 4px solid transparent;
     border-top: 4px solid transparent;
@@ -235,7 +237,7 @@
     margin-left: -4px
 }
 
-.caret.right{
+.caret.right {
     border-left: 4px solid;
     border-bottom: 4px solid transparent;
     border-top: 4px solid transparent;
@@ -318,13 +320,13 @@
     visibility: hidden !important;
 }
 
-.totalPages{
+.react-table .totalPages {
     margin-left: 30px;
     font-size: 14px;
     color: #333;
 }
 
-.btn {
+.react-table .btn {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
@@ -346,33 +348,33 @@
     border-radius: 4px;
 }
 
-.btn:focus {
+.react-table .btn:focus {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
 }
 
-.btn:hover,
-.btn:focus,
-.btn.focus {
+.react-table .btn:hover,
+.react-table .btn:focus,
+.react-table .btn.focus {
     color: #333;
     text-decoration: none;
 }
 
-.btn-default {
+.react-table .btn-default {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
 }
 
-.btn-default:focus,
-.btn-default.focus {
+.react-table .btn-default:focus,
+.el-table .btn-default.focus {
     color: #333;
     background-color: #e6e6e6;
     border-color: #8c8c8c;
 }
 
-.btn-default:hover {
+.el-table .btn-default:hover {
     color: #333;
     background-color: #e6e6e6;
     border-color: #adadad;
