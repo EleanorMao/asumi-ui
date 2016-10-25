@@ -8,7 +8,7 @@ import React, {
 
 import {isObj} from './Util';
 
-export default class NestedTreeHeader extends Component {
+export default class NestedHeader extends Component {
     constructor(props) {
         super(props);
     }
@@ -52,6 +52,6 @@ export default class NestedTreeHeader extends Component {
     }
 }
 
-NestedTreeHeader.defaultProps = {
+NestedHeader.defaultProps = {
     nestedHead: PropTypes.arrayOf(PropTypes.array)
 };

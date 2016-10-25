@@ -5,7 +5,7 @@ import React, {
     Component
 } from 'react';
 
-export default class TreeRow extends Component {
+export default class Row extends Component {
     constructor(props) {
         super(props);
     }
@@ -93,6 +93,6 @@ export default class TreeRow extends Component {
     }
 }
 
-TreeRow.defaultProps = {
+Row.defaultProps = {
     hideSelectColumn: false,
 };

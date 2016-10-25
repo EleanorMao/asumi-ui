@@ -8,7 +8,7 @@ import React, {
 
 import {empty, sort, isArr} from './Util';
 
-export default class TreeHeader extends Component {
+export default class Header extends Component {
     constructor(props) {
         super(props);
     }
@@ -91,7 +91,7 @@ export default class TreeHeader extends Component {
     }
 }
 
-TreeHeader.defaultProps = {
+Header.defaultProps = {
     left: 0,
     right: 0,
     selectRow: {

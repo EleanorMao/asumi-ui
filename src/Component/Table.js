@@ -23,7 +23,7 @@ import {
 
 require('../style/table.css');
 
-export default class TreeTable extends Component {
+export default class Table extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -698,7 +698,7 @@ export default class TreeTable extends Component {
     }
 }
 
-TreeTable.defaultProps = {
+Table.defaultProps = {
     data: [],
     dataSize: 0,
     hover: false,

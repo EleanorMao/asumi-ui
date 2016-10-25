@@ -3,7 +3,7 @@ import React, {
     PropTypes
 } from 'react';
 
-class TreeHeadCol extends Component {
+class Col extends Component {
     constructor(props) {
         super(props);
     }
@@ -59,15 +59,16 @@ class TreeHeadCol extends Component {
     }
 }
 
-TreeHeadCol.defaultProps = {
+Col.defaultProps = {
     render: null,
     colSpan: null,
     dataSort: false,
     dataFixed: 'auto',
+    dataAlign: 'center',
     showArrow: undefined
 };
 
-TreeHeadCol.propTypes = {
+Col.propTypes = {
     hidden: PropTypes.bool,
     dataSort: PropTypes.bool,
     colSpan: PropTypes.number,
