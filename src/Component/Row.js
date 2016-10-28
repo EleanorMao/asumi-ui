@@ -60,6 +60,7 @@ export default class Row extends Component {
                     key={'' + _key + i}
                     colSpan={props.colSpan}
                     rowSpan={props.rowSpan}
+                    title={typeof cell === 'string' ? cell : null}
                 >
                     {cell}
                 </td>
