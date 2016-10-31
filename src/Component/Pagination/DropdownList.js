@@ -73,7 +73,9 @@ export default class DropdownList extends Component {
                                 <li key={index}>
                                     <a href={item.href || '#'}
                                        onClick={(e)=> {
-                                           e.preventDefault();
+                                           if (!item.href) {
+                                               e.preventDefault();
+                                           }
                                            onClick(item)
                                        }}>{item.label || item}</a>
                                 </li>);
