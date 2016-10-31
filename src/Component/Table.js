@@ -21,8 +21,6 @@ import {
     getScrollBarWidth
 } from './Util';
 
-require('../style/table.css');
-
 export default class Table extends Component {
     constructor(props) {
         super(props);

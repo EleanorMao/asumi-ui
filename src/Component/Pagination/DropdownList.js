@@ -71,11 +71,11 @@ export default class DropdownList extends Component {
                         list.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <a href="#"
+                                    <a href={item.href || '#'}
                                        onClick={(e)=> {
                                            e.preventDefault();
                                            onClick(item)
-                                       }}>{item}</a>
+                                       }}>{item.label || item}</a>
                                 </li>);
                         })
                     }
