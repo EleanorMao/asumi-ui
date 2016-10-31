@@ -23,15 +23,11 @@ export default class DropdownList extends Component {
     }
 
     componentDidMount() {
-        const target = this.refs.dropdown;
-        window.addEventListener('click', function (e) {
-            if (!contains(target, e.target)) {
-                this.setState(old=> {
-                    old.toggle = false;
-                    return old;
-                })
-            }
-        }.bind(this))
+        window.addEventListener('click', this.clickToClose.bind(this))
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('click', this.clickToClose.bind(this))
     }
 
     componentWillReceiveProps() {
@@ -50,6 +46,16 @@ export default class DropdownList extends Component {
         })
     }
 
+    clickToClose(e) {
+        const target = this.refs.dropdown;
+        if (!contains(target, e.target)) {
+            this.setState(old=> {
+                old.toggle = false;
+                return old;
+            })
+        }
+    }
+
     render() {
         const {list, children, onClick} = this.props;
         return (
@@ -57,9 +63,10 @@ export default class DropdownList extends Component {
                 <button className="btn btn-default dropdown-toggle" type="button"
                         onClick={this.handleToggle.bind(this)}>
                     {children}
-                    <span className="caret"></span>
+                    <span className="caret"
+                          style={this.state.toggle ? {borderTop: 0, borderBottom: '4px solid'} : null}/>
                 </button>
-                <ul className="dropdown-menu" style={{display: this.state.toggle && 'block'}}>
+                <ul className="dropdown-menu" style={{display: this.state.toggle && 'block' || null}}>
                     {
                         list.map((item, index) => {
                             return (
