@@ -1,6 +1,6 @@
 {
   "name": "el-table",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Table",
   "main": "lib/Index.js",
   "scripts": {

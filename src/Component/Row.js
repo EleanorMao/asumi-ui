@@ -46,7 +46,7 @@ export default class Row extends Component {
             };
 
             if (dataFormat) {
-                cell = dataFormat(data[key.id], data, i, col);
+                cell = dataFormat(data[key.id], data, i, col) || cell;
             }
             if (colSpan && colTarget < i && i < colSpan) return;
             if (key.render) {

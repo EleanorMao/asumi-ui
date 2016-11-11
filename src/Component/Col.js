@@ -64,8 +64,7 @@ Col.defaultProps = {
     colSpan: null,
     dataSort: false,
     dataFixed: 'auto',
-    dataAlign: 'center',
-    showArrow: undefined
+    dataAlign: 'center'
 };
 
 Col.propTypes = {
@@ -75,8 +74,7 @@ Col.propTypes = {
     dataFormat: PropTypes.func,
     dataFixed: PropTypes.oneOf(['left', 'right', 'auto']),
     dataAlign: PropTypes.oneOf(['left', 'right', 'center']),
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    showArrow: PropTypes.oneOfType([PropTypes.func, PropTypes.bool])
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 export default Col;
