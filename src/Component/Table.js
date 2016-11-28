@@ -245,6 +245,12 @@ export default class Table extends Component {
 
     componentDidUpdate() {
         this._adjustWidth();
+        if (this.refs.rightContainer) {
+            this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
+        }
+        if (this.refs.leftContainer && !this.refs.rightContainer) {
+            this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
+        }
     }
 
     componentWillReceiveProps(nextProps) {

@@ -1,6 +1,6 @@
 {
   "name": "el-table",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Table",
   "main": "lib/Index.js",
   "scripts": {
@@ -26,6 +26,9 @@
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
+    "babel-plugin-transform-es3-member-expression-literals": "^6.8.0",
+    "babel-plugin-transform-es3-property-literals": "^6.8.0",
+    "babel-plugin-transform-function-bind": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
