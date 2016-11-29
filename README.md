@@ -71,7 +71,7 @@ ReactDOM.render(
 * **dataAlign[String]** text align of column
 * **dataFixed[String]** this column will be fixed when table scroll, `left`, `right` or `auto`, default is `auto`
 * **dataSort[Boolean]** enable table sorting, default is `false`(only sort the first level of data when isTree)
-* **dataFormat[Function(cell, level, row, index, col)]** customize format function
+* **dataFormat[Function(cell, row, index, colIndex, col)]** customize format function
 * **render[Function(rowIndex)]** render function to set `colspan` and `rowspan` attribute for `tr`, it's return an object `{rowspan: value, colspan: value}`. value = 0 means don't render this cell
 * **colSpan[Number]** set attribute `colspan` to table head column
 * **hidden[Boolean]** hide this column or not, default is `false`
