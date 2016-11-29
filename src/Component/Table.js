@@ -18,6 +18,8 @@ import {
     empty,
     sort,
     diff,
+    addEvent,
+    removeEvent,
     getScrollBarWidth
 } from './Util';
 
@@ -82,8 +84,8 @@ export default class Table extends Component {
         return data.slice((page - 1) * length, page * length);
     }
 
-    _adjustWidth() {
-        const refs = this.refs,
+    _adjustWidth(me) {
+        const refs = this.refs || me,
             firstRow = refs.colgroup.childNodes,
             cells = refs.thead.refs.thead.childNodes,
             fixedLeftRow = refs.left && refs.left.childNodes,
@@ -221,35 +223,45 @@ export default class Table extends Component {
     }
 
     componentDidMount() {
-        this._adjustWidth();
-        window.addEventListener('resize', this._adjustWidth.bind(this));
-        this.refs.container.addEventListener('scroll', this._scrollHeader.bind(this));
+        this._adjustWidth(this.refs);
+        addEvent(window, 'resize', this._adjustWidth.bind(this));
+        addEvent(this.refs.container, 'scroll', this._scrollHeader.bind(this));
+        // window.addEventListener('resize', this._adjustWidth.bind(this));
+        // this.refs.container.addEventListener('scroll', this._scrollHeader.bind(this));
         if (this.refs.rightContainer) {
-            this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
+            addEvent(this.refs.rightContainer, 'scroll', this._scrollHeight.bind(this));
+            // this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
         }
         if (this.refs.leftContainer && !this.refs.rightContainer) {
-            this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
+            addEvent(this.refs.container, 'scroll', this._scrollHeight.bind(this));
+            // this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
         }
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this._adjustWidth.bind(this));
-        this.refs.container.removeEventListener('scroll', this._scrollHeader.bind(this));
+        removeEvent(window, 'resize', this._adjustWidth.bind(this));
+        removeEvent(this.refs.container, 'scroll', this._scrollHeader.bind(this));
+        // window.removeEventListener('resize', this._adjustWidth.bind(this));
+        // this.refs.container.removeEventListener('scroll', this._scrollHeader.bind(this));
         if (this.refs.rightContainer) {
-            this.refs.rightContainer.removeEventListener('scroll', this._scrollHeight.bind(this));
+            removeEvent(this.refs.rightContainer, 'scroll', this._scrollHeight.bind(this));
+            // this.refs.rightContainer.removeEventListener('scroll', this._scrollHeight.bind(this));
         }
         if (this.refs.leftContainer && !this.refs.rightContainer) {
-            this.refs.container.removeEventListener('scroll', this._scrollHeight.bind(this));
+            removeEvent(this.refs.container, 'scroll', this._scrollHeight.bind(this));
+            // this.refs.container.removeEventListener('scroll', this._scrollHeight.bind(this));
         }
     }
 
     componentDidUpdate() {
-        this._adjustWidth();
+        this._adjustWidth(this.refs);
         if (this.refs.rightContainer) {
-            this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
+            addEvent(this.refs.rightContainer, 'scroll', this._scrollHeight.bind(this));
+            // this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
         }
         if (this.refs.leftContainer && !this.refs.rightContainer) {
-            this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
+            addEvent(this.refs.container, 'scroll', this._scrollHeight.bind(this));
+            // this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
         }
     }
 

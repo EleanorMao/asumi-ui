@@ -73,3 +73,21 @@ export let sort = function (arr) {
     let sorted = left.concat(auto).concat(right);
     return {sorted, left, right}
 };
+
+export let addEvent = function (el, event, listener) {
+    if (el.addEventListener) {
+        el.addEventListener(event, listener, false);
+    } else if (el.attachEvent) {
+        el.attachEvent('on' + event, listener);
+    } else {
+        el['on' + event] = listener;
+    }
+}
+
+export let removeEvent = function (el, event, listener) {
+    if (el.removeEventListener) {
+        el.removeEventListener(event, listener, false);
+    } else if (el.detachEvent) {
+        el.attachEvent('on' + event, listener);
+    }
+}
