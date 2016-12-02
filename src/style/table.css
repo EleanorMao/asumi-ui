@@ -327,13 +327,16 @@
 }
 
 .react-table .btn {
+    color: #333;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #ffd800;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 0 12px;
     margin-bottom: 0;
     font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42857143;
-    text-align: center;
+    font-weight: 400;
     white-space: nowrap;
     vertical-align: middle;
     -ms-touch-action: manipulation;
@@ -344,8 +347,9 @@
     -ms-user-select: none;
     user-select: none;
     background-image: none;
+    border-radius: 2px;
     border: 1px solid transparent;
-    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .react-table .btn:focus {
@@ -383,6 +387,10 @@
 .dropup,
 .dropdown {
     position: relative;
+}
+
+.react-table .dropdown {
+    margin: 16px 0;
 }
 
 .dropdown-toggle:focus {
