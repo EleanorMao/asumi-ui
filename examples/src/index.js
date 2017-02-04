@@ -1,9 +1,10 @@
+import '../../lib/style/table.css';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {
     Table,
     Col
-} from '../../src/Index.js';
+} from '../../lib/Index.js';
 import {
     data,
     list
