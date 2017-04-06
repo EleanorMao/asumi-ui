@@ -50,10 +50,10 @@ export default class Pagination extends Component {
         let PageButtons = [
             <PageButton
                 disabled={this.startPage === 1}
-                label={startLabel} hidden={hideStartLabel}  pgBtn={true}
+                label={startLabel} hidden={hideStartLabel} pgBtn={true}
                 key='start' onClick={() =>onPageChange(1, sizePerPage)}/>,
             <PageButton
-                label={prevLabel} disabled={current === 1}  pgBtn={true}
+                label={prevLabel} disabled={current === 1} pgBtn={true}
                 key='prev' onClick={() =>onPageChange(current - 1, sizePerPage)}/>
         ];
         for (let i = this.startPage; i < this.lastPage + 1; i++) {
@@ -68,7 +68,7 @@ export default class Pagination extends Component {
         PageButtons.push(
             <PageButton
                 label={endLabel} hidden={hideEndLabel}
-                disabled={this.lastPage === totalPages}  pgBtn={true}
+                disabled={this.lastPage === totalPages} pgBtn={true}
                 key='end' onClick={() =>onPageChange(totalPages, sizePerPage)}/>
         );
 
@@ -77,7 +77,7 @@ export default class Pagination extends Component {
                 <ul className="pagination">
                     {PageButtons}
                 </ul>
-                {showTotalPages && 
+                {showTotalPages &&
                 <span className="totalPages">共 {totalPages} 页</span>}
             </div>
         )

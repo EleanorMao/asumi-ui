@@ -1,0 +1,83 @@
+.btn {
+  height: 36px;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0 12px;
+  min-width: 96px;
+  font-weight: 400;
+  margin-bottom: 0;
+  line-height: 36px;
+  text-align: center;
+  color: @normalText;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: @default;
+  touch-action: manipulation;
+  -ms-touch-action: manipulation;
+  user-select: none;
+  border-radius: 2px;
+  -ms-user-select: none;
+  background-image: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  border: 1px solid transparent;
+  &.disabled, &:disabled {
+    background-color: @disabled;
+    color: #fff;
+    &:active, &:focus, &:hover {
+      background-color: @disabled;
+    }
+  }
+  &.primary {
+    background-color: @primary;
+    color: #fff;
+    &:active, &:focus, &:hover {
+      background-color: @d_primary;
+    }
+  }
+  &.secondary {
+    background-color: @secondary;
+    color: #fff;
+    &:active, &:focus, &:hover {
+      background-color: @d_secondary;
+    }
+  }
+  &.danger {
+    background-color: @danger;
+    color: #fff;
+    &:active, &:focus, &:hover {
+      background-color: @d_danger;
+    }
+  }
+  &.success {
+    background-color: @success;
+    color: #fff;
+    &:active, &:focus, &:hover {
+      background-color: @d_success;
+    }
+  }
+  &.large {
+    height: 45px;
+    line-height: 45px;
+    min-width: 126px;
+    font-size: 16px;
+  }
+  &.small {
+    height: 35px;
+    line-height: 35px;
+    min-width: 76px;
+    font-size: 12px;
+  }
+  &.text {
+    background-color: transparent;
+    padding: 0 8px;
+    min-width: 40px;
+    &:active, &:focus, &:hover {
+      background-color: transparent;
+    }
+  }
+  &:active, &:focus, &:hover {
+    background-color: @d_default;
+  }
+}

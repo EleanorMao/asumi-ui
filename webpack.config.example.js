@@ -6,7 +6,7 @@ const Nyan = require('nyan-progress-webpack-plugin');
 const openBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
-    entry: './examples/src/index.js',
+    entry: './examples/src/Index.js',
     output: {
         path: './examples/lib',
         filename: 'index.js',
@@ -18,8 +18,8 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel'
         }, {
-            test: /\.css?$/,
-            loader: 'style-loader!css-loader'
+            test: /\.less?$/,
+            loader: 'style-loader!css-loader!less-loader'
         }]
     },
     plugins: [

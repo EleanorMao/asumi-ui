@@ -1,0 +1,84 @@
+::-webkit-input-placeholder, ::-moz-placeholder, :-moz-placeholder, :-ms-input-placeholder {
+  color: @lightText;
+}
+
+.input-wrapper {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.input-wrapper {
+  .input-prepend, .input-append {
+    width: 1px;
+    line-height: 1;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 5px 8px;
+    border-radius: 4px;
+    color: @normalText;
+    text-align: center;
+    position: relative;
+    white-space: nowrap;
+    display: table-cell;
+    vertical-align: middle;
+    border: 1px solid @border;
+    background-color: @default;
+  }
+  .input-prepend {
+    border-right-width: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    + .input {
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+  .input-append {
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .input {
+    display: table-cell;
+    &:first-child, &:not(:first-child):not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.input {
+  min-height: 30px;
+  padding: 5px 8px;
+  line-height: 1.5;
+  font-size: 13px;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  cursor: text;
+  color: @normalText;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid @border;
+  border-radius: 4px;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: @disabledText;
+  }
+  &:focus {
+    border-color: @primary;
+  }
+  &.large {
+    font-size: 14px;
+    min-height: 35px;
+    padding: 6px 8px;
+  }
+  &.small {
+    font-size: 12px;
+    min-height: 24px;
+    padding: 2px 8px;
+  }
+}

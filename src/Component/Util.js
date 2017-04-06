@@ -82,7 +82,7 @@ export let addEvent = function (el, event, listener) {
     } else {
         el['on' + event] = listener;
     }
-}
+};
 
 export let removeEvent = function (el, event, listener) {
     if (el.removeEventListener) {
@@ -90,4 +90,17 @@ export let removeEvent = function (el, event, listener) {
     } else if (el.detachEvent) {
         el.attachEvent('on' + event, listener);
     }
-}
+};
+
+export let contains = function (root, el) {
+    if (root.compareDocumentPosition)
+        return root === el || !!(root.compareDocumentPosition(el) & 16);
+
+    if (root.contains && el.nodeType === 1)
+        return root.contains(el) && root !== el;
+
+    while (el = el.parentNode)
+        if (el === root) return true;
+
+    return false;
+};

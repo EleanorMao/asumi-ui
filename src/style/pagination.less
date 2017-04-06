@@ -1,0 +1,76 @@
+.active() {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: @d_primary;
+  border-color: @d_primary;
+}
+
+.disabled() {
+  color: @disabledText;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: @border;
+}
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 16px 0;
+  vertical-align: middle;
+  > li {
+    display: inline-block;
+    margin-left: 10px;
+    > a, > span {
+      height: 30px;
+      min-width: 30px;
+      line-height: 28px;
+      text-align: center;
+      position: relative;
+      float: left;
+      padding: 0 6px;
+      margin-left: -1px;
+      color: @normalText;
+      text-decoration: none;
+      background-color: #fff;
+      border: 1px solid @border;
+      &:hover, &:active, &:focus {
+        border-color: @d_primary;
+      }
+    }
+    &:last-child > a, &:last-child > span {
+      margin-left: 0;
+    }
+  }
+  > .pg-btn {
+    > a, > span {
+      min-width: 70px;
+    }
+  }
+  > .active {
+    > a, > span {
+      .active();
+      &:hover, &:active, &:focus {
+        .active();
+      }
+    }
+  }
+  > .disabled {
+    > a, > span {
+      .disabled();
+      &:hover, &:active, &:focus {
+        .disabled();
+      }
+    }
+  }
+  > .hidden {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+.totalPages {
+  margin-left: 15px;
+  font-size: 13px;
+  color: @normalText;
+}

@@ -6,7 +6,7 @@ import React, {
     PropTypes
 } from 'react';
 
-import {isObj} from './Util';
+import {isObj} from '../Util';
 
 export default class NestedHeader extends Component {
     constructor(props) {

@@ -6,7 +6,7 @@ import React, {
     PropTypes
 } from 'react';
 
-import {empty, sort, isArr} from './Util';
+import {empty, sort, isArr} from '../Util';
 
 export default class Header extends Component {
     constructor(props) {

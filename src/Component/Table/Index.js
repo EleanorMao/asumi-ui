@@ -10,10 +10,10 @@ import React, {
 import Row from './Row';
 import Header from './Header';
 import classSet from 'classnames';
+import Dropdown from '../Dropdown';
+import Paging from '../Pagination';
 import NestedHeader from './NestedHeader';
-import Paging from './Pagination/Pagination';
-import SimplePaging from './Pagination/SimplePagination';
-import Dropdown from './Pagination/DropdownList';
+import SimplePaging from '../Pagination/SimplePagination';
 import {
     empty,
     sort,
@@ -21,7 +21,7 @@ import {
     addEvent,
     removeEvent,
     getScrollBarWidth
-} from './Util';
+} from '../Util';
 
 export default class Table extends Component {
     constructor(props) {

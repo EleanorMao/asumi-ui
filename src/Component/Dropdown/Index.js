@@ -1,22 +1,10 @@
 /**
  * Created by elly on 16/9/19.
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {contains} from '../Util';
 
-function contains(root, el) {
-    if (root.compareDocumentPosition)
-        return root === el || !!(root.compareDocumentPosition(el) & 16);
-
-    if (root.contains && el.nodeType === 1)
-        return root.contains(el) && root !== el;
-
-    while (el = el.parentNode)
-        if (el === root) return true;
-
-    return false;
-}
-
-export default class DropdownList extends Component {
+export default class Dropdown extends Component {
     constructor(props) {
         super(props);
         this.state = {toggle: false}
@@ -60,18 +48,21 @@ export default class DropdownList extends Component {
         const {list, children, onClick} = this.props;
         return (
             <div className="dropdown" style={{display: 'inline-block'}} ref="dropdown">
-                <button className="btn btn-default dropdown-toggle" type="button"
-                        onClick={this.handleToggle.bind(this)}>
+                <button
+                    type="button"
+                    className="btn dropdown-toggle"
+                    onClick={this.handleToggle.bind(this)}>
                     {children}
-                    <span className="caret"
-                          style={this.state.toggle ? {borderTop: 0, borderBottom: '4px solid'} : null}/>
+                    <span
+                        className="caret"
+                        style={this.state.toggle ? {borderTop: 0, borderBottom: '4px solid'} : null}/>
                 </button>
                 <ul className="dropdown-menu" style={{display: this.state.toggle && 'block' || null}}>
                     {
                         list.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <a href={item.href || '#'}
+                                    <a href={item.href || 'javascript:;'}
                                        onClick={(e)=> {
                                            if (!item.href) {
                                                e.preventDefault();
@@ -86,3 +77,16 @@ export default class DropdownList extends Component {
         )
     }
 }
+
+Dropdown.propTypes = {
+    onClick: PropTypes.func,
+    list: PropTypes.oneOfType([PropTypes.array, PropTypes.shape({
+        href: PropTypes.string,
+        label: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node, PropTypes.func, PropTypes.element])
+    })])
+
+};
+Dropdown.defaultProps = {
+    onClick: ()=> {
+    }
+};

@@ -18,7 +18,7 @@ export default class PageButton extends Component {
             disabled,
         } = this.props;
         const className = classSet({
-            pgBtn: pgBtn,
+            'pg-btn': pgBtn,
             active: active,
             hidden: hidden,
             disabled: disabled,

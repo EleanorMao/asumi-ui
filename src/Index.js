@@ -2,16 +2,25 @@
  * Created by Elly on 2016/5/27.
  */
 
+import './style/index.less';
+import Nav from './Component/Nav';
+import Input from './Component/Input';
 import Table from './Component/Table';
-import Col from './Component/Col';
-import Pagination from './Component/Pagination/Pagination';
-import Dropdown from './Component/Pagination/DropdownList';
+import Col from './Component/Table/Col';
+import Button from './Component/Button';
+import Group from './Component/Group';
+import Dropdown from './Component/Dropdown';
+import Pagination from './Component/Pagination';
 import SimplePagination from './Component/Pagination/SimplePagination';
 
 export {
-    Table,
     Col,
+    Nav,
+    Table,
+    Input,
+    Group,
+    Button,
+    Dropdown,
     Pagination,
     SimplePagination,
-    Dropdown
 };
