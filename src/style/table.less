@@ -1,235 +1,222 @@
-.react-table {
-    margin: 10px;
+.el-fr {
+  float: right;
 }
 
-.react-table .fr {
-    float: right;
+.el-fl {
+  float: left;
 }
 
-.react-table .ml-10 {
-    margin-left: 10px;
-}
-
-.react-table .row {
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.react-table .row:before,
-.react-table .row:after {
+.el-row {
+  margin-right: -15px;
+  margin-left: -15px;
+  &:before, &:after {
     display: table;
     content: " ";
-}
-
-.react-table .row:after {
+  }
+  &:after {
     clear: both;
-}
-
-.react-table .fr {
+  }
+  > .fr, > .fl {
     position: relative;
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
-    float: right;
+  }
 }
 
-.react-table .fl {
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    float: left;
+.el-table-group .el-table table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 0;
+  border-spacing: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: #fff;
 }
 
-.react-table .table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 0;
-    border-spacing: 0;
-    table-layout: fixed;
-    border-collapse: collapse;
-    background-color: #fff;
+.el-table table thead {
+  display: table-header-group
 }
 
-.table thead {
-    display: table-header-group
+.el-table table > tbody > tr > td,
+.el-table table > tbody > tr > th,
+.el-table table > tfoot > tr > td,
+.el-table table > tfoot > tr > th,
+.el-table table > thead > tr > td,
+.el-table table > thead > tr > th {
+  padding: 8px;
+  position: relative;
+  line-height: 1.42857143;
+  vertical-align: middle;
+  border-top: 1px solid @border;
 }
 
-.table > tbody > tr > td,
-.table > tbody > tr > th,
-.table > tfoot > tr > td,
-.table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > thead > tr > th {
-    padding: 8px;
-    position: relative;
-    line-height: 1.42857143;
-    vertical-align: middle;
-    border-top: 1px solid #ddd
+.el-table table > colgroup + thead > tr:first-child > td,
+.el-table table > colgroup + thead > tr:first-child > th,
+.el-table table > thead:first-child > tr:first-child > td,
+.el-table table > thead:first-child > tr:first-child > th {
+  border-top: 0
 }
 
-.table > colgroup + thead > tr:first-child > td,
-.table > colgroup + thead > tr:first-child > th,
-.table > thead:first-child > tr:first-child > td,
-.table > thead:first-child > tr:first-child > th {
-    border-top: 0
+.el-table-bordered > tbody > tr > td,
+.el-table-bordered > tbody > tr > th,
+.el-table-bordered > tfoot > tr > td,
+.el-table-bordered > tfoot > tr > th,
+.el-table-bordered > thead > tr > td,
+.el-table-bordered > thead > tr > th {
+  border: 1px solid @border;
+  border-left: 0;
 }
 
-.table-bordered > tbody > tr > td,
-.table-bordered > tbody > tr > th,
-.table-bordered > tfoot > tr > td,
-.table-bordered > tfoot > tr > th,
-.table-bordered > thead > tr > td,
-.table-bordered > thead > tr > th {
-    border: 1px solid #ddd;
-    border-left: 0;
-}
-
-.table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: #f9f9f9
+.el-table-striped > tbody > tr:nth-of-type(even) {
+  background-color: @l_default;
 }
 
 .el-table-wrapper {
-    position: relative;
-    border: 1px solid #ddd;
+  position: relative;
+  border: 1px solid @border;
 }
 
 .el-table {
-    color: #333;
-    width: 100%;
-    font-size: 13px;
-    line-height: 40px;
+  color: @normalText;
+  width: 100%;
+  font-size: 13px;
+  line-height: 40px;
 }
 
-.el-table.table-fixed {
-    width: auto;
+.el-table.el-table-fixed {
+  width: auto;
 }
 
-.el-table.table-fixed .table {
-    width: auto;
+.el-table.el-table-fixed table {
+  width: auto;
 }
 
-.el-table .table-container {
-    overflow: auto;
-    position: relative;
+.el-table .el-table-container {
+  overflow: auto;
+  position: relative;
 }
 
 .el-table-wrapper .el-table-footer {
-    padding: 10px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 15px;
 }
 
-.react-table .el-table-title {
-    padding: 10px 0;
+.el-table-group .el-table-title {
+  padding: 10px 0;
+  font-weight: 700;
+  font-size: 15px;
 }
 
-.table-fixed .table-container,
-.table-container.table-header-container {
-    overflow: hidden;
+.el-table-fixed .el-table-container,
+.el-table-container.el-table-header-container {
+  overflow: hidden;
 }
 
-.el-table .table > thead > tr > th {
-    padding: 11px;
-    background: @default;
+.el-table table > thead > tr > th {
+  padding: 11px;
+  background: @default;
 }
 
-.el-table .table-bordered > tbody > tr > td:last-child,
-.el-table .table-bordered > thead > tr > th:last-child {
-    border-right-width: 0;
+.el-table .el-table-bordered > tbody > tr > td:last-child,
+.el-table .el-table-bordered > thead > tr > th:last-child {
+  border-right-width: 0;
 }
 
-.table-fixed {
-    top: 0;
-    position: absolute;
+.el-table-fixed {
+  top: 0;
+  position: absolute;
 }
 
-.table-left-fixed {
-    left: 0;
-    border-right: 0;
-    box-shadow: 4px 0 4px rgba(0, 0, 0, 0.2);
+.el-table-left-fixed {
+  left: 0;
+  border-right: 0;
+  box-shadow: 4px 0 4px @shadow;
 }
 
-.table-left-fixed .table {
-    border-right: 0
+.el-table-left-fixed .el-table {
+  border-right: 0
 }
 
-.table-right-fixed {
-    right: 0;
-    border-left: 0;
-    box-shadow: -4px 0 4px rgba(0, 0, 0, 0.2);
+.el-table-right-fixed {
+  right: 0;
+  border-left: 0;
+  box-shadow: -4px 0 4px @shadow;
 }
 
-.table-right-fixed .table-container {
-    overflow: auto;
+.el-table-right-fixed .el-table-container {
+  overflow: auto;
 }
 
-.react-table.ellipsis .table th,
-.react-table.ellipsis .table td {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.el-table-group.el-ellipsis table th,
+.el-table-group.el-ellipsis table td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.react-table.break .table th,
-.react-table.break .table td {
-    white-space: normal;
-    word-break: break-all;
-    vertical-align: top;
+.el-table-group.el-break table th,
+.el-table-group.el-break table td {
+  white-space: normal;
+  word-break: break-all;
+  vertical-align: top;
 }
 
-.el-table.table-nestedHead {
-    border: 1px solid @border;
-    background: @default;
-    border-bottom: 0;
-    overflow: hidden;
+.el-table.el-table-nestedHead {
+  border: 1px solid @border;
+  background: @default;
+  border-bottom: 0;
+  overflow: hidden;
 }
 
-.table-nestedHead .table-bordered {
-    border-bottom: 0;
+.el-table-nestedHead .el-table-bordered {
+  border-bottom: 0;
 }
 
-.table-nestedHead .table-bordered thead > tr > th {
-    border-bottom: 0;
+.el-table-nestedHead .el-table-bordered thead > tr > th {
+  border-bottom: 0;
 }
 
-.table-body-container .table-bordered > tbody > tr:first-child > td {
-    border-top: 0;
+.el-table-body-container .el-table-bordered > tbody > tr:first-child > td {
+  border-top: 0;
 }
 
-.table-nestedHead .table-bordered > thead > tr:last-child > th {
-    border-top: 0;
+.el-table-nestedHead .el-table-bordered > thead > tr:last-child > th {
+  border-top: 0;
 }
 
-.el-table .table-striped > tbody > tr:nth-of-type(even) {
-    background: #fff;
+.el-table .el-table-striped > tbody > tr:nth-of-type(odd) {
+  background: #fff;
 }
 
-.caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    margin-left: 2px;
-    vertical-align: middle;
-    border-top: 4px solid;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-    border-bottom: 4px solid transparent;
+.el-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  border-bottom: 4px solid transparent;
 }
 
-.caret.left {
-    border-right: 4px solid;
-    border-bottom: 4px solid transparent;
-    border-top: 4px solid transparent;
-    border-left: 4px solid transparent;
-    margin-right: 3px;
-    margin-left: -4px
+.el-caret.el-left {
+  border-right: 4px solid;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid transparent;
+  border-left: 4px solid transparent;
+  margin-right: 3px;
+  margin-left: -4px
 }
 
-.caret.right {
-    border-left: 4px solid;
-    border-bottom: 4px solid transparent;
-    border-top: 4px solid transparent;
-    border-right: 4px solid transparent;
-    margin-left: 3px;
-    margin-right: -4px
+.el-caret.el-right {
+  border-left: 4px solid;
+  border-bottom: 4px solid transparent;
+  border-top: 4px solid transparent;
+  border-right: 4px solid transparent;
+  margin-left: 3px;
+  margin-right: -4px
 }
 

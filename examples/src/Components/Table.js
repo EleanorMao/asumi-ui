@@ -61,7 +61,7 @@ export  default class Main extends Component {
 
         const selectRow = {
             mode: "checkbox",
-            bgColor: "#ffd800",
+            bgColor: "#E1F5FE",
             selected: this.state.selected,
             hideSelectColumn: false,
             onSelectAll: (checked, currentSelected) => {
@@ -100,6 +100,8 @@ export  default class Main extends Component {
                 <Table
                     isKey="id"
                     data={list}
+                    hover={true}
+                    striped={true}
                 >
                     <Col dataField="id" dataAlign="center">id</Col>
                     <Col dataAlign='center' dataField='regionRoleName'>区域角色</Col>

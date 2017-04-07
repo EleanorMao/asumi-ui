@@ -13,6 +13,9 @@ import Dropdown from './Component/Dropdown';
 import Pagination from './Component/Pagination';
 import SimplePagination from './Component/Pagination/SimplePagination';
 
+Table.Col = Col;
+Pagination.Simple = SimplePagination;
+
 export {
     Col,
     Nav,

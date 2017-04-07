@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import Row from './Row';
 import Header from './Header';
-import classSet from 'classnames';
+import classnames from 'classnames';
 import Dropdown from '../Dropdown';
 import Paging from '../Pagination';
 import NestedHeader from './NestedHeader';
@@ -423,14 +423,14 @@ export default class Table extends Component {
         if (data.length) return null;
         return (
             <tr>
-                <td className="text-center" colSpan={colSpan}>{showText && this.props.noDataText}</td>
+                <td className="el-text-center" colSpan={colSpan}>{showText && this.props.noDataText}</td>
             </tr>
         );
     }
 
     bodyRender(data, className, height, selectRow) {
         return (
-            <div className="table-container table-body-container" style={{height: height || 'auto'}}
+            <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
                  ref="container">
                 <table className={className} ref="body">
                     <colgroup ref="colgroup">
@@ -448,7 +448,7 @@ export default class Table extends Component {
     leftBodyRender(data, className, height, selectRow) {
         if (this.leftColumnData.length) {
             return (
-                <div className="table-container table-body-container" style={{height: height || 'auto'}}
+                <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
                      ref="leftContainer">
                     <table className={className}>
                         <colgroup ref="left">
@@ -467,7 +467,7 @@ export default class Table extends Component {
     rightBodyRender(data, className, height) {
         if (this.rightColumnData.length) {
             return (
-                <div className="table-container table-body-container" style={{height: height || 'auto'}}
+                <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
                      ref="rightContainer">
                     <table className={className} ref="rightBody">
                         <colgroup ref="right">
@@ -540,7 +540,7 @@ export default class Table extends Component {
             dataSize,
         } = this.props;
         return (
-            <div className="fr">
+            <div className="el-fr">
                 {  remote ?
                     <Paging
                         dataSize={dataSize}
@@ -583,7 +583,7 @@ export default class Table extends Component {
             dataSize
         } = this.props;
         return (
-            <div className="fr">
+            <div className="el-fr">
                 {  remote ?
                     <SimplePaging
                         dataSize={dataSize}
@@ -612,12 +612,12 @@ export default class Table extends Component {
     pagingRowRender() {
         if (!this.props.pagination || !this.props.data.length) return null;
         return (
-            <div className="row">
-                <div className="fl">
+            <div className="el-row">
+                <div className="el-fl">
                     {this.dropDownListRender()}
                     {this.paginationTotalRender()}
                 </div>
-                <div className="fr">
+                <div className="el-fr">
                     {this.pagingRender()}
                 </div>
             </div>
@@ -627,8 +627,8 @@ export default class Table extends Component {
     topPagingRowRender() {
         if (!this.props.topPagination || !this.props.data.length) return null;
         return (
-            <div className="row">
-                <div className="fr">
+            <div className="el-row">
+                <div className="el-fr">
                     {this.topPagingRender()}
                 </div>
             </div>
@@ -680,17 +680,16 @@ export default class Table extends Component {
         } = this.state;
 
         let checked = false;
-        const className = classSet({
-            'table': true,
-            'table-bordered': true,
-            'table-striped': striped
+        const className = classnames({
+            'el-table-bordered': true,
+            'el-table-striped': striped
         });
         const renderList = (topPagination || pagination) && !remote ? this._sliceData(data, currentPage, length) : data.slice();
         if (selectRow.mode !== 'none') {
             checked = this._getAllValue(renderList.slice(), isKey).sort().toString() === selectRow.selected.slice().sort().toString();
         }
         return (
-            <div className={"react-table " + lineWrap}>
+            <div className={"el-table-group el-" + lineWrap}>
                 {this.titleRender()}
                 {this.topPagingRowRender()}
                 {
@@ -717,7 +716,7 @@ export default class Table extends Component {
                     </div>
                     {
                         !!this.leftColumnData.length &&
-                        <div className="el-table table-fixed table-left-fixed">
+                        <div className="el-table el-table-fixed el-table-left-fixed">
                             <Header
                                 ref="lthead" left={this.leftColumnData.length}
                                 onSelectAll={this.handleSelectAll.bind(this)}
@@ -733,7 +732,7 @@ export default class Table extends Component {
                     }
                     {
                         !!this.rightColumnData.length &&
-                        <div className="el-table table-fixed table-right-fixed">
+                        <div className="el-table el-table-fixed el-table-right-fixed">
                             <Header
                                 ref="rthead" right={this.rightColumnData.length}
                                 sortName={remote ? sortName : sortField}
@@ -769,14 +768,14 @@ Table.defaultProps = {
     lineWrap: 'ellipsis',
     noDataText: <span>暂无数据</span>,
     hoverStyle: {
-        backgroundColor: '#f4f5f9'
+        backgroundColor: '#EEF7FE'
     },
     selectRow: {
         mode: 'none',
         selected: [],
         onSelect: empty,
         onSelectAll: empty,
-        bgColor: '#ffd800',
+        bgColor: '#E1F5FE',
         hideSelectColumn: false
     },
     options: {

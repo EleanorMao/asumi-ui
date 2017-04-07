@@ -42,8 +42,8 @@ export default class NestedHeader extends Component {
 
     render() {
         return (
-            <div className={"el-table table-nestedHead " + this.props.lineWrap} ref="header">
-                <table className="table table-bordered table-striped">
+            <div className={"el-table el-table-nestedHead el-" + this.props.lineWrap} ref="header">
+                <table className="el-table-bordered">
                     <colgroup ref="colgroup">{this.colgroupRender()}</colgroup>
                     <thead>{this.nestedHeadRender()}</thead>
                 </table>

@@ -12,15 +12,15 @@ export default  class Button extends Component {
     render() {
         let {type, size, disabled, children, href, ...other} = this.props;
         let className = classnames({
-            btn: true,
-            disabled: disabled,
-            text: type === 'text',
-            small: size === 'small',
-            large: size === 'large',
-            danger: type === 'danger',
-            success: type === 'success',
-            primary: type === 'primary',
-            secondary: type === 'secondary',
+            'el-btn': true,
+            'el-disabled': disabled,
+            'el-text': type === 'text',
+            'el-small': size === 'small',
+            'el-large': size === 'large',
+            'el-danger': type === 'danger',
+            'el-success': type === 'success',
+            'el-primary': type === 'primary',
+            'el-secondary': type === 'secondary',
         });
         if (href) {
             return (

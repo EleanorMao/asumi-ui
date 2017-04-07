@@ -74,11 +74,11 @@ export default class Pagination extends Component {
 
         return (
             <div>
-                <ul className="pagination">
+                <ul className="el-pagination">
                     {PageButtons}
                 </ul>
                 {showTotalPages &&
-                <span className="totalPages">共 {totalPages} 页</span>}
+                <span className="el-totalPages">共 {totalPages} 页</span>}
             </div>
         )
     }
@@ -101,8 +101,8 @@ Pagination.defaultProps = {
     hideEndLabel: false,
     hideStartLabel: false,
     showTotalPages: true,
-    prevLabel: <span><span className="caret left"></span>上一页</span>,
-    nextLabel: <span>下一页<span className="caret right"></span></span>,
+    prevLabel: <span><span className="el-caret el-left"></span>上一页</span>,
+    nextLabel: <span>下一页<span className="el-caret el-right"></span></span>,
     startLabel: '首页',
     endLabel: '尾页'
 }

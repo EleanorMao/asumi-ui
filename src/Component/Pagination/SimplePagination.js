@@ -22,14 +22,14 @@ class SimplePagination extends Component {
         const totalPages = sizePerPage && Math.ceil(dataSize / sizePerPage) || 1;
         return (
             <div>
-                <ul className="pagination">
+                <ul className="el-pagination">
                     <PageButton label={prevLabel} disabled={current - 1 <= 0} pgBtn={true}
                                 onClick={() =>onPageChange(current - 1, sizePerPage)}/>
                     <PageButton label={nextLabel} disabled={current + 1 > totalPages} pgBtn={true}
                                 onClick={() =>onPageChange(current + 1, sizePerPage)}/>
                 </ul>
                 {showTotalPages &&
-                <span className="totalPages">共 {totalPages} 页</span>}
+                <span className="el-totalPages">共 {totalPages} 页</span>}
             </div>
         );
     }
@@ -41,15 +41,15 @@ SimplePagination.PropTypes = {
     sizePerPage: PropTypes.number,
     showTotalPages: PropTypes.bool,
     onPageChange: PropTypes.func
-}
+};
 
 SimplePagination.defaultProps = {
     current: 1,
     dataSize: 0,
     sizePerPage: 10,
     showTotalPages: true,
-    prevLabel: <span><span className="caret left"></span>上一页</span>,
-    nextLabel: <span>下一页<span className="caret right"></span></span>,
-}
+    prevLabel: <span><span className="el-caret el-left"></span>上一页</span>,
+    nextLabel: <span>下一页<span className="el-caret el-right"></span></span>,
+};
 
 export default SimplePagination;

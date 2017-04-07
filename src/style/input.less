@@ -2,7 +2,7 @@
   color: @lightText;
 }
 
-.input-wrapper {
+.el-input-wrapper {
   position: relative;
   display: table;
   border-collapse: separate;
@@ -10,8 +10,8 @@
   width: 100%;
 }
 
-.input-wrapper {
-  .input-prepend, .input-append {
+.el-input-wrapper {
+  .el-input-prepend, .el-input-append {
     width: 1px;
     line-height: 1;
     font-size: 13px;
@@ -27,21 +27,21 @@
     border: 1px solid @border;
     background-color: @default;
   }
-  .input-prepend {
+  .el-input-prepend {
     border-right-width: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    + .input {
+    + .el-input {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
   }
-  .input-append {
+  .el-input-append {
     border-left-width: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
-  .input {
+  .el-input {
     display: table-cell;
     &:first-child, &:not(:first-child):not(:last-child) {
       border-top-right-radius: 0;
@@ -50,7 +50,7 @@
   }
 }
 
-.input {
+.el-input {
   min-height: 30px;
   padding: 5px 8px;
   line-height: 1.5;
@@ -71,12 +71,12 @@
   &:focus {
     border-color: @primary;
   }
-  &.large {
+  &.el-large {
     font-size: 14px;
     min-height: 35px;
     padding: 6px 8px;
   }
-  &.small {
+  &.el-small {
     font-size: 12px;
     min-height: 24px;
     padding: 2px 8px;

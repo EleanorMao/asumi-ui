@@ -2,6 +2,7 @@
  * Created by elly on 16/9/19.
  */
 import React, {Component, PropTypes} from 'react';
+import classnames from 'classnames';
 import {contains} from '../Util';
 
 export default class Dropdown extends Component {
@@ -45,19 +46,27 @@ export default class Dropdown extends Component {
     }
 
     render() {
-        const {list, children, onClick} = this.props;
+        const {list, type, style, children, onClick} = this.props;
+        let className = classnames({
+            'el-btn': true,
+            'el-dropdown-toggle': true,
+            'el-danger': type === 'danger',
+            'el-success': type === 'success',
+            'el-primary': type === 'primary',
+            'el-secondary': type === 'secondary',
+        });
         return (
-            <div className="dropdown" style={{display: 'inline-block'}} ref="dropdown">
+            <div className="el-dropdown" style={style} ref="dropdown">
                 <button
                     type="button"
-                    className="btn dropdown-toggle"
+                    className={className}
                     onClick={this.handleToggle.bind(this)}>
                     {children}
                     <span
-                        className="caret"
+                        className="el-caret"
                         style={this.state.toggle ? {borderTop: 0, borderBottom: '4px solid'} : null}/>
                 </button>
-                <ul className="dropdown-menu" style={{display: this.state.toggle && 'block' || null}}>
+                <ul className="el-dropdown-menu" style={{display: this.state.toggle && 'block' || null}}>
                     {
                         list.map((item, index) => {
                             return (
@@ -80,6 +89,7 @@ export default class Dropdown extends Component {
 
 Dropdown.propTypes = {
     onClick: PropTypes.func,
+    type: PropTypes.oneOf(['default', 'danger', 'success', 'primary', 'secondary']),
     list: PropTypes.oneOfType([PropTypes.array, PropTypes.shape({
         href: PropTypes.string,
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node, PropTypes.func, PropTypes.element])
@@ -87,6 +97,7 @@ Dropdown.propTypes = {
 
 };
 Dropdown.defaultProps = {
+    type: 'default',
     onClick: ()=> {
     }
 };

@@ -64,8 +64,8 @@ export default class Header extends Component {
         let renderChildren = isArr(children) ? children : [children];
         renderChildren = sort(renderChildren).sorted;
         return (
-            <div className="table-container table-header-container" ref="header">
-                <table className="table table-bordered">
+            <div className="el-table-container el-table-header-container" ref="header">
+                <table className="el-table-bordered">
                     {this.colgroupRender(renderChildren, selectRow, left, right)}
                     <thead>
                     <tr ref="thead">
@@ -96,7 +96,7 @@ Header.defaultProps = {
     right: 0,
     selectRow: {
         mode: 'none',
-        bgColor: '#dff0d8',
+        bgColor: '#E1F5FE',
         selected: [],
         onSelect: empty,
         onSelectAll: empty

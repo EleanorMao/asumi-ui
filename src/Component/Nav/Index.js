@@ -12,8 +12,8 @@ export default class Nav extends Component {
     render() {
         let {width, router, style} = this.props;
         return (
-            <div className="side-nav" style={extend({}, {width}, style)}>
-                <ul className="nav">
+            <div className="el-side-nav" style={extend({}, {width}, style)}>
+                <ul className="el-nav">
                     {
                         router.map((item, index)=> {
                             return (

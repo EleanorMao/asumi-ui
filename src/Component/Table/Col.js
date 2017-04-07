@@ -10,17 +10,17 @@ class Col extends Component {
 
     caretRender(dataField, sortName, sortOrder) {
         const SortGroup =
-            <span className="order">
-                <span className="dropdown">
-                    <span className="caret" style={{margin: '10px 0 10px 5px', color: '#ccc'}}/>
+            <span className="el-order">
+                <span className="el-dropdown">
+                    <span className="el-caret" style={{margin: '10px 0 10px 5px', color: '#ccc'}}/>
                 </span>
-                <span className="dropup">
-                    <span className="caret" style={{margin: '10px 0', color: '#ccc'}}/>
+                <span className="el-dropup">
+                    <span className="el-caret" style={{margin: '10px 0', color: '#ccc'}}/>
                 </span>
            </span>;
-        const AscCaret = <span className="caret" style={{margin: '10px 0 10px 5px'}}/>;
+        const AscCaret = <span className="el-caret" style={{margin: '10px 0 10px 5px'}}/>;
         if (dataField === sortName && sortOrder) {
-            return <span className={"order " + (sortOrder === 'desc' ? '' : 'dropup')}>{AscCaret}</span>;
+            return <span className={"el-order " + (sortOrder === 'desc' ? '' : 'el-dropup')}>{AscCaret}</span>;
         } else {
             return SortGroup;
         }

@@ -1,8 +1,8 @@
-a.btn {
+a.el-btn {
   color: @normalText;
 }
 
-.btn {
+.el-btn {
   height: 36px;
   font-size: 13px;
   cursor: pointer;
@@ -26,54 +26,54 @@ a.btn {
   -moz-user-select: none;
   -webkit-user-select: none;
   border: 1px solid transparent;
-  &.disabled, &:disabled {
+  &.el-disabled, &:disabled {
     background-color: @disabled;
     color: #fff;
     &:active, &:focus, &:hover {
       background-color: @disabled;
     }
   }
-  &.primary {
+  &.el-primary {
     background-color: @primary;
     color: #fff;
     &:active, &:focus, &:hover {
       background-color: @d_primary;
     }
   }
-  &.secondary {
+  &.el-secondary {
     background-color: @secondary;
     color: #fff;
     &:active, &:focus, &:hover {
       background-color: @d_secondary;
     }
   }
-  &.danger {
+  &.el-danger {
     background-color: @danger;
     color: #fff;
     &:active, &:focus, &:hover {
       background-color: @d_danger;
     }
   }
-  &.success {
+  &.el-success {
     background-color: @success;
     color: #fff;
     &:active, &:focus, &:hover {
       background-color: @d_success;
     }
   }
-  &.large {
+  &.el-large {
     height: 45px;
     line-height: 45px;
     min-width: 126px;
     font-size: 16px;
   }
-  &.small {
+  &.el-small {
     height: 35px;
     line-height: 35px;
     min-width: 76px;
     font-size: 12px;
   }
-  &.text {
+  &.el-text {
     background-color: transparent;
     color: @primary;
     padding: 0 8px;

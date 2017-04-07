@@ -13,7 +13,7 @@
   border-color: @border;
 }
 
-.pagination {
+.el-pagination {
   display: inline-block;
   padding-left: 0;
   margin: 16px 0;
@@ -42,12 +42,12 @@
       margin-left: 0;
     }
   }
-  > .pg-btn {
+  > .el-pg-btn {
     > a, > span {
       min-width: 70px;
     }
   }
-  > .active {
+  > .el-active {
     > a, > span {
       .active();
       &:hover, &:active, &:focus {
@@ -55,7 +55,7 @@
       }
     }
   }
-  > .disabled {
+  > .el-disabled {
     > a, > span {
       .disabled();
       &:hover, &:active, &:focus {
@@ -63,13 +63,13 @@
       }
     }
   }
-  > .hidden {
+  > .el-hidden {
     display: none !important;
     visibility: hidden !important;
   }
 }
 
-.totalPages {
+.el-totalPages {
   margin-left: 15px;
   font-size: 13px;
   color: @normalText;

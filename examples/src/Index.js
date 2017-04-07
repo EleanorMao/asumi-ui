@@ -40,7 +40,17 @@ ReactDOM.render(
         <div>
             <Nav router={router} style={{float: 'left', width: 100}}/>
             <div style={{overflow: 'hidden'}}>
-                <Route exact path="/" component={Default}/>
+                <Route exact path="/" component={()=> {
+                    return (
+                        <div>
+                            <Input/>
+                            <Dropdown/>
+                            <Button/>
+                            <Table/>
+                            <Pagination/>
+                        </div>
+                    )
+                }}/>
                 <Route path="/input" component={Input}/>
                 <Route path="/table" component={Table}/>
                 <Route path="/button" component={Button}/>
