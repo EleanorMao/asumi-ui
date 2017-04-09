@@ -1,0 +1,86 @@
+.el-mask {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 999;
+  position: fixed;
+  background-color: @shadow;
+}
+
+.el-modal-wrapper {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  outline: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  overflow: auto;
+  display: table;
+  position: fixed;
+  -webkit-overflow-scrolling: touch;
+  .el-modal {
+    display: table-cell;
+    vertical-align: middle;
+    .el-modal-content {
+      margin: auto;
+      position: relative;
+      width: 480px;
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px 15px 10px;
+      box-shadow: 0 2px 8px @shadow;
+      &.el-large {
+        font-size: 16px;
+        width: 560px;
+        padding: 20px;
+        .el-modal-header {
+          font-size: 18px;
+        }
+      }
+      &.el-small {
+        font-size: 12px;
+        width: 360px;
+        padding: 10px;
+        .el-modal-header {
+          font-size: 14px;
+        }
+      }
+      .el-modal-close {
+        position: absolute;
+        top: 10px;
+        right: 13px;
+        font-size: 15px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        text-align: center;
+        color: @lightText;
+        z-index: 1;
+        &:hover {
+          color: @d_primary;
+        }
+      }
+      .el-modal-header {
+        width: 100%;
+        border-bottom: 1px solid @border;
+        padding-bottom: 10px;
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .el-modal-body {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        min-height: 150px;
+      }
+      .el-modal-footer {
+        border-top: 1px solid @border;
+        text-align: right;
+        padding-top: 10px;
+      }
+    }
+  }
+}

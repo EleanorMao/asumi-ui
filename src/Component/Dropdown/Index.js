@@ -37,7 +37,7 @@ export default class Dropdown extends Component {
 
     clickToClose(e) {
         const target = this.refs.dropdown;
-        if (!contains(target, e.target)) {
+        if (target && !contains(target, e.target)) {
             this.setState(old=> {
                 old.toggle = false;
                 return old;

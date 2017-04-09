@@ -37,12 +37,12 @@ export default  class Button extends Component {
 Button.propTypes = {
     href: PropTypes.string,
     disabled: PropTypes.bool,
-    size: PropTypes.oneOf(['normal', 'large', 'small']),
+    size: PropTypes.oneOf(['default', 'large', 'small']),
     type: PropTypes.oneOf(['default', 'text', 'danger', 'success', 'primary', 'secondary'])
 };
 
 Button.defaultProps = {
-    size: 'normal',
+    size: 'default',
     type: 'default',
     disabled: false
 };

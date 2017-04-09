@@ -1,23 +1,7 @@
 @charset "utf-8";
 
-@danger: #EE2C00;
-@d_danger: #DD1B00;
-@l_default: #F9F9F9;
-@default: #F5F5F5;
-@d_default: #E4E4E4;
-@l_primary: #EEF7FE;
-@primary: #53B6FF;
-@d_primary: #42A5EE;
-@success: #4CAF50;
-@d_success: #3B9E3F;
-@secondary: #FFC107;
-@d_secondary: #EEB000;
-@disabled: #BDBDBD;
-@border: #E0E0E0;
-@shadow: rgba(0, 0, 0, .175);
-@normalText: #333;
-@lightText: #CCC;
-@disabledText: #ECECEC;
+@import "setup";
+@import "normalize";
 
 body {
   font-family: '微软雅黑', "Microsoft YaHei", Arial, Microsoft YaHei, Helvetica, sans-serif;
@@ -39,10 +23,11 @@ a {
   box-shadow: 0 6px 12px @shadow;
 }
 
-@import "normalize";
-@import "table";
 @import "nav";
-@import "button";
+@import "tabs";
 @import "drop";
-@import "pagination";
+@import "modal";
 @import "input";
+@import "table";
+@import "button";
+@import "pagination";

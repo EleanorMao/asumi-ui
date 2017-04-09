@@ -10,7 +10,9 @@ import {
 } from 'react-router-dom';
 
 import {Nav} from '../../src';
+import Tabs from './Components/Tabs';
 import Table from './Components/Table';
+import Modal from './Components/Modal';
 import Input from './Components/Input';
 import Button from './Components/Button';
 import Default from './Components/Default';
@@ -43,15 +45,18 @@ ReactDOM.render(
                 <Route exact path="/" component={()=> {
                     return (
                         <div>
-                            <Input/>
-                            <Dropdown/>
                             <Button/>
+                            <Dropdown/>
+                            <Input/>
+                            <Tabs/>
                             <Table/>
                             <Pagination/>
                         </div>
                     )
                 }}/>
+                <Route path="/tabs" component={Tabs}/>
                 <Route path="/input" component={Input}/>
+                <Route path="/modal" component={Modal}/>
                 <Route path="/table" component={Table}/>
                 <Route path="/button" component={Button}/>
                 <Route path="/dropdown" component={Dropdown}/>
