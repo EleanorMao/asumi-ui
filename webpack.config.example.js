@@ -20,6 +20,9 @@ module.exports = {
         }, {
             test: /\.less?$/,
             loader: 'style-loader!css-loader!less-loader'
+        }, {
+            test: /\.(svg|ttf|eot|svg|woff(\(?2\)?)?)(\?[a-zA-Z_0-9.=&]*)?(#[a-zA-Z_0-9.=&]*)?$/,
+            loader: "file-loader"
         }]
     },
     plugins: [

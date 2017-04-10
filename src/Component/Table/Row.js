@@ -1,9 +1,8 @@
-/**
- * Created by BG236557 on 2016/5/27.
- */
 import React, {
     Component
 } from 'react';
+import Radio from '../Radio';
+import Checkbox from '../Checkbox';
 
 export default class Row extends Component {
     constructor(props) {
@@ -29,7 +28,8 @@ export default class Row extends Component {
         if (isSelect && !hideSelectColumn) {
             output.push(
                 <td key={_key} style={{backgroundColor: checked && selectRow.bgColor, textAlign: 'center'}}>
-                    <input type={selectRow.mode} checked={checked} readOnly={true}/>
+                    {selectRow.mode === "radio" && <Radio checked={checked} readOnly={true}/>}
+                    {selectRow.mode === "checkbox" && <Checkbox checked={checked} readOnly={true}/>}
                 </td>
             )
         }

@@ -46,7 +46,7 @@ export default class Input extends Component {
     render() {
         let {type, size, rule, regExp, style, append, prepend, className, ...other}=this.props;
         let _style = (prepend || append) ? null : style;
-        let _className = classnames('el-input', className, size);
+        let _className = classnames('el-input', className, size ? `el-${size}` : '');
         if (type === 'textarea') {
             return (
                 <textarea
@@ -67,7 +67,7 @@ export default class Input extends Component {
                 />
             );
             if (prepend || append) {
-                let _wrapperClass = classnames('el-input-wrapper', className, size);
+                let _wrapperClass = classnames('el-input-wrapper', className, size ? `el-${size}` : '');
                 return (
                     <div className={_wrapperClass} style={style}>
                         {prepend && <span className="el-input-prepend">{prepend}</span>}

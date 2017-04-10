@@ -17,7 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
-    "fontawesome": "^4.7.2"
+    "react-fontawesome": "^1.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -31,6 +31,7 @@
     "babel-preset-stage-1": "^6.5.0",
     "babel-preset-stage-3": "^6.22.0",
     "css-loader": "^0.23.1",
+    "file-loader": "^0.11.1",
     "history": "^4.6.1",
     "json-server": "^0.8.20",
     "less": "^2.7.2",

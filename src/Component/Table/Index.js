@@ -28,7 +28,10 @@ export default class Table extends Component {
         super(props);
         this.state = {
             isHover: null,
+            columnData: [],
             order: undefined,
+            leftColumnData: [],
+            rightColumnData: [],
             sortField: undefined,
             data: props.data.slice(),
             currentPage: (props.pagination || props.topPagination) && props.options.page || 1,
@@ -54,9 +57,11 @@ export default class Table extends Component {
             });
         });
         let sortedData = sort(columnData);
-        this.columnData = sortedData.sorted;
-        this.leftColumnData = sortedData.left;
-        this.rightColumnData = sortedData.right;
+        this.setState({
+            columnData: sortedData.sorted,
+            leftColumnData: sortedData.left,
+            rightColumnData: sortedData.right
+        });
     }
 
     _getAllValue(data, isKey) {
@@ -68,15 +73,15 @@ export default class Table extends Component {
     }
 
     _getLastChild(data) {
-        let unavail = [],
+        let invalid = [],
             list = [];
         for (let i = 0, len = data.length; i < len; i++) {
             if (data[i].hidden) {
-                unavail.push(i);
+                invalid.push(i);
             }
             list.push(i);
         }
-        let diffList = diff(list, unavail);
+        let diffList = diff(list, invalid);
         return diffList[diffList.length - 1];
     }
 
@@ -84,8 +89,8 @@ export default class Table extends Component {
         return data.slice((page - 1) * length, page * length);
     }
 
-    _adjustWidth(me) {
-        const refs = this.refs || me,
+    _adjustWidth() {
+        const refs = this.refs,
             firstRow = refs.colgroup.childNodes,
             cells = refs.thead.refs.thead.childNodes,
             fixedLeftRow = refs.left && refs.left.childNodes,
@@ -102,7 +107,7 @@ export default class Table extends Component {
         const scrollBarWidth = getScrollBarWidth(),
             haveScrollBar = refs.body.offsetWidth !== refs.thead.refs.header.offsetWidth;
 
-        let lastChild = this._getLastChild(this.columnData), fixedRightWidth = 0;
+        let lastChild = this._getLastChild(this.state.columnData), fixedRightWidth = 0;
         lastChild = this.props.selectRow.mode !== 'none' ? lastChild + 1 : lastChild;
 
         for (let i = 0; i < length; i++) {
@@ -188,11 +193,12 @@ export default class Table extends Component {
     }
 
     _scrollHeight(e) {
-        if (this.refs.leftContainer) {
-            this.refs.leftContainer.scrollTop = e.currentTarget.scrollTop;
-        }
-        if (this.refs.rightContainer && this.refs.leftContainer) {
+        this.refs.leftContainer.scrollTop = e.currentTarget.scrollTop;
+        if (e.currentTarget == this.refs.rightContainer) {
             this.refs.container.scrollTop = e.currentTarget.scrollTop;
+        }
+        if (e.currentTarget == this.refs.container) {
+            this.refs.rightContainer.scrollTop = e.currentTarget.scrollTop;
         }
     }
 
@@ -201,9 +207,10 @@ export default class Table extends Component {
             selectRow,
             nestedHead
         } = this.props;
+        const {leftColumnData, rightColumnData}= this.state;
         const warning = 'color:red';
 
-        if (nestedHead.length && (this.leftColumnData.length || this.rightColumnData.length)) {
+        if (nestedHead.length && (leftColumnData.length || rightColumnData.length)) {
             console.warn('%c!Warning: Since you set props `nestedHead`, it\'s better not set `dataFixed` in `TreeHeadCol`', warning);
         }
         if (selectRow.mode !== 'none') {
@@ -223,46 +230,24 @@ export default class Table extends Component {
     }
 
     componentDidMount() {
-        this._adjustWidth(this.refs);
-        addEvent(window, 'resize', this._adjustWidth.bind(this));
-        addEvent(this.refs.container, 'scroll', this._scrollHeader.bind(this));
-        // window.addEventListener('resize', this._adjustWidth.bind(this));
-        // this.refs.container.addEventListener('scroll', this._scrollHeader.bind(this));
-        if (this.refs.rightContainer) {
-            addEvent(this.refs.rightContainer, 'scroll', this._scrollHeight.bind(this));
-            // this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
-        }
-        if (this.refs.leftContainer && !this.refs.rightContainer) {
-            addEvent(this.refs.container, 'scroll', this._scrollHeight.bind(this));
-            // this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
-        }
+        this._adjustWidth();
+        window.addEventListener('resize', this._adjustWidth.bind(this));
+        this.refs.container.addEventListener('scroll', this._scrollHeader.bind(this));
+        this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
+        this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
     }
 
     componentWillUnmount() {
-        removeEvent(window, 'resize', this._adjustWidth.bind(this));
-        removeEvent(this.refs.container, 'scroll', this._scrollHeader.bind(this));
-        // window.removeEventListener('resize', this._adjustWidth.bind(this));
-        // this.refs.container.removeEventListener('scroll', this._scrollHeader.bind(this));
-        if (this.refs.rightContainer) {
-            removeEvent(this.refs.rightContainer, 'scroll', this._scrollHeight.bind(this));
-            // this.refs.rightContainer.removeEventListener('scroll', this._scrollHeight.bind(this));
-        }
-        if (this.refs.leftContainer && !this.refs.rightContainer) {
-            removeEvent(this.refs.container, 'scroll', this._scrollHeight.bind(this));
-            // this.refs.container.removeEventListener('scroll', this._scrollHeight.bind(this));
-        }
+        window.removeEventListener('resize', this._adjustWidth.bind(this));
+        let {rightContainer, container}= this.refs;
+        container.removeEventListener('scroll', this._scrollHeader.bind(this));
+        container.removeEventListener('scroll', this._scrollHeight.bind(this));
+        rightContainer.removeEventListener('scroll', this._scrollHeight.bind(this));
     }
 
     componentDidUpdate() {
-        this._adjustWidth(this.refs);
-        if (this.refs.rightContainer) {
-            addEvent(this.refs.rightContainer, 'scroll', this._scrollHeight.bind(this));
-            // this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
-        }
-        if (this.refs.leftContainer && !this.refs.rightContainer) {
-            addEvent(this.refs.container, 'scroll', this._scrollHeight.bind(this));
-            // this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
-        }
+        this._adjustWidth();
+        this._adjustWidth();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -429,56 +414,54 @@ export default class Table extends Component {
     }
 
     bodyRender(data, className, height, selectRow) {
+        let columnData = this.state.columnData;
         return (
             <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
                  ref="container">
                 <table className={className} ref="body">
                     <colgroup ref="colgroup">
-                        {this.colgroupRender(this.columnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
+                        {this.colgroupRender(columnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
                     </colgroup>
                     <tbody ref="tbody">
-                    {this.blankRender(data, this.columnData.length, true)}
-                    {this.rowsRender(data, this.columnData, selectRow.hideSelectColumn)}
+                    {this.blankRender(data, columnData.length, true)}
+                    {this.rowsRender(data, columnData, selectRow.hideSelectColumn)}
                     </tbody>
                 </table>
             </div>
         )
     }
 
-    leftBodyRender(data, className, height, selectRow) {
-        if (this.leftColumnData.length) {
+    leftBodyRender(data, className, selectRow) {
+        let leftColumnData = this.state.leftColumnData;
+        if (leftColumnData.length) {
             return (
-                <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
-                     ref="leftContainer">
-                    <table className={className}>
-                        <colgroup ref="left">
-                            {this.colgroupRender(this.leftColumnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
-                        </colgroup>
-                        <tbody ref="ltbody">
-                        {this.blankRender(data, this.leftColumnData.length)}
-                        {this.rowsRender(data, this.leftColumnData, selectRow.hideSelectColumn)}
-                        </tbody>
-                    </table>
-                </div>
+                <table className={className}>
+                    <colgroup ref="left">
+                        {this.colgroupRender(leftColumnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
+                    </colgroup>
+                    <tbody ref="ltbody">
+                    {this.blankRender(data, leftColumnData.length)}
+                    {this.rowsRender(data, leftColumnData, selectRow.hideSelectColumn)}
+                    </tbody>
+                </table>
             )
         }
     }
 
-    rightBodyRender(data, className, height) {
-        if (this.rightColumnData.length) {
+
+    rightBodyRender(data, className) {
+        let rightColumnData = this.state.rightColumnData;
+        if (rightColumnData.length) {
             return (
-                <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
-                     ref="rightContainer">
-                    <table className={className} ref="rightBody">
-                        <colgroup ref="right">
-                            {this.colgroupRender(this.rightColumnData, 'none')}
-                        </colgroup>
-                        <tbody ref="rtbody">
-                        {this.blankRender(data, this.rightColumnData.length)}
-                        {this.rowsRender(data, this.rightColumnData, true, true)}
-                        </tbody>
-                    </table>
-                </div>
+                <table className={className} ref="rightBody">
+                    <colgroup ref="right">
+                        {this.colgroupRender(rightColumnData, 'none')}
+                    </colgroup>
+                    <tbody ref="rtbody">
+                    {this.blankRender(data, rightColumnData.length)}
+                    {this.rowsRender(data, rightColumnData, true, true)}
+                    </tbody>
+                </table>
             )
         }
     }
@@ -676,17 +659,25 @@ export default class Table extends Component {
             order,
             length,
             sortField,
-            currentPage
+            columnData,
+            currentPage,
+            leftColumnData,
+            rightColumnData
         } = this.state;
 
         let checked = false;
-        const className = classnames({
+        let className = classnames({
             'el-table-bordered': true,
             'el-table-striped': striped
         });
-        const renderList = (topPagination || pagination) && !remote ? this._sliceData(data, currentPage, length) : data.slice();
+        let renderList = (topPagination || pagination) && !remote ? this._sliceData(data, currentPage, length) : data.slice();
         if (selectRow.mode !== 'none') {
             checked = this._getAllValue(renderList.slice(), isKey).sort().toString() === selectRow.selected.slice().sort().toString();
+        }
+        let paddingBottom = 0;
+        let container = this.refs.container;
+        if (container && typeof parseFloat(height) == "number" && (container.scrollWidth > container.clientWidth)) {
+            paddingBottom = parseFloat(height) - container.clientHeight;
         }
         return (
             <div className={"el-table-group el-" + lineWrap}>
@@ -697,7 +688,7 @@ export default class Table extends Component {
                     <NestedHeader
                         ref="nested" nestedHead={nestedHead}
                         selectRow={selectRow} lineWrap={lineWrap}
-                        cols={this.columnData}
+                        cols={columnData}
                     />
                 }
                 <div className="el-table-wrapper" style={{width: width || '100%'}}>
@@ -714,11 +705,11 @@ export default class Table extends Component {
                         </Header>
                         {this.bodyRender(renderList, className, height, selectRow)}
                     </div>
-                    {
-                        !!this.leftColumnData.length &&
-                        <div className="el-table el-table-fixed el-table-left-fixed">
+                    <div className="el-table el-table-fixed el-table-left-fixed">
+                        {
+                            !!leftColumnData.length &&
                             <Header
-                                ref="lthead" left={this.leftColumnData.length}
+                                ref="lthead" left={leftColumnData.length}
                                 onSelectAll={this.handleSelectAll.bind(this)}
                                 selectRow={selectRow} checked={checked}
                                 sortName={remote ? sortName : sortField}
@@ -727,23 +718,35 @@ export default class Table extends Component {
                             >
                                 {children}
                             </Header>
-                            {this.leftBodyRender(renderList, className, height, selectRow)}
+                        }
+                        <div
+                            ref="leftContainer"
+                            className="el-table-container el-table-body-container"
+                            style={{height: height || 'auto', paddingBottom: paddingBottom}}
+                        >
+                            {this.leftBodyRender(renderList, className, selectRow)}
                         </div>
-                    }
-                    {
-                        !!this.rightColumnData.length &&
-                        <div className="el-table el-table-fixed el-table-right-fixed">
+                    </div>
+                    <div className="el-table el-table-fixed el-table-right-fixed">
+                        {
+                            !!rightColumnData.length &&
                             <Header
-                                ref="rthead" right={this.rightColumnData.length}
+                                ref="rthead" right={rightColumnData.length}
                                 sortName={remote ? sortName : sortField}
-                                sortOrder={remote ? sortOrder : order}
+                                sortOrd er={remote ? sortOrder : order}
                                 onSort={this.handleSort.bind(this)}
                             >
                                 {children}
                             </Header>
-                            {this.rightBodyRender(renderList, className, height)}
+                        }
+                        <div
+                            ref="rightContainer"
+                            className="el-table-container el-table-body-container"
+                            style={{height: height || 'auto', paddingBottom: paddingBottom}}
+                        >
+                            {this.rightBodyRender(renderList, className)}
                         </div>
-                    }
+                    </div>
                     {this.footerRender()}
                 </div>
                 {this.pagingRowRender()}

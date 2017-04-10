@@ -141,15 +141,12 @@ export  default class Main extends Component {
                     nestedHead={[['喵', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]]}
                 >
                     <Col dataField="id" dataAlign="center" dataFixed="auto">id</Col>
-                    <Col dataAlign='center' width="150px" dataField='regionRoleName'
-                         dataFixed="auto">区域角色</Col>
+                    <Col dataAlign='center' width="150px" dataField='regionRoleName' dataFixed="auto">区域角色</Col>
+                    <Col dataAlign='center' width="150px" dataSort={true} dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
-                    <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
-                    <Col dataAlign='center' width="150px" dataSort={true}
-                         dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='region'

@@ -3,9 +3,11 @@
  */
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
+import {extend} from '../Util';
 import Modal from './Modal';
+import confirm from './Confirm';
 
-export default  class ModalWrap extends Component {
+export default  class Wrap extends Component {
     constructor(props) {
         super(props);
     }
@@ -42,10 +44,20 @@ export default  class ModalWrap extends Component {
     }
 }
 
-ModalWrap.propTypes = {
+
+Wrap.confirm = (props)=> {
+    props = extend({}, {
+        title: 'confirm',
+        content: '',
+        size: 'default'
+    }, props);
+    return confirm(props)
+};
+
+Wrap.propTypes = {
     visible: PropTypes.bool
 };
 
-ModalWrap.defaultProps = {
+Wrap.defaultProps = {
     visible: false
 };

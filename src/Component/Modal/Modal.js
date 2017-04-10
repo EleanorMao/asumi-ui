@@ -11,7 +11,7 @@ export default  class Modal extends Component {
     }
 
     render() {
-        let {size, title, style, className, footer, children, onSure, onClose}=this.props;
+        let {size, mask, title, style, okText, closeText, maskClosable, className, footer, children, onOk, onClose}=this.props;
         let _classNames = classnames({
             'el-modal-content': true,
             'el-small': size === "small",
@@ -20,11 +20,11 @@ export default  class Modal extends Component {
         });
         return (
             <div>
-                <div className="el-mask"></div>
+                {!!mask && <div className="el-mask"></div>}
                 <div className="el-modal-wrapper">
                     <div className="el-modal">
                         <div className={_classNames} style={style}>
-                            <div className="el-modal-close" onClick={this.props.onClose}>×</div>
+                            <div className="el-modal-close" onClick={onClose}>×</div>
                             <div className="el-modal-header">{title}</div>
                             <div className="el-modal-body">{children}</div>
                             {footer !== null &&
@@ -34,11 +34,11 @@ export default  class Modal extends Component {
                                     <Button
                                         style={{marginRight: 10}}
                                         size={size === "large" ? "default" : "small"}
-                                        onClick={onClose}>取消</Button>
+                                        onClick={onClose}>{closeText}</Button>
                                     <Button
                                         type="primary"
                                         size={size === "large" ? "default" : "small"}
-                                        onClick={onSure}>确定</Button>
+                                        onClick={onOk}>{okText}</Button>
                                 </div>)}
                             </div>}
                         </div>
@@ -50,13 +50,17 @@ export default  class Modal extends Component {
 }
 
 Modal.propTypes = {
-    onSure: PropTypes.func,
+    mask: PropTypes.bool,
+    onOk: PropTypes.func,
     onClick: PropTypes.func,
     size: PropTypes.oneOf(['default', 'small', 'large'])
 };
 
 Modal.defaultProps = {
-    onSure: ()=> {
+    mask: true,
+    okText: '确定',
+    closeText: '取消',
+    onOk: ()=> {
     },
     onClose: ()=> {
     }

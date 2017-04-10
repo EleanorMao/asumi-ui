@@ -1,0 +1,54 @@
+.el-checkbox-wrapper {
+  > * {
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1;
+  }
+  display: inline-block;
+  cursor: pointer;
+  &.el-disabled {
+    color: @disabled;
+    cursor: not-allowed;
+    .el-checkbox {
+      .el-checkbox-input {
+        &:hover + .el-unchecked {
+          color: @disabled;
+        }
+      }
+      .el-checked {
+        color: @disabled;
+      }
+    }
+  }
+  .el-checkbox {
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    .el-checkbox-input {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      filter: alpha(opacity=0);
+      &:hover + .el-unchecked {
+        color: @d_primary;
+      }
+    }
+    .el-checked {
+      color: @d_primary;
+    }
+  }
+}
+
+.el-checkbox-group {
+  padding: 10px 0;
+  .el-checkbox-row {
+    padding-bottom: 5px;
+  }
+}

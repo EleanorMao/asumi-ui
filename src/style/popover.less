@@ -1,0 +1,80 @@
+.el-popover-wrapper {
+  z-index: 9999;
+  display: block;
+  font-weight: 400;
+  line-break: auto;
+  text-shadow: none;
+  font-style: normal;
+  text-align: center;
+  position: absolute;
+  word-break: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  letter-spacing: normal;
+  &.el-tooltip-wrapper {
+    min-width: 50px;
+    word-wrap: normal;
+    white-space: normal;
+  }
+  .el-popover {
+    text-align: left;
+    display: inline-block;
+    position: relative;
+    &.el-top, &.el-bottom {
+      padding: 10px 0;
+    }
+    &.el-left, &.el-right {
+      padding: 0 10px;
+    }
+    &.el-left:after {
+      content: '';
+      .el-caret();
+      .el-caret.el-right();
+      top: 50%;
+      right: 6px;
+      margin-top: -3px;
+      position: absolute;
+    }
+    &.el-right:after {
+      content: '';
+      .el-caret();
+      .el-caret.el-left();
+      top: 50%;
+      left: 6px;
+      margin-top: -3px;
+      position: absolute;
+    }
+    &.el-top:after {
+      content: '';
+      .el-caret();
+      .el-caret.el-bottom();
+      left: 50%;
+      bottom: 6px;
+      margin-left: -2px;
+      position: absolute;
+    }
+    &.el-bottom:after {
+      content: '';
+      .el-caret();
+      .el-caret.el-top();
+      top: 6px;
+      left: 50%;
+      margin-left: -2px;
+      position: absolute;
+    }
+  }
+  .el-popover-inner {
+    color: @default;
+    line-height: 1.3;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .8);
+    padding: 5px 10px;
+  }
+  .el-popover-body {
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid @border;
+  }
+}
+

@@ -2,7 +2,7 @@
  * Created by elly on 2017/4/8.
  */
 import React, {Component, PropTypes} from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 export default  class Select extends Component {
     constructor(props) {
@@ -10,22 +10,19 @@ export default  class Select extends Component {
         this.state = {};
     }
 
-    handleChange(event) {
-
-    }
-
     render() {
-        let {size, multi, onChange, ...other}=this.props;
+        let {size, multiple, onChange, wrapperClassName, className, children, ...other}=this.props;
+        let _className = classnames('el-select-wrapper', wrapperClassName, size ? `el-${size}` : '');
         return (
-            <select {...other} onChange={this.handleChange.bind(this)}>
+            <div className={_className}>
 
-            </select>
+            </div>
         )
     }
 }
 
 Select.propTypes = {
-    multi: PropTypes.bool,
+    multiple: PropTypes.bool,
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 

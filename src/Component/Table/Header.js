@@ -5,6 +5,7 @@ import React, {
     Component,
     PropTypes
 } from 'react';
+import Checkbox from '../Checkbox';
 
 import {empty, sort, isArr} from '../Util';
 
@@ -17,7 +18,7 @@ export default class Header extends Component {
         if (mode === 'checkbox') {
             return (
                 <th onClick={()=>onSelectAll(!checked)} style={{textAlign: 'center', width: 46}} data-input={mode}>
-                    <input type={mode} checked={checked} readOnly={true}/>
+                    <Checkbox checked={checked} readOnly={true}/>
                 </th>
             )
         } else if (mode === 'radio') {
