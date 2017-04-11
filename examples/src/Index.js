@@ -16,6 +16,7 @@ import Radio from './Components/Radio';
 import Modal from './Components/Modal';
 import Input from './Components/Input';
 import Button from './Components/Button';
+import Loading from './Components/Loading';
 import Popover from './Components/Popover';
 import Tooltip from './Components/Tooltip';
 import Checkbox from './Components/Checkbox';
@@ -26,7 +27,6 @@ const router = [
     <Link to={'/'}>HOME</Link>,
     <Link to={'/tabs'}>TABS</Link>,
     <Link to={'/tree'}>TREE</Link>,
-    <Link to={'/spin'}>SPIN</Link>,
     <Link to={'/table'}>TABLE</Link>,
     <Link to={'/input'}>INPUT</Link>,
     <Link to={'/radio'}>RADIO</Link>,
@@ -34,6 +34,7 @@ const router = [
     <Link to={'/upload'}>UPLOAD</Link>,
     <Link to={'/select'}>SELECT</Link>,
     <Link to={'/button'}>BUTTON</Link>,
+    <Link to={'/Loading'}>LOADING</Link>,
     <Link to={'/tooltip'}>TOOLTIP</Link>,
     <Link to={'/popover'}>POPOVER</Link>,
     <Link to={'/message'}>MESSAGE</Link>,
@@ -45,7 +46,7 @@ const router = [
 ReactDOM.render(
     <Router>
         <div>
-            <Nav router={router} style={{float: 'left', width: 100}}/>
+            <Nav router={router} style={{float: 'left', width: 200}}/>
             <div style={{overflow: 'hidden'}}>
                 <Route exact path="/" component={()=> {
                     return (
@@ -59,6 +60,7 @@ ReactDOM.render(
                             <Tabs/>
                             <Table/>
                             <Pagination/>
+                            <Loading/>
                         </div>
                     )
                 }}/>
@@ -68,6 +70,7 @@ ReactDOM.render(
                 <Route path="/modal" component={Modal}/>
                 <Route path="/table" component={Table}/>
                 <Route path="/button" component={Button}/>
+                <Route path="/loading" component={Loading}/>
                 <Route path="/popover" component={Popover}/>
                 <Route path="/tooltip" component={Tooltip}/>
                 <Route path="/checkbox" component={Checkbox}/>

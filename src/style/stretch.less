@@ -1,0 +1,132 @@
+.el-loading-wrapper {
+  text-align: center;
+  position: relative;
+  color: @d_primary;
+  min-height: 180px;
+  display: none;
+  &.el-loading-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    .el-loading-content {
+      display: table-cell;
+    }
+  }
+  .el-loading-title {
+    padding: 4px 0;
+  }
+  .el-loading-children {
+    position: relative;
+    padding: 10px;
+    z-index: 0;
+    opacity: .8;
+    filter: blur(.7px);
+    -webkit-filter: blur(.7px);
+  }
+  .el-loading-body {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    position: absolute;
+    &.el-loading-mask {
+      background-color: fade(@l_primary, 60%);
+    }
+  }
+  .el-loading-nest {
+    width: 100%;
+    height: 100%;
+    display: table;
+  }
+  .el-loading-content {
+    vertical-align: middle;
+    display: table-cell;
+  }
+  &.el-small {
+    .el-stretch {
+      width: 30px;
+      height: 30px;
+      .el-stretch-rect {
+        width: 4px;
+        margin-left: 1px;
+      }
+    }
+  }
+  &.el-large {
+    .el-stretch {
+      width: 108px;
+      height: 66px;
+      .el-stretch-rect {
+        width: 15px;
+      }
+    }
+  }
+  .el-stretch {
+    width: 66px;
+    height: 50px;
+    position: relative;
+    margin: auto;
+    display: inline-block;
+    .el-stretch-rect {
+      width: 8px;
+      height: 100%;
+      margin-left: 3px;
+      display: inline-block;
+      background-color: @primary;
+      transition: all 200ms ease-out;
+      -webkit-transition: all 200ms ease-out;
+      animation: stretch infinite 1s ease-in-out;
+      -webkit-animation: stretch infinite 1s ease-in-out;
+      &:nth-child(2) {
+        animation-delay: -0.9s;
+        -webkit-animation-delay: -0.9s;
+      }
+      &:nth-child(3) {
+        animation-delay: -0.8s;
+        -webkit-animation-delay: -0.8s;
+      }
+      &:nth-child(4) {
+        animation-delay: -0.7s;
+        -webkit-animation-delay: -0.7s;
+      }
+      &:nth-child(5) {
+        animation-delay: -0.6s;
+        -webkit-animation-delay: -0.6s;
+      }
+      &:nth-child(6) {
+        animation-delay: -0.5s;
+        -webkit-animation-delay: -0.5s;
+      }
+    }
+  }
+}
+
+@keyframes stretch {
+  0%, 100% {
+    transform: scaleY(0.4);
+    background-color: @l_primary;
+  }
+  50% {
+    transform: scaleY(1);
+    background-color: @primary;
+  }
+}
+
+@-webkit-keyframes stretch {
+  0%, 100% {
+    -webkit-transform: scaleY(0.4);
+    background-color: @l_primary;
+  }
+  50% {
+    -webkit-transform: scaleY(1);
+    background-color: @primary;
+  }
+}

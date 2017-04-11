@@ -12,6 +12,7 @@ import Modal from './Component/Modal';
 import Table from './Component/Table';
 import Col from './Component/Table/Col';
 import Button from './Component/Button';
+import Loading from './Component/Loading';
 import Tooltip from './Component/Tooltip';
 import Checkbox from './Component/Checkbox';
 import Dropdown from './Component/Dropdown';
@@ -39,6 +40,7 @@ export {
     Radio,
     Button,
     Tooltip,
+    Loading,
     Popover,
     TabPanel,
     Dropdown,
