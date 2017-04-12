@@ -16,11 +16,12 @@ export default  class Radio extends Component {
     }
 
     render() {
-        let {label, checked, className, onChange, disabled, children, ...other} = this.props;
+        let {label, type, checked, className, onChange, disabled, children, ...other} = this.props;
         let _className = classnames('el-checkbox-wrapper', disabled ? 'el-disabled' : '', className);
+        let _innerClassName = classnames('el-checkbox', type ? 'el-switch' : null);
         return (
             <label className={_className}>
-                <span className="el-checkbox">
+                <span className={_innerClassName}>
                     <input
                         {...other}
                         type="radio"
@@ -28,10 +29,11 @@ export default  class Radio extends Component {
                         disabled={disabled}
                         className="el-checkbox-input"
                         onChange={this.handleChange.bind(this)}/>
-                    {checked ?
-                        <span className="fa fa-dot-circle-o el-checked"/> :
-                        <span className="fa fa-circle-o el-unchecked"/>
-                    }
+                    { type ? <span/> : (
+                        checked ?
+                            <span className="fa fa-dot-circle-o el-checked"/> :
+                            <span className="fa fa-circle-o el-unchecked"/>
+                    )}
                 </span>
                 <span>{children || label}</span>
             </label>
@@ -39,7 +41,9 @@ export default  class Radio extends Component {
     }
 }
 
-Radio.propTypes = {};
+Radio.propTypes = {
+    type: PropTypes.oneOf(['switch'])
+};
 
 Radio.defaultProps = {
     checked: false,

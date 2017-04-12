@@ -56,6 +56,10 @@ export default  class Main extends Component {
                     <Input placeholder="small input"/>
                     <Input type="textarea" placeholder="small textarea"/>
                 </Group>
+                <h1>Icon Input</h1>
+                <div>
+                    <Input icon={<i className="fa fa-bed"/>}/>
+                </div>
                 <h1>RegExp Input</h1>
                 <Group style={style} onChange={this.handleChange.bind(this)}>
                     <Input name="color" value={color} placeholder="color" rule="color"/>

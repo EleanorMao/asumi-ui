@@ -11,17 +11,6 @@ export default  class Wrap extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        this.container = document.createElement('div');
-        this.container.className = `el-popover-wrapper${this.props.content ? '' : ' el-tooltip-wrapper'}`;
-        document.body.appendChild(this.container);
-    }
-
-    componentDidUpdate() {
-        this.container.className = `el-popover-wrapper${this.props.content ? '' : ' el-tooltip-wrapper'}`;
-        this.getPosition();
-    }
-
     componentWillUnmount() {
         if (this.container) {
             document.body.removeChild(this.container);
@@ -71,6 +60,12 @@ export default  class Wrap extends Component {
     }
 
     renderComponent() {
+        if (!this.container) {
+            this.container = document.createElement('div');
+            this.container.className = `el-popover-wrapper${this.props.content ? '' : ' el-tooltip-wrapper'}`;
+            document.body.appendChild(this.container);
+        }
+        let props = extend({}, {style: this.props.content ? {maxWidth: 200} : null}, this.props);
         ReactDOM.unstable_renderSubtreeIntoContainer(this, <Popover {...this.props} />, this.container);
         this.addStyle();
         this.visible = true;
@@ -91,7 +86,7 @@ export default  class Wrap extends Component {
         for (let style in this.style) {
             this.container.style[style] = this.style[style];
         }
-        this.container.style.display = 'inline-block';
+        this.container.style.display = 'block';
     }
 
     render() {
@@ -111,19 +106,6 @@ export default  class Wrap extends Component {
         }
 
         return React.cloneElement(child, props);
-    }
-}
-
-export class PopoverWrap extends Wrap {
-    constructor(props) {
-        super(props)
-    }
-
-    renderComponent() {
-        let props = extend({}, {style: {maxWidth: 200}}, this.props);
-        ReactDOM.unstable_renderSubtreeIntoContainer(this, <Popover {...props} />, this.container);
-        this.addStyle();
-        this.visible = true;
     }
 }
 

@@ -16,11 +16,12 @@ export default  class Checkbox extends Component {
     }
 
     render() {
-        let {label, checked, className, indeterminate, onChange, disabled, children, ...other} = this.props;
+        let {type, label, checked, className, indeterminate, onChange, disabled, children, ...other} = this.props;
         let _className = classnames('el-checkbox-wrapper', disabled ? 'el-disabled' : '', className);
+        let _innerClassName = classnames('el-checkbox', type ? 'el-switch' : null);
         return (
             <label className={_className}>
-                <span className="el-checkbox">
+                <span className={_innerClassName}>
                     <input
                         {...other}
                         type="checkbox"
@@ -28,12 +29,14 @@ export default  class Checkbox extends Component {
                         disabled={disabled}
                         className="el-checkbox-input"
                         onChange={this.handleChange.bind(this)}/>
-                    {indeterminate ?
-                        <span className="fa fa-minus-square el-checked"/> :
-                        (checked ?
-                                <span className="fa fa-check-square el-checked"/> :
-                                <span className="fa fa-square-o el-unchecked"/>
-                        )}
+                    {type ? <span/> : (
+                        indeterminate ?
+                            <span className="fa fa-minus-square el-checked"/> :
+                            (checked ?
+                                    <span className="fa fa-check-square el-checked"/> :
+                                    <span className="fa fa-square-o el-unchecked"/>
+                            ))
+                    }
                 </span>
                 <span>{children || label}</span>
             </label>
@@ -41,7 +44,9 @@ export default  class Checkbox extends Component {
     }
 }
 
-Checkbox.propTypes = {};
+Checkbox.propTypes = {
+    type: PropTypes.oneOf(['switch'])
+};
 
 Checkbox.defaultProps = {
     checked: false,

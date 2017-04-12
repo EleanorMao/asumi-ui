@@ -24,11 +24,11 @@ export default  class Button extends Component {
         });
         if (href) {
             return (
-                <a href={disabled ? 'javascript:;' : href} className={className} {...other}>{children}</a>
+                <a {...other} href={disabled ? 'javascript:;' : href} className={className}>{children}</a>
             )
         } else {
             return (
-                <button type="button" className={className} disabled={disabled} {...other}>{children}</button>
+                <button {...other} type="button" className={className} disabled={disabled}>{children}</button>
             )
         }
     }

@@ -10,6 +10,7 @@ export default  class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            swi: true,
             normal: true,
             checkedList: [1, 2]
         }
@@ -39,6 +40,16 @@ export default  class Main extends Component {
                         checked={this.state.normal}
                         onChange={this.handleChange.bind(this)}/>
                 </div>
+                <h1>Switch Radio</h1>
+                <div>
+                    <Checkbox
+                        value="1"
+                        label="switch"
+                        name="swi"
+                        type="switch"
+                        checked={this.state.swi}
+                        onChange={this.handleChange.bind(this)}/>
+                </div>
                 <h1>Disabled Checkbox</h1>
                 <div>
                     <Checkbox
@@ -51,6 +62,16 @@ export default  class Main extends Component {
                         label="label"
                         checked={true}
                     />
+                    <Checkbox
+                        label="switch"
+                        type="switch"
+                        disabled
+                        checked={false}/>
+                    <Checkbox
+                        label="switch"
+                        type="switch"
+                        disabled
+                        checked={true}/>
                 </div>
                 <h1>Indeterminate Checkbox</h1>
                 <div>

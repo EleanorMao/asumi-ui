@@ -15,6 +15,7 @@ import Table from './Components/Table';
 import Radio from './Components/Radio';
 import Modal from './Components/Modal';
 import Input from './Components/Input';
+import Select from './Components/Select';
 import Button from './Components/Button';
 import Loading from './Components/Loading';
 import Popover from './Components/Popover';
@@ -69,6 +70,7 @@ ReactDOM.render(
                 <Route path="/radio" component={Radio}/>
                 <Route path="/modal" component={Modal}/>
                 <Route path="/table" component={Table}/>
+                <Route path="/select" component={Select}/>
                 <Route path="/button" component={Button}/>
                 <Route path="/loading" component={Loading}/>
                 <Route path="/popover" component={Popover}/>

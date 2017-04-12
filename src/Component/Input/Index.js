@@ -9,8 +9,8 @@ export default class Input extends Component {
         super(props);
     }
 
-    handleChange(event) {
-        const {name, value} = event.target;
+    handleChange(e) {
+        const {name, value} = e.target;
         const {rule, regExp} = this.props;
         if (rule === 'price') { //金额相关 8+2
             let reg = /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/;
@@ -40,31 +40,36 @@ export default class Input extends Component {
             }
         }
 
-        this.props.onChange && this.props.onChange({event, name, value});
+        this.props.onChange && this.props.onChange({e, name, value});
     }
 
     render() {
-        let {type, size, rule, regExp, style, append, prepend, className, ...other}=this.props;
-        let _style = (prepend || append) ? null : style;
+        let {type, size, rule, regExp, icon, style, inputStyle, append, prepend, className, ...other}=this.props;
+        let {onClick}={...other};
         let _className = classnames('el-input', className, size ? `el-${size}` : '');
         if (type === 'textarea') {
             return (
-                <textarea
-                    style={style}
-                    className={_className}
-                    onChange={this.handleChange.bind(this)}
-                    {...other}
-                />
+                <div className={_className} style={style}>
+                    {!!icon && <span className="el-input-icon" onClick={onClick}>{icon}</span>}
+                    <textarea
+                        {...other}
+                        style={inputStyle}
+                        className={_className}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                </div>
             )
         } else {
             let input = (
-                <input
-                    type="text"
-                    style={_style}
-                    className={_className}
-                    onChange={this.handleChange.bind(this)}
-                    {...other}
-                />
+                <div className={_className} style={style}>
+                    {!!icon && <span className="el-input-icon" onClick={onClick}>{icon}</span>}
+                    <input
+                        {...other}
+                        type="text"
+                        style={inputStyle}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                </div>
             );
             if (prepend || append) {
                 let _wrapperClass = classnames('el-input-wrapper', className, size ? `el-${size}` : '');

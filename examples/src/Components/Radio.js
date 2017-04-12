@@ -10,6 +10,7 @@ export default  class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            swi: true,
             normal: true,
             groupValue: 1
         }
@@ -30,13 +31,23 @@ export default  class Main extends Component {
     render() {
         return (
             <div className="content">
-                <h1>Normal Checkbox</h1>
+                <h1>Normal Radio</h1>
                 <div>
                     <Radio
                         value="1"
                         label="label"
                         name="normal"
                         checked={this.state.normal}
+                        onChange={this.handleChange.bind(this)}/>
+                </div>
+                <h1>Switch Radio</h1>
+                <div>
+                    <Radio
+                        value="1"
+                        label="switch"
+                        name="swi"
+                        type="switch"
+                        checked={this.state.swi}
                         onChange={this.handleChange.bind(this)}/>
                 </div>
                 <h1>Disabled Radio</h1>
@@ -51,6 +62,16 @@ export default  class Main extends Component {
                         label="label"
                         checked={true}
                     />
+                    <Radio
+                        label="switch"
+                        type="switch"
+                        disabled
+                        checked={false}/>
+                    <Radio
+                        label="switch"
+                        type="switch"
+                        disabled
+                        checked={true}/>
                 </div>
                 <h1>RadioGroup</h1>
                 <div>

@@ -32,8 +32,10 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     + .el-input {
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
+      > input[type="text"], > textarea {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
     }
   }
   .el-input-append {
@@ -44,41 +46,148 @@
   .el-input {
     display: table-cell;
     &:first-child, &:not(:first-child):not(:last-child) {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      > input[type="text"], > textarea {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
   }
 }
 
 .el-input {
-  min-height: 30px;
-  padding: 5px 8px;
-  line-height: 1.5;
-  font-size: 13px;
+  cursor: text;
   position: relative;
   display: inline-block;
-  width: 100%;
-  cursor: text;
-  color: @normalText;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid @border;
-  border-radius: 4px;
-  &:disabled {
-    cursor: not-allowed;
-    background-color: @disabledText;
+  > input[type="text"], > textarea {
+    width: 100%;
+    font-size: 13px;
+    min-height: 30px;
+    padding: 5px 8px;
+    line-height: 1.5;
+    color: @normalText;
+    border-radius: 4px;
+    display: inline-block;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid @border;
+    &:disabled {
+      cursor: not-allowed;
+      background-color: @disabledText;
+    }
+    &:focus {
+      border-color: @primary;
+    }
   }
-  &:focus {
-    border-color: @primary;
+  .el-input-icon {
+    right: 0;
+    z-index: 1;
+    width: 35px;
+    height: 100%;
+    padding: 5px 8px;
+    line-height: 1.5;
+    color: @midText;
+    position: absolute;
+    text-align: center;
+    + input[type="text"], + textarea {
+      padding-right: 35px;
+    }
   }
   &.el-large {
-    font-size: 14px;
-    min-height: 35px;
-    padding: 6px 8px;
+    > input[type="text"], > textarea {
+      font-size: 14px;
+      min-height: 35px;
+      padding: 6px 8px;
+    }
+    .el-input-icon {
+      width: 40px;
+      padding: 6px 8px;
+      + input[type="text"], + textarea {
+        padding-right: 40px;
+      }
+    }
   }
   &.el-small {
-    font-size: 12px;
-    min-height: 24px;
-    padding: 2px 8px;
+    > input[type="text"], > textarea {
+      font-size: 12px;
+      min-height: 24px;
+      padding: 2px 8px;
+    }
+    .el-input-icon {
+      width: 30px;
+      padding: 2px 8px;
+      + input[type="text"], + textarea {
+        padding-right: 30px;
+      }
+    }
   }
 }
+
+.el-select-wrapper {
+  position: relative;
+  display: inline-block;
+  .el-input {
+    cursor: default;
+  }
+  .el-caret {
+    margin-left: 0;
+    margin-right: 0;
+    transition: transform .2s ease-out;
+    -webkit-transition: transform .2s ease-out;
+    &.el-select-open {
+      transform: translateY(-50%) rotate(180deg);
+      -webkit-transform: translateY(-50%) rotate(180deg);
+    }
+  }
+}
+
+.el-select-dropdown {
+  width: 100%;
+  z-index: 1000;
+  overflow: auto;
+  margin-top: 5px;
+  background: #fff;
+  max-height: 250px;
+  margin-bottom: 5px;
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid @border;
+  box-shadow: 0 0 5px @shadow;
+  ul {
+    padding: 5px 0;
+    > li {
+      .overflow();
+      height: 30px;
+      position: relative;
+      padding: 5px 23px 5px 8px;
+      &.el-select-no-data {
+        color: @disabled;
+        text-align: center;
+        &:hover {
+          background: #fff;
+        }
+      }
+      &.el-disabled {
+        color: @disabled;
+        cursor: not-allowed;
+        background-color: @disabledText;
+        &:hover {
+          background: @disabledText;
+        }
+      }
+      .el-select-selected {
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 30px;
+        color: @d_primary;
+        line-height: 30px;
+        position: absolute;
+        display: inline-block;
+      }
+      &:hover {
+        background: @default;
+      }
+    }
+  }
+}
+
