@@ -231,18 +231,19 @@ export default class Table extends Component {
 
     componentDidMount() {
         this._adjustWidth();
-        window.addEventListener('resize', this._adjustWidth.bind(this));
-        this.refs.container.addEventListener('scroll', this._scrollHeader.bind(this));
-        this.refs.container.addEventListener('scroll', this._scrollHeight.bind(this));
-        this.refs.rightContainer.addEventListener('scroll', this._scrollHeight.bind(this));
+        addEvent(window, 'resize', this._adjustWidth.bind(this));
+        let {rightContainer, container}= this.refs;
+        addEvent(container, 'scroll', this._scrollHeader.bind(this));
+        addEvent(container, 'scroll', this._scrollHeight.bind(this));
+        addEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this._adjustWidth.bind(this));
+        removeEvent(window, 'resize', this._adjustWidth.bind(this));
         let {rightContainer, container}= this.refs;
-        container.removeEventListener('scroll', this._scrollHeader.bind(this));
-        container.removeEventListener('scroll', this._scrollHeight.bind(this));
-        rightContainer.removeEventListener('scroll', this._scrollHeight.bind(this));
+        removeEvent(container, 'scroll', this._scrollHeader.bind(this));
+        removeEvent(container, 'scroll', this._scrollHeight.bind(this));
+        removeEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
     }
 
     componentDidUpdate() {

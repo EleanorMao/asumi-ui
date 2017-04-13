@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: './examples/lib',
         filename: 'index.js',
-        publicPath: "http://127.0.0.1:9010/lib"
+        publicPath: "http://0.0.0.0:9010/lib"
     },
     module: {
         loaders: [{

@@ -6,7 +6,7 @@ import React, {Component, PropTypes} from 'react';
 import classnames from 'classnames';
 import Input from '../Input';
 import Option from './Option';
-import {isArr, extend, contains} from '../Util';
+import {isArr, extend, contains, addEvent, removeEvent} from '../Util';
 
 export default  class Select extends Component {
     constructor(props) {
@@ -28,8 +28,8 @@ export default  class Select extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('resize', this.addStyle.bind(this), false);
-        document.addEventListener('click', this.handleClose.bind(this), false);
+        addEvent(window, 'resize', this.addStyle.bind(this));
+        addEvent(document, 'click', this.handleClose.bind(this));
     }
 
     componentWillUnmount() {
@@ -37,8 +37,8 @@ export default  class Select extends Component {
             document.body.removeChild(this.container);
             this.container = null;
         }
-        window.removeEventListener('resize', this.addStyle.bind(this), false);
-        document.removeEventListener('click', this.handleClose.bind(this), false);
+        removeEvent(window, 'resize', this.addStyle.bind(this));
+        removeEvent(document, 'click', this.handleClose.bind(this));
     }
 
     componentWillReceiveProps(nextProps) {

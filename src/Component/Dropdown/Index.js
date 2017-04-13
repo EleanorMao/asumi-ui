@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react';
 import classnames from 'classnames';
-import {contains} from '../Util';
+import {contains, addEvent, removeEvent} from '../Util';
 
 export default class Dropdown extends Component {
     constructor(props) {
@@ -12,11 +12,11 @@ export default class Dropdown extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('click', this.clickToClose.bind(this))
+        addEvent(window, 'click', this.clickToClose.bind(this))
     }
 
     componentWillUnmount() {
-        window.removeEventListener('click', this.clickToClose.bind(this))
+        removeEvent(window, 'click', this.clickToClose.bind(this))
     }
 
     componentWillReceiveProps() {

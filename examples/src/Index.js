@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 
 import {Nav} from '../../src';
+import Form from './Components/Form';
 import Tabs from './Components/Tabs';
 import Table from './Components/Table';
 import Radio from './Components/Radio';
@@ -52,16 +53,35 @@ ReactDOM.render(
                 <Route exact path="/" component={()=> {
                     return (
                         <div>
-                            <Button/>
-                            <Dropdown/>
-                            <Modal/>
-                            <Input/>
-                            <Tooltip/>
-                            <Popover/>
-                            <Tabs/>
-                            <Table/>
-                            <Pagination/>
-                            <Loading/>
+                            <h1>Global</h1>
+                            <div>
+                                <Button/>
+                            </div>
+                            <h1>Form</h1>
+                            <div>
+                                <Input/>
+                                <Select/>
+                                <Radio/>
+                                <Checkbox/>
+                                <Form/>
+                            </div>
+                            <h1>Display</h1>
+                            <div>
+                                <Tooltip/>
+                                <Popover/>
+                                <Table/>
+                                <Pagination/>
+                            </div>
+                            <h1>Navigation</h1>
+                            <div>
+                                <Dropdown/>
+                                <Tabs/>
+                            </div>
+                            <h1>Others</h1>
+                            <div>
+                                <Modal/>
+                                <Loading/>
+                            </div>
                         </div>
                     )
                 }}/>

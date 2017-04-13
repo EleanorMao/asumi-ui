@@ -4,6 +4,7 @@
 
 import './style/index.less';
 import Nav from './Component/Nav';
+import Form from './Component/Form';
 import Tabs from './Component/Tabs';
 import Radio from './Component/Radio';
 import Group from './Component/Group';
@@ -37,6 +38,7 @@ export {
     Col,
     Nav,
     Tabs,
+    Form,
     Table,
     Modal,
     Input,
