@@ -7,20 +7,20 @@
 }
 
 .el-row {
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-left: -1.1538rem;
+  margin-right: -1.1538rem;
   &:before, &:after {
-    display: table;
     content: " ";
+    display: table;
   }
   &:after {
     clear: both;
   }
   > .fr, > .fl {
-    position: relative;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+    position: relative;
+    padding-left: 1.1538rem;
+    padding-right: 1.1538rem;
   }
 }
 
@@ -30,12 +30,12 @@
   margin-bottom: 0;
   border-spacing: 0;
   table-layout: fixed;
-  border-collapse: collapse;
   background-color: #fff;
+  border-collapse: collapse;
 }
 
 .el-table table thead {
-  display: table-header-group
+  display: table-header-group;
 }
 
 .el-table table > tbody > tr > td,
@@ -44,10 +44,10 @@
 .el-table table > tfoot > tr > th,
 .el-table table > thead > tr > td,
 .el-table table > thead > tr > th {
-  padding: 8px;
+  padding: 0.6153rem;
   position: relative;
-  line-height: 1.42857143;
   vertical-align: middle;
+  line-height: 1.42857143;
   border-top: 1px solid @border;
 }
 
@@ -78,10 +78,10 @@
 }
 
 .el-table {
-  color: @normalText;
   width: 100%;
-  font-size: 13px;
+  font-size: 1rem;
   line-height: 40px;
+  color: @normalText;
 }
 
 .el-table.el-table-fixed {
@@ -98,15 +98,15 @@
 }
 
 .el-table-wrapper .el-table-footer {
-  padding: 10px;
+  padding: 0.7692rem;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 1.1538rem;
 }
 
 .el-table-group .el-table-title {
-  padding: 10px 0;
+  padding: 0.7692rem 0;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 1.1538rem;
 }
 
 .el-table-fixed .el-table-container,
@@ -115,7 +115,7 @@
 }
 
 .el-table table > thead > tr > th {
-  padding: 11px;
+  padding: 0.8461rem;
   background: @default;
 }
 

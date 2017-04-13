@@ -4,6 +4,10 @@
 @import "normalize";
 @import "fontawesome/less/font-awesome";
 
+:root {
+  font-size: @fontSize;
+}
+
 body {
   font-family: '微软雅黑', "Microsoft YaHei", Arial, Microsoft YaHei, Helvetica, sans-serif;
   margin: 0;
@@ -20,8 +24,8 @@ a {
 }
 
 .el-shadow {
-  box-shadow: 0 6px 12px @shadow;
-  -webkit-box-shadow: 0 6px 12px @shadow;
+  box-shadow: 0 0.4615rem 0.9230rem @shadow;
+  -webkit-box-shadow: 0 0.4615rem 0.9230rem @shadow;
 }
 
 .overflow {

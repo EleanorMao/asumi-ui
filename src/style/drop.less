@@ -3,9 +3,9 @@
 }
 
 .el-dropdown {
-  display: inline-block;
   position: relative;
-  margin: 16px 0;
+  margin: 1.2307rem 0;
+  display: inline-block;
 }
 
 .el-dropdown-toggle:focus {
@@ -13,34 +13,34 @@
 }
 
 .el-dropdown-menu {
-  position: absolute;
-  top: 100%;
+  .el-shadow();
   left: 0;
+  top: 100%;
+  padding: 0;
+  float: left;
   z-index: 1000;
   display: none;
-  float: left;
+  font-size: 1rem;
+  margin-top: 2px;
   min-width: 160px;
-  padding: 0;
-  font-size: 13px;
   text-align: left;
   list-style: none;
-  margin-top: 2px;
+  position: absolute;
   background-color: #fff;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   border: 1px solid @border;
-  .el-shadow();
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
   > li {
     border-bottom: 1px solid @border;
     > a {
-      display: block;
-      padding: 11px 20px;
       clear: both;
-      font-weight: normal;
-      line-height: 1.42857143;
+      display: block;
       color: @normalText;
+      font-weight: normal;
       white-space: nowrap;
       text-decoration: none;
+      line-height: 1.42857143;
+      padding: 0.8461rem 1.5384rem;
       &:hover, &:focus {
         text-decoration: none;
         background-color: @default;

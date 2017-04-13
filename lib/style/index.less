@@ -1,29 +1,48 @@
 @charset "utf-8";
 
-@danger: #EE2C00;
-@d_danger: #DD1B00;
-@default: #F5F5F5;
-@d_default: #E4E4E4;
-@primary: #53B6FF;
-@d_primary: #42A5EE;
-@success: #4CAF50;
-@d_success: #3B9E3F;
-@secondary: #FFC107;
-@d_secondary: #EEB000;
-@disabled: #757575;
-@border: #CFD8DC;
-@normalText: #333;
+@import "variables";
+@import "normalize";
+@import "fontawesome/less/font-awesome";
+
+:root {
+  font-size: @fontSize;
+}
 
 body {
   font-family: '微软雅黑', "Microsoft YaHei", Arial, Microsoft YaHei, Helvetica, sans-serif;
-  font-size: 12px;
+  margin: 0;
   color: @normalText;
+  font-size: @fontSize;
   line-height: 1.42857;
-  margin: 0
 }
 
-@import "normalize";
-@import "table";
+a {
+  color: @primary;
+  &:hover, &:active, &:visited, &:focus {
+    color: @d_primary;
+  }
+}
+
+.el-shadow {
+  box-shadow: 0 0.4615rem 0.9230rem @shadow;
+  -webkit-box-shadow: 0 0.4615rem 0.9230rem @shadow;
+}
+
+.overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 @import "nav";
-@import "button";
+@import "tabs";
 @import "drop";
+@import "caret";
+@import "modal";
+@import "input";
+@import "table";
+@import "button";
+@import "stretch";
+@import "popover";
+@import "checkbox";
+@import "pagination";

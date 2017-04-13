@@ -1,79 +1,85 @@
-.btn {
+a.el-btn {
+  color: @normalText;
+}
+
+.el-btn {
   height: 36px;
-  font-size: 13px;
+  font-size: 1rem;
   cursor: pointer;
-  padding: 0 12px;
   min-width: 96px;
   font-weight: 400;
   margin-bottom: 0;
   line-height: 36px;
   text-align: center;
+  user-select: none;
   color: @normalText;
   white-space: nowrap;
+  padding: 0 0.9230rem;
+  -ms-user-select: none;
   display: inline-block;
   vertical-align: middle;
+  background-image: none;
+  -moz-user-select: none;
   background-color: @default;
   touch-action: manipulation;
   -ms-touch-action: manipulation;
-  user-select: none;
-  border-radius: 2px;
-  -ms-user-select: none;
-  background-image: none;
-  -moz-user-select: none;
   -webkit-user-select: none;
   border: 1px solid transparent;
-  &.disabled, &:disabled {
-    background-color: @disabled;
+  border-radius: @smallBorderRadio;
+  &.el-disabled, &:disabled {
     color: #fff;
+    background-color: @disabled;
     &:active, &:focus, &:hover {
       background-color: @disabled;
     }
   }
-  &.primary {
-    background-color: @primary;
+  &.el-primary {
     color: #fff;
+    background-color: @primary;
     &:active, &:focus, &:hover {
       background-color: @d_primary;
     }
   }
-  &.secondary {
-    background-color: @secondary;
+  &.el-secondary {
     color: #fff;
+    background-color: @secondary;
     &:active, &:focus, &:hover {
       background-color: @d_secondary;
     }
   }
-  &.danger {
-    background-color: @danger;
+  &.el-danger {
     color: #fff;
+    background-color: @danger;
     &:active, &:focus, &:hover {
       background-color: @d_danger;
     }
   }
-  &.success {
-    background-color: @success;
+  &.el-success {
     color: #fff;
+    background-color: @success;
     &:active, &:focus, &:hover {
       background-color: @d_success;
     }
   }
-  &.large {
+  &.el-large {
     height: 45px;
-    line-height: 45px;
     min-width: 126px;
-    font-size: 16px;
+    line-height: 45px;
+    font-size: 1.2307rem;
   }
-  &.small {
+  &.el-small {
     height: 35px;
-    line-height: 35px;
     min-width: 76px;
-    font-size: 12px;
+    line-height: 35px;
+    font-size: 0.9230rem;
   }
-  &.text {
-    background-color: transparent;
-    padding: 0 8px;
+  &.el-text {
+    color: @primary;
     min-width: 40px;
+    padding: 0 0.6153rem;
+    background-color: transparent;
     &:active, &:focus, &:hover {
+      color: @d_primary;
       background-color: transparent;
     }
   }
