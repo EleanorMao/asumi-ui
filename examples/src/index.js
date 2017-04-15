@@ -22,6 +22,7 @@ import Select from './components/select';
 import Button from './components/button';
 import Loading from './components/loading';
 import Popover from './components/popover';
+import Message from './components/message';
 import Tooltip from './components/tooltip';
 import Checkbox from './components/checkbox';
 import Dropdown from './components/dropdown';
@@ -31,6 +32,7 @@ const router = [
     <Link to={'/'}>HOME</Link>,
     <Link to={'/tabs'}>TABS</Link>,
     <Link to={'/tree'}>TREE</Link>,
+    <Link to={'/form'}>FORM</Link>,
     <Link to={'/table'}>TABLE</Link>,
     <Link to={'/input'}>INPUT</Link>,
     <Link to={'/radio'}>RADIO</Link>,
@@ -88,6 +90,7 @@ ReactDOM.render(
                     )
                 }}/>
                 <Route path="/tabs" component={Tabs}/>
+                <Route path="/form" component={Form}/>
                 <Route path="/input" component={Input}/>
                 <Route path="/radio" component={Radio}/>
                 <Route path="/modal" component={Modal}/>
@@ -95,6 +98,7 @@ ReactDOM.render(
                 <Route path="/select" component={Select}/>
                 <Route path="/button" component={Button}/>
                 <Route path="/loading" component={Loading}/>
+                <Route path="/message" component={Message}/>
                 <Route path="/popover" component={Popover}/>
                 <Route path="/tooltip" component={Tooltip}/>
                 <Route path="/checkbox" component={Checkbox}/>

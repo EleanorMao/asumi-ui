@@ -15,19 +15,22 @@ import Button from './component/button';
 import Select from './component/select';
 import Loading from './component/loading';
 import Popover from './component/popover';
+import Message from './component/message';
 import Checkbox from './component/checkbox';
 import Dropdown from './component/dropdown';
 import Option from './component/select/option';
 import Pagination from './component/pagination';
+import FormItem from './component/form/formItem';
 import TabPanel from './component/tabs/tabPanel';
-import RadioGroup from './component/group/radioGroup';
-import CheckboxGroup from './component/group/checkGroup';
+import RadioGroup from './component/radio/radioGroup';
+import CheckboxGroup from './component/checkbox/checkGroup';
 import SimplePagination from './component/pagination/simplePagination';
 
 const Tooltip = Popover;
 
 Table.Col = Col;
 Select.Option = Option;
+Form.FormItem = FormItem;
 Tabs.TabPanel = TabPanel;
 Radio.Group = RadioGroup;
 Checkbox.Group = CheckboxGroup;
@@ -48,7 +51,9 @@ export {
     Option,
     Loading,
     Popover,
+    Message,
     Tooltip,
+    FormItem,
     TabPanel,
     Dropdown,
     Checkbox,

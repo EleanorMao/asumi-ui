@@ -65,7 +65,7 @@ export default class Input extends Component {
                     {!!icon && <span className="el-input-icon" onClick={onClick}>{icon}</span>}
                     <input
                         {...other}
-                        type="text"
+                        type={type}
                         style={inputStyle}
                         onChange={this.handleChange.bind(this)}
                     />

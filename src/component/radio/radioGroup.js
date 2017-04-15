@@ -17,7 +17,7 @@ export default  class RadioGroup extends Component {
             <div className={_className}>
                 <div className="el-checkbox-row">
                     {
-                        options.map((item, index)=> {
+                        !!options && options.map((item, index)=> {
                             if (typeof item === 'string') {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }

@@ -25,6 +25,7 @@ module.exports = {
             loader: "file-loader"
         }]
     },
+    devtool: "#inline-source-map",
     plugins: [
         new Nyan(),
         new webpack.HotModuleReplacementPlugin(),

@@ -4,7 +4,8 @@
 import React, {Component} from 'react';
 import {
     Group,
-    Button
+    Button,
+    Message
 } from '../../../src';
 
 export default  class Main extends Component {

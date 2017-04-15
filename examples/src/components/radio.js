@@ -12,7 +12,8 @@ export default  class Main extends Component {
         this.state = {
             swi: true,
             normal: true,
-            groupValue: 1
+            groupValue: 1,
+            groupValue1: 1
         }
     }
 

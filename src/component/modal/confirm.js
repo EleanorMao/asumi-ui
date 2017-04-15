@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from './modal';
 
-export default  function confirm(props) {
+export default function confirm(props) {
     let div = document.createElement('div');
     document.body.appendChild(div);
 

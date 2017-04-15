@@ -12,18 +12,18 @@ export default  class CheckGroup extends Component {
 
     handleChange(e) {
         let {checked, value} = e;
-        let {min, max, checkedList}= this.props;
+        let {min, max, name, checkedList}= this.props;
         checkedList = checkedList.slice();
         if (max != null && checkedList.length === max)return;
         if (min != null && !checked && checkedList.length === min + 1)return;
         let index = checkedList.indexOf(value);
         checked ? checkedList.push(value) : checkedList.splice(index, 1);
-        this.props.onChange(checkedList);
+        this.props.onChange({e, name, value: checkedList});
     }
 
     handleToggle(e) {
         let {checked} = e;
-        let {options}= this.props;
+        let {options, name}= this.props;
         let checkedList = [];
         if (checked) {
             checkedList = options.map(item=> {
@@ -33,7 +33,7 @@ export default  class CheckGroup extends Component {
                 return item.value
             })
         }
-        this.props.onChange(checkedList);
+        this.props.onChange({e, name, value: checkedList});
     }
 
     render() {
@@ -53,7 +53,7 @@ export default  class CheckGroup extends Component {
                 </div>
                 <div className="el-checkbox-row">
                     {
-                        options.map((item, index)=> {
+                        options && options.map((item, index)=> {
                             if (typeof item === 'string') {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }

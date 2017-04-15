@@ -13,6 +13,7 @@ export default  class Wrap extends Component {
 
     componentWillUnmount() {
         if (this.container) {
+            ReactDOM.unmountComponentAtNode(this.container);
             document.body.removeChild(this.container);
             this.container = null;
         }
@@ -117,7 +118,7 @@ Wrap.propTypes = {
 
 Wrap.defaultProps = {
     hideTrigger: 'hover',
-    placement: 'left',
+    placement: "left",
     trigger: 'click',
     title: ''
 };

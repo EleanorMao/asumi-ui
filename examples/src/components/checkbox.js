@@ -24,8 +24,8 @@ export default  class Main extends Component {
         })
     }
 
-    handleSelect(checkedList) {
-        this.setState({checkedList});
+    handleSelect({value}) {
+        this.setState({checkedList: value});
     }
 
     render() {

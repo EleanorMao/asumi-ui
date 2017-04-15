@@ -34,6 +34,7 @@ export default  class Wrap extends Component {
 
     removeComponent() {
         if (this.container) {
+            ReactDOM.unmountComponentAtNode(this.container);
             document.body.removeChild(this.container);
             this.container = null;
         }

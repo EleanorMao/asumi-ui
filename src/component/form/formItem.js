@@ -2,32 +2,142 @@
  * Created by elly on 2017/4/13.
  */
 import React, {Component, PropTypes} from 'react';
+import classnames from 'classnames';
 import Input from '../input';
 import Radio from '../radio';
 import Select from '../select';
-import Checkbox from '../checkbox';
+import Popover from '../popover';
 import Option from '../select/option';
-
+import RadioGroup from '../radio/radioGroup';
+import CheckGroup from '../checkbox/checkGroup';
+let rules = {
+    price: /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/,
+    positiveInt: /^([1-9]\d{0,7})?$/,
+    nature: /^(0?|[1-9]\d{0,7})$/,
+    color: /^#[0-9a-fA-F]{0,6}$/
+};
+function isRequired({validate, required}) {
+    return (required || (validate && validate.some(item=> {
+        return item.required;
+    })));
+}
 export default  class FormItem extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            message: ""
+        }
+    }
+
+    componentWillReceiveProps({beforeSubmit, data, validate, validator}) {
+        if (beforeSubmit && validate && validate.length) {
+            let disabled = false;
+            validate.map(item=> {
+                if (!disabled && item.trigger === "submit") {
+                    disabled = this.validator(item, data);
+                }
+            });
+            validator && validator(disabled);
+        }
+    }
+
+    validator(item, data) {
+        let {max, len, min, message, regExp, rule, required, validator, type}=item;
+        let reg, fail = validator && validator(this.props);
+        let valueType = typeof data;
+        let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
+        if (!fail && required && (data == null || data === "")) {
+            fail = true
+        }
+        if (!fail && type && valueType !== type) {
+            fail = true;
+        }
+        if (!fail && len != null && hasLen && data.length !== len) {
+            fail = true;
+        }
+        if (!fail && min != null && hasLen && data.length < min) {
+            fail = true;
+        }
+        if (!fail && max != null && hasLen && data.length > max) {
+            fail = true;
+        }
+        if (!fail && Object.prototype.toString.call(regExp) === '[object RegExp]') {
+            reg = regExp;
+        } else if (!fail && rule) {
+            reg = rules[rule];
+        }
+        if (!fail && reg && !reg.test(data)) {
+            fail = true;
+        }
+        if (fail) {
+            this.setState(prev=> {
+                prev.message = message;
+                return prev;
+            });
+        }
+        return fail;
+    }
+
+    handleBlur() {
+        let {data, onBlur, validate, validator} = this.props;
+        let disabled = false;
+        if (validate && validate.length) {
+            validate.map(item=> {
+                if (!disabled && item.trigger === "blur") {
+                    disabled = this.validator(item, data);
+                }
+            })
+        }
+        if (!disabled) {
+            this.setState({message: ""});
+        }
+        validator && validator(disabled);
+        onBlur && onBlur.apply(null, arguments);
+
+    }
+
+    handleChange() {
+        let {data, onChange, validate, validator} = this.props;
+        let disabled = false;
+        if (validate && validate.length) {
+            validate.map(item=> {
+                if (!disabled && item.trigger === "change") {
+                    disabled = this.validator(item, data);
+                }
+            })
+        }
+        if (!disabled) {
+            this.setState({message: ""});
+        }
+        validator && validator(disabled);
+        onChange && onChange.apply(null, arguments);
     }
 
     itemRender() {
-        let {name, data, type, config, onChange, children} = this.props;
-        if (children)return;
+        let {on, off, tips, name, data, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, ...config} = this.props;
+        if (children)return children;
         let output = null;
         switch (type) {
-            case "text":
-                output = <Input {...config} name={name} value={data} onChange={onChange}/>;
-                break;
             case "textarea":
-                output = <Input {...config} type="textarea" name={name} value={data} onChange={onChange}/>;
+                output = (
+                    <Input
+                        {...config}
+                        type="textarea"
+                        name={name}
+                        value={data}
+                        onBlur={this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}/>
+                );
                 break;
             case "select":
                 output = (
-                    <Select name={name} value={data} onChange={onChange}>
-                        {config.options.map(item=> {
+                    <Select
+                        {...config}
+                        name={name}
+                        value={data}
+                        onBlur={this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}>
+                        {!!options && options.map(item=> {
                             return (
                                 <Option key={item.value} {...item}/>
                             )
@@ -35,43 +145,144 @@ export default  class FormItem extends Component {
                     </Select>
                 );
                 break;
+            case "switch":
+                output = (
+                    <Radio
+                        {...config}
+                        type="switch"
+                        value={on}
+                        name={name}
+                        label={null}
+                        onBlur={this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}
+                        checked={typeof data === "boolean" ? data : on === data}
+                    />
+                );
+                break;
             case "radio":
-                output = ( <Radio
-                    name={name}
-                    onChange={onChange}
-                    value={config.value}
-                    checked={typeof data === "boolean" ? data : config.value === data}
-                />);
+                output = (
+                    <RadioGroup
+                        {...config}
+                        name={name}
+                        value={data}
+                        options={options}
+                        onBlur={ this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                );
+                break;
+            case "radiogroup":
+                output = (
+                    <RadioGroup
+                        {...config}
+                        name={name}
+                        value={data}
+                        options={options}
+                        onBlur={ this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                );
                 break;
             case "checkbox":
                 output = (
-                    <Checkbox
+                    <CheckGroup
+                        {...config}
                         name={name}
-                        onChange={onChange}
-                        value={config.value}
-                        checked={typeof data === "boolean" ? data : config.value === data}
+                        options={options}
+                        checkedList={data}
+                        onBlur={ this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}
+                    />
+                );
+                break;
+            case "checkgroup":
+                output = (
+                    <CheckGroup
+                        {...config}
+                        name={name}
+                        options={options}
+                        checkedList={data}
+                        onBlur={ this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}
                     />
                 );
                 break;
             default:
+                output = (
+                    <Input
+                        {...config}
+                        type={type}
+                        name={name}
+                        value={data}
+                        onBlur={this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}
+                    />);
                 break;
         }
         return output;
     }
 
     render() {
-        let {label, required, children} = this.props;
+        let message = this.state.message;
+        let {tips, label, validateType} = this.props;
+        let _className = classnames('el-form-item', message ? `el-form-item-${validateType }` : '');
+        if (tips && typeof tips === "string") {
+            tips = {title: tips};
+        }
+        let required = isRequired(this.props);
         return (
-            <div className="el-form-item">
-                {required && <span className="el-required">*</span>}
-                {!!label && <label className="el-form-label">{label}:&nbsp;&nbsp;</label>}
-                {children}
-                {this.itemRender()}
+            <div className={_className}>
+                {(!label && required) && <span className="el-required">*</span>}
+                {!!label && (
+                    <label className="el-form-label">
+                        {required && <span className="el-required">*</span>}
+                        {label}
+                        {!!tips &&
+                        <Popover {...tips} trigger="hover" placement="top">
+                            <span className="fa fa-question-circle-o" style={{paddingLeft: 4}}/>
+                        </Popover>}
+                    </label>)
+                }
+                <div className="el-form-control">
+                    {this.itemRender()}
+                    {!!message &&
+                    <div className="el-form-message">
+                        {message}
+                    </div>}
+                </div>
             </div>
         )
     }
 }
 
-FormItem.propTypes = {};
+FormItem.propTypes = {
+    data: PropTypes.any,
+    name: PropTypes.string,
+    label: PropTypes.string,
+    required: PropTypes.bool,
+    onChange: PropTypes.func,
+    tips: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            title: PropTypes.string,
+            content: PropTypes.any
+        })]),
+    validateType: PropTypes.oneOf(['error', 'warning']),
+    validate: PropTypes.arrayOf(PropTypes.shape({
+        max: PropTypes.any,
+        min: PropTypes.any,
+        len: PropTypes.number,
+        strict: PropTypes.bool,
+        validator: PropTypes.func,
+        regExp: PropTypes.instanceOf(RegExp),
+        trigger: PropTypes.oneOf(['blur', 'change', 'submit']),
+        rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
+        type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
+    })),
+    type: PropTypes.oneOf(['text', 'color', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+};
 
-FormItem.defaultProps = {};
+FormItem.defaultProps = {
+    type: "text",
+    validateType: "error"
+};

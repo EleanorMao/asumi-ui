@@ -1,13 +1,16 @@
 .el-checkbox-wrapper {
   > * {
-    line-height: 1;
     font-size: 1.0769rem;
     display: inline-block;
     vertical-align: middle;
   }
   cursor: pointer;
+  min-height: 30px;
+  line-height: 30px;
+  user-select: none;
   position: relative;
   display: inline-block;
+  -webkit-user-select: none;
   &.el-disabled {
     color: @disabled;
     cursor: not-allowed;

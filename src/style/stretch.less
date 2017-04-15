@@ -1,9 +1,7 @@
 .el-loading-wrapper {
   display: none;
-  color: @d_primary;
   min-height: 180px;
   position: relative;
-  text-align: center;
   &.el-loading-fixed {
     top: 0;
     left: 0;
@@ -19,6 +17,7 @@
   }
   .el-loading-title {
     padding: 4px 0;
+    color: @d_primary;
   }
   .el-loading-children {
     z-index: 0;
@@ -37,6 +36,7 @@
     height: 100%;
     padding: 0.7692rem;
     position: absolute;
+    text-align: center;
     &.el-loading-mask {
       background-color: fade(@l_primary, 60%);
     }
@@ -106,27 +106,5 @@
         -webkit-animation-delay: -0.5s;
       }
     }
-  }
-}
-
-@keyframes stretch {
-  0%, 100% {
-    transform: scaleY(0.4);
-    background-color: @l_primary;
-  }
-  50% {
-    transform: scaleY(1);
-    background-color: @primary;
-  }
-}
-
-@-webkit-keyframes stretch {
-  0%, 100% {
-    -webkit-transform: scaleY(0.4);
-    background-color: @l_primary;
-  }
-  50% {
-    -webkit-transform: scaleY(1);
-    background-color: @primary;
   }
 }

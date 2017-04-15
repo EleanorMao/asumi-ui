@@ -1,0 +1,99 @@
+.el-move-down {
+  animation: moveDown 1 .3s ease-in-out;
+  -webkit-animation: moveDown 1 .3s ease-in-out;
+}
+
+.el-move-up {
+  animation: moveUp 1 .3s ease-in-out;
+  -webkit-animation: moveUp 1 .3s ease-in-out;
+}
+
+@keyframes moveDown {
+  0% {
+    opacity: 0;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes moveDown {
+  0% {
+    opacity: 0;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+}
+
+@keyframes moveUp {
+  100% {
+    opacity: 0;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+  }
+  0% {
+    opacity: 1;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes moveUp {
+  100% {
+    opacity: 0;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+  }
+  0% {
+    opacity: 1;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+}
+
+@keyframes stretch {
+  0%, 100% {
+    transform: scaleY(0.4);
+    background-color: @l_primary;
+  }
+  50% {
+    transform: scaleY(1);
+    background-color: @primary;
+  }
+}
+
+@-webkit-keyframes stretch {
+  0%, 100% {
+    -webkit-transform: scaleY(0.4);
+    background-color: @l_primary;
+  }
+  50% {
+    -webkit-transform: scaleY(1);
+    background-color: @primary;
+  }
+}

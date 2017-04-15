@@ -51,16 +51,18 @@ export default  class Select extends Component {
         value = isArr(value) ? value : ( !value && value != '0' ? [] : [value]);
         defaultValue = isArr(defaultValue) ? defaultValue : ( !defaultValue && defaultValue != '0' ? [] : [defaultValue]);
         selectedValue = value.length ? value : defaultValue;
-        React.Children.map(children, (elm)=> {
-            let {value, disabled, children} =elm.props;
-            let index = selectedValue.indexOf(value);
-            allValue.push(value);
-            if (~index) {
-                selectedLabel[index] = children;
-            }
-            data.push({value, disabled, label: children});
-            renderData.push({value, disabled, label: children});
-        });
+        if (children) {
+            React.Children.map(children, (elm)=> {
+                let {value, disabled, label, children} =elm.props;
+                let index = selectedValue.indexOf(value);
+                allValue.push(value);
+                if (~index) {
+                    selectedLabel[index] = children || label;
+                }
+                data.push({value, disabled, label: children || label});
+                renderData.push({value, disabled, label: children || label});
+            });
+        }
         this.setState({
             data,
             allValue,
