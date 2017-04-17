@@ -4,7 +4,7 @@
   "description": "ELUI",
   "main": "lib/Index.js",
   "scripts": {
-    "build": "babel src --out-dir lib & cp -r src/style lib",
+    "build": "babel src --out-dir lib",
     "dev": "webpack-dev-server --inline --hot --progress --colors --content-base ./examples --history-api-fallback --config webpack.config.example.js --port 9010",
     "mock": "json-server --watch db.json --port 3000",
     "eslint": "eslint src"
