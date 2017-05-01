@@ -64,7 +64,7 @@ Col.defaultProps = {
     colSpan: null,
     dataSort: false,
     dataFixed: 'auto',
-    dataAlign: 'center'
+    dataAlign: 'left'
 };
 
 Col.propTypes = {

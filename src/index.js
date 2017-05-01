@@ -16,6 +16,8 @@ import Select from './component/select';
 import Loading from './component/loading';
 import Popover from './component/popover';
 import Message from './component/message';
+import Animate from './component/animate';
+import Uploader from './component/uploader';
 import Checkbox from './component/checkbox';
 import Dropdown from './component/dropdown';
 import Option from './component/select/option';
@@ -49,6 +51,7 @@ export {
     Select,
     Button,
     Option,
+    Animate,
     Loading,
     Popover,
     Message,
@@ -56,6 +59,7 @@ export {
     FormItem,
     TabPanel,
     Dropdown,
+    Uploader,
     Checkbox,
     Pagination,
     RadioGroup,

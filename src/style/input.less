@@ -175,7 +175,7 @@
           background: @l_default;
         }
       }
-      .el-select-selected {
+      .el-select-selected, .el-select-unselected {
         top: 0;
         right: 0;
         width: 1.5384rem;
@@ -185,8 +185,14 @@
         position: absolute;
         display: inline-block;
       }
+      .el-select-unselected {
+        color: @normalText;
+      }
       &:hover {
         background: @default;
+        .el-select-unselected {
+          color: @d_primary;
+        }
       }
     }
   }

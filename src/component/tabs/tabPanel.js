@@ -22,6 +22,4 @@ export default  class TablePanel extends Component {
 
 TablePanel.propTypes = {};
 
-TablePanel.defaultProps = {
-    tab: ""
-};
+TablePanel.defaultProps = {};

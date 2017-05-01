@@ -10,7 +10,6 @@ import {
 } from 'react-router-dom';
 
 import '../../src/style/index.less';
-
 import {Nav} from '../../src';
 import Form from './components/form';
 import Tabs from './components/tabs';
@@ -20,6 +19,7 @@ import Modal from './components/modal';
 import Input from './components/input';
 import Select from './components/select';
 import Button from './components/button';
+import Animate from './components/animate';
 import Loading from './components/loading';
 import Popover from './components/popover';
 import Message from './components/message';
@@ -30,21 +30,21 @@ import Pagination from './components/pagination';
 
 const router = [
     <Link to={'/'}>HOME</Link>,
-    <Link to={'/tabs'}>TABS</Link>,
-    <Link to={'/tree'}>TREE</Link>,
-    <Link to={'/form'}>FORM</Link>,
-    <Link to={'/table'}>TABLE</Link>,
-    <Link to={'/input'}>INPUT</Link>,
-    <Link to={'/radio'}>RADIO</Link>,
-    <Link to={'/modal'}>MODAL</Link>,
-    <Link to={'/upload'}>UPLOAD</Link>,
-    <Link to={'/select'}>SELECT</Link>,
     <Link to={'/button'}>BUTTON</Link>,
+    <Link to={'/input'}>INPUT</Link>,
+    <Link to={'/select'}>SELECT</Link>,
+    <Link to={'/radio'}>RADIO</Link>,
+    <Link to={'/checkbox'}>CHECKBOX</Link>,
+    <Link to={'/upload'}>UPLOAD</Link>,
+    <Link to={'/form'}>FORM</Link>,
+    <Link to={'/tabs'}>TABS</Link>,
+    <Link to={'/table'}>TABLE</Link>,
+    <Link to={'/animate'}>ANIMATE</Link>,
     <Link to={'/Loading'}>LOADING</Link>,
     <Link to={'/tooltip'}>TOOLTIP</Link>,
     <Link to={'/popover'}>POPOVER</Link>,
     <Link to={'/message'}>MESSAGE</Link>,
-    <Link to={'/checkbox'}>CHECKBOX</Link>,
+    <Link to={'/modal'}>MODAL</Link>,
     <Link to={'/dropdown'}>DROPDOWN</Link>,
     <Link to={'/calendar'}>CALENDAR</Link>,
     <Link to={'/pagination'}>PAGINATION</Link>,
@@ -54,21 +54,9 @@ ReactDOM.render(
         <div>
             <Nav router={router} style={{float: 'left', width: 200}}/>
             <div style={{overflow: 'hidden'}}>
-                <Route exact path="/" component={()=> {
+                <Route exact path="/" component={() => {
                     return (
                         <div>
-                            <h1>Global</h1>
-                            <div>
-                                <Button/>
-                            </div>
-                            <h1>Form</h1>
-                            <div>
-                                <Input/>
-                                <Select/>
-                                <Radio/>
-                                <Checkbox/>
-                                <Form/>
-                            </div>
                             <h1>Display</h1>
                             <div>
                                 <Tooltip/>
@@ -93,10 +81,11 @@ ReactDOM.render(
                 <Route path="/form" component={Form}/>
                 <Route path="/input" component={Input}/>
                 <Route path="/radio" component={Radio}/>
-                <Route path="/modal" component={Modal}/>
                 <Route path="/table" component={Table}/>
+                <Route path="/modal" component={Modal}/>
                 <Route path="/select" component={Select}/>
                 <Route path="/button" component={Button}/>
+                <Route path="/animate" component={Animate}/>
                 <Route path="/loading" component={Loading}/>
                 <Route path="/message" component={Message}/>
                 <Route path="/popover" component={Popover}/>

@@ -11,7 +11,7 @@ export default class Input extends Component {
 
     handleChange(e) {
         const {name, value} = e.target;
-        const {rule, regExp} = this.props;
+        const {rule, pattern} = this.props;
         if (rule === 'price') { //金额相关 8+2
             let reg = /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/;
             if (!reg.test(value)) {
@@ -34,17 +34,16 @@ export default class Input extends Component {
             }
         }
 
-        if (Object.prototype.toString.call(regExp) === '[object RegExp]') {
-            if (!regExp.test(value)) {
+        if (Object.prototype.toString.call(pattern) === '[object RegExp]') {
+            if (!pattern.test(value)) {
                 return;
             }
         }
-
         this.props.onChange && this.props.onChange({e, name, value});
     }
 
     render() {
-        let {type, size, rule, regExp, icon, style, inputStyle, append, prepend, className, ...other}=this.props;
+        let {type, size, rule, icon, style, inputStyle, append, prepend, className, ...other}=this.props;
         let {onClick}={...other};
         let _className = classnames('el-input', className, size ? `el-${size}` : '');
         if (type === 'textarea') {
@@ -91,8 +90,11 @@ export default class Input extends Component {
 Input.propTypes = {
     type: PropTypes.string,
     onChange: PropTypes.func,
-    regExp: PropTypes.instanceOf(RegExp),
+    pattern: PropTypes.instanceOf(RegExp),
     size: PropTypes.oneOf(['large', 'small']),
+    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    append: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+    prepend: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
 };
 

@@ -6,17 +6,21 @@ import React, {Component, PropTypes} from 'react';
 export default  class Tabs extends Component {
     constructor(props) {
         super(props);
+        let activeKey = props.defaultActiveKey == null ? props.children[0].key : props.defaultActiveKey;
         this.state = {
-            activeKey: props.defaultActiveKey
+            activeKey: activeKey
         }
     }
 
     componentWillReceiveProps(props) {
-        this.setState({activeKey: props.defaultActiveKey});
+        if (props.defaultActiveKey != this.props.defaultActiveKey) {
+            this.setState({activeKey: props.defaultActiveKey});
+        }
     }
 
     handleClick(key) {
         this.setState({activeKey: key});
+        this.props.onClick && this.props.onClick(key);
     }
 
     render() {
@@ -52,6 +56,10 @@ export default  class Tabs extends Component {
     }
 }
 
-Tabs.propTypes = {};
+Tabs.propTypes = {
+    onClick: PropTypes.func,
+    type: PropTypes.oneOf(['default', 'line', 'card']),
+    defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 Tabs.defaultProps = {};

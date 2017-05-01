@@ -47,13 +47,13 @@ export default  class Select extends Component {
 
     getData(props) {
         let data = [], renderData = [], allValue = [], selectedLabel = [], selectedValue = [];
-        let {value, defaultValue, children}=props;
+        let {value, defaultValue, children} = props;
         value = isArr(value) ? value : ( !value && value != '0' ? [] : [value]);
         defaultValue = isArr(defaultValue) ? defaultValue : ( !defaultValue && defaultValue != '0' ? [] : [defaultValue]);
         selectedValue = value.length ? value : defaultValue;
         if (children) {
-            React.Children.map(children, (elm)=> {
-                let {value, disabled, label, children} =elm.props;
+            React.Children.map(children, (elm) => {
+                let {value, disabled, label, children} = elm.props;
                 let index = selectedValue.indexOf(value);
                 allValue.push(value);
                 if (~index) {
@@ -114,15 +114,15 @@ export default  class Select extends Component {
     }
 
     handleChange(e) {
-        let {value}=e;
-        let {onMatch, matchCase}=this.props;
-        this.setState(prev=> {
+        let {value} = e;
+        let {onMatch, matchCase} = this.props;
+        this.setState(prev => {
             prev.renderValue = value;
             let renderData = onMatch ? onMatch(value) :
                 this.handleTryMatch(value, matchCase, [].concat(prev.data));
             prev.renderData = renderData || [];
             return prev;
-        }, ()=> {
+        }, () => {
             this.renderComponent();
         });
     }
@@ -141,7 +141,7 @@ export default  class Select extends Component {
     }
 
     handleToggleInput(focus) {
-        this.setState(prev=> {
+        this.setState(prev => {
             prev.focus = focus;
             if (!focus) {
                 prev.renderData = [].concat(prev.data);
@@ -152,15 +152,15 @@ export default  class Select extends Component {
     }
 
     handleSelect(e, value, selected) {
-        let {name, onChange, readOnly}=this.props;
+        let {name, onChange, readOnly} = this.props;
         if (readOnly)return;
         onChange({e, name, value, selected});
         this.handleToggle();
     }
 
     handleSelectAll(e, allValue, selected) {
-        let {selectedValue}=this.state;
-        let {name, onChange, onSelectAll, readOnly}=this.props;
+        let {selectedValue} = this.state;
+        let {name, onChange, onSelectAll, readOnly} = this.props;
         if (readOnly)return;
         if (!onSelectAll) {
             allValue.map(value => {
@@ -168,7 +168,7 @@ export default  class Select extends Component {
                 onChange({e, name, value, selected});
             });
         } else {
-            if (!selected)allValue = [];
+            if (!selected) allValue = [];
             onSelectAll({e, name, value: allValue.slice(), selected});
         }
         this.handleToggle();
@@ -184,7 +184,7 @@ export default  class Select extends Component {
             document.body.appendChild(this.container);
         }
         ReactDOM.unstable_renderSubtreeIntoContainer(this, this.optionsRender(), this.container);
-        this.setState({visible: true}, ()=> {
+        this.setState({visible: true}, () => {
             this.addStyle();
         });
     }
@@ -208,7 +208,7 @@ export default  class Select extends Component {
 
     optionsRender() {
         let {data, renderData, allValue, selectedValue} = this.state;
-        let {multiple, searchable, selectedAll, noMatchText}=this.props;
+        let {multiple, searchable, selectedAll, selectedAllText, noMatchText} = this.props;
         return (
             <div className="el-select-dropdown">
                 <ul>
@@ -217,17 +217,19 @@ export default  class Select extends Component {
                     {(multiple && selectedAll && renderData.length === data.length) &&
                     <Option
                         key="all"
-                        label="全选"
+                        multiple={multiple}
+                        label={selectedAllText}
                         value={allValue.slice()}
                         onChange={this.handleSelectAll.bind(this)}
                         selected={allValue.slice().sort().join("") === selectedValue.slice().sort().join("")}
                     />
                     }
-                    {renderData.map((props)=> {
+                    {renderData.map((props) => {
                         return (
                             <Option
                                 {...props}
                                 key={props.value}
+                                multiple={multiple}
                                 onChange={this.handleSelect.bind(this)}
                                 selected={!!~selectedValue.indexOf(props.value)}
                             />
@@ -243,9 +245,9 @@ export default  class Select extends Component {
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
             size, style, value, noMatchText, matchCase,
-            searchable, selectedAll, defaultValue,
+            searchable, selectedAll, defaultValue, selectedAllText,
             multiple, onChange, className, children, ...other
-        }=this.props;
+        } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
         return (
             <div className={_className} style={style} ref="el-select">
@@ -273,13 +275,15 @@ Select.propTypes = {
     selectedAll: PropTypes.bool,
     onSelectedAll: PropTypes.func,
     noMatchText: PropTypes.string,
+    selectedAllText: PropTypes.string,
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 
 Select.defaultProps = {
     value: "",
+    selectedAllText: "全选",
     noMatchText: "暂无匹配数据",
-    onChange: ()=> {
+    onChange: () => {
     },
     defaultValue: ""
 };
