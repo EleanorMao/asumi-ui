@@ -42,8 +42,8 @@ export default  class Main extends Component {
                 >Click</Button>
                 <Animate transitionName="example" component={Group} transitionAppear>
                     {
-                        arr.map((item, index) => {
-                            return <p key={index} style={{
+                        arr.map((item) => {
+                            return <p key={item} style={{
                                 lineHeight: '30px',
                                 background: '#eee',
                                 marginBottom: 10
