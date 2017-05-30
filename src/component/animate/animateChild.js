@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/28.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from  'react-dom';
 import cssAnimate from 'css-animation';
 

@@ -4,7 +4,7 @@
 import React, {Component, PropTypes} from 'react';
 import {
     Tooltip
-} from '../../../src';
+} from '../../../lib';
 export default  class Panel extends Component {
     constructor(props) {
         super(props);
@@ -18,8 +18,8 @@ export default  class Panel extends Component {
     }
 
     render() {
-        let {toggle}=this.state;
-        let {title, code, children}=this.props;
+        let {toggle} = this.state;
+        let {title, code, children} = this.props;
         let lines = code.split('\n');
         let reg = new RegExp('^(\\s{' + (lines[0] ? /^(\s*)/.exec(lines[0])[1].length : 0) + '})');
         lines = lines.map(line => line.replace(reg, ''));

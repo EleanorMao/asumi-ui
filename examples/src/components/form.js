@@ -5,7 +5,7 @@ import React, {Component, PropTypes} from 'react';
 import {
     Form,
     FormItem
-} from '../../../src';
+} from '../../../lib';
 
 export default  class Main extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export default  class Main extends Component {
             data: {
                 swi: "",
                 radio: "",
-                input: "",
+                input: "s",
                 select: "",
                 checkbox: "",
                 textarea: "",

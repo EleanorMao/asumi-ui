@@ -3,10 +3,8 @@
  * EL Table
  * Author: Eleanor Mao
  */
-import React, {
-    Component,
-    PropTypes
-} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Row from './row';
 import Header from './header';
 import classnames from 'classnames';
@@ -90,8 +88,9 @@ export default class Table extends Component {
     }
 
     _adjustWidth() {
-        const refs = this.refs,
-            firstRow = refs.colgroup.childNodes,
+        const refs = this.refs;
+        if (!refs.colgroup)return;
+        const firstRow = refs.colgroup.childNodes,
             cells = refs.thead.refs.thead.childNodes,
             fixedLeftRow = refs.left && refs.left.childNodes,
             fixedRightRow = refs.right && refs.right.childNodes,
@@ -170,8 +169,8 @@ export default class Table extends Component {
             const ltbody = refs.ltbody && refs.ltbody.childNodes;
             const rtbody = refs.rtbody && refs.rtbody.childNodes;
             const headHeight = getComputedStyle(refs.thead.refs.thead).height;
-            if (refs.lthead)  refs.lthead.refs.thead.style.height = headHeight;
-            if (refs.rthead)  refs.rthead.refs.thead.style.height = headHeight;
+            if (refs.lthead) refs.lthead.refs.thead.style.height = headHeight;
+            if (refs.rthead) refs.rthead.refs.thead.style.height = headHeight;
             for (let i = 0; i < tbody.length; i++) {
                 let row = tbody[i];
                 let height = getComputedStyle(row).height;
@@ -207,7 +206,7 @@ export default class Table extends Component {
             selectRow,
             nestedHead
         } = this.props;
-        const {leftColumnData, rightColumnData}= this.state;
+        const {leftColumnData, rightColumnData} = this.state;
         const warning = 'color:red';
 
         if (nestedHead.length && (leftColumnData.length || rightColumnData.length)) {
@@ -232,7 +231,7 @@ export default class Table extends Component {
     componentDidMount() {
         this._adjustWidth();
         addEvent(window, 'resize', this._adjustWidth.bind(this));
-        let {rightContainer, container}= this.refs;
+        let {rightContainer, container} = this.refs;
         addEvent(container, 'scroll', this._scrollHeader.bind(this));
         addEvent(container, 'scroll', this._scrollHeight.bind(this));
         addEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
@@ -240,7 +239,7 @@ export default class Table extends Component {
 
     componentWillUnmount() {
         removeEvent(window, 'resize', this._adjustWidth.bind(this));
-        let {rightContainer, container}= this.refs;
+        let {rightContainer, container} = this.refs;
         removeEvent(container, 'scroll', this._scrollHeader.bind(this));
         removeEvent(container, 'scroll', this._scrollHeight.bind(this));
         removeEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));

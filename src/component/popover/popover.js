@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/10.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default  class Popover extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ export default  class Popover extends Component {
     }
 
     render() {
-        let {title, style, content, placement}=this.props;
+        let {title, style, content, placement} = this.props;
         return (
             <div
                 style={style}

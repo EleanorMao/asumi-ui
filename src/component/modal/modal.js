@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/7.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Button from '../button';
 import classnames from 'classnames';
 
@@ -11,7 +12,7 @@ export default  class Modal extends Component {
     }
 
     render() {
-        let {size, mask, title, style, okText, closeText, maskClosable, className, footer, children, onOk, onClose}=this.props;
+        let {size, mask, title, style, okText, closeText, maskClosable, className, footer, children, onOk, onClose} = this.props;
         let _classNames = classnames({
             'el-modal-content': true,
             'el-small': size === "small",
@@ -60,8 +61,8 @@ Modal.defaultProps = {
     mask: true,
     okText: '确定',
     closeText: '取消',
-    onOk: ()=> {
+    onOk: () => {
     },
-    onClose: ()=> {
+    onClose: () => {
     }
 };

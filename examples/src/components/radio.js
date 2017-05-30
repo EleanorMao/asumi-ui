@@ -4,7 +4,7 @@
 import React, {Component, PropTypes} from 'react';
 import {
     Radio
-} from '../../../src';
+} from '../../../lib';
 
 export default  class Main extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default  class Main extends Component {
 
     handleChange(e) {
         let {name, checked} = e;
-        this.setState(prev=> {
+        this.setState(prev => {
             prev[name] = checked;
             return prev;
         })

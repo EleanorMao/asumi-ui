@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
     Table,
     Col
-} from '../../../src';
+} from '../../../lib';
 import {
     data,
     list
@@ -117,7 +117,7 @@ export  default class Main extends Component {
                     <Col dataField="id" dataAlign="center" colSpan={2}>id</Col>
                     <Col dataAlign='center' dataField='regionRoleName' colSpan={2}>区域角色</Col>
                     <Col dataAlign='center' dataField='systemRoleName'>系统角色</Col>
-                    <Col dataAlign='center' dataField='region' render={(index)=> {
+                    <Col dataAlign='center' dataField='region' render={(index) => {
                         if (index == 3) {
                             return {colSpan: 2, rowSpan: 2}
                         }
@@ -125,7 +125,7 @@ export  default class Main extends Component {
                             return {rowSpan: 0}
                         }
                     }}>区域</Col>
-                    <Col dataAlign='center' dataField='createTime' render={(index)=> {
+                    <Col dataAlign='center' dataField='createTime' render={(index) => {
                         if (index == 4) {
                             return {rowSpan: 0}
                         }
@@ -151,7 +151,7 @@ export  default class Main extends Component {
                     <Col dataAlign='center' width="150px" dataField='systemRoleName'>系统角色</Col>
                     <Col dataAlign='center' width="150px" dataField='region'
                          dataFixed="auto">区域</Col>
-                    <Col dataAlign='center' width="150px" dataFormat={()=> {
+                    <Col dataAlign='center' width="150px" dataFormat={() => {
                         return <a href="#">freedom!</a>
                     }}>操作</Col>
                 </Table>
@@ -180,7 +180,7 @@ export  default class Main extends Component {
                     <Col dataAlign='center' width="150px" dataField='createTime'>创建时间</Col>
                     <Col dataAlign='center' width="150px" dataField='description'
                          dataFixed="auto">描述</Col>
-                    <Col dataAlign='center' width="150px" dataFormat={()=> {
+                    <Col dataAlign='center' width="150px" dataFormat={() => {
                         return <a href="#">freedom!</a>
                     }}>操作</Col>
                 </Table>

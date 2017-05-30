@@ -1,0 +1,145 @@
+.el-checkbox-wrapper {
+  > * {
+    font-size: 1.0769rem;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  cursor: pointer;
+  min-height: 35px;
+  line-height: 35px;
+  user-select: none;
+  position: relative;
+  display: inline-block;
+  -webkit-user-select: none;
+  &.el-disabled {
+    color: @disabled;
+    cursor: not-allowed;
+    .el-checkbox {
+      .el-checkbox-input {
+        &:hover + .el-unchecked {
+          color: @disabled;
+        }
+      }
+      .el-checked {
+        color: @disabled;
+      }
+      &.el-switch {
+        input {
+          + span {
+            &:before {
+              border: @disabled;
+              background-color: @d_default;
+            }
+            &:after {
+              background-color: @default;
+            }
+          }
+          &:checked + span {
+            &:before {
+              border-color: @border;
+              background-color: @disabled;
+              box-shadow: @disabled 0 0 0 1.2307rem inset;
+            }
+          }
+        }
+      }
+    }
+  }
+  .el-checkbox {
+    margin-left: 0.3846rem;
+    margin-right: 0.3846rem;
+    position: relative;
+    .el-checkbox-input {
+      top: 0;
+      left: 0;
+      right: 0;
+      border: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: 1;
+      outline: 0;
+      width: 100%;
+      height: 100%;
+      background: 0 0;
+      cursor: pointer;
+      position: absolute;
+      filter: alpha(opacity=0);
+      -webkit-appearance: none;
+      &:hover + .el-unchecked {
+        color: @d_primary;
+      }
+    }
+    .el-checked {
+      color: @d_primary;
+    }
+    &.el-switch {
+      height: 1.3846rem;
+      line-height: 1.3846rem;
+      vertical-align: middle;
+      input {
+        height: 1.3846rem;
+        position: absolute;
+        &[type=checkbox] {
+          + span {
+            width: auto;
+            height: auto;
+            display: block;
+            background: none;
+          }
+        }
+        + span {
+          &:before {
+            content: '';
+            width: 28px;
+            height: 1.2307rem;
+            position: relative;
+            display: inline-block;
+            box-sizing: content-box;
+            border-radius: 0.6153rem;
+            border: 1px solid @border;
+            background-color: @default;
+            background-clip: content-box;
+            box-shadow: @shadow 0 0 0 0 inset;
+            -webkit-background-clip: content-box;
+            transition: border .4s, box-shadow .4s;
+            -webkit-transition: border .4s, -webkit-box-shadow .4s;
+          }
+          &:after {
+            top: 0;
+            left: 0;
+            content: '';
+            width: 1.3846rem;
+            height: 1.3846rem;
+            position: absolute;
+            border-radius: 100%;
+            transition: left .2s;
+            background-color: #fff;
+            -webkit-transition: left .2s;
+            box-shadow: 0 1px 3px @shadow;
+          }
+        }
+        &:checked + span {
+          &:before {
+            border-color: @primary;
+            background-color: @primary;
+            box-shadow: @primary 0 0 0 1.2307rem inset;
+            transition: border .4s, box-shadow .4s, background-color 1.2s;
+            -webkit-transition: border .4s, -webkit-box-shadow .4s, background-color 1.2s;
+          }
+          &:after {
+            left: 1rem
+          }
+        }
+      }
+    }
+  }
+}
+
+.el-checkbox-group {
+  padding: 0.7692rem 0;
+  .el-checkbox-row {
+    padding-bottom: 0.3846rem;
+  }
+}
+
+

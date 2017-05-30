@@ -1,0 +1,54 @@
+.el-message-wrapper {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  position: fixed;
+  .el-message {
+    display: table;
+    min-width: 150px;
+    background: #fff;
+    position: relative;
+    padding: 0.7296rem;
+    margin: 0.7296rem auto auto;
+    transition: all .3s ease-in;
+    box-shadow: 0 0 10px @shadow;
+    border-radius: @smallBorderRadio;
+    -webkit-transition: all .3s ease-in;
+    -webkit-box-shadow: 0 0 10px @shadow;
+    z-index: 99999;
+    &.el-info {
+      color: @d_primary;
+      background: @l_primary;
+    }
+    &.el-warning {
+      color: @d_secondary;
+      background: lighten(@secondary, 40%);
+    }
+    &.el-danger {
+      color: @d_danger;
+      background: lighten(@danger, 40%);
+    }
+    &.el-success {
+      color: @d_success;
+      background: lighten(@success, 40%);
+
+    }
+    .el-message-icon {
+      top: 0;
+      left: 0;
+      height: 100%;
+      text-align: center;
+      padding: 0.7296rem;
+      position: absolute;
+      + .el-message-content {
+        padding-left: 1.2rem;
+      }
+    }
+    .el-message-content {
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+    }
+  }
+}

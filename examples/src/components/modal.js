@@ -30,10 +30,10 @@ export default  class Main extends Component {
         Modal.confirm({
             title: 'Confirm Title',
             content: '今天吃不吃龙虾饭？',
-            onOk: ()=> {
+            onOk: () => {
                 alert('没毛病！')
             },
-            onClose: ()=> {
+            onClose: () => {
                 alert('╮(╯_╰)╭')
             },
             okText: '吃',

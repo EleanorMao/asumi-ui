@@ -6,7 +6,7 @@ import Tabs from './tabs';
 import {
     Button,
     Loading
-} from '../../../src';
+} from '../../../lib';
 
 export default  class Main extends Component {
     constructor(props) {
@@ -17,8 +17,8 @@ export default  class Main extends Component {
     }
 
     showFullScreen() {
-        this.setState({fullScreen: true}, ()=> {
-            setTimeout(()=> {
+        this.setState({fullScreen: true}, () => {
+            setTimeout(() => {
                 this.setState({fullScreen: false});
             }, 3000)
         });
@@ -30,7 +30,7 @@ export default  class Main extends Component {
                 <h1>Normal Loading</h1>
                 <div>
                     <Loading/>
-                    <Loading title="Loading..." />
+                    <Loading title="Loading..."/>
                     <Loading size="small" title="small loading"/>
                     <Loading size="large" title="large loading"/>
                     <Loading mask title="loading">

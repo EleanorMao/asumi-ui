@@ -18,7 +18,7 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel'
         }, {
-            test: /\.less?$/,
+            test: /\.(less|css)?$/,
             loader: 'style-loader!css-loader!less-loader'
         }, {
             test: /\.(svg|ttf|eot|svg|woff(\(?2\)?)?)(\?[a-zA-Z_0-9.=&]*)?(#[a-zA-Z_0-9.=&]*)?$/,

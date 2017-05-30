@@ -1,7 +1,8 @@
 /**
  * Created by elly on 16/9/19.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {contains, addEvent, removeEvent} from '../util';
 
@@ -21,7 +22,7 @@ export default class Dropdown extends Component {
 
     componentWillReceiveProps() {
         if (this.state.toggle) {
-            this.setState(old=> {
+            this.setState(old => {
                 old.toggle = false;
                 return old;
             })
@@ -29,7 +30,7 @@ export default class Dropdown extends Component {
     }
 
     handleToggle() {
-        this.setState(old=> {
+        this.setState(old => {
             old.toggle = !old.toggle;
             return old;
         })
@@ -38,7 +39,7 @@ export default class Dropdown extends Component {
     clickToClose(e) {
         const target = this.refs.dropdown;
         if (target && !contains(target, e.target)) {
-            this.setState(old=> {
+            this.setState(old => {
                 old.toggle = false;
                 return old;
             })
@@ -72,7 +73,7 @@ export default class Dropdown extends Component {
                             return (
                                 <li key={index}>
                                     <a href={item.href || 'javascript:;'}
-                                       onClick={(e)=> {
+                                       onClick={(e) => {
                                            if (!item.href) {
                                                e.preventDefault();
                                            }
@@ -98,6 +99,6 @@ Dropdown.propTypes = {
 };
 Dropdown.defaultProps = {
     type: 'default',
-    onClick: ()=> {
+    onClick: () => {
     }
 };

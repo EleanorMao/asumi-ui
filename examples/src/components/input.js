@@ -7,7 +7,7 @@ import {
     Group,
     Table,
     Col
-} from '../../../src';
+} from '../../../lib';
 import Panel from './Panel';
 import {basic, icon, size, prefix, pattern, api} from '../constants/input';
 
@@ -24,7 +24,7 @@ export default  class Main extends Component {
     }
 
     handleChange({name, value}) {
-        this.setState(prev=> {
+        this.setState(prev => {
             prev[name] = value;
             return prev;
         })

@@ -1,13 +1,14 @@
 /**
  * Created by elly on 2017/4/13.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
 
 function isRequired({validate, required}) {
-    return (required || (validate && validate.some(item=> {
+    return (required || (validate && validate.some(item => {
         return item.required;
     })));
 }
@@ -23,7 +24,7 @@ export default  class Form extends Component {
     }
 
     componentWillMount() {
-        let {data, options}=this.props;
+        let {data, options} = this.props;
         this.validator(data, options)
     }
 
@@ -43,7 +44,7 @@ export default  class Form extends Component {
     }
 
     handleDisabled(props, _disabled) {
-        let {disabled, disabledName}=this.state;
+        let {disabled, disabledName} = this.state;
         if (props.name === disabledName && _disabled != disabled) {
             this.setState({disabled: _disabled});
         } else if (!disabled && _disabled && props.name !== disabledName) {
@@ -62,8 +63,8 @@ export default  class Form extends Component {
     }
 
     handleSubmit() {
-        let {validator, onSubmit}= this.props;
-        this.setState({beforeSubmit: true}, ()=> {
+        let {validator, onSubmit} = this.props;
+        this.setState({beforeSubmit: true}, () => {
             if (this.state.disabled) {
             } else {
                 let disabled = validator && validator();
@@ -78,13 +79,13 @@ export default  class Form extends Component {
     }
 
     render() {
-        let {disabled, beforeSubmit}=this.state;
-        let {data, error, options, layout, title, className, submitText, children}= this.props;
+        let {disabled, beforeSubmit} = this.state;
+        let {data, error, style, hideSubmitButton, options, layout, title, className, submitText, children} = this.props;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, className);
         return (
-            <form className={_className}>
+            <form className={_className} style={style}>
                 {!!title && <div className="el-form-title">{title}</div>}
-                {options.map((props, index)=> {
+                {options.map((props, index) => {
                     return (
                         <FormItem
                             onChange={this.handleChange.bind(this, props)}
@@ -98,12 +99,13 @@ export default  class Form extends Component {
                 })}
                 {children}
                 <FormItem>
+                    {!hideSubmitButton &&
                     <Button
                         disabled={disabled}
                         type={disabled ? null : "success"}
                         onClick={this.handleSubmit.bind(this)}>
                         {submitText}
-                    </Button>
+                    </Button>}
                     {!!error && <div className="el-form-error">{error}</div>}
                 </FormItem>
             </form>
@@ -117,6 +119,7 @@ Form.propTypes = {
     onSubmit: PropTypes.func,
     validator: PropTypes.func,
     id: PropTypes.string.isRequired,
+    hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
     options: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
@@ -142,14 +145,14 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline'])
 };
 
 Form.defaultProps = {
     id: "id",
-    onChange: ()=> {
+    onChange: () => {
     },
     submitText: '提交',
     layout: "horizontal"

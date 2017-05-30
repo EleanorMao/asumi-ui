@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/6.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 export default class Input extends Component {
@@ -43,8 +44,8 @@ export default class Input extends Component {
     }
 
     render() {
-        let {type, size, rule, icon, style, inputStyle, append, prepend, className, ...other}=this.props;
-        let {onClick}={...other};
+        let {type, size, rule, icon, style, inputStyle, append, prepend, className, ...other} = this.props;
+        let {onClick} = {...other};
         let _className = classnames('el-input', className, size ? `el-${size}` : '');
         if (type === 'textarea') {
             return (

@@ -1,10 +1,8 @@
 /**
  * Created by BG236557 on 2016/9/19.
  */
-import React, {
-    Component,
-    PropTypes
-} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 
 import {empty, sort, isArr} from '../util';
@@ -17,7 +15,7 @@ export default class Header extends Component {
     selectRender(mode, onSelectAll, checked) {
         if (mode === 'checkbox') {
             return (
-                <th onClick={()=>onSelectAll(!checked)} style={{textAlign: 'center', width: 46}} data-input={mode}>
+                <th onClick={() => onSelectAll(!checked)} style={{textAlign: 'center', width: 46}} data-input={mode}>
                     <Checkbox checked={checked} readOnly={true}/>
                 </th>
             )
@@ -34,7 +32,7 @@ export default class Header extends Component {
             <colgroup ref="colgroup">
                 {selectRow.mode !== 'none' && !selectRow.hideSelectColumn &&
                 <col key="select" style={{textAlign: 'center', width: 46}}/>}
-                {  React.Children.map(renderChildren, (elm)=> {
+                {  React.Children.map(renderChildren, (elm) => {
                     if (left && elm.props.dataFixed !== 'left') return;
                     if (right && elm.props.dataFixed !== 'right') return;
                     let style = {
@@ -71,7 +69,7 @@ export default class Header extends Component {
                     <thead>
                     <tr ref="thead">
                         {!selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, checked)}
-                        {  React.Children.map(renderChildren, (elm)=> {
+                        {  React.Children.map(renderChildren, (elm) => {
                             if (left && elm.props.dataFixed !== 'left') return;
                             if (right && elm.props.dataFixed !== 'right') return;
                             if (colSpan && target < i && i < colSpan) {

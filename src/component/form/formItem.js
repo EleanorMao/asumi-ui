@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/13.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Input from '../input';
 import Radio from '../radio';
@@ -17,7 +18,7 @@ let rules = {
     color: /^#[0-9a-fA-F]{0,6}$/
 };
 function isRequired({validate, required}) {
-    return (required || (validate && validate.some(item=> {
+    return (required || (validate && validate.some(item => {
         return item.required;
     })));
 }
@@ -32,7 +33,7 @@ export default  class FormItem extends Component {
     componentWillReceiveProps({beforeSubmit, data, validate, validator}) {
         if (beforeSubmit && validate && validate.length) {
             let disabled = false;
-            validate.map(item=> {
+            validate.map(item => {
                 if (!disabled && item.trigger === "submit") {
                     disabled = this.validator(item, data);
                 }
@@ -42,7 +43,7 @@ export default  class FormItem extends Component {
     }
 
     validator(item, data) {
-        let {max, len, min, message, regExp, rule, required, validator, type}=item;
+        let {max, len, min, message, regExp, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
         let valueType = typeof data;
         let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
@@ -70,7 +71,7 @@ export default  class FormItem extends Component {
             fail = true;
         }
         if (fail) {
-            this.setState(prev=> {
+            this.setState(prev => {
                 prev.message = message;
                 return prev;
             });
@@ -82,7 +83,7 @@ export default  class FormItem extends Component {
         let {data, onBlur, validate, validator} = this.props;
         let disabled = false;
         if (validate && validate.length) {
-            validate.map(item=> {
+            validate.map(item => {
                 if (!disabled && item.trigger === "blur") {
                     disabled = this.validator(item, data);
                 }
@@ -100,7 +101,7 @@ export default  class FormItem extends Component {
         let {data, onChange, validate, validator} = this.props;
         let disabled = false;
         if (validate && validate.length) {
-            validate.map(item=> {
+            validate.map(item => {
                 if (!disabled && item.trigger === "change") {
                     disabled = this.validator(item, data);
                 }
@@ -114,7 +115,7 @@ export default  class FormItem extends Component {
     }
 
     itemRender() {
-        let {on, off, tips, name, data, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, ...config} = this.props;
+        let {on, off, tips, name, data, component, className, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, ...config} = this.props;
         if (children)return children;
         let output = null;
         switch (type) {
@@ -137,7 +138,7 @@ export default  class FormItem extends Component {
                         value={data}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}>
-                        {!!options && options.map(item=> {
+                        {!!options && options.map(item => {
                             return (
                                 <Option key={item.value} {...item}/>
                             )
@@ -207,6 +208,9 @@ export default  class FormItem extends Component {
                     />
                 );
                 break;
+            case "component":
+                output = (component);
+                break;
             default:
                 output = (
                     <Input
@@ -224,8 +228,8 @@ export default  class FormItem extends Component {
 
     render() {
         let message = this.state.message;
-        let {tips, label, validateType} = this.props;
-        let _className = classnames('el-form-item', message ? `el-form-item-${validateType }` : '');
+        let {tips, label, className, validateType} = this.props;
+        let _className = classnames('el-form-item', message ? `el-form-item-${validateType }` : '', className);
         if (tips && typeof tips === "string") {
             tips = {title: tips};
         }
@@ -279,7 +283,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+    type: PropTypes.oneOf(['text', 'color', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
 };
 
 FormItem.defaultProps = {

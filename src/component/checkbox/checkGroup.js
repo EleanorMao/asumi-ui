@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/10.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 import classnames from 'classnames';
 
@@ -12,7 +13,7 @@ export default  class CheckGroup extends Component {
 
     handleChange(e) {
         let {checked, value} = e;
-        let {min, max, name, checkedList}= this.props;
+        let {min, max, name, checkedList} = this.props;
         checkedList = checkedList.slice();
         if (max != null && checkedList.length === max)return;
         if (min != null && !checked && checkedList.length === min + 1)return;
@@ -23,10 +24,10 @@ export default  class CheckGroup extends Component {
 
     handleToggle(e) {
         let {checked} = e;
-        let {options, name}= this.props;
+        let {options, name} = this.props;
         let checkedList = [];
         if (checked) {
-            checkedList = options.map(item=> {
+            checkedList = options.map(item => {
                 if (typeof  item === "string") {
                     return item;
                 }
@@ -37,7 +38,7 @@ export default  class CheckGroup extends Component {
     }
 
     render() {
-        let {hasCheckAll, disableAll, options, checkedList, className}= this.props;
+        let {hasCheckAll, disableAll, options, checkedList, className} = this.props;
         let _className = classnames('el-checkbox-group', className);
         return (
             <div className={_className}>
@@ -53,7 +54,7 @@ export default  class CheckGroup extends Component {
                 </div>
                 <div className="el-checkbox-row">
                     {
-                        options && options.map((item, index)=> {
+                        options && options.map((item, index) => {
                             if (typeof item === 'string') {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }

@@ -1,10 +1,8 @@
 /**
  * Created by elly on 16/9/26.
  */
-import React, {
-    Component,
-    PropTypes
-} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import {isObj} from '../util';
 
@@ -34,7 +32,7 @@ export default class NestedHeader extends Component {
     colgroupRender() {
         const {cols} = this.props;
         let output = [];
-        cols.map((item, i)=> {
+        cols.map((item, i) => {
             output.push(<col key={i} style={{display: item.hidden && 'none'}}/>)
         });
         return output;

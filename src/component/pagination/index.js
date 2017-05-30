@@ -1,7 +1,5 @@
-import React, {
-    Component,
-    PropTypes
-} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import PageButton from './pageButton';
 
 export default class Pagination extends Component {

@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/7.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 export default  class TablePanel extends Component {
@@ -10,7 +11,7 @@ export default  class TablePanel extends Component {
     }
 
     render() {
-        let {_active, className, style, children}=this.props;
+        let {_active, className, style, children} = this.props;
         let _classNames = classnames('el-tabs-panel', (_active ? " el-tabs-panel-active" : ""), className);
         return (
             <div className={_classNames} style={style}>

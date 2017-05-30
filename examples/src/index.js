@@ -9,8 +9,8 @@ import {
     Link
 } from 'react-router-dom';
 
-import '../../src/style/index.less';
-import {Nav} from '../../src';
+import '../../style/index.less';
+import {Menu, SubMenu, MenuItem} from '../../lib';
 import Form from './components/form';
 import Tabs from './components/tabs';
 import Table from './components/table';
@@ -30,51 +30,91 @@ import Pagination from './components/pagination';
 
 const router = [
     <Link to={'/'}>HOME</Link>,
-    <Link to={'/button'}>BUTTON</Link>,
-    <Link to={'/input'}>INPUT</Link>,
-    <Link to={'/select'}>SELECT</Link>,
-    <Link to={'/radio'}>RADIO</Link>,
-    <Link to={'/checkbox'}>CHECKBOX</Link>,
-    <Link to={'/upload'}>UPLOAD</Link>,
-    <Link to={'/form'}>FORM</Link>,
-    <Link to={'/tabs'}>TABS</Link>,
-    <Link to={'/table'}>TABLE</Link>,
-    <Link to={'/animate'}>ANIMATE</Link>,
-    <Link to={'/Loading'}>LOADING</Link>,
-    <Link to={'/tooltip'}>TOOLTIP</Link>,
-    <Link to={'/popover'}>POPOVER</Link>,
-    <Link to={'/message'}>MESSAGE</Link>,
-    <Link to={'/modal'}>MODAL</Link>,
-    <Link to={'/dropdown'}>DROPDOWN</Link>,
-    <Link to={'/calendar'}>CALENDAR</Link>,
-    <Link to={'/pagination'}>PAGINATION</Link>,
+    {
+        title: 'Basic',
+        children: [
+            <Link to={'/grid'}>Grid</Link>,
+            <Link to={'/button'}>BUTTON</Link>
+        ]
+    },
+    {
+        title: 'Form',
+        children: [
+            <Link to={'/input'}>INPUT</Link>,
+            <Link to={'/select'}>SELECT</Link>,
+            <Link to={'/radio'}>RADIO</Link>,
+            <Link to={'/checkbox'}>CHECKBOX</Link>,
+            <Link to={'/upload'}>UPLOAD</Link>,
+            <Link to={'/form'}>FORM</Link>
+        ]
+    },
+    {
+        title: 'Display',
+        children: [
+            <Link to={'/table'}>TABLE</Link>,
+            <Link to={'/pagination'}>PAGINATION</Link>,
+        ]
+    },
+    {
+        title: 'Message',
+        children: [
+            <Link to={'/tooltip'}>TOOLTIP</Link>,
+            <Link to={'/popover'}>POPOVER</Link>,
+            <Link to={'/message'}>MESSAGE</Link>
+        ]
+    },
+    {
+        title: 'Navigation',
+        children: [
+            <Link to={'/dropdown'}>DROPDOWN</Link>,
+            <Link to={'/tabs'}>TABS</Link>,
+            <Link to={'/menu'}>MENU</Link>,
+        ]
+    },
+    {
+        title: 'Others',
+        children: [
+            <Link to={'/modal'}>MODAL</Link>,
+            <Link to={'/animate'}>ANIMATE</Link>,
+            <Link to={'/Loading'}>LOADING</Link>,
+        ]
+    },
+    <Link to={'/calendar'}>CALENDAR</Link>
 ];
+
 ReactDOM.render(
     <Router>
         <div>
-            <Nav router={router} style={{float: 'left', width: 200}}/>
-            <div style={{overflow: 'hidden'}}>
+            <Menu
+                defaultOpenKey="Basic"
+                style={{width: 200, position: 'absolute', top: 0, bottom: 0}}>
+                {router.map((item, index) => {
+                    if (item.children) {
+                        return (
+                            <SubMenu
+                                key={item.title}
+                                title={<span>{item.title}</span>}>
+                                {item.children.map((r, i) => {
+                                    return (
+                                        <MenuItem key={item.title + i}>{r}</MenuItem>
+                                    )
+                                })}
+                                <SubMenu title="dads">
+
+                                </SubMenu>
+                            </SubMenu>
+                        )
+                    } else {
+                        return (
+                            <MenuItem key={index}>{item}</MenuItem>
+                        )
+                    }
+                })}
+            </Menu>
+            <div style={{marginLeft: 200}}>
                 <Route exact path="/" component={() => {
                     return (
-                        <div>
-                            <h1>Display</h1>
-                            <div>
-                                <Tooltip/>
-                                <Popover/>
-                                <Table/>
-                                <Pagination/>
-                            </div>
-                            <h1>Navigation</h1>
-                            <div>
-                                <Dropdown/>
-                                <Tabs/>
-                            </div>
-                            <h1>Others</h1>
-                            <div>
-                                <Modal/>
-                                <Loading/>
-                            </div>
-                        </div>
+                        <h1>喵</h1>
                     )
                 }}/>
                 <Route path="/tabs" component={Tabs}/>

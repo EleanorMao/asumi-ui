@@ -2,7 +2,11 @@
  * Created by Elly on 2016/5/27.
  */
 
-import Nav from './component/nav';
+import Menu from './component/menu';
+import SubMenu from './component/menu/subMenu';
+import MenuItem from './component/menu/menuItem';
+import MenuItemGroup from './component/menu/menuItemGroup';
+import Grid from './component/grid';
 import Form from './component/form';
 import Tabs from './component/tabs';
 import Radio from './component/radio';
@@ -32,17 +36,21 @@ const Tooltip = Popover;
 
 Table.Col = Col;
 Select.Option = Option;
+Menu.SubMenu = SubMenu;
 Form.FormItem = FormItem;
 Tabs.TabPanel = TabPanel;
 Radio.Group = RadioGroup;
+Menu.MenuItem = MenuItem;
+Menu.MenuItemGroup = MenuItemGroup;
 Checkbox.Group = CheckboxGroup;
 Pagination.Simple = SimplePagination;
 
 export {
     Col,
-    Nav,
     Tabs,
+    Menu,
     Form,
+    Grid,
     Table,
     Modal,
     Input,
@@ -51,12 +59,14 @@ export {
     Select,
     Button,
     Option,
+    SubMenu,
     Animate,
     Loading,
     Popover,
     Message,
     Tooltip,
     FormItem,
+    MenuItem,
     TabPanel,
     Dropdown,
     Uploader,
@@ -64,5 +74,6 @@ export {
     Pagination,
     RadioGroup,
     CheckboxGroup,
+    MenuItemGroup,
     SimplePagination,
 };

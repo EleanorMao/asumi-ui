@@ -1,7 +1,5 @@
-import React, {
-    Component,
-    PropTypes
-} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Col extends Component {
     constructor(props) {
@@ -50,7 +48,7 @@ class Col extends Component {
 
         return (
             <th style={style} colSpan={colSpan}
-                onClick={dataSort ? ()=>onSort(dataField, sortOrder === 'asc' ? 'desc' : 'asc') : ()=> {
+                onClick={dataSort ? () => onSort(dataField, sortOrder === 'asc' ? 'desc' : 'asc') : () => {
                     return false;
                 }}>
                 <span>{children}</span>{dataSort && this.caretRender(dataField, sortName, sortOrder)}

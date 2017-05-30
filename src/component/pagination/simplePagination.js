@@ -1,7 +1,5 @@
-import React, {
-    Component,
-    PropTypes
-} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import PageButton from './pageButton';
 
 class SimplePagination extends Component {
@@ -24,9 +22,9 @@ class SimplePagination extends Component {
             <div>
                 <ul className="el-pagination">
                     <PageButton label={prevLabel} disabled={current - 1 <= 0} pgBtn={true}
-                                onClick={() =>onPageChange(current - 1, sizePerPage)}/>
+                                onClick={() => onPageChange(current - 1, sizePerPage)}/>
                     <PageButton label={nextLabel} disabled={current + 1 > totalPages} pgBtn={true}
-                                onClick={() =>onPageChange(current + 1, sizePerPage)}/>
+                                onClick={() => onPageChange(current + 1, sizePerPage)}/>
                 </ul>
                 {showTotalPages &&
                 <span className="el-totalPages">共 {totalPages} 页</span>}

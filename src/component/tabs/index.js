@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/7.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export default  class Tabs extends Component {
     constructor(props) {
@@ -24,15 +25,15 @@ export default  class Tabs extends Component {
     }
 
     render() {
-        let {type, children}=this.props;
-        let {activeKey} =this.state;
+        let {type, children} = this.props;
+        let {activeKey} = this.state;
         let isCard = type === "card" ? " el-card" : "";
         return (
             <div className={"el-tabs"}>
                 <ul className={`el-tabs-nav${isCard} clearfix`}>
-                    {React.Children.map(children, (elm)=> {
+                    {React.Children.map(children, (elm) => {
                         let key = elm.key;
-                        let {label}=elm.props;
+                        let {label} = elm.props;
                         return (
                             <li
                                 key={key}
@@ -46,7 +47,7 @@ export default  class Tabs extends Component {
                     })}
                 </ul>
                 <div className={`el-tabs-content${isCard}`}>
-                    {React.Children.map(children, (elm)=> {
+                    {React.Children.map(children, (elm) => {
                         let key = elm.key;
                         return React.cloneElement(elm, {_active: activeKey === key})
                     })}

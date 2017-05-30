@@ -1,0 +1,55 @@
+@charset "utf-8";
+@import "variables";
+@import "normalize";
+@import "fontawesome/less/font-awesome";
+
+:root {
+  font-size: @fontSize;
+}
+
+body {
+  font-family: '微软雅黑', "Microsoft YaHei", Arial, Microsoft YaHei, Helvetica, sans-serif;
+  margin: 0;
+  color: @normalText;
+  font-size: @fontSize;
+  line-height: 1.42857;
+}
+
+a {
+  color: @primary;
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus {
+    color: @d_primary;
+  }
+}
+
+.el-shadow {
+  box-shadow: 0 0.4615rem 0.9230rem @shadow;
+  -webkit-box-shadow: 0 0.4615rem 0.9230rem @shadow;
+}
+
+.overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@import "menu";
+@import "grid";
+@import "tabs";
+@import "drop";
+@import "form";
+@import "caret";
+@import "modal";
+@import "input";
+@import "table";
+@import "button";
+@import "message";
+@import "stretch";
+@import "popover";
+@import "uploader";
+@import "checkbox";
+@import "animation";
+@import "pagination";

@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {
     Group,
     Dropdown
-} from '../../../src';
+} from '../../../lib';
 
 export default  class Main extends Component {
     constructor(props) {

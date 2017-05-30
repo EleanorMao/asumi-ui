@@ -8,7 +8,7 @@ import {
     Group,
     Table,
     Col
-} from '../../../src';
+} from '../../../lib';
 import Panel from './Panel';
 import {basic, size, searchable, multiple, api} from '../constants/select';
 
@@ -30,14 +30,14 @@ export default  class Main extends Component {
     }
 
     handleChange({name, value}) {
-        this.setState(prev=> {
+        this.setState(prev => {
             prev[name] = value;
             return prev;
         })
     }
 
     handleChangeMultiple({name, value, selected}) {
-        this.setState(prev=> {
+        this.setState(prev => {
             if (selected) {
                 prev[name].push(value);
             } else {

@@ -1,7 +1,8 @@
 /**
  * Created by elly on 2017/4/10.
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Popover from './popover';
 import {extend} from '../util';
@@ -20,7 +21,7 @@ export default  class Wrap extends Component {
     }
 
     getPosition() {
-        let {placement}=this.props;
+        let {placement} = this.props;
         let {right, left, top, bottom, width, height} = ReactDOM.findDOMNode(this).getBoundingClientRect();
         let {clientHeight, clientWidth} = this.container;
         let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;

@@ -1,8 +1,12 @@
 {
   "name": "el-ui",
-  "version": "1.3.1",
+  "version": "0.0.4",
   "description": "ELUI",
-  "main": "lib/Index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "style"
+  ],
   "scripts": {
     "build": "babel src --out-dir lib",
     "dev": "webpack-dev-server --inline --hot --progress --colors --content-base ./examples --history-api-fallback --config webpack.config.example.js --port 9010",
@@ -10,15 +14,14 @@
     "eslint": "eslint src"
   },
   "keywords": [
-    "react",
-    "table"
+    "react"
   ],
   "author": "Eleanor Mao",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
     "css-animation": "^1.3.2",
-    "react-fontawesome": "^1.5.0"
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
