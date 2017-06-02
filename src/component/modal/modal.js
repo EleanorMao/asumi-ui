@@ -13,20 +13,23 @@ export default  class Modal extends Component {
 
     render() {
         let {size, mask, title, style, okText, closeText, maskClosable, className, footer, children, onOk, onClose} = this.props;
-        let _classNames = classnames({
+        let obj = {
             'el-modal-content': true,
             'el-small': size === "small",
-            'el-large': size === "large",
-            className
-        });
+            'el-large': size === "large"
+        };
+        if (className) {
+            obj[className] = true;
+        }
+        let _classNames = classnames(obj);
         return (
             <div>
-                {!!mask && <div className="el-mask"></div>}
+                {!!mask && <div className="el-mask"/>}
                 <div className="el-modal-wrapper">
                     <div className="el-modal">
                         <div className={_classNames} style={style}>
                             <div className="el-modal-close" onClick={onClose}>×</div>
-                            <div className="el-modal-header">{title}</div>
+                            {!!title && <div className="el-modal-header">{title}</div>}
                             <div className="el-modal-body">{children}</div>
                             {footer !== null &&
                             <div className="el-modal-footer">

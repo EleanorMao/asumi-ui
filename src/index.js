@@ -14,6 +14,7 @@ import Group from './component/group';
 import Input from './component/input';
 import Modal from './component/modal';
 import Table from './component/table';
+import Editor from './component/editor';
 import Col from './component/table/col';
 import Button from './component/button';
 import Select from './component/select';
@@ -59,6 +60,7 @@ export {
     Select,
     Button,
     Option,
+    Editor,
     SubMenu,
     Animate,
     Loading,

@@ -21,6 +21,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "css-animation": "^1.3.2",
+    "hyperdown": "^2.1.1",
     "prop-types": "^15.5.10"
   },
   "devDependencies": {

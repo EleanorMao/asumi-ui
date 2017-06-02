@@ -3,11 +3,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Route,
-    Link
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import '../../style/index.less';
 import {Menu, SubMenu, MenuItem} from '../../lib';
@@ -18,6 +14,7 @@ import Radio from './components/radio';
 import Modal from './components/modal';
 import Input from './components/input';
 import Select from './components/select';
+import Editor from './components/editor';
 import Button from './components/button';
 import Animate from './components/animate';
 import Loading from './components/loading';
@@ -52,6 +49,7 @@ const router = [
         title: 'Display',
         children: [
             <Link to={'/table'}>TABLE</Link>,
+            <Link to={'/editor'}>EDITOR</Link>,
             <Link to={'/pagination'}>PAGINATION</Link>,
         ]
     },
@@ -95,13 +93,8 @@ ReactDOM.render(
                                 key={item.title}
                                 title={<span>{item.title}</span>}>
                                 {item.children.map((r, i) => {
-                                    return (
-                                        <MenuItem key={item.title + i}>{r}</MenuItem>
-                                    )
+                                    return <MenuItem key={item.title + i}>{r}</MenuItem>;
                                 })}
-                                <SubMenu title="dads">
-
-                                </SubMenu>
                             </SubMenu>
                         )
                     } else {
@@ -123,6 +116,7 @@ ReactDOM.render(
                 <Route path="/radio" component={Radio}/>
                 <Route path="/table" component={Table}/>
                 <Route path="/modal" component={Modal}/>
+                <Route path="/editor" component={Editor}/>
                 <Route path="/select" component={Select}/>
                 <Route path="/button" component={Button}/>
                 <Route path="/animate" component={Animate}/>

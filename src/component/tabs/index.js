@@ -32,6 +32,7 @@ export default  class Tabs extends Component {
             <div className={"el-tabs"}>
                 <ul className={`el-tabs-nav${isCard} clearfix`}>
                     {React.Children.map(children, (elm) => {
+                        if (!elm)return;
                         let key = elm.key;
                         let {label} = elm.props;
                         return (
@@ -48,6 +49,7 @@ export default  class Tabs extends Component {
                 </ul>
                 <div className={`el-tabs-content${isCard}`}>
                     {React.Children.map(children, (elm) => {
+                        if (!elm)return;
                         let key = elm.key;
                         return React.cloneElement(elm, {_active: activeKey === key})
                     })}
