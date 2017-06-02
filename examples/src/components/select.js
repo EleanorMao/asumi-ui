@@ -8,7 +8,7 @@ import {
     Group,
     Table,
     Col
-} from '../../../lib';
+} from '../../../src';
 import Panel from './Panel';
 import {basic, size, searchable, multiple, api} from '../constants/select';
 

@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {
     Pagination,
     SimplePagination
-} from '../../../lib';
+} from '../../../src';
 
 export default  class Main extends Component {
     constructor(props) {

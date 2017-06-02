@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
     Table,
     Col
-} from '../../../lib';
+} from '../../../src';
 import {
     data,
     list

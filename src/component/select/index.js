@@ -77,7 +77,7 @@ export default  class Select extends Component {
     getPosition() {
         if (!this.container)return;
         let {clientHeight} = this.container;
-        let {top, left, bottom, width} = this.refs['el-select'].getBoundingClientRect();
+        let {top, left, bottom, width} = this.el_select.getBoundingClientRect();
         let scrollLeft = document.body.scrollLeft || document.documentElement.scrollTop;
         let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         top += scrollTop;
@@ -97,10 +97,7 @@ export default  class Select extends Component {
     }
 
     handleClose(e) {
-        if (this.state.visible &&
-            this.refs &&
-            this.refs['el-select']
-            && !contains(this.refs['el-select'], e.target)) {
+        if (this.state.visible && this.el_select && !contains(this.el_select, e.target)) {
             this.hideComponent();
         }
     }
@@ -251,7 +248,9 @@ export default  class Select extends Component {
         } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
         return (
-            <div className={_className} style={style} ref="el-select">
+            <div className={_className} style={style} ref={(c) => {
+                this.el_select = c
+            }}>
                 <Input
                     {...other}
                     size={size}

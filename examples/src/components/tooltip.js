@@ -5,7 +5,7 @@ import React, {Component, PropTypes} from 'react';
 import {
     Tooltip,
     Button
-} from '../../../lib';
+} from '../../../src';
 
 export default  class Main extends Component {
     constructor(props) {

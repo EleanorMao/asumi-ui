@@ -29,7 +29,9 @@ export default class Header extends Component {
     colgroupRender(renderChildren, selectRow, left, right) {
         let i = 0;
         return (
-            <colgroup ref="colgroup">
+            <colgroup ref={(c) => {
+                this._colgroup = c
+            }}>
                 {selectRow.mode !== 'none' && !selectRow.hideSelectColumn &&
                 <col key="select" style={{textAlign: 'center', width: 46}}/>}
                 {  React.Children.map(renderChildren, (elm) => {
@@ -63,11 +65,15 @@ export default class Header extends Component {
         let renderChildren = isArr(children) ? children : [children];
         renderChildren = sort(renderChildren).sorted;
         return (
-            <div className="el-table-container el-table-header-container" ref="header">
+            <div className="el-table-container el-table-header-container" ref={(c) => {
+                this._header = c
+            }}>
                 <table className="el-table-bordered">
                     {this.colgroupRender(renderChildren, selectRow, left, right)}
                     <thead>
-                    <tr ref="thead">
+                    <tr ref={(c) => {
+                        this._thead = c
+                    }}>
                         {!selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, checked)}
                         {  React.Children.map(renderChildren, (elm) => {
                             if (left && elm.props.dataFixed !== 'left') return;

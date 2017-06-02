@@ -7,7 +7,7 @@ import {
     Button,
     Table,
     Col
-} from '../../../lib';
+} from '../../../src';
 import Panel from './Panel';
 import {basic, link, size, api}from'../constants/button'
 

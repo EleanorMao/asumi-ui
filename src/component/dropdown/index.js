@@ -37,7 +37,7 @@ export default class Dropdown extends Component {
     }
 
     clickToClose(e) {
-        const target = this.refs.dropdown;
+        const target = this._dropdown;
         if (target && !contains(target, e.target)) {
             this.setState(old => {
                 old.toggle = false;
@@ -57,7 +57,9 @@ export default class Dropdown extends Component {
             'el-secondary': type === 'secondary',
         });
         return (
-            <div className="el-dropdown" style={style} ref="dropdown">
+            <div className="el-dropdown" style={style} ref={(c) => {
+                this._dropdown = c
+            }}>
                 <button
                     type="button"
                     className={className}

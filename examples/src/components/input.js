@@ -7,7 +7,7 @@ import {
     Group,
     Table,
     Col
-} from '../../../lib';
+} from '../../../src';
 import Panel from './Panel';
 import {basic, icon, size, prefix, pattern, api} from '../constants/input';
 

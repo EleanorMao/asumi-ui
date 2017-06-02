@@ -24,6 +24,7 @@ import {
 export default class Table extends Component {
     constructor(props) {
         super(props);
+        this._instance = {};
         this.state = {
             isHover: null,
             columnData: [],
@@ -88,15 +89,15 @@ export default class Table extends Component {
     }
 
     _adjustWidth() {
-        const refs = this.refs;
+        const refs = this._instance;
         if (!refs.colgroup)return;
         const firstRow = refs.colgroup.childNodes,
-            cells = refs.thead.refs.thead.childNodes,
+            cells = refs.thead._thead.childNodes,
             fixedLeftRow = refs.left && refs.left.childNodes,
             fixedRightRow = refs.right && refs.right.childNodes,
-            nestedRow = refs.nested && refs.nested.refs.colgroup.childNodes,
-            fixedLeftHeadRow = refs.lthead && refs.lthead.refs.colgroup.childNodes,
-            fixedRightHeadRow = refs.rthead && refs.rthead.refs.colgroup.childNodes,
+            nestedRow = refs.nested && refs.nested._colgroup.childNodes,
+            fixedLeftHeadRow = refs.lthead && refs.lthead._colgroup.childNodes,
+            fixedRightHeadRow = refs.rthead && refs.rthead._colgroup.childNodes,
             isNoData = refs.tbody.firstChild.childElementCount === 1,
             length = cells.length,
             rightFixedLength = fixedRightRow ? length - fixedRightRow.length : 0;
@@ -104,7 +105,7 @@ export default class Table extends Component {
         if (firstRow.length !== length)return;
 
         const scrollBarWidth = getScrollBarWidth(),
-            haveScrollBar = refs.body.offsetWidth !== refs.thead.refs.header.offsetWidth;
+            haveScrollBar = refs.body.offsetWidth !== refs.thead._header.offsetWidth;
 
         let lastChild = this._getLastChild(this.state.columnData), fixedRightWidth = 0;
         lastChild = this.props.selectRow.mode !== 'none' ? lastChild + 1 : lastChild;
@@ -168,9 +169,9 @@ export default class Table extends Component {
             const tbody = refs.tbody.childNodes;
             const ltbody = refs.ltbody && refs.ltbody.childNodes;
             const rtbody = refs.rtbody && refs.rtbody.childNodes;
-            const headHeight = getComputedStyle(refs.thead.refs.thead).height;
-            if (refs.lthead) refs.lthead.refs.thead.style.height = headHeight;
-            if (refs.rthead) refs.rthead.refs.thead.style.height = headHeight;
+            const headHeight = getComputedStyle(refs.thead._thead).height;
+            if (refs.lthead) refs.lthead._thead.style.height = headHeight;
+            if (refs.rthead) refs.rthead._thead.style.height = headHeight;
             for (let i = 0; i < tbody.length; i++) {
                 let row = tbody[i];
                 let height = getComputedStyle(row).height;
@@ -187,17 +188,17 @@ export default class Table extends Component {
     }
 
     _scrollHeader(e) {
-        this.refs.thead.refs.header.scrollLeft = e.currentTarget.scrollLeft;
-        if (this.refs.nested) this.refs.nested.refs.header.scrollLeft = e.currentTarget.scrollLeft;
+        this._instance.thead._header.scrollLeft = e.currentTarget.scrollLeft;
+        if (this._instance.nested) this._instance.nested._header.scrollLeft = e.currentTarget.scrollLeft;
     }
 
     _scrollHeight(e) {
-        this.refs.leftContainer.scrollTop = e.currentTarget.scrollTop;
-        if (e.currentTarget == this.refs.rightContainer) {
-            this.refs.container.scrollTop = e.currentTarget.scrollTop;
+        this._instance.leftContainer.scrollTop = e.currentTarget.scrollTop;
+        if (e.currentTarget == this._instance.rightContainer) {
+            this._instance.container.scrollTop = e.currentTarget.scrollTop;
         }
-        if (e.currentTarget == this.refs.container) {
-            this.refs.rightContainer.scrollTop = e.currentTarget.scrollTop;
+        if (e.currentTarget == this._instance.container) {
+            this._instance.rightContainer.scrollTop = e.currentTarget.scrollTop;
         }
     }
 
@@ -231,7 +232,7 @@ export default class Table extends Component {
     componentDidMount() {
         this._adjustWidth();
         addEvent(window, 'resize', this._adjustWidth.bind(this));
-        let {rightContainer, container} = this.refs;
+        let {rightContainer, container} = this._instance;
         addEvent(container, 'scroll', this._scrollHeader.bind(this));
         addEvent(container, 'scroll', this._scrollHeight.bind(this));
         addEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
@@ -239,7 +240,7 @@ export default class Table extends Component {
 
     componentWillUnmount() {
         removeEvent(window, 'resize', this._adjustWidth.bind(this));
-        let {rightContainer, container} = this.refs;
+        let {rightContainer, container} = this._instance;
         removeEvent(container, 'scroll', this._scrollHeader.bind(this));
         removeEvent(container, 'scroll', this._scrollHeight.bind(this));
         removeEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
@@ -417,12 +418,20 @@ export default class Table extends Component {
         let columnData = this.state.columnData;
         return (
             <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
-                 ref="container">
-                <table className={className} ref="body">
-                    <colgroup ref="colgroup">
+                 ref={(c) => {
+                     this._instance.container = c
+                 }}>
+                <table className={className} ref={(c) => {
+                    this._instance.body = c
+                }}>
+                    <colgroup ref={(c) => {
+                        this._instance.colgroup = c
+                    }}>
                         {this.colgroupRender(columnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
                     </colgroup>
-                    <tbody ref="tbody">
+                    <tbody ref={(c) => {
+                        this._instance.tbody = c
+                    }}>
                     {this.blankRender(data, columnData.length, true)}
                     {this.rowsRender(data, columnData, selectRow.hideSelectColumn)}
                     </tbody>
@@ -436,10 +445,14 @@ export default class Table extends Component {
         if (leftColumnData.length) {
             return (
                 <table className={className}>
-                    <colgroup ref="left">
+                    <colgroup ref={(c) => {
+                        this._instance.left = c
+                    }}>
                         {this.colgroupRender(leftColumnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
                     </colgroup>
-                    <tbody ref="ltbody">
+                    <tbody ref={(c) => {
+                        this._instance.ltbody = c
+                    }}>
                     {this.blankRender(data, leftColumnData.length)}
                     {this.rowsRender(data, leftColumnData, selectRow.hideSelectColumn)}
                     </tbody>
@@ -453,11 +466,17 @@ export default class Table extends Component {
         let rightColumnData = this.state.rightColumnData;
         if (rightColumnData.length) {
             return (
-                <table className={className} ref="rightBody">
-                    <colgroup ref="right">
+                <table className={className} ref={(c) => {
+                    this._instance.rightBody = c
+                }}>
+                    <colgroup ref={(c) => {
+                        this._instance.right = c
+                    }}>
                         {this.colgroupRender(rightColumnData, 'none')}
                     </colgroup>
-                    <tbody ref="rtbody">
+                    <tbody ref={(c) => {
+                        this._instance.rtbody = c
+                    }}>
                     {this.blankRender(data, rightColumnData.length)}
                     {this.rowsRender(data, rightColumnData, true, true)}
                     </tbody>
@@ -675,7 +694,7 @@ export default class Table extends Component {
             checked = this._getAllValue(renderList.slice(), isKey).sort().toString() === selectRow.selected.slice().sort().toString();
         }
         let paddingBottom = 0;
-        let container = this.refs.container;
+        let container = this._instance.container;
         if (container && typeof parseFloat(height) == "number" && (container.scrollWidth > container.clientWidth)) {
             paddingBottom = parseFloat(height) - container.clientHeight;
         }
@@ -686,7 +705,9 @@ export default class Table extends Component {
                 {
                     !!nestedHead.length &&
                     <NestedHeader
-                        ref="nested" nestedHead={nestedHead}
+                        ref={(c) => {
+                            this._instance.nested = c
+                        }} nestedHead={nestedHead}
                         selectRow={selectRow} lineWrap={lineWrap}
                         cols={columnData}
                     />
@@ -694,7 +715,9 @@ export default class Table extends Component {
                 <div className="el-table-wrapper" style={{width: width || '100%'}}>
                     <div className="el-table">
                         <Header
-                            ref="thead"
+                            ref={(c) => {
+                                this._instance.thead = c
+                            }}
                             onSelectAll={this.handleSelectAll.bind(this)}
                             selectRow={selectRow} checked={checked}
                             sortOrder={remote ? sortOrder : order}
@@ -709,7 +732,9 @@ export default class Table extends Component {
                         {
                             !!leftColumnData.length &&
                             <Header
-                                ref="lthead" left={leftColumnData.length}
+                                ref={(c) => {
+                                    this._instance.lthead = c
+                                }} left={leftColumnData.length}
                                 onSelectAll={this.handleSelectAll.bind(this)}
                                 selectRow={selectRow} checked={checked}
                                 sortName={remote ? sortName : sortField}
@@ -720,8 +745,9 @@ export default class Table extends Component {
                             </Header>
                         }
                         <div
-                            ref="leftContainer"
-                            className="el-table-container el-table-body-container"
+                            ref={(c) => {
+                                this._instance.leftContainer = c
+                            }} className="el-table-container el-table-body-container"
                             style={{height: height || 'auto', paddingBottom: paddingBottom}}
                         >
                             {this.leftBodyRender(renderList, className, selectRow)}
@@ -731,7 +757,9 @@ export default class Table extends Component {
                         {
                             !!rightColumnData.length &&
                             <Header
-                                ref="rthead" right={rightColumnData.length}
+                                ref={(c) => {
+                                    this._instance.rthead = c
+                                }} right={rightColumnData.length}
                                 sortName={remote ? sortName : sortField}
                                 sortOrd er={remote ? sortOrder : order}
                                 onSort={this.handleSort.bind(this)}
@@ -740,8 +768,9 @@ export default class Table extends Component {
                             </Header>
                         }
                         <div
-                            ref="rightContainer"
-                            className="el-table-container el-table-body-container"
+                            ref={(c) => {
+                                this._instance.rightContainer = c
+                            }} className="el-table-container el-table-body-container"
                             style={{height: height || 'auto', paddingBottom: paddingBottom}}
                         >
                             {this.rightBodyRender(renderList, className)}

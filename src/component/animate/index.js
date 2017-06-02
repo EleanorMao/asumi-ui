@@ -86,6 +86,7 @@ function isSameChildren(c1, c2) {
 export default  class Animate extends Component {
     constructor(props) {
         super(props);
+        this._children = {};
         this.keysToLeave = [];
         this.keysToEnter = [];
         this.animatingKeys = {};
@@ -137,23 +138,23 @@ export default  class Animate extends Component {
     }
 
     performAppear(key) {
-        if (this.refs[key]) {
+        if (this._children[key]) {
             this.animatingKeys[key] = true;
-            this.refs[key].componentWillAppear(this.handleJoin.bind(this, key, 'appear'))
+            this._children[key].componentWillAppear(this.handleJoin.bind(this, key, 'appear'))
         }
     }
 
     performEnter(key) {
-        if (this.refs[key]) {
+        if (this._children[key]) {
             this.animatingKeys[key] = true;
-            this.refs[key].componentWillEnter(this.handleJoin.bind(this, key, 'enter'));
+            this._children[key].componentWillEnter(this.handleJoin.bind(this, key, 'enter'));
         }
     }
 
     performLeave(key) {
-        if (this.refs[key]) {
+        if (this._children[key]) {
             this.animatingKeys[key] = true;
-            this.refs[key].componentWillLeave(this.handleLeave.bind(this, key));
+            this._children[key].componentWillLeave(this.handleLeave.bind(this, key));
         }
     }
 
@@ -211,7 +212,9 @@ export default  class Animate extends Component {
                 return (
                     <AnimateChild
                         key={child.key}
-                        ref={child.key}
+                        ref={(c) => {
+                            this._children[child.key] = c
+                        }}
                         {...this.props}
                     >
                         {child}

@@ -4,7 +4,7 @@
 import React, {Component, PropTypes} from 'react';
 import {
     Tooltip
-} from '../../../lib';
+} from '../../../src';
 export default  class Panel extends Component {
     constructor(props) {
         super(props);

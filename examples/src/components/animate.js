@@ -2,7 +2,7 @@
  * Created by elly on 2017/4/7.
  */
 import React, {Component} from 'react';
-import {Button, Group, Animate} from '../../../lib';
+import {Button, Group, Animate} from '../../../src';
 
 export default  class Main extends Component {
     constructor(props) {

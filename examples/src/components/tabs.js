@@ -7,7 +7,7 @@ import {
     TabPanel,
     Table,
     Col
-} from '../../../lib';
+} from '../../../src';
 import {basic, card, api, apiOfTabPanel}from'../constants/tabs';
 import Panel from './Panel';
 
