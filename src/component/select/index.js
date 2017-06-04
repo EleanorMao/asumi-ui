@@ -242,7 +242,7 @@ export default  class Select extends Component {
         let {renderValue, visible} = this.state;
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
-            size, style, value, noMatchText, matchCase,
+            size, style, value, noMatchText, matchCase, onMatch,
             searchable, selectedAll, defaultValue, selectedAllText,
             multiple, onChange, className, children, ...other
         } = this.props;

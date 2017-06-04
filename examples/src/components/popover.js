@@ -32,8 +32,8 @@ export default  class Main extends Component {
                 </div>
                 <h1>Customer Trigger Popover</h1>
                 <div>
-                    <Popover title="popover" content="popover content" trigger="hover">
-                        <Button type="secondary">HOVER</Button>
+                    <Popover title="popover" content="popover content" trigger="click">
+                        <Button type="secondary">CLICK</Button>
                     </Popover>
                 </div>
             </div>

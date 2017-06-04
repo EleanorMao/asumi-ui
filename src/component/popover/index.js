@@ -120,6 +120,6 @@ Wrap.propTypes = {
 Wrap.defaultProps = {
     hideTrigger: 'hover',
     placement: "left",
-    trigger: 'click',
+    trigger: 'hover',
     title: ''
 };

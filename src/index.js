@@ -6,6 +6,7 @@ import Menu from './component/menu';
 import SubMenu from './component/menu/subMenu';
 import MenuItem from './component/menu/menuItem';
 import MenuItemGroup from './component/menu/menuItemGroup';
+import Tag from './component/tag';
 import Grid from './component/grid';
 import Form from './component/form';
 import Tabs from './component/tabs';
@@ -48,6 +49,7 @@ Pagination.Simple = SimplePagination;
 
 export {
     Col,
+    Tag,
     Tabs,
     Menu,
     Form,

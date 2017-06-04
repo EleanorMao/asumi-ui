@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Modal from  '../modal';
 import Input from  '../input';
 import Tabs from '../tabs';
+import Popover from '../popover';
 import Uploader from '../uploader';
 import TabPanel from '../tabs/tabPanel';
 const HyperDown = require('hyperdown');
@@ -441,7 +442,9 @@ export default  class Editor extends Component {
                 this.setState(prev => {
                     prev.imgUrl = path;
                     return prev;
-                }, this.handleGetImg(true))
+                }, () => {
+                    this.handleGetImg(true)
+                });
             } else {
                 this.handleGetImg(false)
             }
@@ -452,44 +455,66 @@ export default  class Editor extends Component {
         return (
             <div className="editor-toolbar">
                 <ul className="editor__menu clearfix">
-                    <li className="wmd-button" title="加粗 <strong> Ctrl+B">
-                        <a className="fa fa-bold" onClick={this.handleBold.bind(this)}/>
-                    </li>
-                    <li className="wmd-button" title="斜体 <em> Ctrl+I">
-                        <a className="fa fa-italic" onClick={this.handleItalic.bind(this)}/>
-                    </li>
+                    <Popover trigger="hover" title="加粗 <strong> Ctrl+B">
+                        <li className="wmd-button">
+                            <a className="fa fa-bold" onClick={this.handleBold.bind(this)}/>
+                        </li>
+                    </Popover>
+                    <Popover trigger="hover" title="斜体 <em> Ctrl+I">
+                        <li className="wmd-button">
+                            <a className="fa fa-italic" onClick={this.handleItalic.bind(this)}/>
+                        </li>
+                    </Popover>
                     <li className="editor__menu--divider wmd-spacer1"/>
-                    <li className="wmd-button" title="链接 <a> Ctrl+L">
-                        <a className="fa fa-link" onClick={this.handleLink.bind(this)}/>
-                    </li>
-                    <li className="wmd-button" title="引用 <blockquote> Ctrl+Q">
-                        <a className="fa fa-quote-left" onClick={this.handleQuote.bind(this)}/>
-                    </li>
-                    <li className="wmd-button" title="图片 <img> Ctrl+G">
-                        <a className="fa fa-image" onClick={this.handleImg.bind(this)}/>
-                    </li>
+                    <Popover trigger="hover" title="链接 <a> Ctrl+L">
+                        <li className="wmd-button">
+                            <a className="fa fa-link" onClick={this.handleLink.bind(this)}/>
+                        </li>
+                    </Popover>
+                    <Popover trigger="hover" title="引用 <blockquote> Ctrl+Q">
+                        <li className="wmd-button">
+                            <a className="fa fa-quote-left" onClick={this.handleQuote.bind(this)}/>
+                        </li>
+                    </Popover>
+                    <Popover trigger="hover" title="图片 <img> Ctrl+G">
+                        <li className="wmd-button">
+                            <a className="fa fa-image" onClick={this.handleImg.bind(this)}/>
+                        </li>
+                    </Popover>
                     <li className="editor__menu--divider wmd-spacer2"/>
-                    <li className="wmd-button" title="数字列表 <ol> Ctrl+O">
-                        <a className="fa fa-list-ol" onClick={this.handleOl.bind(this)}/>
-                    </li>
-                    <li className="wmd-button" title="普通列表 <ul> Ctrl+U">
-                        <a className="fa fa-list-ul" onClick={this.handleUl.bind(this)}/>
-                    </li>
-                    <li className="wmd-button" title="标题 <h1>/<h2> Ctrl+H">
-                        <a className="fa fa-header" onClick={this.handleTitle.bind(this)}/>
-                    </li>
-                    <li className="wmd-button" title="分割线 <hr> Ctrl+R">
-                        <a className="fa fa-hr" onClick={this.handleHr.bind(this)}>hr</a>
-                    </li>
+                    <Popover trigger="hover" title="数字列表 <ol> Ctrl+O">
+                        <li className="wmd-button">
+                            <a className="fa fa-list-ol" onClick={this.handleOl.bind(this)}/>
+                        </li>
+                    </Popover>
+                    <Popover trigger="hover" title="普通列表 <ul> Ctrl+U">
+                        <li className="wmd-button">
+                            <a className="fa fa-list-ul" onClick={this.handleUl.bind(this)}/>
+                        </li>
+                    </Popover>
+                    <Popover trigger="hover" title="标题 <h1>/<h2> Ctrl+H">
+                        <li className="wmd-button">
+                            <a className="fa fa-header" onClick={this.handleTitle.bind(this)}/>
+                        </li>
+                    </Popover>
+                    <Popover trigger="hover" title="分割线 <hr> Ctrl+R">
+                        <li className="wmd-button">
+                            <a className="fa fa-hr" onClick={this.handleHr.bind(this)}>hr</a>
+                        </li>
+                    </Popover>
                     <li className="editor__menu--divider wmd-spacer3"/>
-                    <li className="wmd-button" title="撤销 - Ctrl+Z">
-                        <a className={"fa fa-undo" + (!this.state.cacheForUndo.length ? ' disabled' : '')}
-                           onClick={this.handleUndo.bind(this)}/>
-                    </li>
-                    <li className="wmd-button" title="重做 - Ctrl+Shift+Z">
-                        <a className={"fa fa-repeat" + (!this.state.cacheForRedo.length ? ' disabled' : '')}
-                           onClick={this.handleRedo.bind(this)}/>
-                    </li>
+                    <Popover trigger="hover" title="撤销 - Ctrl+Z">
+                        <li className="wmd-button">
+                            <a className={"fa fa-undo" + (!this.state.cacheForUndo.length ? ' disabled' : '')}
+                               onClick={this.handleUndo.bind(this)}/>
+                        </li>
+                    </Popover>
+                    <Popover trigger="hover" title="重做 - Ctrl+Shift+Z">
+                        <li className="wmd-button">
+                            <a className={"fa fa-repeat" + (!this.state.cacheForRedo.length ? ' disabled' : '')}
+                               onClick={this.handleRedo.bind(this)}/>
+                        </li>
+                    </Popover>
                 </ul>
             </div>
         )

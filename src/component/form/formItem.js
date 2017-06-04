@@ -11,6 +11,7 @@ import Popover from '../popover';
 import Option from '../select/option';
 import RadioGroup from '../radio/radioGroup';
 import CheckGroup from '../checkbox/checkGroup';
+import {extend} from'../util';
 let rules = {
     price: /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/,
     positiveInt: /^([1-9]\d{0,7})?$/,
@@ -140,7 +141,7 @@ export default  class FormItem extends Component {
                         onChange={this.handleChange.bind(this)}>
                         {!!options && options.map(item => {
                             return (
-                                <Option key={item.value} {...item}/>
+                                <Option key={item.value}/>
                             )
                         })}
                     </Select>
@@ -209,7 +210,14 @@ export default  class FormItem extends Component {
                 );
                 break;
             case "component":
-                output = (component);
+                output = React.cloneElement(component, {
+                    name,
+                    data,
+                    value: data,
+                    onBlur: this.handleBlur.bind(this),
+                    onChange: this.handleChange.bind(this),
+                    ...config
+                });
                 break;
             default:
                 output = (
@@ -243,7 +251,7 @@ export default  class FormItem extends Component {
                         {label}
                         {!!tips &&
                         <Popover {...tips} trigger="hover" placement="top">
-                            <span className="fa fa-question-circle-o" style={{paddingLeft: 4}}/>
+                            <span className="el-form-tips fa fa-question-circle-o" style={{paddingLeft: 4}}/>
                         </Popover>}
                     </label>)
                 }

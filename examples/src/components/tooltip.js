@@ -32,8 +32,8 @@ export default  class Main extends Component {
                 </div>
                 <h1>Customer Trigger Tooltip</h1>
                 <div>
-                    <Tooltip title="tooltip" trigger="hover">
-                        <Button type="secondary">HOVER</Button>
+                    <Tooltip title="tooltip" trigger="click">
+                        <Button type="secondary">CLICK</Button>
                     </Tooltip>
                 </div>
             </div>
