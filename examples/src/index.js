@@ -84,7 +84,7 @@ ReactDOM.render(
     <Router>
         <div>
             <Menu
-                defaultOpenKey="Basic"
+                openAll
                 style={{width: 200, position: 'absolute', top: 0, bottom: 0}}>
                 {router.map((item, index) => {
                     if (item.children) {

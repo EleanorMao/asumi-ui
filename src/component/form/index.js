@@ -23,18 +23,33 @@ export default  class Form extends Component {
         }
     }
 
-    componentDidUpdate({data, options}) {
+    componentDidMount() {
+        let {data, options} = this.props;
+        this.validator(data, options)
+    }
+
+    componentWillReceiveProps({data, options}) {
         this.validator(data, options)
     }
 
     validator(data, options) {
         if (!options) return;
-        for (let i = options.length; i--;) {
-            let item = options[i];
-            if (isRequired(item) && (data[item.name] == null || data[item.name === ""])) {
-                this.handleDisabled(item, true);
-                break;
+        let disabledIndex = -1;
+        let _disabledIndex = -1;
+        let state = this.state;
+        let disabled = options.some((item, index) => {
+            if (state.disabled && state.disabledName && item.name === state.disabledName) {
+                _disabledIndex = index;
             }
+            if (isRequired(item) && (data[item.name] == null || data[item.name] === "")) {
+                disabledIndex = index;
+                return true;
+            }
+        });
+        if (disabled) {
+            this.handleDisabled(options[disabledIndex], true);
+        } else if (~_disabledIndex) {
+            this.handleDisabled(options[_disabledIndex], false);
         }
     }
 

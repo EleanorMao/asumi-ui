@@ -11,7 +11,7 @@ import Popover from '../popover';
 import Option from '../select/option';
 import RadioGroup from '../radio/radioGroup';
 import CheckGroup from '../checkbox/checkGroup';
-import {extend} from'../util';
+
 let rules = {
     price: /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/,
     positiveInt: /^([1-9]\d{0,7})?$/,
@@ -141,7 +141,7 @@ export default  class FormItem extends Component {
                         onChange={this.handleChange.bind(this)}>
                         {!!options && options.map(item => {
                             return (
-                                <Option key={item.value}/>
+                                <Option key={item.value} {...item}/>
                             )
                         })}
                     </Select>

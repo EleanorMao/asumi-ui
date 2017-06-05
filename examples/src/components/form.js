@@ -4,7 +4,7 @@
 import React, {Component, PropTypes} from 'react';
 import {
     Form,
-    FormItem
+    Button
 } from '../../../src';
 
 export default  class Main extends Component {
@@ -12,30 +12,45 @@ export default  class Main extends Component {
         super(props);
         this.state = {
             data: {
-                swi: "",
-                radio: "",
-                input: "s",
-                select: "",
+                sex: 1,
+                on: "",
+                name: "",
+                grade: "",
                 checkbox: "",
-                textarea: "",
-                radioGroup: 1,
-                checkgroup: [1],
+                classes: [1],
+                description: "",
             }
         }
     }
 
     handleChange({name, value}) {
-        this.setState(prev=> {
+        this.setState(prev => {
             prev.data[name] = value;
             return prev;
         });
     }
 
     handleSelect({value, name}) {
-        this.setState(prev=> {
+        this.setState(prev => {
             prev.data[name] = value;
             return prev;
         });
+    }
+
+    handleClick() {
+        setTimeout(() => {
+            this.setState({
+                data: {
+                    sex: 2,
+                    on: 1,
+                    name: "毛毛",
+                    grade: 1,
+                    checkbox: "",
+                    classes: [1],
+                    description: "sddsdsd",
+                }
+            })
+        }, 300)
     }
 
     render() {
@@ -43,6 +58,9 @@ export default  class Main extends Component {
         return (
             <div className="content">
                 <h1>Normal Form</h1>
+                <div>
+                    <Button type="primary" onClick={this.handleClick.bind(this)}>get remote data</Button>
+                </div>
                 <Form
                     data={data}
                     title="Normal Form"
@@ -51,8 +69,8 @@ export default  class Main extends Component {
                         {
                             type: "text",
                             tips: "help",
-                            name: "input",
-                            label: "Input",
+                            name: "name",
+                            label: "姓名",
                             required: true,
                             validateType: "error",
                             validate: [{
@@ -64,20 +82,15 @@ export default  class Main extends Component {
                                 type: "string",
                                 trigger: "submit",
                                 max: 7,
-                                min: 4,
-                                message: "不得少于4~7字符"
-                            }, {
-                                type: "string",
-                                trigger: "change",
-                                rule: "color",
-                                message: "必须是16进制颜色"
+                                min: 2,
+                                message: "不得少于2~7字符"
                             }],
                             placeholder: "请输入内容"
                         },
                         {
-                            name: "textarea",
+                            name: "description",
                             type: "textarea",
-                            label: "Textarea",
+                            label: "个人简介",
                             validateType: "warning",
                             validate: [{
                                 type: "string",
@@ -93,52 +106,48 @@ export default  class Main extends Component {
                             placeholder: "(づ￣3￣)づ╭❤～"
                         }, {
                             required: true,
-                            name: "select",
+                            name: "grade",
                             type: "select",
-                            label: "Select",
+                            label: "年级",
                             searchable: true,
                             placeholder: "请选择",
                             options: [{
                                 value: 1,
-                                label: "1"
+                                label: "一年级"
                             }, {
                                 value: 2,
-                                label: "2"
+                                label: "二年级"
                             }]
                         }, {
-                            name: "swi",
+                            name: "on",
                             type: "switch",
-                            required: true,
-                            label: "Switch",
+                            label: "上课",
                             on: 1,
                             off: 0,
                         }, {
                             type: "radiogroup",
-                            name: "radioGroup",
-                            label: "RadioGroup",
+                            name: "sex",
+                            label: "性别",
                             options: [{
-                                label: '选项1',
+                                label: '男',
                                 value: 1
                             }, {
-                                label: '选项2',
+                                label: '女',
                                 value: 2
-                            }, {
-                                label: '选项3',
-                                value: 3
                             }]
                         }, {
                             type: "checkgroup",
-                            name: "checkgroup",
-                            label: "Checkgroup",
+                            name: "classes",
+                            label: "课程",
                             onChange: this.handleSelect.bind(this),
                             options: [{
-                                label: '选项1',
+                                label: '语文',
                                 value: 1
                             }, {
-                                label: '选项2',
+                                label: '数学',
                                 value: 2
                             }, {
-                                label: '选项3',
+                                label: '英语',
                                 value: 3
                             }]
                         }
