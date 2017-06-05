@@ -23,11 +23,6 @@ export default  class Form extends Component {
         }
     }
 
-    componentWillMount() {
-        let {data, options} = this.props;
-        this.validator(data, options)
-    }
-
     componentDidUpdate({data, options}) {
         this.validator(data, options)
     }
@@ -36,7 +31,7 @@ export default  class Form extends Component {
         if (!options) return;
         for (let i = options.length; i--;) {
             let item = options[i];
-            if (isRequired(item) && !data[item.name] && data[item.name] != '0') {
+            if (isRequired(item) && (data[item.name] == null || data[item.name === ""])) {
                 this.handleDisabled(item, true);
                 break;
             }

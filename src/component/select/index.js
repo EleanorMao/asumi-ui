@@ -54,6 +54,7 @@ export default  class Select extends Component {
         selectedValue = value.length ? value : defaultValue;
         if (children) {
             React.Children.map(children, (elm) => {
+                if (!elm) return;
                 let {value, disabled, label, children} = elm.props;
                 let index = selectedValue.indexOf(value);
                 allValue.push(value);
