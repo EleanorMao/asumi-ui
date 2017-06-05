@@ -16,6 +16,7 @@ export default class Menu extends Component {
             <div className="el-side-menu" style={extend({}, {width}, style)}>
                 <ul className="el-menu">
                     {React.Children.map(children, (elm) => {
+                        if (!elm)return;
                         let open = openAll;
                         if (!open && defaultOpenKey === elm.key) open = true;
                         return React.cloneElement(elm, {open, openAll, defaultOpenKey});

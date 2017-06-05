@@ -27,6 +27,7 @@ export default  class SubMenu extends Component {
                 <div className="el-submenu-title" onClick={this.handleToggle.bind(this)}>{title}</div>
                 <ul className="el-submenu-list">
                     {React.Children.map(children, (elm) => {
+                        if (!elm) return;
                         let open = openAll;
                         if (!open && defaultOpenKey === elm.key) open = true;
                         return React.cloneElement(elm, {open, openAll, defaultOpenKey});

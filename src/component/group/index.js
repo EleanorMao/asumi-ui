@@ -10,10 +10,11 @@ export default  class Group extends Component {
     }
 
     render() {
-        let {children, style, ...other}=this.props;
+        let {children, style, ...other} = this.props;
         return (
             <div className="el-group">
-                {React.Children.map(children, (elm)=> {
+                {React.Children.map(children, (elm) => {
+                    if (!elm)return;
                     return React.cloneElement(elm, {style: extend({}, {marginRight: 10}, style), ...other});
                 })}
             </div>

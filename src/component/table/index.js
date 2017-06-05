@@ -42,6 +42,7 @@ export default class Table extends Component {
     _initColumnData(props) {
         let columnData = [];
         React.Children.map(props.children, function (column) {
+            if (!column)return;
             columnData.push({
                 width: column.props.width,
                 id: column.props.dataField,

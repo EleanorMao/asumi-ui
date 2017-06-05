@@ -35,6 +35,7 @@ export default class Header extends Component {
                 {selectRow.mode !== 'none' && !selectRow.hideSelectColumn &&
                 <col key="select" style={{textAlign: 'center', width: 46}}/>}
                 {  React.Children.map(renderChildren, (elm) => {
+                    if (!elm)return;
                     if (left && elm.props.dataFixed !== 'left') return;
                     if (right && elm.props.dataFixed !== 'right') return;
                     let style = {
@@ -76,6 +77,7 @@ export default class Header extends Component {
                     }}>
                         {!selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, checked)}
                         {  React.Children.map(renderChildren, (elm) => {
+                            if (!elm) return;
                             if (left && elm.props.dataFixed !== 'left') return;
                             if (right && elm.props.dataFixed !== 'right') return;
                             if (colSpan && target < i && i < colSpan) {
