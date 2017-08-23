@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "babel src --out-dir lib",
-    "dev": "webpack-dev-server --inline --hot --progress --colors --content-base ./examples --history-api-fallback --config webpack.config.example.js --port 9010",
+    "dev": "webpack-dev-server --inline --hot --progress --colors --content-base ./examples --history-api-fallback --config webpack.config.example.js --port 9010 --host 0.0.0.0",
     "mock": "json-server --watch db.json --port 3000",
     "eslint": "eslint src"
   },

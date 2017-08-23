@@ -8,7 +8,7 @@ import {
     Table,
     Col
 } from '../../../src';
-import Panel from './Panel';
+import Panel from './panel';
 import {basic, icon, size, prefix, pattern, api} from '../constants/input';
 
 export default  class Main extends Component {
@@ -55,7 +55,7 @@ export default  class Main extends Component {
                     title="icon"
                     code={icon}
                 >
-                    <Input icon={<i className="fa fa-bed"/>}/>
+                    <Input size="large" icon={<i className="fa fa-envelope-o"/>}/>
                 </Panel>
                 <Panel
                     title="size"

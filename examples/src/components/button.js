@@ -8,7 +8,7 @@ import {
     Table,
     Col
 } from '../../../src';
-import Panel from './Panel';
+import Panel from './panel';
 import {basic, link, size, api}from'../constants/button'
 
 export default  class Main extends Component {

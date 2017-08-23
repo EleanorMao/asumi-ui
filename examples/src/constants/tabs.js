@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Tabs, TabPanel} from 'elui';
+export const basic = `import {Tabs, TabPanel} from 'el-ui';
 // or Const TabPanel = Tabs.TabPanel;
 
 ReactDOM.render(
@@ -12,7 +12,7 @@ ReactDOM.render(
     </Tabs>
 </div>, div)`;
 
-export const card = `import {Tabs, TabPanel} from 'elui';
+export const card = `import {Tabs, TabPanel} from 'el-ui';
 // or Const TabPanel = Tabs.TabPanel;
 
 ReactDOM.render(

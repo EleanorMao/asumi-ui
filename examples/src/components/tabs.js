@@ -9,7 +9,7 @@ import {
     Col
 } from '../../../src';
 import {basic, card, api, apiOfTabPanel}from'../constants/tabs';
-import Panel from './Panel';
+import Panel from './panel';
 
 export default  class Main extends Component {
     constructor(props) {

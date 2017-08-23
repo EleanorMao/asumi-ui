@@ -9,7 +9,7 @@ import {
     Table,
     Col
 } from '../../../src';
-import Panel from './Panel';
+import Panel from './panel';
 import {basic, size, searchable, multiple, api} from '../constants/select';
 
 

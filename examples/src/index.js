@@ -3,17 +3,22 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
 
 import '../../style/index.less';
-import {Menu, SubMenu, MenuItem} from '../../lib';
+import './assets/public.less';
+import {Menu, SubMenu, MenuItem} from '../../src';
+
 import Form from './components/form';
+import Home from './components/home';
 import Tabs from './components/tabs';
+import Grid from './components/grid';
 import Table from './components/table';
 import Radio from './components/radio';
 import Modal from './components/modal';
 import Input from './components/input';
 import Select from './components/select';
+import Header from './components/header';
 import Editor from './components/editor';
 import Button from './components/button';
 import Animate from './components/animate';
@@ -26,66 +31,67 @@ import Dropdown from './components/dropdown';
 import Pagination from './components/pagination';
 
 const router = [
-    <Link to={'/'}>HOME</Link>,
+    <NavLink to={'/'} activeClassName="">HOME</NavLink>,
     {
         title: 'Basic',
         children: [
-            <Link to={'/grid'}>Grid</Link>,
-            <Link to={'/button'}>BUTTON</Link>
+            <NavLink to={'/grid'} activeClassName="active">GRID</NavLink>,
+            <NavLink to={'/button'} activeClassName="active">BUTTON</NavLink>
         ]
     },
     {
         title: 'Form',
         children: [
-            <Link to={'/input'}>INPUT</Link>,
-            <Link to={'/select'}>SELECT</Link>,
-            <Link to={'/radio'}>RADIO</Link>,
-            <Link to={'/checkbox'}>CHECKBOX</Link>,
-            <Link to={'/upload'}>UPLOAD</Link>,
-            <Link to={'/form'}>FORM</Link>
+            <NavLink to={'/input'} activeClassName="active">INPUT</NavLink>,
+            <NavLink to={'/select'} activeClassName="active">SELECT</NavLink>,
+            <NavLink to={'/radio'} activeClassName="active">RADIO</NavLink>,
+            <NavLink to={'/checkbox'} activeClassName="active">CHECKBOX</NavLink>,
+            <NavLink to={'/upload'} activeClassName="active">UPLOAD</NavLink>,
+            <NavLink to={'/form'} activeClassName="active">FORM</NavLink>
         ]
     },
     {
         title: 'Display',
         children: [
-            <Link to={'/table'}>TABLE</Link>,
-            <Link to={'/editor'}>EDITOR</Link>,
-            <Link to={'/pagination'}>PAGINATION</Link>,
+            <NavLink to={'/table'} activeClassName="active">TABLE</NavLink>,
+            <NavLink to={'/editor'} activeClassName="active">EDITOR</NavLink>,
+            <NavLink to={'/pagination'} activeClassName="active">PAGINATION</NavLink>,
         ]
     },
     {
         title: 'Message',
         children: [
-            <Link to={'/tooltip'}>TOOLTIP</Link>,
-            <Link to={'/popover'}>POPOVER</Link>,
-            <Link to={'/message'}>MESSAGE</Link>
+            <NavLink to={'/tooltip'} activeClassName="active">TOOLTIP</NavLink>,
+            <NavLink to={'/popover'} activeClassName="active">POPOVER</NavLink>,
+            <NavLink to={'/message'} activeClassName="active">MESSAGE</NavLink>
         ]
     },
     {
         title: 'Navigation',
         children: [
-            <Link to={'/dropdown'}>DROPDOWN</Link>,
-            <Link to={'/tabs'}>TABS</Link>,
-            <Link to={'/menu'}>MENU</Link>,
+            <NavLink to={'/dropdown'} activeClassName="active">DROPDOWN</NavLink>,
+            <NavLink to={'/tabs'} activeClassName="active">TABS</NavLink>,
+            <NavLink to={'/menu'} activeClassName="active">MENU</NavLink>,
         ]
     },
     {
         title: 'Others',
         children: [
-            <Link to={'/modal'}>MODAL</Link>,
-            <Link to={'/animate'}>ANIMATE</Link>,
-            <Link to={'/Loading'}>LOADING</Link>,
+            <NavLink to={'/modal'} activeClassName="active">MODAL</NavLink>,
+            <NavLink to={'/animate'} activeClassName="active">ANIMATE</NavLink>,
+            <NavLink to={'/Loading'} activeClassName="active">LOADING</NavLink>,
         ]
     },
-    <Link to={'/calendar'}>CALENDAR</Link>
+    <NavLink to={'/calendar'} activeClassName="active">CALENDAR</NavLink>
 ];
 
 ReactDOM.render(
     <Router>
         <div>
+            <Header/>
             <Menu
                 openAll
-                style={{width: 200, position: 'absolute', top: 0, bottom: 0}}>
+                style={{width: 200, position: 'absolute', top: 0, bottom: 0, marginTop: 60}}>
                 {router.map((item, index) => {
                     if (item.children) {
                         return (
@@ -104,13 +110,10 @@ ReactDOM.render(
                     }
                 })}
             </Menu>
-            <div style={{marginLeft: 200}}>
-                <Route exact path="/" component={() => {
-                    return (
-                        <h1>喵</h1>
-                    )
-                }}/>
+            <div style={{marginLeft: 200, marginTop: 60}}>
+                <Route exact path="/" component={Home}/>
                 <Route path="/tabs" component={Tabs}/>
+                <Route path="/grid" component={Grid}/>
                 <Route path="/form" component={Form}/>
                 <Route path="/input" component={Input}/>
                 <Route path="/radio" component={Radio}/>

@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Select, Option , Group} from 'elui';
+export const basic = `import {Select, Option , Group} from 'el-ui';
 //const Option = Select.Option;
 
 let style = {
@@ -56,7 +56,7 @@ class Foo extends Component {
     }
 }`;
 
-export const size = `import {Select, Option , Group} from 'elui';
+export const size = `import {Select, Option , Group} from 'el-ui';
 //const Option = Select.Option;
 
 let style = {
@@ -110,7 +110,7 @@ class Foo extends Component {
     }
 }`;
 
-export const searchable = `import {Select, Option , Group} from 'elui';
+export const searchable = `import {Select, Option , Group} from 'el-ui';
 //const Option = Select.Option;
 
 let style = {
@@ -175,7 +175,7 @@ class Foo extends Component {
     }
 }`;
 
-export const multiple = `import {Select, Option , Group} from 'elui';
+export const multiple = `import {Select, Option , Group} from 'el-ui';
 //const Option = Select.Option;
 
 let style = {

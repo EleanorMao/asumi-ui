@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Input, Group} from 'elui';
+export const basic = `import {Input, Group} from 'el-ui';
 
 let style = {
     width: 300,
@@ -19,7 +19,7 @@ ReactDOM.render(
     </Group>
 </div>, div)`;
 
-export const size = `import {Input, Group} from 'elui';
+export const size = `import {Input, Group} from 'el-ui';
 
 let style = {
     width: 300,
@@ -43,13 +43,13 @@ ReactDOM.render(
     </Group>
 </div>, div)`;
 
-export const icon = `import {Input, Group} from 'elui'
+export const icon = `import {Input, Group} from 'el-ui'
 
 ReactDOM.render(
 <div>
     <Input icon={<i className="fa fa-bed"/>}/>
 </div>,div)`;
-export const pattern = `import {Input, Group} from 'elui';
+export const pattern = `import {Input, Group} from 'el-ui';
 
 let style = {
     width: 300,
@@ -90,7 +90,7 @@ class Foo extends Component {
     }
 }`;
 
-export const prefix = `import {Input, Group} from 'elui';
+export const prefix = `import {Input, Group} from 'el-ui';
 
 let style = {
     width: 300,

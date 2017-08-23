@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Group, Button} from 'elui';
+export const basic = `import {Group, Button} from 'el-ui';
 
 ReactDOM.render(
 <div>
@@ -16,7 +16,7 @@ ReactDOM.render(
     </Group>
 </div>, div)`;
 
-export const link = `import {Group, Button} from 'elui';
+export const link = `import {Group, Button} from 'el-ui';
 
 ReactDOM.render(
 <div>
@@ -31,7 +31,7 @@ ReactDOM.render(
     </Group>
 </div>, div)`;
 
-export const size = `import {Group, Button} from 'elui';
+export const size = `import {Group, Button} from 'el-ui';
 
 ReactDOM.render(
 <div>
