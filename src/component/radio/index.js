@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default  class Radio extends Component {
+export default class Radio extends Component {
     constructor(props) {
         super(props);
     }
@@ -19,7 +19,7 @@ export default  class Radio extends Component {
     render() {
         let {label, type, checked, className, onChange, disabled, children, ...other} = this.props;
         let _className = classnames('el-checkbox-wrapper', disabled ? 'el-disabled' : '', className);
-        let _innerClassName = classnames('el-checkbox', type ? 'el-switch' : null);
+        let _innerClassName = classnames('el-checkbox', type ? 'el-switch' : 'el-radio');
         return (
             <label className={_className}>
                 <span className={_innerClassName}>
@@ -30,11 +30,7 @@ export default  class Radio extends Component {
                         disabled={disabled}
                         className="el-checkbox-input"
                         onChange={this.handleChange.bind(this)}/>
-                    { type ? <span/> : (
-                        checked ?
-                            <span className="fa fa-dot-circle-o el-checked"/> :
-                            <span className="fa fa-circle-o el-unchecked"/>
-                    )}
+                    <span/>
                 </span>
                 <span>{children || label}</span>
             </label>
@@ -48,6 +44,6 @@ Radio.propTypes = {
 
 Radio.defaultProps = {
     checked: false,
-    onChange: ()=> {
+    onChange: () => {
     }
 };

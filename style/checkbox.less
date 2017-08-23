@@ -23,6 +23,20 @@
       .el-checked {
         color: @disabled;
       }
+      &.el-radio input[type=radio] {
+        cursor: not-allowed;
+        + span:before {
+          border-color: @disabled;
+        }
+        &:checked + span {
+          &:before {
+            border-color: @disabled;
+          }
+          &:after {
+            background: @disabled;
+          }
+        }
+      }
       &.el-switch {
         input {
           + span {
@@ -45,6 +59,7 @@
       }
     }
   }
+
   .el-checkbox {
     margin-left: 0.3846rem;
     margin-right: 0.3846rem;
@@ -72,14 +87,67 @@
     .el-checked {
       color: @d_primary;
     }
+    &.el-radio {
+      height: 1rem;
+      line-height: 1rem;
+      vertical-align: middle;
+      input[type=radio] {
+        height: 1rem;
+        position: absolute;
+        + span {
+          width: auto;
+          display: block;
+          background: none;
+          position: relative;
+          height: 1rem;
+          &:before {
+            content: '';
+            width: 0.84615rem;
+            height: 0.84615rem;
+            border-radius: 50%;
+            position: relative;
+            display: inline-block;
+            box-sizing: content-box;
+            transition: border .2s;
+            border: 1px solid @normalText;
+            -webkit-transition: border .2s;
+          }
+        }
+        &:checked + span {
+          &:before {
+            border-color: @d_primary;
+            transition: border .2s;
+            -webkit-transition: border .2s;
+          }
+          &:after {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            position: absolute;
+            background: @d_primary;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+          }
+        }
+      }
+      &:hover {
+        input + span:before {
+          border-color: @d_primary;
+        }
+      }
+    }
     &.el-switch {
       height: 1.3846rem;
       line-height: 1.3846rem;
       vertical-align: middle;
       input {
-        height: 1.3846rem;
-        position: absolute;
-        &[type=checkbox] {
+        &[type=checkbox], &[type=radio] {
+          height: 1.3846rem;
+          position: absolute;
           + span {
             width: auto;
             height: auto;
@@ -133,6 +201,7 @@
       }
     }
   }
+
 }
 
 .el-checkbox-group {

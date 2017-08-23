@@ -3,10 +3,14 @@
  */
 import React, {Component, PropTypes} from 'react';
 import {
-    Radio
+    Radio,
+    Table,
+    Col
 } from '../../../src';
+import Panel from './panel';
+import {basic, _switch, disabled, radioGroup, api} from '../constants/radio'
 
-export default  class Main extends Component {
+export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +22,8 @@ export default  class Main extends Component {
     }
 
     handleChange(e) {
-        let {name, checked} = e;
+        let {name, value, checked} = e;
+        console.log(name, value, checked);
         this.setState(prev => {
             prev[name] = checked;
             return prev;
@@ -32,27 +37,34 @@ export default  class Main extends Component {
     render() {
         return (
             <div className="content">
-                <h1>Normal Radio</h1>
-                <div>
+                <h1>Radio 单选按钮</h1>
+                <Panel
+                    title="Basic"
+                    code={basic}
+                >
                     <Radio
                         value="1"
-                        label="label"
+                        label="radio"
                         name="normal"
                         checked={this.state.normal}
                         onChange={this.handleChange.bind(this)}/>
-                </div>
-                <h1>Switch Radio</h1>
-                <div>
+                </Panel>
+                <Panel
+                    title="Switch"
+                    code={_switch}
+                >
                     <Radio
                         value="1"
-                        label="switch"
                         name="swi"
                         type="switch"
+                        label="switch"
                         checked={this.state.swi}
                         onChange={this.handleChange.bind(this)}/>
-                </div>
-                <h1>Disabled Radio</h1>
-                <div>
+                </Panel>
+                <Panel
+                    title="Disabled"
+                    code={disabled}
+                >
                     <Radio
                         disabled
                         label="label"
@@ -73,9 +85,11 @@ export default  class Main extends Component {
                         type="switch"
                         disabled
                         checked={true}/>
-                </div>
-                <h1>RadioGroup</h1>
-                <div>
+                </Panel>
+                <Panel
+                    title="RadioGroup"
+                    code={radioGroup}
+                >
                     <Radio.Group
                         options={[{
                             label: '选项1',
@@ -103,7 +117,14 @@ export default  class Main extends Component {
                         }]}
                         disableAll={true}
                     />
-                </div>
+                </Panel>
+                <h1>API</h1>
+                <Table isKey="property" data={api} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
             </div>
         )
     }
