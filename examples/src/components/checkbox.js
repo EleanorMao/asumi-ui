@@ -3,9 +3,12 @@
  */
 import React, {Component, PropTypes} from 'react';
 import {
-    Checkbox
+    Checkbox,
+    Table,
+    Col
 } from '../../../src';
 import Panel from './panel';
+import {basic, _switch, disabled, indeterminate, checkboxGroup, api, apiofgroup} from '../constants/checkbox'
 
 export default class Main extends Component {
     constructor(props) {
@@ -32,17 +35,22 @@ export default class Main extends Component {
     render() {
         return (
             <div className="content">
-                <h1>Normal Checkbox</h1>
-                <div>
+                <h1>Checkbox 多选框</h1>
+                <Panel
+                    title="Basic"
+                    code={basic}
+                >
                     <Checkbox
                         value="1"
-                        label="label"
+                        label="normal"
                         name="normal"
                         checked={this.state.normal}
                         onChange={this.handleChange.bind(this)}/>
-                </div>
-                <h1>Switch Radio</h1>
-                <div>
+                </Panel>
+                <Panel
+                    title="Switch"
+                    code={_switch}
+                >
                     <Checkbox
                         value="1"
                         label="switch"
@@ -50,9 +58,11 @@ export default class Main extends Component {
                         type="switch"
                         checked={this.state.swi}
                         onChange={this.handleChange.bind(this)}/>
-                </div>
-                <h1>Disabled Checkbox</h1>
-                <div>
+                </Panel>
+                <Panel
+                    title="Disabled"
+                    code={disabled}
+                >
                     <Checkbox
                         disabled
                         label="label"
@@ -73,16 +83,20 @@ export default class Main extends Component {
                         type="switch"
                         disabled
                         checked={true}/>
-                </div>
-                <h1>Indeterminate Checkbox</h1>
-                <div>
+                </Panel>
+                <Panel
+                    title="Indeterminate"
+                    code={indeterminate}
+                >
                     <Checkbox
                         label="indeterminate"
                         indeterminate={true}
                     />
-                </div>
-                <h1>CheckboxGroup</h1>
-                <div>
+                </Panel>
+                <Panel
+                    title="CheckboxGroup"
+                    code={checkboxGroup}
+                >
                     <Checkbox.Group
                         options={[{
                             label: '组别1',
@@ -111,7 +125,21 @@ export default class Main extends Component {
                         disableAll={true}
                         checkedList={[]}
                     />
-                </div>
+                </Panel>
+                <h1>API</h1>
+                <Table isKey="property" data={api} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
+                <h1>API of CheckboxGroup</h1>
+                <Table isKey="property" data={apiofgroup} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
             </div>
         )
     }
