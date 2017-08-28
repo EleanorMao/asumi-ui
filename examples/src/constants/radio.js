@@ -149,20 +149,81 @@ class Foo extends React.Component {
 ReactDOM.render(<Foo />, div)`;
 
 
-//TODO: 补完
 export const api = [{
-    property: "className",
+    property: "type",
     type: "string",
     'default': "",
-    description: "ClassName of row"
+    description: "Type of radio. Options: switch"
+}, {
+    property: "label",
+    type: "any",
+    'default': "",
+    description: ""
+}, {
+    property: "disabled",
+    type: "bool",
+    'default': "",
+    description: "Disable radio"
+}, {
+    property: "checked",
+    type: "bool",
+    'default': "false",
+    description: "Is radio checked or not, default is false"
+}, {
+    property: "onChange",
+    type: "function",
+    'default': "({e, name, value, checked})=>{}",
+    description: "Callback when value change.",
 }, {
     property: "style",
     type: "object",
     'default': "",
-    description: "Style of row"
+    description: "Style of radio"
+}, {
+    property: "className",
+    type: "object",
+    'default': "",
+    description: "ClassName of radio"
 }, {
     property: "children",
     type: "any",
     'default': "",
-    description: ""
+    description: "Same as label, but the priority is higher than it"
+}, {
+    property: "...others",
+    type: "",
+    'default': "",
+    description: "Other property can work on a \<input\> tag"
+}];
+
+export const apiofgroup = [{
+    property: "options",
+    type: "string[] | array<{label: any, name: string, value: string|number, disabled: bool, ...other}>",
+    'default': "",
+    description: "Set radio group optional. please refer to aip of radio"
+}, {
+    property: "disableAll",
+    type: "boolean",
+    'default': "false",
+    description: "disable all radio"
+}, {
+    property: "value",
+    type: "string | number",
+    'default': "",
+    description: "value of radio group"
+}, {
+    property: "onChange",
+    type: "function",
+    'default': "({e, name, value, checked})=>{}",
+    description: "Callback when value change.",
+}, {
+    property: "style",
+    type: "object",
+    'default': "",
+    description: "Style of radio"
+}, {
+    property: "className",
+    type: "object",
+    'default': "",
+    description: "ClassName of radio"
 }];

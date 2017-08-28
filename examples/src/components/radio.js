@@ -8,7 +8,7 @@ import {
     Col
 } from '../../../src';
 import Panel from './panel';
-import {basic, _switch, disabled, radioGroup, api} from '../constants/radio'
+import {basic, _switch, disabled, radioGroup, api, apiofgroup} from '../constants/radio'
 
 export default class Main extends Component {
     constructor(props) {
@@ -120,6 +120,13 @@ export default class Main extends Component {
                 </Panel>
                 <h1>API</h1>
                 <Table isKey="property" data={api} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
+                <h1>API of RadioGroup</h1>
+                <Table isKey="property" data={apiofgroup} lineWrap="break">
                     <Col dataField="property">Property</Col>
                     <Col dataField="description">Description</Col>
                     <Col dataField="type">Type</Col>

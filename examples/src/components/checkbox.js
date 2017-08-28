@@ -5,8 +5,9 @@ import React, {Component, PropTypes} from 'react';
 import {
     Checkbox
 } from '../../../src';
+import Panel from './panel';
 
-export default  class Main extends Component {
+export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
