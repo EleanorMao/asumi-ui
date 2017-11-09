@@ -7,11 +7,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Input from '../input';
 import Option from './option';
-import {isArr, extend, contains, addEvent, removeEvent} from '../util';
+import {isArr, extend, contains, addEvent, removeEvent, KeyCode} from '../util';
 
-export default  class Select extends Component {
+
+export default class Select extends Component {
     constructor(props) {
         super(props);
+        this.index = -1;
         this.state = {
             data: [],
             focus: false,
@@ -46,6 +48,20 @@ export default  class Select extends Component {
         this.getData(nextProps);
     }
 
+    setPreSelect(length, minus) {
+        if (minus) {
+            if (this.index === 0) {
+                this.index = length
+            }
+            this.index--;
+        } else {
+            if (this.index === length - 1) {
+                this.index = -1
+            }
+            this.index++;
+        }
+    }
+
     getData(props) {
         let data = [], renderData = [], allValue = [], selectedLabel = [], selectedValue = [];
         let {value, defaultValue, children} = props;
@@ -76,10 +92,10 @@ export default  class Select extends Component {
     }
 
     getPosition() {
-        if (!this.container)return;
+        if (!this.container) return;
         let {clientHeight} = this.container;
         let {top, left, bottom, width} = this.el_select.getBoundingClientRect();
-        let scrollLeft = document.body.scrollLeft || document.documentElement.scrollTop;
+        let scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
         let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         top += scrollTop;
         left += scrollLeft;
@@ -104,12 +120,37 @@ export default  class Select extends Component {
     }
 
     handleToggle() {
-        if (this.props.disabled)return;
+        if (this.props.disabled) return;
         if (this.state.visible) {
             this.hideComponent()
         } else {
             this.renderComponent();
         }
+    }
+
+    handleKeyDown(e) {
+        let {onKeyDown, disabled} = this.props;
+        let renderData = this.state.renderData;
+        let length = renderData.length;
+        let keyCode = e.keyCode;
+        if (this.state.visible && !disabled && length) {
+            if (keyCode === KeyCode.DOWN) {
+                e.preventDefault();
+                if (this.index >= 0) this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+                this.setPreSelect(length);
+                this.el_select_ul.children[this.index].classList.add('el-select-selected');
+            } else if (keyCode === KeyCode.UP) {
+                e.preventDefault();
+                if (this.index >= 0) this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+                this.setPreSelect(length, true);
+                this.el_select_ul.children[this.index].classList.add('el-select-selected');
+            } else if (keyCode === KeyCode.ENTER && this.index >= 0) {
+                this.el_select_ul.children[this.index].click();
+            }
+        } else if (keyCode === KeyCode.ENTER) {
+            this.handleToggle();
+        }
+        if (onKeyDown) onKeyDown(e)
     }
 
     handleChange(e) {
@@ -152,7 +193,7 @@ export default  class Select extends Component {
 
     handleSelect(e, value, selected) {
         let {name, onChange, readOnly} = this.props;
-        if (readOnly)return;
+        if (readOnly) return;
         onChange({e, name, value, selected});
         this.handleToggle();
     }
@@ -160,7 +201,7 @@ export default  class Select extends Component {
     handleSelectAll(e, allValue, selected) {
         let {selectedValue} = this.state;
         let {name, onChange, onSelectAll, readOnly} = this.props;
-        if (readOnly)return;
+        if (readOnly) return;
         if (!onSelectAll) {
             allValue.map(value => {
                 if (selected && ~selectedValue.indexOf(value)) return;
@@ -171,6 +212,11 @@ export default  class Select extends Component {
             onSelectAll({e, name, value: allValue.slice(), selected});
         }
         this.handleToggle();
+    }
+
+    handleDisableSelect() {
+        if (this.index >= 0) this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+        this.index = -1;
     }
 
     renderComponent() {
@@ -192,11 +238,14 @@ export default  class Select extends Component {
         if (this.container) {
             this.container.style.display = 'none';
         }
+        if (this.index >= 0) {
+            this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+        }
         this.setState({visible: false});
     }
 
     addStyle() {
-        if (!this.state.visible || !this.container)return;
+        if (!this.state.visible || !this.container) return;
         this.getPosition();
         for (let style in this.style) {
             this.container.style[style] = this.style[style];
@@ -210,7 +259,9 @@ export default  class Select extends Component {
         let {multiple, searchable, selectedAll, selectedAllText, noMatchText} = this.props;
         return (
             <div className="el-select-dropdown">
-                <ul>
+                <ul ref={c => {
+                    this.el_select_ul = c
+                }}>
                     {(searchable && !renderData.length) &&
                     <li key="no-data" className="el-select-no-data">{noMatchText}</li>}
                     {(multiple && selectedAll && renderData.length === data.length) &&
@@ -230,6 +281,7 @@ export default  class Select extends Component {
                                 key={props.value}
                                 multiple={multiple}
                                 onChange={this.handleSelect.bind(this)}
+                                onDisableChange={this.handleDisableSelect.bind(this)}
                                 selected={!!~selectedValue.indexOf(props.value)}
                             />
                         );
@@ -256,10 +308,12 @@ export default  class Select extends Component {
                     {...other}
                     size={size}
                     icon={icon}
+                    autoComplete="off"
                     value={renderValue}
-                    readOnly={searchable ? false : true}
+                    readOnly={!searchable}
                     onClick={this.handleToggle.bind(this)}
                     onChange={this.handleChange.bind(this)}
+                    onKeyDown={this.handleKeyDown.bind(this)}
                     onFocus={this.handleToggleInput.bind(this, true)}
                     onBlur={this.handleToggleInput.bind(this, false)}
                 />

@@ -162,6 +162,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     > li {
       .overflow();
       height: 35px;
+      line-height: 2;
       position: relative;
       padding: 0.3846rem 23px 0.3846rem 0.6153rem;
       &.el-select-no-data {
@@ -179,7 +180,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
           background: @l_default;
         }
       }
-      .el-select-selected, .el-select-unselected {
+      .el-select-selected,
+      .el-select-unselected {
         top: 0;
         right: 0;
         width: 1.5384rem;
@@ -196,6 +198,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
         background: @default;
         .el-select-unselected {
           color: @d_primary;
+        }
+      }
+      &.el-select-selected {
+        background: @l_primary;
+        &:hover {
+          background: @l_primary;
         }
       }
     }

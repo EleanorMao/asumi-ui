@@ -30,7 +30,7 @@ export default class Input extends Component {
             }
         } else if (rule === 'color') { //颜色
             let reg = /^#[0-9a-fA-F]{0,6}$/;
-            if (!reg.test(value)) {
+            if (value && !reg.test(value)) {
                 return;
             }
         }

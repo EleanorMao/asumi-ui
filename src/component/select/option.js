@@ -2,11 +2,21 @@
  * Created by elly on 2017/4/8.
  */
 import React, {Component} from 'react';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-export default  class Option extends Component {
+export default class Option extends Component {
     constructor(props) {
         super(props);
+    }
+
+    handleClick(e) {
+        let {value, disabled, selected, onChange, onDisableChange} = this.props;
+        if (disabled) {
+            if (onDisableChange) onDisableChange(e, value);
+        } else {
+            onChange(e, value, !selected)
+        }
     }
 
     selectRender(selected, multiple) {
@@ -22,11 +32,16 @@ export default  class Option extends Component {
     }
 
     render() {
-        let {label, value, disabled, multiple, selected, onChange} = this.props;
+        let {label, disabled, multiple, selected} = this.props;
+        let _className = classnames({
+            'el-disabled': disabled
+        });
         return (
             <li
-                className={disabled ? 'el-disabled' : ''}
-                onClick={disabled ? null : (e) => onChange(e, value, !selected)}>
+                className={_className}
+                aria-disabled={disabled ? 'disabled' : ''}
+                aria-selected={selected ? 'selected' : 'unselected'}
+                onClick={this.handleClick.bind(this)}>
                 {label}
                 {this.selectRender(selected, multiple)}
             </li>
@@ -36,4 +51,6 @@ export default  class Option extends Component {
 
 Option.propTypes = {};
 
-Option.defaultProps = {};
+Option.defaultProps = {
+    className: ""
+};

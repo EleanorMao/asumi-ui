@@ -104,3 +104,9 @@ export let contains = function (root, el) {
 
     return false;
 };
+
+export let KeyCode = {
+    ENTER: 13,
+    DOWN: 40,
+    UP: 38
+};
