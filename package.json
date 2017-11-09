@@ -44,7 +44,7 @@
     "nyan-progress-webpack-plugin": "^1.1.4",
     "open-browser-webpack-plugin": "0.0.2",
     "react": ">=0.14.3",
-    "react-dom": "^15.1.0",
+    "react-dom": ">=0.14.3",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "style-loader": "^0.13.1",
