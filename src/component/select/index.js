@@ -9,6 +9,12 @@ import Input from '../input';
 import Option from './option';
 import {isArr, extend, contains, addEvent, removeEvent, KeyCode} from '../util';
 
+function renderComponent(instance) {
+    if (!instance.container) {
+        instance.container = instance.getContainer();
+    }
+    ReactDOM.unstable_renderSubtreeIntoContainer(instance, instance.optionsRender(), instance.container)
+}
 
 export default class Select extends Component {
     constructor(props) {
@@ -33,6 +39,10 @@ export default class Select extends Component {
     componentDidMount() {
         addEvent(window, 'resize', this.addStyle.bind(this));
         addEvent(document, 'click', this.handleClose.bind(this));
+    }
+
+    componentDidUpdate() {
+        if (this.state.visible && !this.props.closeAfterSelect) renderComponent(this);
     }
 
     componentWillUnmount() {
@@ -113,9 +123,22 @@ export default class Select extends Component {
         }
     }
 
+    getContainer() {
+        this.container = document.createElement('div');
+        this.container.style.position = 'absolute';
+        this.container.style.left = '-9999px';
+        this.container.style.top = '-9999px';
+        this.container.style.width = 0;
+        document.body.appendChild(this.container);
+        return this.container;
+    }
+
     handleClose(e) {
         if (this.state.visible && this.el_select && !contains(this.el_select, e.target)) {
-            this.hideComponent();
+            let closeAfterSelect = this.props.closeAfterSelect;
+            if (closeAfterSelect || (!closeAfterSelect && !contains(this.el_select_ul, e.target))) {
+                this.hideComponent();
+            }
         }
     }
 
@@ -124,7 +147,8 @@ export default class Select extends Component {
         if (this.state.visible) {
             this.hideComponent()
         } else {
-            this.renderComponent();
+            renderComponent(this);
+            this.showComponent();
         }
     }
 
@@ -163,7 +187,8 @@ export default class Select extends Component {
             prev.renderData = renderData || [];
             return prev;
         }, () => {
-            this.renderComponent();
+            renderComponent(this);
+            this.showComponent();
         });
     }
 
@@ -195,7 +220,6 @@ export default class Select extends Component {
         let {name, onChange, readOnly} = this.props;
         if (readOnly) return;
         onChange({e, name, value, selected});
-        this.handleToggle();
     }
 
     handleSelectAll(e, allValue, selected) {
@@ -211,7 +235,6 @@ export default class Select extends Component {
             if (!selected) allValue = [];
             onSelectAll({e, name, value: allValue.slice(), selected});
         }
-        this.handleToggle();
     }
 
     handleDisableSelect() {
@@ -219,19 +242,9 @@ export default class Select extends Component {
         this.index = -1;
     }
 
-    renderComponent() {
-        if (!this.container) {
-            this.container = document.createElement('div');
-            this.container.style.position = 'absolute';
-            this.container.style.left = '-9999px';
-            this.container.style.top = '-9999px';
-            this.container.style.width = 0;
-            document.body.appendChild(this.container);
-        }
-        ReactDOM.unstable_renderSubtreeIntoContainer(this, this.optionsRender(), this.container);
-        this.setState({visible: true}, () => {
-            this.addStyle();
-        });
+    showComponent() {
+        this.setState({visible: true},
+            this.addStyle.bind(this))
     }
 
     hideComponent() {
@@ -297,7 +310,7 @@ export default class Select extends Component {
         let {
             size, style, value, noMatchText, matchCase, onMatch,
             searchable, selectedAll, defaultValue, selectedAllText,
-            multiple, onChange, className, children, ...other
+            multiple, onChange, className, children, closeAfterSelect, ...other
         } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
         return (
@@ -330,12 +343,14 @@ Select.propTypes = {
     selectedAll: PropTypes.bool,
     onSelectedAll: PropTypes.func,
     noMatchText: PropTypes.string,
+    closeAfterSelect: PropTypes.bool,
     selectedAllText: PropTypes.string,
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 
 Select.defaultProps = {
     value: "",
+    closeAfterSelect: true,
     selectedAllText: "全选",
     noMatchText: "暂无匹配数据",
     onChange: () => {

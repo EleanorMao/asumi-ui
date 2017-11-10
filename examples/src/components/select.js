@@ -13,7 +13,7 @@ import Panel from './panel';
 import {basic, size, searchable, multiple, api} from '../constants/select';
 
 
-export default  class Main extends Component {
+export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -113,7 +113,7 @@ export default  class Main extends Component {
                     title="multiple"
                     code={multiple}
                 >
-                    <Group style={style}
+                    <Group style={style} closeAfterSelect={false}
                            multiple onChange={this.handleChangeMultiple.bind(this)}>
                         <Select placeholder="请选择" name="animal1" value={animal1}>
                             <Option value="monkey">Monkey</Option>
@@ -147,7 +147,7 @@ export default  class Main extends Component {
                         <Select
                             name="animal3"
                             value={animal3}
-                            multiple selectedAll
+                            multiple selectedAll closeAfterSelect={false}
                             onChange={this.handleChangeMultiple.bind(this)}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>

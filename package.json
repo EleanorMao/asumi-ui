@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "babel src --out-dir lib",
-    "dev": "webpack-dev-server --inline --hot --progress --colors --content-base ./examples --history-api-fallback --config webpack.config.example.js --port 9010 --host 0.0.0.0",
+    "dev": "webpack-dev-server --config webpack.config.example.js --color",
     "mock": "json-server --watch db.json --port 3000",
     "eslint": "eslint src"
   },
@@ -48,7 +48,7 @@
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
   }
 }
