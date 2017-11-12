@@ -59,6 +59,7 @@ export default class Select extends Component {
     }
 
     setPreSelect(length, minus) {
+        length = this.hasSelectAll() ? length + 1 : length;
         if (minus) {
             if (this.index === 0) {
                 this.index = length
@@ -70,6 +71,12 @@ export default class Select extends Component {
             }
             this.index++;
         }
+    }
+
+    hasSelectAll() {
+        let {data, renderData} = this.state;
+        let {multiple, selectedAll} = this.props;
+        return !!(multiple && selectedAll && renderData.length === data.length)
     }
 
     getData(props) {
@@ -152,6 +159,18 @@ export default class Select extends Component {
         }
     }
 
+    handleRemoveClass() {
+        if (this.index >= 0) {
+            this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+        }
+    }
+
+    handleAddClass() {
+        if (this.index >= 0) {
+            this.el_select_ul.children[this.index].classList.add('el-select-selected');
+        }
+    }
+
     handleKeyDown(e) {
         let {onKeyDown, disabled} = this.props;
         let renderData = this.state.renderData;
@@ -160,14 +179,14 @@ export default class Select extends Component {
         if (this.state.visible && !disabled && length) {
             if (keyCode === KeyCode.DOWN) {
                 e.preventDefault();
-                if (this.index >= 0) this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+                this.handleRemoveClass();
                 this.setPreSelect(length);
-                this.el_select_ul.children[this.index].classList.add('el-select-selected');
+                this.handleAddClass();
             } else if (keyCode === KeyCode.UP) {
                 e.preventDefault();
-                if (this.index >= 0) this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+                this.handleRemoveClass();
                 this.setPreSelect(length, true);
-                this.el_select_ul.children[this.index].classList.add('el-select-selected');
+                this.handleAddClass();
             } else if (keyCode === KeyCode.ENTER && this.index >= 0) {
                 this.el_select_ul.children[this.index].click();
             }
@@ -238,7 +257,7 @@ export default class Select extends Component {
     }
 
     handleDisableSelect() {
-        if (this.index >= 0) this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+        this.handleRemoveClass();
         this.index = -1;
     }
 
@@ -251,9 +270,7 @@ export default class Select extends Component {
         if (this.container) {
             this.container.style.display = 'none';
         }
-        if (this.index >= 0) {
-            this.el_select_ul.children[this.index].classList.remove('el-select-selected');
-        }
+        this.handleRemoveClass();
         this.setState({visible: false});
     }
 
@@ -268,8 +285,8 @@ export default class Select extends Component {
     }
 
     optionsRender() {
-        let {data, renderData, allValue, selectedValue} = this.state;
-        let {multiple, searchable, selectedAll, selectedAllText, noMatchText} = this.props;
+        let {renderData, allValue, selectedValue} = this.state;
+        let {multiple, searchable, selectedAllText, noMatchText} = this.props;
         return (
             <div className="el-select-dropdown">
                 <ul ref={c => {
@@ -277,7 +294,7 @@ export default class Select extends Component {
                 }}>
                     {(searchable && !renderData.length) &&
                     <li key="no-data" className="el-select-no-data">{noMatchText}</li>}
-                    {(multiple && selectedAll && renderData.length === data.length) &&
+                    {this.hasSelectAll() &&
                     <Option
                         key="all"
                         multiple={multiple}
@@ -310,8 +327,7 @@ export default class Select extends Component {
         let {
             size, style, value, noMatchText, matchCase, onMatch,
             searchable, selectedAll, defaultValue, selectedAllText,
-            multiple, onChange, className, children, closeAfterSelect, ...other
-        } = this.props;
+            multiple, onChange, className, children, closeAfterSelect, ...other} = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
         return (
             <div className={_className} style={style} ref={(c) => {

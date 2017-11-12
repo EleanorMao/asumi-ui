@@ -113,9 +113,9 @@ export default class Main extends Component {
                     title="multiple"
                     code={multiple}
                 >
-                    <Group style={style} closeAfterSelect={false}
+                    <Group style={style}
                            multiple onChange={this.handleChangeMultiple.bind(this)}>
-                        <Select placeholder="请选择" name="animal1" value={animal1}>
+                        <Select placeholder="请选择" name="animal1" value={animal1} closeAfterSelect={false}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
                             <Option value="elephant">Elephant</Option>

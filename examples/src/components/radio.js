@@ -23,7 +23,6 @@ export default class Main extends Component {
 
     handleChange(e) {
         let {name, value, checked} = e;
-        console.log(name, value, checked);
         this.setState(prev => {
             prev[name] = checked;
             return prev;
@@ -43,7 +42,7 @@ export default class Main extends Component {
                     code={basic}
                 >
                     <Radio
-                        value="1"
+                        value={1}
                         label="radio"
                         name="normal"
                         checked={this.state.normal}
@@ -54,7 +53,7 @@ export default class Main extends Component {
                     code={_switch}
                 >
                     <Radio
-                        value="1"
+                        value={1}
                         name="swi"
                         type="switch"
                         label="switch"

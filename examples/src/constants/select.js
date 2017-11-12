@@ -163,7 +163,7 @@ class Foo extends Component {
                 <Select
                     name="animal3"
                     value={animal3}
-                    multiple selectedAll
+                    multiple selectedAll closeAfterSelect={false}
                     onChange={this.handleChangeMultiple\.bind(this)}>
                     <Option value="monkey">Monkey</Option>
                     <Option value="lion">Lion</Option>
@@ -209,7 +209,7 @@ class Foo extends Component {
         return (
             <Group style={style}
                    multiple onChange={this.handleChangeMultiple\.bind(this)}>
-                <Select placeholder="请选择" name="animal1" value={animal1}>
+                <Select placeholder="请选择" name="animal1" value={animal1} closeAfterSelect={false}>
                     <Option value="monkey">Monkey</Option>
                     <Option value="lion">Lion</Option>
                     <Option value="elephant">Elephant</Option>
@@ -261,6 +261,11 @@ export const api = [{
     type: "string",
     'default': "暂无匹配数据",
     description: "Text show when no match options",
+}, {
+    property: 'closeAfterSelect',
+    type: "bool",
+    'default': "true",
+    description: "Close menu after select or not"
 }, {
     property: "onMatch",
     type: "func",

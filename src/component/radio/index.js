@@ -29,7 +29,9 @@ export default class Radio extends Component {
                         checked={checked}
                         disabled={disabled}
                         className="el-checkbox-input"
-                        onChange={this.handleChange.bind(this)}/>
+                        onChange={() => {
+                        }}
+                        onClick={this.handleChange.bind(this)}/>
                     <span/>
                 </span>
                 <span>{children || label}</span>

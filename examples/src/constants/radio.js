@@ -23,7 +23,7 @@ class Foo extends React.Component {
         return (
             <div>
                  <Radio
-                    value="1"
+                    value={1}
                     name="value"
                     label="radio"
                     checked={this.state.value}
@@ -57,7 +57,7 @@ class Foo extends React.Component {
         return (
             <div>
                  <Radio
-                    value="1"
+                    value={1}
                     name="value"
                     type="switch"
                     label="switch"
