@@ -26,13 +26,6 @@ a.el-btn {
   -ms-touch-action: manipulation;
   -webkit-user-select: none;
   border-radius: @smallBorderRadio;
-  &.el-disabled, &:disabled {
-    color: #fff;
-    background-color: @disabled;
-    &:active, &:focus, &:hover {
-      background-color: @disabled;
-    }
-  }
   &.el-primary {
     color: #fff;
     background-color: @primary;
@@ -81,6 +74,13 @@ a.el-btn {
     &:active, &:focus, &:hover {
       color: @d_primary;
       background-color: transparent;
+    }
+  }
+  &.el-disabled, &:disabled {
+    color: #fff;
+    background-color: @disabled;
+    &:active, &:focus, &:hover {
+      background-color: @disabled;
     }
   }
   &:active, &:focus, &:hover {
