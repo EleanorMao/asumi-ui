@@ -7,7 +7,7 @@ import Modal from  '../modal';
 import Input from  '../input';
 import Tabs from '../tabs';
 import Popover from '../popover';
-import Uploader from '../uploader';
+import Uploader from '../upload';
 import TabPanel from '../tabs/tabPanel';
 const HyperDown = require('hyperdown');
 

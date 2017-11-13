@@ -3,14 +3,14 @@
  */
 import React, {Component} from 'react';
 import {
-    Uploader,
+    Upload,
     Button,
     Group,
     Table,
     Col
 } from '../../../src';
 import Panel from './panel';
-import {basic, validator, api} from '../constants/uploader'
+import {basic, validator, api} from '../constants/upload'
 
 export default class Main extends Component {
     constructor(props) {
@@ -37,56 +37,56 @@ export default class Main extends Component {
     render() {
         return (
             <div className="content">
-                <h1>Uploader 上传</h1>
+                <h1>Upload 上传</h1>
                 <Panel
                     title="Basic"
                     code={basic}
                 >
                     <Group style={{marginRight: 10}}>
-                        <Uploader
+                        <Upload
                             name="click/drag_to_upload"
                             onUpload={this.handleUpload.bind(this)}>
                             <Button type="success">click/drag to upload</Button>
-                        </Uploader>
-                        <Uploader
+                        </Upload>
+                        <Upload
                             multiple
                             name="upload_multiple_files"
                             onUpload={this.handleUpload.bind(this)}>
                             <Button type="primary">upload multiple files</Button>
-                        </Uploader>
-                        <Uploader
-                            accept="image/jpg"
+                        </Upload>
+                        <Upload
+                            accept="image/png"
                             name="upload_image/jpg_type_files"
                             onUpload={this.handleUpload.bind(this)}>
-                            <Button type="secondary">upload image/jpg type files</Button>
-                        </Uploader>
-                        <Uploader
+                            <Button type="secondary">upload image/png type files</Button>
+                        </Upload>
+                        <Upload
                             maxSize={1024 * 30}
                             name="max_size_is_1kb"
                             onUpload={this.handleUpload.bind(this)}>
                             <Button type="danger">max size is 30kb</Button>
-                        </Uploader>
-                        <Uploader
+                        </Upload>
+                        <Upload
                             disabled
                             name="disabled_to_upload"
                             onUpload={this.handleUpload.bind(this)}
                         >
                             <Button>disabled to upload</Button>
-                        </Uploader>
+                        </Upload>
                     </Group>
                 </Panel>
                 <Panel
                     title="validator"
                     code={validator}
                 >
-                    <Uploader
+                    <Upload
                         name="validator"
                         validator={this.validator.bind(this)}
                         validatorError={this.validatorError.bind(this)}
                         onUpload={this.handleUpload.bind(this)}
                     >
                         <Button type="primary">file name should have an 'a'</Button>
-                    </Uploader>
+                    </Upload>
                 </Panel>
                 <h1>API</h1>
                 <Table isKey="property" data={api} lineWrap="break">

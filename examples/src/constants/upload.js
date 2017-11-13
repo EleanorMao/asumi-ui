@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Uploader, Button, Group} from 'el-ui';
+export const basic = `import {Upload, Button, Group} from 'el-ui';
 
 class Foo extends Component {
     constructor(props) {
@@ -20,43 +20,43 @@ class Foo extends Component {
         return (
             <div>
                <Group style={{marginRight: 10}}>
-                   <Uploader
+                   <Upload
                        name="click/drag_to_upload"
                        onUpload={this.handleUpload.bind(this)}>
                        <Button type="success">click/drag to upload</Button>
-                   </Uploader>
-                   <Uploader
+                   </Upload>
+                   <Upload
                        multiple
                        name="upload_multiple_files"
                        onUpload={this.handleUpload.bind(this)}>
                        <Button type="primary">upload multiple files</Button>
-                   </Uploader>
-                   <Uploader
+                   </Upload>
+                   <Upload
                        accept="image/jpg"
                        name="upload_image/jpg_type_files"
                        onUpload={this.handleUpload.bind(this)}>
                        <Button type="primary">upload image/jpg type files</Button>
-                   </Uploader>
-                   <Uploader
+                   </Upload>
+                   <Upload
                         maxSize={1024 * 30}
                         name="max_size_is_1kb"
                         onUpload={this.handleUpload.bind(this)}>
                         <Button type="primary">max size is 30kb</Button>
-                    </Uploader>
-                   <Uploader
+                    </Upload>
+                   <Upload
                        disabled
                        name="disabled_to_upload"
                        onUpload={this.handleUpload.bind(this)}
                    >
                        <Button type="primary">disabled to upload</Button>
-                   </Uploader>
+                   </Upload>
                </Group>
             </div>
         )
     }
 `;
 
-export const validator = `import {Uploader, Button} from 'el-ui';
+export const validator = `import {Upload, Button} from 'el-ui';
 
 class Foo extends Component {
     constructor(props) {
@@ -82,14 +82,14 @@ class Foo extends Component {
     render(){
         return (
             <div>
-               <Uploader
+               <Upload
                    name="validator"
                    validator={this.validator.bind(this)}
                    validatorError={this.validatorError.bind(this)}
                    onUpload={this.handleUpload.bind(this)}
                >
                    <Button type="primary">file name should have an 'a'</Button>
-               </Uploader>
+               </Upload>
             </div>
         )
     }

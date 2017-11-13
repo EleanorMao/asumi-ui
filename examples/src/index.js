@@ -26,7 +26,7 @@ import Loading from './components/loading';
 import Popover from './components/popover';
 import Message from './components/message';
 import Tooltip from './components/tooltip';
-import Uploader from './components/uploader';
+import Upload from './components/upload';
 import Checkbox from './components/checkbox';
 import Dropdown from './components/dropdown';
 import Pagination from './components/pagination';
@@ -47,7 +47,7 @@ const router = [
             <NavLink to={'/select'} activeClassName="active">SELECT</NavLink>,
             <NavLink to={'/radio'} activeClassName="active">RADIO</NavLink>,
             <NavLink to={'/checkbox'} activeClassName="active">CHECKBOX</NavLink>,
-            <NavLink to={'/uploader'} activeClassName="active">UPLOADER</NavLink>,
+            <NavLink to={'/upload'} activeClassName="active">UPLOAD</NavLink>,
             <NavLink to={'/form'} activeClassName="active">FORM</NavLink>
         ]
     },
@@ -136,7 +136,7 @@ ReactDOM.render(
                 <Route path="/message" component={Message}/>
                 <Route path="/popover" component={Popover}/>
                 <Route path="/tooltip" component={Tooltip}/>
-                <Route path="/uploader" component={Uploader}/>
+                <Route path="/upload" component={Upload}/>
                 <Route path="/checkbox" component={Checkbox}/>
                 <Route path="/dropdown" component={Dropdown}/>
                 <Route path="/pagination" component={Pagination}/>
