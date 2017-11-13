@@ -10,6 +10,7 @@
   "scripts": {
     "build": "babel src --out-dir lib",
     "dev": "webpack-dev-server --config webpack.config.example.js --color",
+    "pages": "webpack --config webpack.config.pages.js",
     "mock": "json-server --watch db.json --port 3000",
     "eslint": "eslint src"
   },
