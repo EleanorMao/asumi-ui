@@ -9,7 +9,7 @@ import {
     noKeyData,
 } from "../mock/data";
 import Panel from "./panel";
-import {basic} from "../constants/table";
+import {basic, sort, fixed, tree, pagination, colspan_rowspan, checkbox_radio} from "../constants/table";
 
 export default class Main extends Component {
     constructor() {
@@ -29,40 +29,16 @@ export default class Main extends Component {
         return new Date(cell).toDateString();
     }
 
+    levelRender(cell, row, level, colIndex, i, col) {
+        return cell + " I am level " + level;
+    }
+
     controlRender(cell, row, level, colIndex, i, col) {
         console.log(cell, row, level);
         return <a href="#">启用</a>
     }
 
     render() {
-        const dataFormat = {
-            "a": function (cell, row, level) {
-                return cell + " I am level " + level
-            },
-            "b": function (cell, row, level, colIndex, i, col) {
-                if (level) {
-                    return "";
-                } else {
-                    return cell + " I am row b"
-                }
-            },
-            "c": function (cell, row, level, colIndex, i, col) {
-                if (level) {
-                    let key = col[colIndex - 2];
-                    return row[key.id || key];
-                } else {
-                    return cell
-                }
-            },
-            "d": function (cell, row, level, colIndex, i, col) {
-                if (level) {
-                    let key = col[colIndex - 1];
-                    return row[key.id || key];
-                } else {
-                    return cell + 1
-                }
-            }
-        };
         const options = {
             page: 1,
             sizePerPage: 3,
@@ -130,6 +106,7 @@ export default class Main extends Component {
                 }
             }
         };
+
         return (
             <div className="content">
                 <h1>Table 表格</h1>
@@ -152,7 +129,7 @@ export default class Main extends Component {
                 </Panel>
                 <Panel
                     title="pagination"
-                    code={basic}
+                    code={pagination}
                 >
                     <Table
                         isKey="id"
@@ -172,7 +149,7 @@ export default class Main extends Component {
                 </Panel>
                 <Panel
                     title="sort"
-                    code={basic}
+                    code={sort}
                 >
                     <Table
                         isKey="id"
@@ -189,7 +166,7 @@ export default class Main extends Component {
                 </Panel>
                 <Panel
                     title="colspan & rowspan"
-                    code={basic}
+                    code={colspan_rowspan}
                 >
                     <Table
                         isKey="id"
@@ -218,7 +195,7 @@ export default class Main extends Component {
                 </Panel>
                 <Panel
                     title="checkbox & radio"
-                    code={basic}
+                    code={checkbox_radio}
                 >
                     <Table
                         isKey="id"
@@ -260,7 +237,7 @@ export default class Main extends Component {
                 </Panel>
                 <Panel
                     title="fixed column"
-                    code={basic}
+                    code={fixed}
                 >
                     <Table
                         isKey="id"
@@ -282,7 +259,7 @@ export default class Main extends Component {
                 </Panel>
                 <Panel
                     title="tree table"
-                    code={basic}
+                    code={tree}
                 >
                     <Table
                         isKey="a"
@@ -290,9 +267,9 @@ export default class Main extends Component {
                         isTree={true}
                         title="has key value"
                     >
-                        <Col width={200} dataField="a" dataFormat={dataFormat.a}>第一列</Col>
-                        <Col dataField="b" dataFormat={dataFormat.a}>第二列</Col>
-                        <Col width={200} dataField="c" dataFormat={dataFormat.a}>第三列</Col>
+                        <Col width={200} dataField="a" dataFormat={this.levelRender.bind(this)}>第一列</Col>
+                        <Col dataField="b" dataFormat={this.levelRender.bind(this)}>第二列</Col>
+                        <Col width={200} dataField="c" dataFormat={this.levelRender.bind(this)}>第三列</Col>
                         <Col width={200} dataField="d">第四列</Col>
                         <Col width={200} dataField="d">第五列</Col>
                         <Col dataField="d">第六列</Col>
@@ -304,15 +281,20 @@ export default class Main extends Component {
                         data={noKeyData}
                         title="has no key value"
                     >
-                        <Col width={200} dataField="a" dataFormat={dataFormat.a}>第一列</Col>
-                        <Col dataField="b" dataFormat={dataFormat.a}>第二列</Col>
-                        <Col width={200} dataField="c" dataFormat={dataFormat.a}>第三列</Col>
+                        <Col width={200} dataField="a" dataFormat={this.levelRender.bind(this)}>第一列</Col>
+                        <Col dataField="b" dataFormat={this.levelRender.bind(this)}>第二列</Col>
+                        <Col width={200} dataField="c" dataFormat={this.levelRender.bind(this)}>第三列</Col>
                         <Col width={200} dataField="d">第四列</Col>
                         <Col width={200} dataField="d">第五列</Col>
                         <Col dataField="d">第六列</Col>
                         <Col dataField="d">第七列</Col>
                     </Table>
                 </Panel>
+                <h1>API</h1>
+                <div>
+                    Almost same as <a href="https://github.com/EleanorMao/React-TreeTable/blob/master/README.md">React-TreeTable</a>.
+                    But, 'isTree' default value is false.
+                </div>
             </div>
         )
     }

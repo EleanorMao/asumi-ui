@@ -707,7 +707,7 @@ export default class Table extends Component {
             dataSize
         } = this.props;
         return (
-            <div className="el-fr">
+            <div className="el-fr ">
                 {remote ?
                     <SimplePaging
                         dataSize={dataSize}
@@ -968,7 +968,7 @@ Table.propTypes = {
     expandAll: PropTypes.bool,
     arrowRender: PropTypes.func,
     onArrowClick: PropTypes.func,
-    isKey: PropTypes.string.isRequired,
+    isKey: PropTypes.string,
     nestedHead: PropTypes.arrayOf(PropTypes.array),
     expandRowKeys: PropTypes.array,
     startArrowCol: PropTypes.number,
