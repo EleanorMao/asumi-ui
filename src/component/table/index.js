@@ -13,9 +13,10 @@ import Paging from '../pagination';
 import NestedHeader from './nestedHeader';
 import SimplePaging from '../pagination/simplePagination';
 import {
-    empty,
-    sort,
     diff,
+    sort,
+    noop,
+    uniqueID,
     addEvent,
     removeEvent,
     getScrollBarWidth
@@ -25,6 +26,7 @@ export default class Table extends Component {
     constructor(props) {
         super(props);
         this._instance = {};
+        let data = this._initDictionary(props);
         this.state = {
             isHover: null,
             columnData: [],
@@ -32,17 +34,65 @@ export default class Table extends Component {
             leftColumnData: [],
             rightColumnData: [],
             sortField: undefined,
-            data: props.data.slice(),
+            renderedList: data.data,
+            dictionary: data.dictionary,
             currentPage: (props.pagination || props.topPagination) && props.options.page || 1,
-            length: (props.pagination || props.topPagination) && props.options.sizePerPage || props.data.length
+            length: (props.pagination || props.topPagination) && props.options.sizePerPage || data.data.length
         }
     }
 
+    _initDictionary(props) {
+        let dictionary = [], data = props.data.slice();
+        const {
+            uid,
+            isKey,
+            isTree,
+            hashKey,
+            expandAll,
+            expandRowKeys,
+            childrenPropertyName
+        } = props;
+        let keyName = hashKey ? uid : isKey;
+        if (isTree) {
+            if (expandAll) {
+                dictionary = this._recursion(data, hashKey, keyName, childrenPropertyName);
+            } else if (expandRowKeys && expandRowKeys.length) {
+                dictionary = expandRowKeys.slice();
+            }
+        }
+        return {data, dictionary};
+    }
+
+    _recursion(data, hashKey, keyName, childrenPropertyName) {
+        let dictionary = [];
+        for (let i = 0; i < data.length; i++) {
+            let item = data[i];
+            if (hashKey && !item[keyName]) item[keyName] = uniqueID(); //引用大法好
+            if (item[childrenPropertyName] && item[childrenPropertyName].length) {
+                dictionary.push(item[keyName]);
+                data = data.concat(item[childrenPropertyName]);
+            }
+        }
+        return dictionary;
+    }
+
+    _flatten(data, childrenPropertyName, hashKey, keyName) {
+        let output = [];
+        for (let i = 0; i < data.length; i++) {
+            let item = data[i];
+            if (hashKey && !item[keyName]) item[keyName] = uniqueID();
+            if (item[childrenPropertyName]) {
+                output.push(item[keyName]);
+                data = data.concat(item[childrenPropertyName]);
+            }
+        }
+        return output;
+    }
 
     _initColumnData(props) {
         let columnData = [];
         React.Children.map(props.children, function (column) {
-            if (!column)return;
+            if (!column) return;
             columnData.push({
                 width: column.props.width,
                 id: column.props.dataField,
@@ -89,27 +139,32 @@ export default class Table extends Component {
         return data.slice((page - 1) * length, page * length);
     }
 
+    _getKeyName() {
+        const {hashKey, isKey, uid} = this.props;
+        return hashKey ? uid : isKey;
+    }
+
     _adjustWidth() {
         const refs = this._instance;
-        if (!refs.colgroup)return;
-        const firstRow = refs.colgroup.childNodes,
-            cells = refs.thead._thead.childNodes,
-            fixedLeftRow = refs.left && refs.left.childNodes,
-            fixedRightRow = refs.right && refs.right.childNodes,
-            nestedRow = refs.nested && refs.nested._colgroup.childNodes,
-            fixedLeftHeadRow = refs.lthead && refs.lthead._colgroup.childNodes,
-            fixedRightHeadRow = refs.rthead && refs.rthead._colgroup.childNodes,
-            isNoData = refs.tbody.firstChild.childElementCount === 1,
-            length = cells.length,
-            rightFixedLength = fixedRightRow ? length - fixedRightRow.length : 0;
+        if (!refs.colgroup) return;
+        const firstRow = refs.colgroup.childNodes;
+        const cells = refs.thead._thead.childNodes;
+        const fixedLeftRow = refs.left && refs.left.childNodes;
+        const fixedRightRow = refs.right && refs.right.childNodes;
+        const nestedRow = refs.nested && refs.nested._colgroup.childNodes;
+        const fixedLeftHeadRow = refs.lthead && refs.lthead._colgroup.childNodes;
+        const fixedRightHeadRow = refs.rthead && refs.rthead._colgroup.childNodes;
+        const isNoData = refs.tbody.firstChild.childElementCount === 1;
+        const length = cells.length;
+        const rightFixedLength = fixedRightRow ? length - fixedRightRow.length : 0;
 
-        if (firstRow.length !== length)return;
+        if (firstRow.length !== length) return;
 
-        const scrollBarWidth = getScrollBarWidth(),
-            haveScrollBar = refs.body.offsetWidth !== refs.thead._header.offsetWidth;
+        const scrollBarWidth = getScrollBarWidth();
+        const haveScrollBar = refs.body.offsetWidth !== refs.thead._header.offsetWidth;
 
         let lastChild = this._getLastChild(this.state.columnData), fixedRightWidth = 0;
-        lastChild = this.props.selectRow.mode !== 'none' ? lastChild + 1 : lastChild;
+        lastChild = this.props.selectRow.mode && this.props.selectRow.mode !== 'none' ? lastChild + 1 : lastChild;
 
         for (let i = 0; i < length; i++) {
             const cell = cells[i];
@@ -163,7 +218,7 @@ export default class Table extends Component {
         }
 
         if (fixedRightWidth) {
-            refs.rightBody.style.width = fixedRightWidth - (haveScrollBar ? scrollBarWidth : 0) + 'px';
+            refs.rightBody.style.width = fixedRightWidth + 'px';
         }
 
         if (fixedLeftRow || fixedRightRow) {
@@ -195,30 +250,38 @@ export default class Table extends Component {
 
     _scrollHeight(e) {
         this._instance.leftContainer.scrollTop = e.currentTarget.scrollTop;
-        if (e.currentTarget == this._instance.rightContainer) {
+        if (e.currentTarget === this._instance.rightContainer) {
             this._instance.container.scrollTop = e.currentTarget.scrollTop;
         }
-        if (e.currentTarget == this._instance.container) {
+        if (e.currentTarget === this._instance.container) {
             this._instance.rightContainer.scrollTop = e.currentTarget.scrollTop;
         }
     }
 
     _tryRender() {
-        const {
-            selectRow,
-            nestedHead
-        } = this.props;
+        const {isTree, isKey, hashKey, selectRow, nestedHead} = this.props;
         const {leftColumnData, rightColumnData} = this.state;
         const warning = 'color:red';
+
+        if (isTree && !(isKey || hashKey)) {
+            throw new Error('You need choose one configuration to set key field: `isKey` or `hashkey`!!');
+        }
+
+        if (!isTree && hashKey) {
+            console.warn('%c!Warning: If you set props `isTree` to `false`, `hashKey` need to be false and set props `isKey` instead!!', warning);
+        }
 
         if (nestedHead.length && (leftColumnData.length || rightColumnData.length)) {
             console.warn('%c!Warning: Since you set props `nestedHead`, it\'s better not set `dataFixed` in `TreeHeadCol`', warning);
         }
-        if (selectRow.mode !== 'none') {
+        if (selectRow.mode && selectRow.mode !== 'none') {
+            if (isTree) {
+                console.warn('%c!Warning: You need set prop `isTree` to `false`, if not `Table` will not render select rows', warning);
+            }
             if (selectRow.mode === 'radio' && selectRow.selected.length > 1) {
                 console.warn(
                     '%c!Warning: Since you set `selectRow.mode` to `radio`,' +
-                    '`selectRow.selected` should only have one child, if not `TreeTable` will use the first child of `selectRow.selected`',
+                    '`selectRow.selected` should only have one child, if not `Table` will use the first child of `selectRow.selected`',
                     warning
                 );
             }
@@ -254,18 +317,55 @@ export default class Table extends Component {
 
     componentWillReceiveProps(nextProps) {
         this._initColumnData(nextProps);
-
+        let data = this._initDictionary(nextProps);
         this.setState(prevState => {
-            prevState.data = nextProps.data.slice();
-            prevState.length = (nextProps.pagination || nextProps.topPagination) && nextProps.options.sizePerPage || nextProps.data.length;
+            prevState.renderedList = data.data;
+            prevState.dictionary = data.dictionary;
+            prevState.length = (nextProps.pagination || nextProps.topPagination) && nextProps.options.sizePerPage || data.data.length;
             prevState.currentPage = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
             return prevState;
         });
     }
 
+    handleToggle(option) {
+        const {
+            data,
+            open,
+            parent
+        } = option;
+        const that = this;
+        const {hashKey, clickToCloseAll, childrenPropertyName} = this.props;
+        const keyName = this._getKeyName();
+        let callback = (data) => {
+            let childList = data && data[childrenPropertyName] || [];
+            if (clickToCloseAll) {
+                childList = this._flatten(childList, childrenPropertyName, hashKey, keyName);
+            }
+            if (!open) {
+                that.setState(old => {
+                    if (hashKey && !data[keyName]) data[keyName] = uniqueID();
+                    old.dictionary.push(data[keyName]);
+                    return old;
+                })
+            } else {
+                that.setState(old => {
+                    old.dictionary.splice(old.dictionary.indexOf(data[keyName]), 1);
+                    clickToCloseAll && childList && childList.forEach(item => {
+                        let index = old.dictionary.indexOf(item);
+                        if (~index) {
+                            old.dictionary.splice(index, 1);
+                        }
+                    });
+                    return old;
+                })
+            }
+        };
+        this.props.onArrowClick(open, data, callback, parent);
+    }
+
     handleSelectAll(checked) {
         if (checked) {
-            this.props.selectRow.onSelectAll(checked, this.state.data.slice())
+            this.props.selectRow.onSelectAll(checked, this.state.renderedList.slice())
         } else {
             this.props.selectRow.onSelectAll(checked, [])
         }
@@ -279,7 +379,7 @@ export default class Table extends Component {
         if (remote) {
             onSortChange(sortField, order)
         } else {
-            let data = this.state.data.slice();
+            let data = this.state.renderedList.slice();
 
             data.sort((a, b) => {
                 let ValueA = a[sortField];
@@ -300,8 +400,8 @@ export default class Table extends Component {
             });
 
             this.setState(prevState => {
-                prevState.data = data;
                 prevState.order = order;
+                prevState.renderedList = data;
                 prevState.sortField = sortField;
                 return prevState;
             });
@@ -327,7 +427,7 @@ export default class Table extends Component {
         if (!remote) {
             this.setState(prevState => {
                 prevState.length = length;
-                if (!remote && (page - 1) * length > prevState.data.length) {
+                if (!remote && (page - 1) * length > prevState.renderedList.length) {
                     prevState.currentPage = 1;
                 }
                 return prevState;
@@ -364,35 +464,53 @@ export default class Table extends Component {
         return output;
     }
 
-    rowsRender(data, cols, hideSelectColumn) {
+    rowsRender(data, cols, level, parent, hideSelectColumn, right) {
         const {
-            isHover
+            isHover,
+            dictionary
         } = this.state;
         const {
             hover,
             isKey,
+            isTree,
+            hashKey,
             selectRow,
             hoverStyle,
+            arrowRender,
+            startArrowCol,
+            childrenPropertyName
         } = this.props;
-        const isSelect = selectRow.mode !== 'none';
+        const isSelect = selectRow.mode && selectRow.mode !== 'none';
+        const keyName = this._getKeyName();
         let output = [];
 
         if (data && data.length) {
             for (let i = 0; i < data.length; i++) {
                 let node = data[i];
-                let key = node[isKey];
+                if (hashKey && !node[keyName]) node[keyName] = uniqueID();
+                let key = node[keyName];
+                let opened = !!~dictionary.indexOf(key);
                 output.push(
                     <Row
                         key={key}
                         data={node}
                         cols={cols}
                         colIndex={i}
+                        level={level}
                         isKey={isKey}
-                        isSelect={isSelect}
+                        open={opened}
+                        parent={parent}
+                        isTree={isTree}
+                        hashKey={hashKey}
                         selectRow={selectRow}
                         hover={isHover === key}
                         hoverStyle={hoverStyle}
+                        arrowRender={arrowRender}
+                        isSelect={!isTree && isSelect}
                         hideSelectColumn={hideSelectColumn}
+                        onClick={this.handleToggle.bind(this)}
+                        arrowCol={right ? null : startArrowCol}
+                        childrenPropertyName={childrenPropertyName}
                         onMouseOut={hover ? this.handleHover.bind(this, null) : () => {
                         }}
                         onMouseOver={hover ? this.handleHover.bind(this, key) : () => {
@@ -401,6 +519,9 @@ export default class Table extends Component {
                             !!~selectRow.selected.indexOf(key) : selectRow.selected[0] === key}
                     />
                 );
+                if (opened) {
+                    output = output.concat(this.rowsRender(node[childrenPropertyName], cols, level + 1, node, hideSelectColumn, right));
+                }
             }
         }
         return output;
@@ -434,7 +555,7 @@ export default class Table extends Component {
                         this._instance.tbody = c
                     }}>
                     {this.blankRender(data, columnData.length, true)}
-                    {this.rowsRender(data, columnData, selectRow.hideSelectColumn)}
+                    {this.rowsRender(data, columnData, 0, null, selectRow.hideSelectColumn)}
                     </tbody>
                 </table>
             </div>
@@ -455,7 +576,7 @@ export default class Table extends Component {
                         this._instance.ltbody = c
                     }}>
                     {this.blankRender(data, leftColumnData.length)}
-                    {this.rowsRender(data, leftColumnData, selectRow.hideSelectColumn)}
+                    {this.rowsRender(data, leftColumnData, 0, null, selectRow.hideSelectColumn)}
                     </tbody>
                 </table>
             )
@@ -479,7 +600,7 @@ export default class Table extends Component {
                         this._instance.rtbody = c
                     }}>
                     {this.blankRender(data, rightColumnData.length)}
-                    {this.rowsRender(data, rightColumnData, true, true)}
+                    {this.rowsRender(data, rightColumnData, 0, null, true, true)}
                     </tbody>
                 </table>
             )
@@ -540,11 +661,11 @@ export default class Table extends Component {
         const {
             remote,
             options,
-            dataSize,
+            dataSize
         } = this.props;
         return (
             <div className="el-fr">
-                {  remote ?
+                {remote ?
                     <Paging
                         dataSize={dataSize}
                         current={options.page}
@@ -587,7 +708,7 @@ export default class Table extends Component {
         } = this.props;
         return (
             <div className="el-fr">
-                {  remote ?
+                {remote ?
                     <SimplePaging
                         dataSize={dataSize}
                         current={options.page}
@@ -631,9 +752,7 @@ export default class Table extends Component {
         if (!this.props.topPagination || !this.props.data.length) return null;
         return (
             <div className="el-row">
-                <div className="el-fr">
-                    {this.topPagingRender()}
-                </div>
+                {this.topPagingRender()}
             </div>
         )
     }
@@ -661,7 +780,8 @@ export default class Table extends Component {
     render() {
         const {
             width,
-            isKey,
+            style,
+            isTree,
             remote,
             height,
             striped,
@@ -672,17 +792,17 @@ export default class Table extends Component {
             sortOrder,
             nestedHead,
             pagination,
-            topPagination
+            topPagination,
         } = this.props;
         const {
-            data,
             order,
             length,
             sortField,
             columnData,
             currentPage,
+            renderedList,
             leftColumnData,
-            rightColumnData
+            rightColumnData,
         } = this.state;
 
         let checked = false;
@@ -690,17 +810,20 @@ export default class Table extends Component {
             'el-table-bordered': true,
             'el-table-striped': striped
         });
-        let renderList = (topPagination || pagination) && !remote ? this._sliceData(data, currentPage, length) : data.slice();
-        if (selectRow.mode !== 'none') {
-            checked = this._getAllValue(renderList.slice(), isKey).sort().toString() === selectRow.selected.slice().sort().toString();
+        let renderList = (topPagination || pagination) && !remote ? this._sliceData(renderedList, currentPage, length) : renderedList.slice();
+        if (selectRow.mode && selectRow.mode !== 'none') {
+            checked = this._getAllValue(renderList.slice(), this._getKeyName()).sort().toString() === selectRow.selected.slice().sort().toString();
         }
         let paddingBottom = 0;
         let container = this._instance.container;
-        if (container && typeof parseFloat(height) == "number" && (container.scrollWidth > container.clientWidth)) {
+        if (container && typeof parseFloat(height) === "number" && (container.scrollWidth > container.clientWidth)) {
             paddingBottom = parseFloat(height) - container.clientHeight;
         }
+        if (isNaN(paddingBottom)) {
+            paddingBottom = 0;
+        }
         return (
-            <div className={"el-table-group el-" + lineWrap}>
+            <div className={"el-table-group el-" + lineWrap} style={style}>
                 {this.titleRender()}
                 {this.topPagingRowRender()}
                 {
@@ -708,7 +831,7 @@ export default class Table extends Component {
                     <NestedHeader
                         ref={(c) => {
                             this._instance.nested = c
-                        }} nestedHead={nestedHead}
+                        }} nestedHead={nestedHead} isTree={isTree}
                         selectRow={selectRow} lineWrap={lineWrap}
                         cols={columnData}
                     />
@@ -718,7 +841,7 @@ export default class Table extends Component {
                         <Header
                             ref={(c) => {
                                 this._instance.thead = c
-                            }}
+                            }} isTree={isTree}
                             onSelectAll={this.handleSelectAll.bind(this)}
                             selectRow={selectRow} checked={checked}
                             sortOrder={remote ? sortOrder : order}
@@ -735,7 +858,7 @@ export default class Table extends Component {
                             <Header
                                 ref={(c) => {
                                     this._instance.lthead = c
-                                }} left={leftColumnData.length}
+                                }} left={leftColumnData.length} isTree={isTree}
                                 onSelectAll={this.handleSelectAll.bind(this)}
                                 selectRow={selectRow} checked={checked}
                                 sortName={remote ? sortName : sortField}
@@ -760,7 +883,7 @@ export default class Table extends Component {
                             <Header
                                 ref={(c) => {
                                     this._instance.rthead = c
-                                }} right={rightColumnData.length}
+                                }} right={rightColumnData.length} isTree={isTree}
                                 sortName={remote ? sortName : sortField}
                                 sortOrd er={remote ? sortOrder : order}
                                 onSort={this.handleSort.bind(this)}
@@ -789,16 +912,22 @@ export default class Table extends Component {
 Table.defaultProps = {
     data: [],
     dataSize: 0,
+    uid: '__uid',
     hover: false,
+    isTree: false,
     remote: false,
     striped: false,
     nestedHead: [],
+    startArrowCol: 0,
+    expandAll: false,
     pagination: false,
     topPagination: false,
-    onSortChange: empty,
+    onSortChange: noop,
     sortName: undefined,
     sortOrder: undefined,
     lineWrap: 'ellipsis',
+    clickToCloseAll: true,
+    childrenPropertyName: 'list',
     noDataText: <span>暂无数据</span>,
     hoverStyle: {
         backgroundColor: '#EEF7FE'
@@ -806,8 +935,8 @@ Table.defaultProps = {
     selectRow: {
         mode: 'none',
         selected: [],
-        onSelect: empty,
-        onSelectAll: empty,
+        onSelect: noop,
+        onSelectAll: noop,
         bgColor: '#E1F5FE',
         hideSelectColumn: false
     },
@@ -815,9 +944,12 @@ Table.defaultProps = {
         sizePerPage: 10,
         paginationSize: 6,
         sizePageList: [10],
-        onPageChange: empty,
-        onSizePageChange: empty
+        onPageChange: noop,
+        onSizePageChange: noop
     },
+    onArrowClick: (opened, data, callback) => {
+        callback(data);
+    }
 };
 
 Table.propTypes = {
@@ -830,8 +962,18 @@ Table.propTypes = {
     onSortChange: PropTypes.func,
     hoverStyle: PropTypes.object,
     topPagination: PropTypes.bool,
+    uid: PropTypes.string,
+    isTree: PropTypes.bool,
+    hashKey: PropTypes.bool,
+    expandAll: PropTypes.bool,
+    arrowRender: PropTypes.func,
+    onArrowClick: PropTypes.func,
     isKey: PropTypes.string.isRequired,
     nestedHead: PropTypes.arrayOf(PropTypes.array),
+    expandRowKeys: PropTypes.array,
+    startArrowCol: PropTypes.number,
+    clickToCloseAll: PropTypes.bool,
+    childrenPropertyName: PropTypes.string,
     lineWrap: PropTypes.oneOf(['ellipsis', 'break']),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

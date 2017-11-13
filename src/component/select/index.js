@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Input from '../input';
 import Option from './option';
-import {isArr, extend, contains, addEvent, removeEvent, KeyCode} from '../util';
+import {isArr, extend, contains, addEvent, removeEvent, KeyCode, noop} from '../util';
 
 function renderComponent(instance) {
     if (!instance.container) {
@@ -370,7 +370,6 @@ Select.defaultProps = {
     closeAfterSelect: true,
     selectedAllText: "全选",
     noMatchText: "暂无匹配数据",
-    onChange: () => {
-    },
+    onChange: noop,
     defaultValue: ""
 };

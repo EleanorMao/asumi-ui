@@ -5,8 +5,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from '../button';
 import classnames from 'classnames';
+import {noop} from "../util";
 
-export default  class Modal extends Component {
+export default class Modal extends Component {
     constructor(props) {
         super(props);
     }
@@ -64,8 +65,6 @@ Modal.defaultProps = {
     mask: true,
     okText: '确定',
     closeText: '取消',
-    onOk: () => {
-    },
-    onClose: () => {
-    }
+    onOk: noop,
+    onClose: noop
 };

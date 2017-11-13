@@ -4,6 +4,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import AnimateChild from './animateChild';
+import {noop} from "../util";
+
 let uuid = `el_animate_${Date.now()}`;
 
 function isValid(props) {
@@ -83,7 +85,7 @@ function isSameChildren(c1, c2) {
     return same;
 }
 
-export default  class Animate extends Component {
+export default class Animate extends Component {
     constructor(props) {
         super(props);
         this._children = {};
@@ -256,14 +258,10 @@ Animate.propTypes = {
 };
 
 Animate.defaultProps = {
-    onEnd: () => {
-    },
-    onLeave: () => {
-    },
-    onAppear: () => {
-    },
-    onEnter: () => {
-    },
+    onEnd: noop,
+    onLeave: noop,
+    onAppear: noop,
+    onEnter: noop,
     component: 'span',
     transitionEnter: true,
     transitionLeave: true,

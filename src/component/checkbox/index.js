@@ -4,8 +4,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import {noop} from "../util";
 
-export default  class Checkbox extends Component {
+
+export default class Checkbox extends Component {
     constructor(props) {
         super(props);
     }
@@ -51,6 +53,5 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {
     checked: false,
-    onChange: () => {
-    }
+    onChange: noop
 };

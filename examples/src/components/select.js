@@ -55,7 +55,7 @@ export default class Main extends Component {
         let {fruit1, fruit2, flower1, flower2, flower3, flower4, animal1, animal2, animal3} = this.state;
         return (
             <div className="content">
-                <h1>Select</h1>
+                <h1>Select 选择框</h1>
                 <Panel
                     title="basic"
                     code={basic}

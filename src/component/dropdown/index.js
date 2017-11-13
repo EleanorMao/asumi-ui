@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {contains, addEvent, removeEvent} from '../util';
+import {contains, addEvent, removeEvent, noop} from '../util';
 
 export default class Dropdown extends Component {
     constructor(props) {
@@ -101,6 +101,5 @@ Dropdown.propTypes = {
 };
 Dropdown.defaultProps = {
     type: 'default',
-    onClick: () => {
-    }
+    onClick: noop
 };

@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 
-import {empty, sort, isArr} from '../util';
+import {noop, sort, isArr} from '../util';
 
 export default class Header extends Component {
     constructor(props) {
@@ -26,16 +26,16 @@ export default class Header extends Component {
         }
     }
 
-    colgroupRender(renderChildren, selectRow, left, right) {
+    colgroupRender(renderChildren, selectRow, isTree, left, right) {
         let i = 0;
         return (
             <colgroup ref={(c) => {
                 this._colgroup = c
             }}>
-                {selectRow.mode !== 'none' && !selectRow.hideSelectColumn &&
+                {selectRow.mode && selectRow.mode !== 'none' && !selectRow.hideSelectColumn && !isTree &&
                 <col key="select" style={{textAlign: 'center', width: 46}}/>}
-                {  React.Children.map(renderChildren, (elm) => {
-                    if (!elm)return;
+                {React.Children.map(renderChildren, (elm) => {
+                    if (!elm) return;
                     if (left && elm.props.dataFixed !== 'left') return;
                     if (right && elm.props.dataFixed !== 'right') return;
                     let style = {
@@ -55,6 +55,7 @@ export default class Header extends Component {
             left,
             right,
             onSort,
+            isTree,
             checked,
             children,
             sortName,
@@ -70,13 +71,13 @@ export default class Header extends Component {
                 this._header = c
             }}>
                 <table className="el-table-bordered">
-                    {this.colgroupRender(renderChildren, selectRow, left, right)}
+                    {this.colgroupRender(renderChildren, selectRow, isTree, left, right)}
                     <thead>
                     <tr ref={(c) => {
                         this._thead = c
                     }}>
-                        {!selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, checked)}
-                        {  React.Children.map(renderChildren, (elm) => {
+                        {!isTree && !selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, checked)}
+                        {React.Children.map(renderChildren, (elm) => {
                             if (!elm) return;
                             if (left && elm.props.dataFixed !== 'left') return;
                             if (right && elm.props.dataFixed !== 'right') return;
@@ -105,7 +106,7 @@ Header.defaultProps = {
         mode: 'none',
         bgColor: '#E1F5FE',
         selected: [],
-        onSelect: empty,
-        onSelectAll: empty
+        onSelect: noop,
+        onSelectAll: noop
     }
 };

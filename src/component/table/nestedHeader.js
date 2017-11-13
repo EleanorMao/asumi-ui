@@ -13,10 +13,12 @@ export default class NestedHeader extends Component {
 
     nestedHeadRender() {
         let output = [];
-        const {nestedHead} = this.props;
+        const {nestedHead, isTree, selectRow} = this.props;
+        const select = !isTree && selectRow.mode && selectRow.mode !== 'none';
         nestedHead.map((throws, index) => {
             let item =
                 <tr key={'trow' + index}>
+                    {select && <th key='trow-1'/>}
                     {throws.map((cell, i) => {
                         let obj = isObj(cell);
                         return <th colSpan={obj && cell.colspan || null}
@@ -30,7 +32,7 @@ export default class NestedHeader extends Component {
     }
 
     colgroupRender() {
-        const {cols} = this.props;
+        const cols = this.props.cols;
         let output = [];
         cols.map((item, i) => {
             output.push(<col key={i} style={{display: item.hidden && 'none'}}/>)

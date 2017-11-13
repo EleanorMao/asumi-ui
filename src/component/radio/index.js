@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import {noop} from "../util";
 
 export default class Radio extends Component {
     constructor(props) {
@@ -46,6 +47,5 @@ Radio.propTypes = {
 
 Radio.defaultProps = {
     checked: false,
-    onChange: () => {
-    }
+    onChange: noop
 };

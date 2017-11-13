@@ -1,28 +1,35 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class Col extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    caretRender(dataField, sortName, sortOrder) {
-        const SortGroup =
-            <span className="el-order">
+const SortGroup = () => {
+    return (
+        <span className="el-order" key="sort-group">
                 <span className="el-dropdown">
                     <span className="el-caret" style={{margin: '10px 0 10px 5px', color: '#ccc'}}/>
                 </span>
                 <span className="el-dropup">
                     <span className="el-caret" style={{margin: '10px 0', color: '#ccc'}}/>
                 </span>
-           </span>;
-        const AscCaret = <span className="el-caret" style={{margin: '10px 0 10px 5px'}}/>;
-        if (dataField === sortName && sortOrder) {
-            return <span className={"el-order " + (sortOrder === 'desc' ? '' : 'el-dropup')}>{AscCaret}</span>;
-        } else {
-            return SortGroup;
-        }
+           </span>
+    );
+};
 
+const singleSort = (sortOrder) => {
+    return (
+        <span key="single-sort"
+              className={"el-order " + (sortOrder === 'desc' ? '' : 'el-dropup')}>
+            <span className="el-caret" key="asc-cart" style={{margin: '10px 0 10px 5px'}}/>
+        </span>
+    )
+};
+
+class Col extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    caretRender(dataField, sortName, sortOrder) {
+        return dataField === sortName && sortOrder ? singleSort(sortOrder) : SortGroup();
     }
 
     render() {
@@ -47,7 +54,7 @@ class Col extends Component {
         };
 
         return (
-            <th style={style} colSpan={colSpan}
+            <th style={style} colSpan={colSpan || null}
                 onClick={dataSort ? () => onSort(dataField, sortOrder === 'asc' ? 'desc' : 'asc') : () => {
                     return false;
                 }}>

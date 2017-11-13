@@ -39,7 +39,7 @@ export default  class Main extends Component {
         let {demo, color, price, nature, positiveInt} = this.state;
         return (
             <div className="content">
-                <h1>Input</h1>
+                <h1>Input 输入框</h1>
                 <Panel
                     title="basic"
                     code={basic}

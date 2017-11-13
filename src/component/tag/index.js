@@ -4,7 +4,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-export default  class Tag extends Component {
+import {noop} from "../util";
+
+export default class Tag extends Component {
     constructor(props) {
         super(props);
     }
@@ -35,7 +37,6 @@ Tag.propTypes = {
 
 Tag.defaultProps = {
     type: 'default',
-    onClose: () => {
-    },
+    onClose: noop,
     closeable: false
 };

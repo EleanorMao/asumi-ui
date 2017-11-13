@@ -3,17 +3,19 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Modal from  '../modal';
-import Input from  '../input';
+import Modal from '../modal';
+import Input from '../input';
 import Tabs from '../tabs';
 import Popover from '../popover';
 import Uploader from '../upload';
 import TabPanel from '../tabs/tabPanel';
+import {noop} from "../util";
+
 const HyperDown = require('hyperdown');
 
 const parser = new HyperDown;
 
-export default  class Editor extends Component {
+export default class Editor extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -618,10 +620,8 @@ Editor.propTypes = {
 Editor.defaultProps = {
     value: '',
     maxCache: 6,
-    onChange: () => {
-    },
-    onUpload: () => {
-    },
+    onChange: noop,
+    onUpload: noop,
     handler: 'handler',
     canUploadImg: false,
     linkImgTitle: '网络资源',

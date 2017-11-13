@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
+import {noop} from "../util";
 
 function isRequired({validate, required}) {
     return (required || (validate && validate.some(item => {
@@ -13,7 +14,7 @@ function isRequired({validate, required}) {
     })));
 }
 
-export default  class Form extends Component {
+export default class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -162,8 +163,7 @@ Form.propTypes = {
 
 Form.defaultProps = {
     id: "id",
-    onChange: () => {
-    },
+    onChange: noop,
     submitText: '提交',
     layout: "horizontal"
 };

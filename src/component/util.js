@@ -1,7 +1,13 @@
 /**
  * Created by BG236557 on 2016/9/23.
  */
-export let empty = function () {
+let idCounter = 0;
+
+export let uniqueID = function () {
+    return idCounter++ + new Date().getTime() + Math.random();
+};
+
+export let noop = function () {
 };
 
 export let isObj = function (input) {

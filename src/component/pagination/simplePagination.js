@@ -46,8 +46,8 @@ SimplePagination.defaultProps = {
     dataSize: 0,
     sizePerPage: 10,
     showTotalPages: true,
-    prevLabel: <span><span className="el-caret el-left"></span>上一页</span>,
-    nextLabel: <span>下一页<span className="el-caret el-right"></span></span>,
+    prevLabel: <span><span className="el-caret el-left"/>上一页</span>,
+    nextLabel: <span>下一页<span className="el-caret el-right"/></span>,
 };
 
 export default SimplePagination;
