@@ -37,8 +37,7 @@ export default class Option extends Component {
             'el-disabled': disabled
         });
         return (
-            <li
-                className={_className}
+            <li className={_className}
                 aria-disabled={disabled ? 'disabled' : ''}
                 aria-selected={selected ? 'selected' : 'unselected'}
                 onClick={this.handleClick.bind(this)}>

@@ -25,7 +25,6 @@ export default class Select extends Component {
             focus: false,
             allValue: [],
             visible: false,
-            searchValue: '',
             renderValue: '',
             selectedValue: [],
             selectedLabel: []
@@ -106,6 +105,19 @@ export default class Select extends Component {
             selectedLabel,
             renderValue: selectedLabel.join(", ")
         });
+    }
+
+    getMatchData(value, matchCase, data) {
+        let output = [];
+        value = matchCase ? value : `${value}`.toLowerCase();
+        for (let i = 0; i < data.length; i++) {
+            let item = data[i];
+            let label = matchCase ? item.label : `${item.label}`.toLowerCase();
+            if (~label.indexOf(value)) {
+                output.push(extend({}, item));
+            }
+        }
+        return output
     }
 
     getPosition() {
@@ -202,27 +214,15 @@ export default class Select extends Component {
         this.setState(prev => {
             prev.renderValue = value;
             let renderData = onMatch ? onMatch(value) :
-                this.handleTryMatch(value, matchCase, [].concat(prev.data));
+                this.getMatchData(value, matchCase, [].concat(prev.data));
             prev.renderData = renderData || [];
             return prev;
         }, () => {
             renderComponent(this);
-            this.showComponent();
+            if (!this.state.visible) this.showComponent();
         });
     }
 
-    handleTryMatch(value, matchCase, data) {
-        let output = [];
-        value = matchCase ? value : `${value}`.toLowerCase();
-        for (let i = 0; i < data.length; i++) {
-            let item = data[i];
-            let label = matchCase ? item.label : `${item.label}`.toLowerCase();
-            if (~label.indexOf(value)) {
-                output.push(extend({}, item));
-            }
-        }
-        return output
-    }
 
     handleToggleInput(focus) {
         this.setState(prev => {
@@ -327,7 +327,8 @@ export default class Select extends Component {
         let {
             size, style, value, noMatchText, matchCase, onMatch,
             searchable, selectedAll, defaultValue, selectedAllText,
-            multiple, onChange, className, children, closeAfterSelect, ...other} = this.props;
+            multiple, onChange, className, children, closeAfterSelect, ...other
+        } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
         return (
             <div className={_className} style={style} ref={(c) => {
@@ -344,7 +345,7 @@ export default class Select extends Component {
                     onChange={this.handleChange.bind(this)}
                     onKeyDown={this.handleKeyDown.bind(this)}
                     onFocus={this.handleToggleInput.bind(this, true)}
-                    onBlur={this.handleToggleInput.bind(this, false)}
+                    onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : null}
                 />
             </div>
         )
