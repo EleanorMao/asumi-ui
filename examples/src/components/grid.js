@@ -25,7 +25,7 @@ export default class Main extends Component {
     render() {
         return (
             <div className="content">
-                <h1>栅格布局</h1>
+                <h1>Grid 栅格布局</h1>
                 <Panel
                     title="Basic"
                     code={basic}

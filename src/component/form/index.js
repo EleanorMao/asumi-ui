@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
+import Grid from '../grid';
 import {noop} from "../util";
 
 function isRequired({validate, required}) {
@@ -89,25 +90,42 @@ export default class Form extends Component {
         })
     }
 
+    itemsRender() {
+        let items = [];
+        let {beforeSubmit} = this.state;
+        let {data, options, colNum} = this.props;
+        let col = colNum ? Math.ceil(12 / colNum) : 0;
+        options.map((props, index) => {
+            let item = (
+                <FormItem
+                    onChange={this.handleChange.bind(this, props)}
+                    {...props}
+                    key={index}
+                    data={data[props.name]}
+                    beforeSubmit={beforeSubmit}
+                    required={isRequired(props)}
+                    validator={this.handleDisabled.bind(this, props)}
+                />);
+            if (col) {
+                items.push(<Grid.Col col={col * (props.colSpan || 1)} key={index} inline>{item}</Grid.Col>)
+            } else {
+                items.push(item)
+            }
+        });
+        if (col) {
+            return <Grid.Row>{items}</Grid.Row>;
+        }
+        return items;
+    }
+
     render() {
-        let {disabled, beforeSubmit} = this.state;
-        let {data, error, style, hideSubmitButton, options, layout, title, className, submitText, children} = this.props;
+        let {disabled} = this.state;
+        let {error, style, hideSubmitButton, layout, title, className, submitText, children} = this.props;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, className);
         return (
             <form className={_className} style={style}>
                 {!!title && <div className="el-form-title">{title}</div>}
-                {options.map((props, index) => {
-                    return (
-                        <FormItem
-                            onChange={this.handleChange.bind(this, props)}
-                            {...props}
-                            key={index}
-                            data={data[props.name]}
-                            beforeSubmit={beforeSubmit}
-                            required={isRequired(props)}
-                            validator={this.handleDisabled.bind(this, props)}
-                        />)
-                })}
+                {this.itemsRender()}
                 {children}
                 <FormItem>
                     {!hideSubmitButton &&
@@ -126,6 +144,7 @@ export default class Form extends Component {
 
 Form.propTypes = {
     error: PropTypes.string,
+    colNum: PropTypes.number,
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
     validator: PropTypes.func,
@@ -136,6 +155,7 @@ Form.propTypes = {
         label: PropTypes.string,
         required: PropTypes.bool,
         onChange: PropTypes.func,
+        colSpan: PropTypes.number,
         name: PropTypes.string.isRequired,
         tips: PropTypes.oneOfType([
             PropTypes.string,

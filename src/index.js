@@ -37,14 +37,20 @@ import SimplePagination from './component/pagination/simplePagination';
 const Tooltip = Popover;
 
 Table.Col = Col;
+
 Select.Option = Option;
-Menu.SubMenu = SubMenu;
-Form.FormItem = FormItem;
+
 Tabs.TabPanel = TabPanel;
-Radio.Group = RadioGroup;
+
+Menu.SubMenu = SubMenu;
 Menu.MenuItem = MenuItem;
 Menu.MenuItemGroup = MenuItemGroup;
+
+Radio.Group = RadioGroup;
 Checkbox.Group = CheckboxGroup;
+
+Form.FormItem = FormItem;
+
 Pagination.Simple = SimplePagination;
 
 export {
