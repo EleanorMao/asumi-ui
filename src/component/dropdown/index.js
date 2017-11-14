@@ -38,8 +38,11 @@ export default class Dropdown extends Component {
     getClassName(list = this.props.list) {
         let className = '';
         if (this._dropdown && this._dropdown_menu && this._dropdown.getBoundingClientRect) {
-            let bottom = (document.body.offsetHeight || document.documentElement.offsetHeight ) - this._dropdown.getBoundingClientRect().bottom;
-            if (bottom < list.length * 40) {
+            let {bottom, top} = this._dropdown.getBoundingClientRect();
+            let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            let bodyHeight = Math.max(window.innerHeight, (document.body.offsetHeight || document.documentElement.offsetHeight ));
+            let offsetBottom = bodyHeight - bottom - scrollTop;
+            if (top + scrollTop > offsetBottom && offsetBottom < list.length * 40) {
                 className = 'el-dropdown-menu-bottom';
             }
         }
