@@ -36,17 +36,6 @@ export default class Main extends Component {
         })
     }
 
-    handleChangeMultiple({name, value, selected}) {
-        this.setState(prev => {
-            if (selected) {
-                prev[name].push(value);
-            } else {
-                prev[name].splice(prev[name].indexOf(value), 1);
-            }
-            return prev;
-        })
-    }
-
     render() {
         let style = {
             marginBottom: 10,
@@ -114,7 +103,7 @@ export default class Main extends Component {
                     code={multiple}
                 >
                     <Group style={style}
-                           multiple onChange={this.handleChangeMultiple.bind(this)}>
+                           multiple onChange={this.handleChange.bind(this)}>
                         <Select placeholder="请选择" name="animal1" value={animal1} closeAfterSelect={false}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
@@ -148,7 +137,7 @@ export default class Main extends Component {
                             name="animal3"
                             value={animal3}
                             multiple selectedAll closeAfterSelect={false}
-                            onChange={this.handleChangeMultiple.bind(this)}>
+                            onChange={this.handleChange.bind(this)}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
                             <Option value="elephant">Elephant</Option>

@@ -134,18 +134,7 @@ class Foo extends Component {
             return prev;
         })
     }
-    
-    handleChangeMultiple({name, value, selected}) {
-        this.setState(prev=> {
-            if (selected) {
-                prev[name].push(value);
-            } else {
-                prev[name].splice(prev[name].indexOf(value), 1);
-            }
-            return prev;
-        })
-    }
-    
+   
     render(){
         let {flower4, animal3} = this.state;
         return (
@@ -164,7 +153,7 @@ class Foo extends Component {
                     name="animal3"
                     value={animal3}
                     multiple selectedAll closeAfterSelect={false}
-                    onChange={this.handleChangeMultiple\.bind(this)}>
+                    onChange={this.handleChange\.bind(this)}>
                     <Option value="monkey">Monkey</Option>
                     <Option value="lion">Lion</Option>
                     <Option value="elephant">Elephant</Option>
@@ -193,13 +182,9 @@ class Foo extends Component {
         }
     }
     
-    handleChangeMultiple({name, value, selected}) {
-        this.setState(prev=> {
-            if (selected) {
-                prev[name].push(value);
-            } else {
-                prev[name].splice(prev[name].indexOf(value), 1);
-            }
+    handleChange({name, value}) {
+        this.setState(prev => {
+            prev[name] = value;
             return prev;
         })
     }
@@ -208,7 +193,7 @@ class Foo extends Component {
         let {animal1, animal2} = this.state;
         return (
             <Group style={style}
-                   multiple onChange={this.handleChangeMultiple\.bind(this)}>
+                   multiple onChange={this.handleChange\.bind(this)}>
                 <Select placeholder="请选择" name="animal1" value={animal1} closeAfterSelect={false}>
                     <Option value="monkey">Monkey</Option>
                     <Option value="lion">Lion</Option>
@@ -279,8 +264,8 @@ export const api = [{
 }, {
     property: "onChange",
     type: "function",
-    'default': "({e, name, value, selected})=>{}",
-    description: "Callback when value change. Basic, it will return arguments {e, name, value, selected}, when it trigger multiple select, value will be array type",
+    'default': "({e, name, value, selectedValue, selected})=>{}",
+    description: "Callback when value change. Basic, it will return arguments {e, name, value, selectedValue, selected}, when it trigger multiple select, value will be array type",
 }, {
     property: "...others",
     type: "",

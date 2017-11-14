@@ -236,23 +236,28 @@ export default class Select extends Component {
     }
 
     handleSelect(e, value, selected) {
-        let {name, onChange, readOnly} = this.props;
+        let {name, multiple, onChange, readOnly} = this.props;
         if (readOnly) return;
-        onChange({e, name, value, selected});
+        if (multiple) {
+            let _value = this.props.value.slice();
+            if (selected) {
+                _value.push(value);
+            } else {
+                _value.splice(_value.indexOf(value), 1);
+            }
+            onChange({e, name, value: _value, selectedValue: value, selected});
+        } else {
+            onChange({e, name, value, selectedValue: value, selected});
+        }
     }
 
     handleSelectAll(e, allValue, selected) {
-        let {selectedValue} = this.state;
         let {name, onChange, onSelectAll, readOnly} = this.props;
         if (readOnly) return;
-        if (!onSelectAll) {
-            allValue.map(value => {
-                if (selected && ~selectedValue.indexOf(value)) return;
-                onChange({e, name, value, selected});
-            });
-        } else {
-            if (!selected) allValue = [];
-            onSelectAll({e, name, value: allValue.slice(), selected});
+        if (!selected) allValue = [];
+        onChange({e, name, value: allValue.slice(), selectedValue: allValue.slice(), selected});
+        if (onSelectAll) {
+            onSelectAll({e, name, value: allValue.slice(), selectedValue: allValue.slice(), selected});
         }
     }
 
