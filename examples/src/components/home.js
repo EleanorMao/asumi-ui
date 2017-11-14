@@ -15,7 +15,7 @@ export default class Main extends Component {
                 <h1>Installation</h1>
                 <h2>npm</h2>
                 <pre>
-                    <code>npm install el-ui -S</code>
+                    <code>npm install elui -S</code>
                 </pre>
                 <h1>Environment Support</h1>
                 <p>Modern browsers and Internet Explorer 9+ (with polyfills)</p>
@@ -23,8 +23,8 @@ export default class Main extends Component {
                 <pre>
                     <code>import React from 'react';</code>
                     <code>import ReactDOM from 'react-dom';</code>
-                    <code dangerouslySetInnerHTML={{__html: "import { Button } from 'el-ui';"}}/>
-                    <code>import 'el-ui/style/index.less';</code>
+                    <code dangerouslySetInnerHTML={{__html: "import { Button } from 'elui';"}}/>
+                    <code>import 'elui/style/index.less';</code>
                 </pre>
                 <h1>Icon</h1>
                 <p>el-ui icons use <a href="http://fontawesome.io/">Font Awesome</a></p>
