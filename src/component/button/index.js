@@ -5,14 +5,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default  class Button extends Component {
+export default class Button extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        let {type, size, disabled, children, href, ...other} = this.props;
-        let className = classnames({
+        let {type, size, disabled, children, href, className, ...other} = this.props;
+        let _className = classnames({
             'el-btn': true,
             'el-disabled': disabled,
             'el-text': type === 'text',
@@ -22,14 +22,15 @@ export default  class Button extends Component {
             'el-success': type === 'success',
             'el-primary': type === 'primary',
             'el-secondary': type === 'secondary',
+            className: !!className
         });
         if (href) {
             return (
-                <a {...other} href={disabled ? 'javascript:;' : href} className={className}>{children}</a>
+                <a {...other} href={disabled ? 'javascript:;' : href} className={_className}>{children}</a>
             )
         } else {
             return (
-                <button {...other} type="button" className={className} disabled={disabled}>{children}</button>
+                <button {...other} type="button" className={_className} disabled={disabled}>{children}</button>
             )
         }
     }
