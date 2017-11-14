@@ -13,7 +13,7 @@ export default class Modal extends Component {
     }
 
     render() {
-        let {size, mask, title, style, okText, closeText, maskClosable, className, footer, children, onOk, onClose} = this.props;
+        let {size, mask, title, style, okText, closeText, maskClosable, className, footer, children, close, ok, onOk, onClose} = this.props;
         let obj = {
             'el-modal-content': true,
             'el-small': size === "small",
@@ -36,14 +36,15 @@ export default class Modal extends Component {
                             <div className="el-modal-footer">
                                 {footer ||
                                 (<div>
-                                    <Button
+                                    {close && <Button
                                         style={{marginRight: 10}}
                                         size={size === "large" ? "default" : "small"}
-                                        onClick={onClose}>{closeText}</Button>
+                                        onClick={onClose}>{closeText}</Button>}
+                                    {ok &&
                                     <Button
                                         type="primary"
                                         size={size === "large" ? "default" : "small"}
-                                        onClick={onOk}>{okText}</Button>
+                                        onClick={onOk}>{okText}</Button>}
                                 </div>)}
                             </div>}
                         </div>
@@ -65,6 +66,8 @@ Modal.defaultProps = {
     mask: true,
     okText: '确定',
     closeText: '取消',
+    ok: true,
+    close: true,
     onOk: noop,
     onClose: noop
 };

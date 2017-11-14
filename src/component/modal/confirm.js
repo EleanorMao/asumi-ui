@@ -13,6 +13,7 @@ export default function confirm(props) {
     let onClose = props.onClose;
     props.onClose = close;
     props.onOk = ok;
+
     function remove() {
         if (ReactDOM.unmountComponentAtNode(div) && div) {
             document.body.removeChild(div);
@@ -21,12 +22,12 @@ export default function confirm(props) {
 
     function ok() {
         remove();
-        onOk();
+        onOk && onOk();
     }
 
     function close() {
         remove();
-        onClose();
+        onClose && onClose();
     }
 
     ReactDOM.render(
