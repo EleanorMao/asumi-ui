@@ -120,7 +120,7 @@ export default class Form extends Component {
 
     render() {
         let {disabled} = this.state;
-        let {error, style, hideSubmitButton, layout, title, className, submitText, submitButtonOptions, children} = this.props;
+        let {error, style, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, className);
         return (
             <form className={_className} style={style}>
@@ -136,7 +136,7 @@ export default class Form extends Component {
                         type={disabled ? null : submitButtonOptions.type || "success"}
                     >
                         {submitText}
-                    </Button>}
+                    </Button>}{submitItems}
                     {!!error && <div className="el-form-error">{error}</div>}
                 </FormItem>
             </form>
