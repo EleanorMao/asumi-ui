@@ -11,12 +11,12 @@ export default class Menu extends Component {
     }
 
     render() {
-        let {width, children, openAll, defaultOpenKey, style} = this.props;
+        let {width, children, className, openAll, defaultOpenKey, style} = this.props;
         return (
-            <div className="el-side-menu" style={extend({}, {width}, style)}>
+            <div className={"el-side-menu " + className} style={extend({}, {width}, style)}>
                 <ul className="el-menu">
                     {React.Children.map(children, (elm) => {
-                        if (!elm)return;
+                        if (!elm) return;
                         let open = openAll;
                         if (!open && defaultOpenKey === elm.key) open = true;
                         return React.cloneElement(elm, {open, openAll, defaultOpenKey});
@@ -32,4 +32,5 @@ Menu.propTypes = {
 };
 Menu.defaultProps = {
     width: 220,
+    className: ''
 };
