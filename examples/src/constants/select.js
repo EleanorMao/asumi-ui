@@ -152,7 +152,7 @@ class Foo extends Component {
                 <Select
                     name="animal3"
                     value={animal3}
-                    multiple selectedAll closeAfterSelect={false}
+                    multiple selectAll closeAfterSelect={false}
                     onChange={this.handleChange\.bind(this)}>
                     <Option value="monkey">Monkey</Option>
                     <Option value="lion">Lion</Option>
@@ -200,7 +200,7 @@ class Foo extends Component {
                     <Option value="elephant">Elephant</Option>
                     <Option value="chicken">Chicken</Option>
                 </Select>
-                <Select placeholder="请选择" selectedAll name="animal2" value={animal2}>
+                <Select placeholder="请选择" selectAll name="animal2" value={animal2}>
                     <Option value="monkey">Monkey</Option>
                     <Option value="lion">Lion</Option>
                     <Option value="elephant">Elephant</Option>
@@ -227,12 +227,12 @@ export const api = [{
     'default': "null",
     description: "Trigger multiple select, and value should be array type",
 }, {
-    property: "selectedAll",
+    property: "selectAll",
     type: "bool",
     'default': "null",
     description: "Only work when multiple is `true`. Tell if show `Select All` Option",
 }, {
-    property: "selectedAllText",
+    property: "selectAllText",
     type: "string",
     'default': "全选",
     description: "Text of `Select All` Option",

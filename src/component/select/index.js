@@ -74,8 +74,8 @@ export default class Select extends Component {
 
     hasSelectAll() {
         let {data, renderData} = this.state;
-        let {multiple, selectedAll} = this.props;
-        return !!(multiple && selectedAll && renderData.length === data.length)
+        let {multiple, selectAll} = this.props;
+        return !!(multiple && selectAll && renderData.length === data.length)
     }
 
     getData(props) {
@@ -291,7 +291,7 @@ export default class Select extends Component {
 
     optionsRender() {
         let {renderData, allValue, selectedValue} = this.state;
-        let {multiple, searchable, selectedAllText, noMatchText} = this.props;
+        let {multiple, searchable, selectAllText, noMatchText} = this.props;
         return (
             <div className="el-select-dropdown">
                 <ul ref={c => {
@@ -303,7 +303,7 @@ export default class Select extends Component {
                     <Option
                         key="all"
                         multiple={multiple}
-                        label={selectedAllText}
+                        label={selectAllText}
                         value={allValue.slice()}
                         onChange={this.handleSelectAll.bind(this)}
                         selected={allValue.slice().sort().join("") === selectedValue.slice().sort().join("")}
@@ -331,7 +331,7 @@ export default class Select extends Component {
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
             size, style, value, noMatchText, matchCase, onMatch,
-            searchable, selectedAll, defaultValue, selectedAllText,
+            searchable, selectAll, defaultValue, selectAllText,
             multiple, onChange, className, children, closeAfterSelect, ...other
         } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
@@ -362,18 +362,18 @@ Select.propTypes = {
     multiple: PropTypes.bool,
     matchCase: PropTypes.bool,
     searchable: PropTypes.bool,
-    selectedAll: PropTypes.bool,
-    onSelectedAll: PropTypes.func,
+    selectAll: PropTypes.bool,
+    onSelectAll: PropTypes.func,
     noMatchText: PropTypes.string,
     closeAfterSelect: PropTypes.bool,
-    selectedAllText: PropTypes.string,
+    selectAllText: PropTypes.string,
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 
 Select.defaultProps = {
     value: "",
     closeAfterSelect: true,
-    selectedAllText: "全选",
+    selectAllText: "全选",
     noMatchText: "暂无匹配数据",
     onChange: noop,
     defaultValue: ""

@@ -110,7 +110,7 @@ export default class Main extends Component {
                             <Option value="elephant">Elephant</Option>
                             <Option value="chicken">Chicken</Option>
                         </Select>
-                        <Select placeholder="请选择" selectedAll name="animal2" value={animal2}>
+                        <Select placeholder="请选择" selectAll name="animal2" value={animal2}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
                             <Option value="elephant">Elephant</Option>
@@ -136,7 +136,7 @@ export default class Main extends Component {
                         <Select
                             name="animal3"
                             value={animal3}
-                            multiple selectedAll closeAfterSelect={false}
+                            multiple selectAll closeAfterSelect={false}
                             onChange={this.handleChange.bind(this)}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
