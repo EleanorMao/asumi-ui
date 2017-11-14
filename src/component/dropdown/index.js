@@ -13,6 +13,7 @@ export default class Dropdown extends Component {
     }
 
     componentDidMount() {
+        this.getClassName();
         addEvent(window, 'click', this.clickToClose.bind(this));
         addEvent(window, 'resize', this.getClassName.bind(this));
     }
@@ -22,26 +23,23 @@ export default class Dropdown extends Component {
         removeEvent(window, 'resize', this.getClassName.bind(this));
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps({list}) {
         if (this.state.toggle) {
             this.setState(old => {
                 old.toggle = false;
                 return old;
             })
         }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.list.length !== this.props.list.length) {
-            this.getClassName();
+        if (list.length !== this.props.list.length) {
+            this.getClassName(list);
         }
     }
 
-    getClassName() {
+    getClassName(list = this.props.list) {
         let className = '';
         if (this._dropdown && this._dropdown_menu && this._dropdown.getBoundingClientRect) {
             let bottom = (document.body.offsetHeight || document.documentElement.offsetHeight ) - this._dropdown.getBoundingClientRect().bottom;
-            if (bottom < this._dropdown_menu.offsetHeight) {
+            if (bottom < list.length * 40) {
                 className = 'el-dropdown-menu-bottom';
             }
         }
