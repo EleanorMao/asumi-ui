@@ -36,7 +36,7 @@ export default class Dropdown extends Component {
         let className = '';
         if (this._dropdown && this._dropdown_menu && this._dropdown.getBoundingClientRect) {
             let {bottom, top} = this._dropdown.getBoundingClientRect();
-            if (bottom < top) {
+            if (bottom < (top + (document.body.scrollTop || document.documentElement.scrollTop))) {
                 className = 'el-dropdown-menu-bottom';
             }
         }
