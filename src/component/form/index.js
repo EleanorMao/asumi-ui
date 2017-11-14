@@ -120,7 +120,7 @@ export default class Form extends Component {
 
     render() {
         let {disabled} = this.state;
-        let {error, style, hideSubmitButton, layout, title, className, submitText, children} = this.props;
+        let {error, style, hideSubmitButton, layout, title, className, submitText, submitButtonOptions, children} = this.props;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, className);
         return (
             <form className={_className} style={style}>
@@ -130,9 +130,11 @@ export default class Form extends Component {
                 <FormItem>
                     {!hideSubmitButton &&
                     <Button
+                        {...submitButtonOptions}
                         disabled={disabled}
-                        type={disabled ? null : "success"}
-                        onClick={this.handleSubmit.bind(this)}>
+                        onClick={this.handleSubmit.bind(this)}
+                        type={disabled ? null : submitButtonOptions.type || "success"}
+                    >
                         {submitText}
                     </Button>}
                     {!!error && <div className="el-form-error">{error}</div>}
@@ -151,6 +153,7 @@ Form.propTypes = {
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
+    submitButtonOptions: PropTypes.object,
     options: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         required: PropTypes.bool,
@@ -185,5 +188,6 @@ Form.defaultProps = {
     id: "id",
     onChange: noop,
     submitText: '提交',
-    layout: "horizontal"
+    layout: "horizontal",
+    submitButtonOptions: {}
 };
