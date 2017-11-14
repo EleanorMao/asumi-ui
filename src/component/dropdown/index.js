@@ -9,15 +9,17 @@ import {contains, addEvent, removeEvent, noop} from '../util';
 export default class Dropdown extends Component {
     constructor(props) {
         super(props);
-        this.state = {toggle: false}
+        this.state = {toggle: false, className: ''}
     }
 
     componentDidMount() {
-        addEvent(window, 'click', this.clickToClose.bind(this))
+        addEvent(window, 'click', this.clickToClose.bind(this));
+        addEvent(window, 'resize', this.getClassName.bind(this));
     }
 
     componentWillUnmount() {
-        removeEvent(window, 'click', this.clickToClose.bind(this))
+        removeEvent(window, 'click', this.clickToClose.bind(this));
+        removeEvent(window, 'resize', this.getClassName.bind(this));
     }
 
     componentWillReceiveProps() {
@@ -27,6 +29,23 @@ export default class Dropdown extends Component {
                 return old;
             })
         }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.list.length !== this.props.list.length) {
+            this.getClassName();
+        }
+    }
+
+    getClassName() {
+        let className = '';
+        if (this._dropdown && this._dropdown_menu && this._dropdown.getBoundingClientRect) {
+            let bottom = (document.body.offsetHeight || document.documentElement.offsetHeight ) - this._dropdown.getBoundingClientRect().bottom;
+            if (bottom < this._dropdown_menu.offsetHeight) {
+                className = 'el-dropdown-menu-bottom';
+            }
+        }
+        this.setState({className});
     }
 
     handleToggle() {
@@ -69,7 +88,9 @@ export default class Dropdown extends Component {
                         className="el-caret"
                         style={this.state.toggle ? {borderTop: 0, borderBottom: '4px solid'} : null}/>
                 </button>
-                <ul className="el-dropdown-menu" style={{display: this.state.toggle && 'block' || null}}>
+                <ul className={"el-dropdown-menu " + this.state.className} ref={(c) => {
+                    this._dropdown_menu = c
+                }} style={{display: this.state.toggle && 'block' || null}}>
                     {
                         list.map((item, index) => {
                             return (
