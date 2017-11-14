@@ -23,23 +23,20 @@ export default class Dropdown extends Component {
         removeEvent(window, 'resize', this.getClassName.bind(this));
     }
 
-    componentWillReceiveProps({list}) {
+    componentWillReceiveProps() {
         if (this.state.toggle) {
             this.setState(old => {
                 old.toggle = false;
                 return old;
             })
         }
-        if (list.length !== this.props.list.length) {
-            this.getClassName(list);
-        }
     }
 
-    getClassName(list = this.props.list) {
+    getClassName() {
         let className = '';
         if (this._dropdown && this._dropdown_menu && this._dropdown.getBoundingClientRect) {
-            let bottom = (document.body.offsetHeight || document.documentElement.offsetHeight ) - this._dropdown.getBoundingClientRect().bottom;
-            if (bottom < list.length * 40) {
+            let {bottom, top} = this._dropdown.getBoundingClientRect();
+            if (bottom < top) {
                 className = 'el-dropdown-menu-bottom';
             }
         }
