@@ -40,7 +40,7 @@ export default class Dropdown extends Component {
         if (this._dropdown && this._dropdown_menu && this._dropdown.getBoundingClientRect) {
             let {bottom, top} = this._dropdown.getBoundingClientRect();
             let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-            let bodyHeight = Math.max(window.innerHeight, document.body.offsetHeight || document.documentElement.offsetHeight);
+            let bodyHeight = document.body.offsetHeight || document.documentElement.offsetHeight;
             let offsetBottom = bodyHeight - bottom - scrollTop;
             if (top + scrollTop > offsetBottom && offsetBottom < list.length * 40) {
                 className = 'el-dropdown-menu-bottom';
