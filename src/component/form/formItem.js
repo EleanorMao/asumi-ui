@@ -18,12 +18,14 @@ let rules = {
     nature: /^(0?|[1-9]\d{0,7})$/,
     color: /^#[0-9a-fA-F]{0,6}$/
 };
+
 function isRequired({validate, required}) {
     return (required || (validate && validate.some(item => {
         return item.required;
     })));
 }
-export default  class  FormItem extends Component {
+
+export default class FormItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -117,7 +119,7 @@ export default  class  FormItem extends Component {
 
     itemRender() {
         let {on, off, tips, name, data, component, className, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, ...config} = this.props;
-        if (children)return children;
+        if (children) return children;
         let output = null;
         switch (type) {
             case "textarea":
@@ -168,7 +170,7 @@ export default  class  FormItem extends Component {
                         name={name}
                         value={data}
                         options={options}
-                        onBlur={ this.handleBlur.bind(this)}
+                        onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
                 );
@@ -180,7 +182,7 @@ export default  class  FormItem extends Component {
                         name={name}
                         value={data}
                         options={options}
-                        onBlur={ this.handleBlur.bind(this)}
+                        onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
                 );
@@ -192,7 +194,7 @@ export default  class  FormItem extends Component {
                         name={name}
                         options={options}
                         checkedList={data}
-                        onBlur={ this.handleBlur.bind(this)}
+                        onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
                 );
@@ -204,7 +206,7 @@ export default  class  FormItem extends Component {
                         name={name}
                         options={options}
                         checkedList={data}
-                        onBlur={ this.handleBlur.bind(this)}
+                        onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
                 );
@@ -236,8 +238,8 @@ export default  class  FormItem extends Component {
 
     render() {
         let message = this.state.message;
-        let {tips, label, className, validateType} = this.props;
-        let _className = classnames('el-form-item', message ? `el-form-item-${validateType }` : '', className);
+        let {tips, label, className, validateType, labelWidth} = this.props;
+        let _className = classnames('el-form-item', 'clearfix', message ? `el-form-item-${validateType }` : '', className);
         if (tips && typeof tips === "string") {
             tips = {title: tips};
         }
@@ -246,7 +248,7 @@ export default  class  FormItem extends Component {
             <div className={_className}>
                 {(!label && required) && <span className="el-required">*</span>}
                 {!!label && (
-                    <label className="el-form-label">
+                    <label className="el-form-label" style={labelWidth ? {width: labelWidth, float: 'left'} : null}>
                         {required && <span className="el-required">*</span>}
                         {label}
                         {!!tips &&
@@ -255,7 +257,8 @@ export default  class  FormItem extends Component {
                         </Popover>}
                     </label>)
                 }
-                <div className="el-form-control">
+                <div className="el-form-control"
+                     style={labelWidth ? {marginLeft: labelWidth, display: 'block'} : null}>
                     {this.itemRender()}
                     {!!message &&
                     <div className="el-form-message">
@@ -273,6 +276,7 @@ FormItem.propTypes = {
     label: PropTypes.string,
     required: PropTypes.bool,
     onChange: PropTypes.func,
+    labelWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     tips: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({

@@ -39,6 +39,16 @@ a {
   text-overflow: ellipsis;
 }
 
+.clearfix {
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 @import "tag";
 @import "menu";
 @import "grid";

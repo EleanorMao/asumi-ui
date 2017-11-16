@@ -95,12 +95,13 @@ export default class Form extends Component {
     itemsRender() {
         let items = [];
         let {beforeSubmit} = this.state;
-        let {data, options, colNum} = this.props;
+        let {data, options, labelWidth, colNum} = this.props;
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         options.map((props, index) => {
             let item = (
                 <FormItem
                     onChange={this.handleChange.bind(this, props)}
+                    labelWidth={labelWidth}
                     {...props}
                     key={index}
                     data={data[props.name]}
@@ -122,14 +123,14 @@ export default class Form extends Component {
 
     render() {
         let {disabled} = this.state;
-        let {error, style, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
+        let {error, style, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, className);
         return (
             <form className={_className} style={style}>
                 {!!title && <div className="el-form-title">{title}</div>}
                 {this.itemsRender()}
                 {children}
-                <FormItem>
+                <FormItem labelWidth={labelWidth}>
                     {!hideSubmitButton &&
                     <Button
                         {...submitButtonOptions}
@@ -156,12 +157,14 @@ Form.propTypes = {
     hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
     submitButtonOptions: PropTypes.object,
+    labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     options: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string,
         required: PropTypes.bool,
         onChange: PropTypes.func,
         colSpan: PropTypes.number,
         name: PropTypes.string.isRequired,
+        labelWidth: PropTypes.oneOfType(PropTypes.number, PropTypes.string),
         tips: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.shape({
