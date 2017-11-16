@@ -7,7 +7,7 @@ import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
 import Grid from '../grid';
-import {noop} from "../util";
+import {noop, extend} from "../util";
 
 function isRequired({validate, required}) {
     return (required || (validate && validate.some(item => {
@@ -64,12 +64,14 @@ export default class Form extends Component {
         }
     }
 
-    handleChange({name, type, off}, {value, checked, selected}) {
+    handleChange({name, type, off}, e) {
         if (this.props.onChange) {
-            if (type === "switch" && !checked) {
-                this.props.onChange({name, type, value: off, checked, selected});
+            if (type === "switch" && !e.checked) {
+                extend(e, {name, type, value: off, originName: e.name, originValue: e.value});
+                this.props.onChange(e);
             } else {
-                this.props.onChange({name, type, value, checked, selected});
+                extend(e, {name, type, originName: e.name, originValue: e.value});
+                this.props.onChange(e);
             }
         }
     }
