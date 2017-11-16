@@ -447,7 +447,7 @@ export default class Table extends Component {
 
     colgroupRender(data, mode) {
         let output = [];
-        if (mode !== 'none') {
+        if (mode && mode !== 'none') {
             output.push(<col key="select" style={{textAlign: 'center', width: 46}}/>)
         }
         data.map((item, index) => {
