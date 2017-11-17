@@ -13,7 +13,7 @@ export default class Header extends Component {
     render() {
         return (
             <header className="header">
-                <h1 className="title"><a href="/">ELLY-COMPONENT</a></h1>
+                <h1 className="title"><a href="/">ASUMI-UI</a></h1>
                 <div className="copyright">
                     <span className="author">© Eleanor Mao</span>
                     <a className="github-button"
