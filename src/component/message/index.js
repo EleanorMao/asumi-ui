@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Animate from '../animate';
 import classnames from 'classnames';
-import {extend}from '../util';
+import {extend} from '../util';
 
 let uuid = 1;
 let _el_message_content = null;
 
-export default  class Message extends Component {
+export default class Message extends Component {
     constructor(props) {
         super(props);
     }
@@ -38,7 +38,7 @@ export default  class Message extends Component {
 Message.propTypes = {
     onDestroy: PropTypes.func,
     duration: PropTypes.number,
-    type: PropTypes.oneOf(['info', 'success', 'warning', 'danger'])
+    type: PropTypes.oneOf(['info', 'success', 'warning', 'danger', 'error'])
 };
 
 Message.defaultProps = {
@@ -124,7 +124,7 @@ Message.success = (props) => {
     return confirm(props)
 };
 
-Message.danger = (props) => {
+Message.danger = Message.error = (props) => {
     props = extend({type: 'danger', icon: <i className="fa fa-close"/>,}, props);
     return confirm(props)
 };

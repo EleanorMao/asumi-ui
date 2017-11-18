@@ -140,6 +140,9 @@ export default class Select extends Component {
         if (clientHeight > leftTopHeight && clientHeight > leftBottomHeight && leftBottomHeight < leftTopHeight) {
             this.style.top = top - clientHeight + 'px';
         }
+        if (document.querySelector('.el-modal-wrapper')) {
+            this.style.zIndex = 99999;
+        }
     }
 
     getContainer() {

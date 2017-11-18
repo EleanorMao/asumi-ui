@@ -12,7 +12,7 @@ export default class Input extends Component {
 
     handleChange(e) {
         const {name, value} = e.target;
-        const {rule, pattern} = this.props;
+        const {rule, pattern, maxLength} = this.props;
         if (rule === 'price') { //金额相关 8+2
             let reg = /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/;
             if (!reg.test(value)) {
@@ -39,6 +39,9 @@ export default class Input extends Component {
             if (!pattern.test(value)) {
                 return;
             }
+        }
+        if (value.length >= maxLength) {
+            return;
         }
         this.props.onChange && this.props.onChange({e, name, value});
     }

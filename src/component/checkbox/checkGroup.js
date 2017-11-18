@@ -5,20 +5,22 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 import classnames from 'classnames';
+import {noop} from "../util";
 
-export default  class CheckGroup extends Component {
+export default class CheckGroup extends Component {
     constructor(props) {
         super(props);
     }
 
-    handleChange(e) {
+    handleChange({onChange}, e) {
         let {checked, value} = e;
         let {min, max, name, checkedList} = this.props;
         checkedList = checkedList.slice();
-        if (max != null && checkedList.length === max)return;
-        if (min != null && !checked && checkedList.length === min + 1)return;
+        if (max != null && checkedList.length === max) return;
+        if (min != null && !checked && checkedList.length === min + 1) return;
         let index = checkedList.indexOf(value);
         checked ? checkedList.push(value) : checkedList.splice(index, 1);
+        onChange && onChange(e);
         this.props.onChange({e, name, value: checkedList});
     }
 
@@ -60,11 +62,11 @@ export default  class CheckGroup extends Component {
                             }
                             return (
                                 <Checkbox
-                                    {...item}
                                     key={index}
                                     disabled={disableAll}
                                     checked={~checkedList.indexOf(item.value)}
-                                    onChange={this.handleChange.bind(this)}
+                                    {...item}
+                                    onChange={this.handleChange.bind(this, item)}
                                 />
                             )
                         })
@@ -85,6 +87,8 @@ CheckGroup.propTypes = {
 };
 
 CheckGroup.defaultProps = {
+    checkedList: [],
     disableAll: false,
     hasCheckAll: true,
+    onChange: noop
 };

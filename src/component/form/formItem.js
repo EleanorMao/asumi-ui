@@ -2,6 +2,7 @@
  * Created by elly on 2017/4/13.
  */
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Input from '../input';
@@ -19,7 +20,7 @@ let rules = {
     color: /^#[0-9a-fA-F]{0,6}$/
 };
 
-function isRequired({validate, required}) {
+function isRequired(validate, required) {
     return (required || (validate && validate.some(item => {
         return item.required;
     })));
@@ -28,9 +29,7 @@ function isRequired({validate, required}) {
 export default class FormItem extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            message: ""
-        }
+        this.msg_str = "";
     }
 
     componentWillReceiveProps({beforeSubmit, data, validate, validator}) {
@@ -46,7 +45,7 @@ export default class FormItem extends Component {
     }
 
     validator(item, data) {
-        let {max, len, min, message, regExp, rule, required, validator, type} = item;
+        let {maxLength, length, minLength, message, regExp, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
         let valueType = typeof data;
         let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
@@ -56,13 +55,13 @@ export default class FormItem extends Component {
         if (!fail && type && valueType !== type) {
             fail = true;
         }
-        if (!fail && len != null && hasLen && data.length !== len) {
+        if (!fail && length != null && hasLen && data.length !== length) {
             fail = true;
         }
-        if (!fail && min != null && hasLen && data.length < min) {
+        if (!fail && minLength != null && hasLen && data.length < minLength) {
             fail = true;
         }
-        if (!fail && max != null && hasLen && data.length > max) {
+        if (!fail && maxLength != null && hasLen && data.length > maxLength) {
             fail = true;
         }
         if (!fail && Object.prototype.toString.call(regExp) === '[object RegExp]') {
@@ -74,16 +73,15 @@ export default class FormItem extends Component {
             fail = true;
         }
         if (fail) {
-            this.setState(prev => {
-                prev.message = message;
-                return prev;
-            });
+            this.msg_str = message;
+            this._message.innerHTML = message;
+            this._form_item.classList.add(`el-form-item-${this.props.validateType}`);
         }
         return fail;
     }
 
     handleBlur() {
-        let {data, onBlur, validate, validator} = this.props;
+        let {data, onBlur, validate, validator, validateType} = this.props;
         let disabled = false;
         if (validate && validate.length) {
             validate.map(item => {
@@ -92,33 +90,37 @@ export default class FormItem extends Component {
                 }
             })
         }
-        if (!disabled) {
-            this.setState({message: ""});
+        if (!disabled && this.msg_str) {
+            this._form_item.classList.remove(`el-form-item-${validateType}`);
+            this._message.innerHTML = "";
+            this.msg_str = ""
         }
         validator && validator(disabled);
         onBlur && onBlur.apply(null, arguments);
 
     }
 
-    handleChange() {
-        let {data, onChange, validate, validator} = this.props;
+    handleChange({value}) {
+        let {data, onChange, validate, validator, validateType} = this.props;
         let disabled = false;
         if (validate && validate.length) {
             validate.map(item => {
                 if (!disabled && item.trigger === "change") {
-                    disabled = this.validator(item, data);
+                    disabled = this.validator(item, value === undefined ? data : value);
                 }
             })
         }
-        if (!disabled) {
-            this.setState({message: ""});
+        if (!disabled && this.msg_str) {
+            this._form_item.classList.remove(`el-form-item-${validateType}`);
+            this._message.innerHTML = "";
+            this.msg_str = "";
         }
         validator && validator(disabled);
         onChange && onChange.apply(null, arguments);
     }
 
     itemRender() {
-        let {on, off, tips, name, data, component, className, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, ...config} = this.props;
+        let {on, off, tips, col, name, data, component, className, content, value, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, labelWidth, ...config} = this.props;
         if (children) return children;
         let output = null;
         switch (type) {
@@ -211,6 +213,9 @@ export default class FormItem extends Component {
                     />
                 );
                 break;
+            case "static":
+                output = <div className="el-form-control-static">{content || value || data}</div>;
+                break;
             case "component":
                 output = React.cloneElement(component, {
                     name,
@@ -237,19 +242,19 @@ export default class FormItem extends Component {
     }
 
     render() {
-        let message = this.state.message;
-        let {tips, label, className, validateType, labelWidth} = this.props;
-        let _className = classnames('el-form-item', 'clearfix', message ? `el-form-item-${validateType }` : '', className);
+        let props = this.props;
+        let {tips, label, className, required, validate, labelWidth, col, colSpan} = props;
+        let _className = classnames('el-form-item clearfix', col ? `el-col-${col * (colSpan || 1)} el-col-inline` : null, className);
         if (tips && typeof tips === "string") {
             tips = {title: tips};
         }
-        let required = isRequired(this.props);
+        let _required = isRequired(validate, required);
         return (
-            <div className={_className}>
-                {(!label && required) && <span className="el-required">*</span>}
+            <div className={_className} ref={c => this._form_item = c}>
+                {(!label && _required) && <span className="el-required">*</span>}
                 {!!label && (
                     <label className="el-form-label" style={labelWidth ? {width: labelWidth, float: 'left'} : null}>
-                        {required && <span className="el-required">*</span>}
+                        {_required && <span className="el-required">*</span>}
                         {label}
                         {!!tips &&
                         <Popover {...tips} trigger="hover" placement="top">
@@ -260,10 +265,7 @@ export default class FormItem extends Component {
                 <div className="el-form-control"
                      style={labelWidth ? {marginLeft: labelWidth, display: 'block'} : null}>
                     {this.itemRender()}
-                    {!!message &&
-                    <div className="el-form-message">
-                        {message}
-                    </div>}
+                    <div className="el-form-message" ref={c => this._message = c}/>
                 </div>
             </div>
         )
@@ -285,9 +287,9 @@ FormItem.propTypes = {
         })]),
     validateType: PropTypes.oneOf(['error', 'warning']),
     validate: PropTypes.arrayOf(PropTypes.shape({
-        max: PropTypes.any,
-        min: PropTypes.any,
-        len: PropTypes.number,
+        maxLength: PropTypes.any,
+        minLength: PropTypes.any,
+        length: PropTypes.number,
         strict: PropTypes.bool,
         validator: PropTypes.func,
         regExp: PropTypes.instanceOf(RegExp),
@@ -295,10 +297,11 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+    type: PropTypes.oneOf(['text', 'color', 'static', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
 };
 
 FormItem.defaultProps = {
     type: "text",
-    validateType: "error"
+    validateType: "error",
 };
+

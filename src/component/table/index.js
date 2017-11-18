@@ -847,6 +847,7 @@ export default class Table extends Component {
                             sortOrder={remote ? sortOrder : order}
                             sortName={remote ? sortName : sortField}
                             onSort={this.handleSort.bind(this)}
+                            dataLength={renderList.length}
                         >
                             {children}
                         </Header>
@@ -864,6 +865,7 @@ export default class Table extends Component {
                                 sortName={remote ? sortName : sortField}
                                 sortOrder={remote ? sortOrder : order}
                                 onSort={this.handleSort.bind(this)}
+                                dataLength={renderList.length}
                             >
                                 {children}
                             </Header>
@@ -887,6 +889,7 @@ export default class Table extends Component {
                                 sortName={remote ? sortName : sortField}
                                 sortOrd er={remote ? sortOrder : order}
                                 onSort={this.handleSort.bind(this)}
+                                dataLength={renderList.length}
                             >
                                 {children}
                             </Header>

@@ -11,8 +11,8 @@ export default class Button extends Component {
     }
 
     render() {
-        let {type, size, disabled, children, href, className, ...other} = this.props;
-        let _className = classnames({
+        let {type, size, disabled, children, href, submit, className, ...other} = this.props;
+        let classObj = {
             'el-btn': true,
             'el-disabled': disabled,
             'el-text': type === 'text',
@@ -22,15 +22,19 @@ export default class Button extends Component {
             'el-success': type === 'success',
             'el-primary': type === 'primary',
             'el-secondary': type === 'secondary',
-            className: !!className
-        });
+        };
+        classObj[className] = !!className;
+        let _className = classnames(classObj);
         if (href) {
             return (
                 <a {...other} href={disabled ? 'javascript:;' : href} className={_className}>{children}</a>
             )
         } else {
             return (
-                <button {...other} type="button" className={_className} disabled={disabled}>{children}</button>
+                <button {...other}
+                        className={_className}
+                        type={submit ? "submit" : "button"}
+                        disabled={disabled}>{children}</button>
             )
         }
     }

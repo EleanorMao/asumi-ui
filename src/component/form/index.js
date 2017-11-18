@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
-import Grid from '../grid';
 import {noop, extend} from "../util";
 
 function isRequired({validate, required}) {
@@ -76,10 +75,10 @@ export default class Form extends Component {
         }
     }
 
-    handleSubmit() {
+    handleSubmit(_disabled) {
         let {validator, onSubmit} = this.props;
         this.setState({beforeSubmit: true}, () => {
-            if (this.state.disabled) {
+            if (_disabled) {
             } else {
                 let disabled = validator && validator();
                 if (disabled) {
@@ -92,51 +91,36 @@ export default class Form extends Component {
         })
     }
 
-    itemsRender() {
-        let items = [];
-        let {beforeSubmit} = this.state;
-        let {data, options, labelWidth, colNum} = this.props;
-        let col = colNum ? Math.ceil(12 / colNum) : 0;
-        options.map((props, index) => {
-            let item = (
-                <FormItem
-                    onChange={this.handleChange.bind(this, props)}
-                    labelWidth={labelWidth}
-                    {...props}
-                    key={index}
-                    data={data[props.name]}
-                    beforeSubmit={beforeSubmit}
-                    required={isRequired(props)}
-                    validator={this.handleDisabled.bind(this, props)}
-                />);
-            if (col) {
-                items.push(<Grid.Col col={col * (props.colSpan || 1)} key={index} inline>{item}</Grid.Col>)
-            } else {
-                items.push(item)
-            }
-        });
-        if (col) {
-            return <Grid.Row>{items}</Grid.Row>;
-        }
-        return items;
-    }
-
     render() {
-        let {disabled} = this.state;
-        let {error, style, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
-        let _className = classnames('el-form', layout ? `el-${layout}` : null, className);
+        let {data, options, colNum, error, disabled, style, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
+        let col = colNum ? Math.ceil(12 / colNum) : 0;
+        let _disabled = this.state.disabled || disabled;
+        let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
         return (
             <form className={_className} style={style}>
                 {!!title && <div className="el-form-title">{title}</div>}
-                {this.itemsRender()}
+                {options.map((props, index) => {
+                    return (
+                        <FormItem
+                            onChange={this.handleChange.bind(this, props)}
+                            labelWidth={labelWidth}
+                            {...props}
+                            col={col}
+                            key={index}
+                            data={data[props.name]}
+                            required={isRequired(props)}
+                            beforeSubmit={this.state.beforeSubmit}
+                            validator={this.handleDisabled.bind(this, props)}
+                        />)
+                })}
                 {children}
                 <FormItem labelWidth={labelWidth}>
                     {!hideSubmitButton &&
                     <Button
                         {...submitButtonOptions}
-                        disabled={disabled}
-                        onClick={this.handleSubmit.bind(this)}
-                        type={disabled ? null : submitButtonOptions.type || "success"}
+                        disabled={_disabled}
+                        onClick={this.handleSubmit.bind(this, _disabled)}
+                        type={_disabled ? null : submitButtonOptions.type || "success"}
                     >
                         {submitText}
                     </Button>}{submitItems}
@@ -153,6 +137,7 @@ Form.propTypes = {
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
     validator: PropTypes.func,
+    disabled: PropTypes.bool,
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
@@ -163,8 +148,8 @@ Form.propTypes = {
         required: PropTypes.bool,
         onChange: PropTypes.func,
         colSpan: PropTypes.number,
-        name: PropTypes.string.isRequired,
-        labelWidth: PropTypes.oneOfType(PropTypes.number, PropTypes.string),
+        name: PropTypes.string,
+        labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         tips: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.shape({
@@ -173,9 +158,9 @@ Form.propTypes = {
             })]),
         validateType: PropTypes.oneOf(['error', 'warning']),
         validate: PropTypes.arrayOf(PropTypes.shape({
-            max: PropTypes.any,
-            min: PropTypes.any,
-            len: PropTypes.number,
+            maxLength: PropTypes.any,
+            minLength: PropTypes.any,
+            length: PropTypes.number,
             required: PropTypes.bool,
             validator: PropTypes.func,
             message: PropTypes.string,
@@ -184,13 +169,14 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline'])
 };
 
 Form.defaultProps = {
     id: "id",
+    options: [],
     onChange: noop,
     submitText: '提交',
     layout: "horizontal",

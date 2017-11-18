@@ -2,6 +2,9 @@
   &.el-horizontal {
 
   }
+  &.el-grid-row {
+    margin-right: 0;
+  }
   &.el-vertical {
     .el-form-item {
       .el-form-label {
@@ -41,12 +44,16 @@
     line-height: 1.5;
     padding: 0.7692rem 0;
     vertical-align: middle;
+    .el-form-message {
+      display: none;
+    }
     &.el-form-item-error {
       .el-input > * {
         border-color: @danger;
       }
       .el-form-message {
         color: @danger;
+        display: block;
       }
     }
     &.el-form-item-warning {
@@ -55,6 +62,7 @@
       }
       .el-form-message {
         color: @d_secondary;
+        display: block;
       }
     }
     .el-required {
@@ -74,9 +82,17 @@
     }
     .el-form-control {
       vertical-align: top;
+      padding-right: 10px;
       display: inline-block;
       .el-input, .el-select-wrapper {
         display: block;
+      }
+      .el-form-control-static {
+        min-height: 35px;
+        line-height: 35px;
+        vertical-align: top;
+        font-size: 1.0769rem;
+        padding-right: 0.7692rem;
       }
     }
     .el-checkbox-group {

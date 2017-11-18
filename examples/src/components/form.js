@@ -80,14 +80,17 @@ export default class Main extends Component {
                                 message: "必填"
                             }, {
                                 type: "string",
-                                trigger: "submit",
-                                max: 7,
-                                min: 2,
+                                trigger: "change",
+                                maxLength: 7,
+                                minLength: 2,
                                 message: "不得少于2~7字符"
                             }],
                             placeholder: "请输入内容"
-                        },
-                        {
+                        }, {
+                            name: "description",
+                            type: "static",
+                            label: "个人简介",
+                        }, {
                             name: "description",
                             type: "textarea",
                             label: "个人简介",
@@ -100,7 +103,7 @@ export default class Main extends Component {
                             }, {
                                 type: "string",
                                 trigger: "blur",
-                                min: 5,
+                                minLength: 5,
                                 message: "必须大于5字符"
                             }],
                             placeholder: "(づ￣3￣)づ╭❤～"

@@ -61,6 +61,7 @@ export default class Header extends Component {
             sortName,
             sortOrder,
             selectRow,
+            dataLength,
             onSelectAll
         } = this.props;
         let i = 0, colSpan, target;
@@ -76,7 +77,7 @@ export default class Header extends Component {
                     <tr ref={(c) => {
                         this._thead = c
                     }}>
-                        {!isTree && !selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, checked)}
+                        {!isTree && !selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, dataLength && checked)}
                         {React.Children.map(renderChildren, (elm) => {
                             if (!elm) return;
                             if (left && elm.props.dataFixed !== 'left') return;
