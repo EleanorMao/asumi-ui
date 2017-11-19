@@ -29,6 +29,7 @@ function isRequired(validate, required) {
 export default class FormItem extends Component {
     constructor(props) {
         super(props);
+        this._required = false;
         this.msg_str = "";
     }
 
@@ -95,6 +96,9 @@ export default class FormItem extends Component {
             this._message.innerHTML = "";
             this.msg_str = ""
         }
+        if (!disabled && this._required && (data == null || data === "")) {
+            disabled = true;
+        }
         validator && validator(disabled);
         onBlur && onBlur.apply(null, arguments);
 
@@ -103,10 +107,11 @@ export default class FormItem extends Component {
     handleChange({value}) {
         let {data, onChange, validate, validator, validateType} = this.props;
         let disabled = false;
+        let _value = value === undefined ? data : value;
         if (validate && validate.length) {
             validate.map(item => {
                 if (!disabled && item.trigger === "change") {
-                    disabled = this.validator(item, value === undefined ? data : value);
+                    disabled = this.validator(item, _value);
                 }
             })
         }
@@ -249,6 +254,7 @@ export default class FormItem extends Component {
             tips = {title: tips};
         }
         let _required = isRequired(validate, required);
+        this._required = _required;
         return (
             <div className={_className} ref={c => this._form_item = c}>
                 {(!label && _required) && <span className="el-required">*</span>}
