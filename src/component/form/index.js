@@ -38,17 +38,16 @@ export default class Form extends Component {
         let disabledIndex = -1;
         let _disabledIndex = -1;
         let state = this.state;
-        let disabled = false;
-        options.forEach((item, index) => {
+        let disabled = options.some((item, index) => {
             if (!~_disabledIndex && state.disabled && state.disabledName && item.name === state.disabledName) {
                 _disabledIndex = index;
             }
-            if (!disabled && isRequired(item) && (data[item.name] == null || data[item.name] === "")) {
+            if (isRequired(item) && (data[item.name] == null || data[item.name] === "")) {
                 disabledIndex = index;
-                disabled = true;
+                return true;
             }
         });
-        if (~disabled) {
+        if (disabled) {
             this.handleDisabled(options[disabledIndex], true);
         } else if (~_disabledIndex) {
             this.handleDisabled(options[_disabledIndex], false);
@@ -58,9 +57,9 @@ export default class Form extends Component {
     handleDisabled(props, _disabled) {
         let {disabled, disabledName} = this.state;
         if (props.name === disabledName && _disabled != disabled) {
-            this.setState({disabled: !!~_disabled});
-        } else if (!disabled && ~_disabled && props.name !== disabledName) {
-            this.setState({disabled: !!~_disabled, disabledName: props.name});
+            this.setState({disabled: _disabled});
+        } else if (_disabled && props.name !== disabledName) {
+            this.setState({disabled: _disabled, disabledName: props.name});
         }
     }
 
