@@ -71,10 +71,10 @@ export default class Dropdown extends Component {
         let className = classnames({
             'el-btn': true,
             'el-dropdown-toggle': true,
-            'el-danger': type === 'danger',
             'el-success': type === 'success',
             'el-primary': type === 'primary',
-            'el-secondary': type === 'secondary',
+            'el-danger': type === 'danger' || type === 'error',
+            'el-secondary': type === 'secondary' || type === 'warning',
         });
         return (
             <div className="el-dropdown" style={style} ref={(c) => {
@@ -114,7 +114,7 @@ export default class Dropdown extends Component {
 
 Dropdown.propTypes = {
     onClick: PropTypes.func,
-    type: PropTypes.oneOf(['default', 'danger', 'success', 'primary', 'secondary']),
+    type: PropTypes.oneOf(['default', 'danger', 'success', 'primary', 'secondary', 'warning', 'error']),
     list: PropTypes.oneOfType([PropTypes.array, PropTypes.shape({
         href: PropTypes.string,
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node, PropTypes.func, PropTypes.element])

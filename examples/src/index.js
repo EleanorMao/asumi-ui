@@ -11,6 +11,7 @@ import {Menu, SubMenu, MenuItem} from '../../src';
 
 import Form from './components/form';
 import Home from './components/home';
+import Tag from './components/tag';
 import Tabs from './components/tabs';
 import Grid from './components/grid';
 import Table from './components/table';
@@ -54,6 +55,7 @@ const router = [
     {
         title: 'Display',
         children: [
+            <NavLink to={'/tag'} activeClassName="active">TAG</NavLink>,
             <NavLink to={'/table'} activeClassName="active">TABLE</NavLink>,
             <NavLink to={'/editor'} activeClassName="active">EDITOR</NavLink>,
             <NavLink to={'/pagination'} activeClassName="active">PAGINATION</NavLink>,
@@ -121,6 +123,7 @@ ReactDOM.render(
             </Menu>
             <div style={{marginLeft: 200, marginTop: 60}}>
                 <Route exact path="/" component={Home}/>
+                <Route path="/tag" component={Tag}/>
                 <Route path="/tabs" component={Tabs}/>
                 <Route path="/grid" component={Grid}/>
                 <Route path="/form" component={Form}/>

@@ -15,10 +15,10 @@ export default class Tag extends Component {
         let {type, children, closeable, onClose} = this.props;
         let className = classnames({
             'el-tag': true,
-            'el-danger': type === 'danger',
             'el-success': type === 'success',
             'el-primary': type === 'primary',
-            'el-secondary': type === 'secondary',
+            'el-danger': type === 'danger' || type === 'error',
+            'el-secondary': type === 'secondary' || type === 'warning',
         });
         return (
             <div className={className}>
@@ -30,7 +30,7 @@ export default class Tag extends Component {
 }
 
 Tag.propTypes = {
-    type: PropTypes.oneOf(['default', 'danger', 'success', 'primary', 'secondary']),
+    type: PropTypes.oneOf(['default', 'danger', 'success', 'primary', 'secondary', 'error', 'warning']),
     onClose: PropTypes.func,
     closeable: PropTypes.bool
 };

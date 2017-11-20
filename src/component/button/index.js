@@ -18,9 +18,9 @@ export default class Button extends Component {
             'el-text': type === 'text',
             'el-small': size === 'small',
             'el-large': size === 'large',
-            'el-danger': type === 'danger',
             'el-success': type === 'success',
             'el-primary': type === 'primary',
+            'el-danger': type === 'danger' || type === 'error',
             'el-secondary': type === 'secondary' || type === 'warning',
         };
         classObj[className] = !!className;
@@ -44,7 +44,7 @@ Button.propTypes = {
     href: PropTypes.string,
     disabled: PropTypes.bool,
     size: PropTypes.oneOf(['default', 'large', 'small']),
-    type: PropTypes.oneOf(['default', 'text', 'danger', 'success', 'primary', 'secondary', 'warning'])
+    type: PropTypes.oneOf(['default', 'text', 'danger', 'success', 'primary', 'secondary', 'error', 'warning'])
 };
 
 Button.defaultProps = {
