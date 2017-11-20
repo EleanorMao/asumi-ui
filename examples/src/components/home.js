@@ -25,9 +25,18 @@ export default class Main extends Component {
                     <code>import ReactDOM from 'react-dom';</code>
                     <code dangerouslySetInnerHTML={{__html: "import { Button } from 'asumi';"}}/>
                     <code>import 'asumi/style/index.less';</code>
+                    <br/>
+                    <code>
+                        <span>&lt;link</span>
+                        <span>rel=</span>
+                        <span>"stylesheet"</span>
+                        <span>href=</span>
+                        <span>"path/to/font-awesome/css/font-awesome.min.css"</span>
+                        <span>&gt;</span>
+                    </code>
                 </pre>
                 <h1>Icon</h1>
-                <p>el-ui icons use <a href="http://fontawesome.io/">Font Awesome</a></p>
+                <p>asumi icons use <a href="http://fontawesome.io/">Font Awesome</a></p>
             </div>
         )
     }

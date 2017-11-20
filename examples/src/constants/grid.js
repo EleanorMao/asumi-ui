@@ -147,6 +147,11 @@ export const apiofcol = [{
     'default': "",
     description: "Number of cells to the left of the grid spacing"
 }, {
+    property: "inline",
+    type: "bool",
+    'default': "",
+    description: "Set `inline` to `true`, while make col `float: none, display: inline-block`,"
+}, {
     property: "className",
     type: "string",
     'default': "",

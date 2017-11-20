@@ -68,7 +68,7 @@ export const api = [{
     property: "type",
     type: "string",
     'default': "default",
-    description: "Style of button. Options: default, text, danger, success, primary, secondary"
+    description: "Style of button. Options: default, text, danger, success, primary, secondary, warning."
 }, {
     property: "size",
     type: "string",

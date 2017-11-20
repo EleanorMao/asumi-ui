@@ -26,7 +26,7 @@ export default  class Main extends Component {
                 >
                     <Group>
                         <Button>default</Button>
-                        <Button type="secondary">secondary</Button>
+                        <Button type="secondary">secondary | warning</Button>
                         <Button type="primary">primary</Button>
                         <Button type="danger">danger</Button>
                         <Button type="success">success</Button>
@@ -40,7 +40,7 @@ export default  class Main extends Component {
                 >
                     <Group>
                         <Button href="#">default</Button>
-                        <Button href="#" type="secondary">secondary</Button>
+                        <Button href="#" type="secondary">secondary | warning</Button>
                         <Button href="#" type="primary">primary</Button>
                         <Button href="#" type="danger">danger</Button>
                         <Button href="#" type="success">success</Button>
@@ -54,7 +54,7 @@ export default  class Main extends Component {
                 >
                     <Group size="large" style={{marginBottom: 10}}>
                         <Button>default large</Button>
-                        <Button type="secondary">secondary large</Button>
+                        <Button type="secondary">secondary | warning large</Button>
                         <Button type="primary">primary large</Button>
                         <Button type="danger">danger large</Button>
                         <Button type="success">success large</Button>
@@ -63,7 +63,7 @@ export default  class Main extends Component {
                     </Group>
                     <Group style={{marginBottom: 10}}>
                         <Button >default default</Button>
-                        <Button type="secondary">secondary default</Button>
+                        <Button type="secondary">secondary | warning default</Button>
                         <Button type="primary">primary default</Button>
                         <Button type="danger">danger default</Button>
                         <Button type="success">success default</Button>
@@ -72,7 +72,7 @@ export default  class Main extends Component {
                     </Group>
                     <Group size="small" style={{marginBottom: 10}}>
                         <Button >default small</Button>
-                        <Button type="secondary">secondary small</Button>
+                        <Button type="secondary">secondary | warning small</Button>
                         <Button type="primary">primary small</Button>
                         <Button type="danger">danger small</Button>
                         <Button type="success">success small</Button>

@@ -46,6 +46,7 @@ Radio.propTypes = {
 };
 
 Radio.defaultProps = {
-    checked: false,
     onChange: noop
 };
+
+//TODO: defaultChecked
