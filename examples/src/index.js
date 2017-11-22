@@ -3,11 +3,11 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
 import '../../style/index.less';
 import './assets/public.less';
-import {Menu, SubMenu, MenuItem} from '../../src';
+import { Menu, SubMenu, MenuItem } from '../../src';
 
 import Form from './components/form';
 import Home from './components/home';
@@ -31,6 +31,7 @@ import Upload from './components/upload';
 import Checkbox from './components/checkbox';
 import Dropdown from './components/dropdown';
 import Pagination from './components/pagination';
+import DateTime from './components/datetime';
 
 const router = [
     <NavLink to={'/'} activeClassName="">HOME</NavLink>,
@@ -49,7 +50,8 @@ const router = [
             <NavLink to={'/radio'} activeClassName="active">RADIO</NavLink>,
             <NavLink to={'/checkbox'} activeClassName="active">CHECKBOX</NavLink>,
             <NavLink to={'/upload'} activeClassName="active">UPLOAD</NavLink>,
-            <NavLink to={'/form'} activeClassName="active">FORM</NavLink>
+            <NavLink to={'/form'} activeClassName="active">FORM</NavLink>,
+            <NavLink to={'/datetime'} activeClassName="active">DATETIME</NavLink>
         ]
     },
     {
@@ -91,7 +93,7 @@ const router = [
 ReactDOM.render(
     <Router>
         <div>
-            <Header/>
+            <Header />
             <Menu
                 openAll
                 style={{
@@ -121,28 +123,28 @@ ReactDOM.render(
                     }
                 })}
             </Menu>
-            <div style={{marginLeft: 200, marginTop: 60}}>
-                <Route exact path="/" component={Home}/>
-                <Route path="/tag" component={Tag}/>
-                <Route path="/tabs" component={Tabs}/>
-                <Route path="/grid" component={Grid}/>
-                <Route path="/form" component={Form}/>
-                <Route path="/input" component={Input}/>
-                <Route path="/radio" component={Radio}/>
-                <Route path="/table" component={Table}/>
-                <Route path="/modal" component={Modal}/>
-                <Route path="/editor" component={Editor}/>
-                <Route path="/select" component={Select}/>
-                <Route path="/button" component={Button}/>
-                <Route path="/animate" component={Animate}/>
-                <Route path="/loading" component={Loading}/>
-                <Route path="/message" component={Message}/>
-                <Route path="/popover" component={Popover}/>
-                <Route path="/tooltip" component={Tooltip}/>
-                <Route path="/upload" component={Upload}/>
-                <Route path="/checkbox" component={Checkbox}/>
-                <Route path="/dropdown" component={Dropdown}/>
-                <Route path="/pagination" component={Pagination}/>
+            <div style={{ marginLeft: 200, marginTop: 60 }}>
+                <Route exact path="/" component={Home} />
+                <Route path="/tabs" component={Tabs} />
+                <Route path="/grid" component={Grid} />
+                <Route path="/form" component={Form} />
+                <Route path="/input" component={Input} />
+                <Route path="/radio" component={Radio} />
+                <Route path="/table" component={Table} />
+                <Route path="/modal" component={Modal} />
+                <Route path="/editor" component={Editor} />
+                <Route path="/select" component={Select} />
+                <Route path="/button" component={Button} />
+                <Route path="/animate" component={Animate} />
+                <Route path="/loading" component={Loading} />
+                <Route path="/message" component={Message} />
+                <Route path="/popover" component={Popover} />
+                <Route path="/tooltip" component={Tooltip} />
+                <Route path="/upload" component={Upload} />
+                <Route path="/checkbox" component={Checkbox} />
+                <Route path="/dropdown" component={Dropdown} />
+                <Route path="/pagination" component={Pagination} />
+                <Route path="/datetime" component={DateTime} />
             </div>
         </div>
     </Router>
