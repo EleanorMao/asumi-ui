@@ -12,7 +12,7 @@ export default class GridCol extends Component {
 
     render() {
         let {offset, col, className, style, inline, children} = this.props;
-        let _className = classnames(`el-col-${col}`, inline ? 'el-col-inline' : '', (offset != undefined ? `el-col-offset-${offset}` : ''), className);
+        let _className = classnames(`el-col-${col}`, inline ? 'el-col-inline' : '', offset != undefined ? `el-col-offset-${offset}` : '', className);
         return (
             <div className={_className} style={style}>{children}</div>
         )

@@ -9,9 +9,9 @@ import Button from '../button';
 import {noop, extend} from "../util";
 
 function isRequired({validate, required}) {
-    return (required || (validate && validate.some(item => {
+    return required || validate && validate.some(item => {
         return item.required;
-    })));
+    });
 }
 
 export default class Form extends Component {

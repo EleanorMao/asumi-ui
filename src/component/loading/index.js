@@ -12,7 +12,7 @@ export default  class Stretch extends Component {
 
     render() {
         let {size, title, mask, fullScreen, loading, className, children} = this.props;
-        let _className = classnames('el-loading-wrapper', className, (fullScreen ? 'el-loading-fixed' : null), (size ? `el-${size}` : null));
+        let _className = classnames('el-loading-wrapper', className, fullScreen ? 'el-loading-fixed' : null, size ? `el-${size}` : null);
         return (
             <div className={_className} style={loading ? {display: 'block'} : {display: 'none'}}>
                 <div className={`el-loading-body ${mask ? 'el-loading-mask' : ''}`}>

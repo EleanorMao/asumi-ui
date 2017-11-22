@@ -22,7 +22,7 @@ class DayView extends React.Component {
             i = 0,
             classnames;
         days.forEach(day => {
-            dow[(7 + (i++) - first) % 7] = day;
+            dow[(7 + i++ - first) % 7] = day;
         })
         this.props.showWeeks && dow.unshift('周');
         return dow.map((day, index) => {
@@ -67,9 +67,9 @@ class DayView extends React.Component {
             classes = 'el-datetime-day';
             currentdate = prevMonth.clone();
 
-            if ((prevMonth.year() === currentYear && prevMonth.month() < currentMonth) || (prevMonth.year() < currentYear)) {
+            if (prevMonth.year() === currentYear && prevMonth.month() < currentMonth || prevMonth.year() < currentYear) {
                 classes += ' el-datetime-old';
-            } else if ((prevMonth.year() === currentYear && prevMonth.month() > currentMonth) || (prevMonth.year() > currentYear)) {
+            } else if (prevMonth.year() === currentYear && prevMonth.month() > currentMonth || prevMonth.year() > currentYear) {
                 classes += ' el-datetime-new';
             }
             if (selected && prevMonth.isSame(selected, 'day')) {
@@ -122,7 +122,7 @@ class DayView extends React.Component {
         let footer = this.renderFooter(),
             date = this.props.viewDate,
             locale = date.localeData(),
-            tableChildren = [(
+            tableChildren = [
                 <thead key='th'>
                     <tr key='h'>
                         <th key='p' className='el-datetime-prev'><span onClick={this.props.subtractTime(1, 'months')}>‹</span></th>
@@ -131,7 +131,7 @@ class DayView extends React.Component {
                     </tr>
                     <tr key='d'>{this.getDaysOfWeek(locale)}</tr>
                 </thead>
-            )];
+            ];
         tableChildren.push(<tbody key='tb'>{this.renderDays()}</tbody>)
         if (footer) {
             tableChildren.push(footer);

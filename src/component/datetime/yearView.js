@@ -50,10 +50,10 @@ class YearView extends React.Component {
                 return isValid(day);
             });
 
-            isDisabled = (validDay === undefined);
+            isDisabled = validDay === undefined;
 
             isDisabled && (classes += ' el-datetime-disabled');
-            (selectedDate && selectedDate.year() === year) && (classes != ' el-datetime-active');
+            selectedDate && selectedDate.year() === year && classes != ' el-datetime-active';
 
             props = {
                 key: year,
@@ -62,8 +62,8 @@ class YearView extends React.Component {
             }
 
             if (!isDisabled) {
-                props.onClick = (this.props.updateOn === 'years' ?
-                    this.updateSelectedYear.bind(this) : this.props.setDate('year'));
+                props.onClick = this.props.updateOn === 'years' ?
+                    this.updateSelectedYear.bind(this) : this.props.setDate('year');
             }
             years.push(renderer(props, year, selectedDate && selectedDate.clone()));
             if (years.length === 4) {
@@ -77,7 +77,7 @@ class YearView extends React.Component {
     }
 
     render() {
-        var year = parseInt(this.props.viewDate.year() / 10, 10) * 10;
+        let year = parseInt(this.props.viewDate.year() / 10, 10) * 10;
         return (
             <div className='el-datetime-years'>
                 <table key='a'>

@@ -62,16 +62,16 @@ class TimeView extends React.Component {
 
         if (format.toLowerCase().indexOf('h') !== -1) {
             counters.push('hours');
-            (format.indexOf('m') !== -1) && counters.push('minutes');
-            (format.indexOf('s') !== -1) && counters.push('seconds');
+            format.indexOf('m') !== -1 && counters.push('minutes');
+            format.indexOf('s') !== -1 && counters.push('seconds');
         }
 
         let daypart = false;
         if (this.state !== null && this.props.timeFormat.toLowerCase().indexOf(' a') !== -1) {
             if (this.props.timeFormat.indexOf(' A') !== -1) {
-                daypart = (this.state.hours >= 12) ? 'PM' : 'AM';
+                daypart = this.state.hours >= 12 ? 'PM' : 'AM';
             } else {
-                daypart = (this.state.hours >= 12) ? 'pm' : 'am';
+                daypart = this.state.hours >= 12 ? 'pm' : 'am';
             }
         }
         return {

@@ -19,12 +19,12 @@ export default class DateTime extends React.Component {
         };
         this.allowedSetTime = ['hours', 'minutes', 'seconds', 'milliseconds'];
         let state = this.getStateFromProps(props);
-        state.currentView = props.dateFormat ? (props.viewMode || state.updateOn || 'days') : 'time';
+        state.currentView = props.dateFormat ? props.viewMode || state.updateOn || 'days' : 'time';
         this.state = state;
     }
 
     getStateFromProps(props) {
-        var formats = this.getFormats(props),
+        let formats = this.getFormats(props),
             date = props.value || props.defaultValue,
             selectedDate, viewDate, updateOn, inputValue;
 
@@ -109,7 +109,7 @@ export default class DateTime extends React.Component {
     }
 
     getFormats(props) {
-        var formats = {
+        let formats = {
             date: props.dateFormat || '',
             time: props.timeFormat || ''
         },
@@ -263,8 +263,8 @@ export default class DateTime extends React.Component {
 
     localMoment(date, format, props) {
         props = props || this.props;
-        var momentFn = props.utc ? moment.utc : moment;
-        var m = momentFn(date, format, props.strictParsing);
+        let momentFn = props.utc ? moment.utc : moment;
+        let m = momentFn(date, format, props.strictParsing);
         if (props.locale) {
             m.locale(props.locale);
         }
@@ -272,7 +272,7 @@ export default class DateTime extends React.Component {
     }
 
     getComponentProps() {
-        var me = this,
+        let me = this,
             formats = this.getFormats(this.props),
             props = { dateFormat: formats.date, timeFormat: formats.time };
 

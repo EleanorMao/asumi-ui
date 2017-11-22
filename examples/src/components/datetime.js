@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Panel from "./panel";
-import { basic, week, year } from '../constants/datetime'
-import { DateTime } from '../../../src';
+import { basic, week, year, api } from '../constants/datetime'
+import { DateTime, Table, Col } from '../../../src';
 moment.locale('zh-CN');
 
 export default class Main extends Component {
@@ -31,7 +31,7 @@ export default class Main extends Component {
                     code={basic}
                 >
                     <DateTime
-                        onChange={this.handleChange.bind(this, 'date')}
+                        onChange={this.handleChange.bind(this, 'date')} className={['aaa', 'bbb']}
                         value={date}
                         viewMode='days' isValidDate={this.handleValidDate.bind(this)} />
                 </Panel>
@@ -60,6 +60,13 @@ export default class Main extends Component {
                         viewMode='years' />
                 </Panel>
 
+                <h1>API of DateTime</h1>
+                <Table isKey="property" data={api} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
             </div>
         )
     }

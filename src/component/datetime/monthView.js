@@ -34,14 +34,14 @@ class MonthView extends React.Component{
                     return i + 1;
                 })
                 validDay = daysInMonth.find(d=>{
-                    var day = currentMonth.clone().set('date', d);
+                    let day = currentMonth.clone().set('date', d);
                     return isValid(day);
                 })
 
-                isDisabled = (validDay === undefined);
+                isDisabled = validDay === undefined;
 
                 isDisabled && (classes += ' el-datetime-disabled');
-                (date && i === month && year === date.year()) && (classes += ' el-datetime-active');
+                date && i === month && year === date.year() && (classes += ' el-datetime-active');
 
                 props = {
                     key: i,
@@ -49,8 +49,8 @@ class MonthView extends React.Component{
                     className: classes
                 };
                 if(!isDisabled){
-                    props.onClick = (this.props.updateOn === 'months' ?
-                        this.updateSelectedMonth.bind(this) : this.props.setDate('month'));
+                    props.onClick = this.props.updateOn === 'months' ?
+                        this.updateSelectedMonth.bind(this) : this.props.setDate('month');
                 }
 
                 months.push(renderer(props, i, year, date && date.clone()));
@@ -78,7 +78,7 @@ class MonthView extends React.Component{
 
     render(){
         
-        return (<div className='el-datetime-months'>
+        return <div className='el-datetime-months'>
                     <table key='a'>
                         <thead>
                             <tr>
@@ -92,7 +92,7 @@ class MonthView extends React.Component{
                     <table key='months'>
                         <tbody key='b'>{this.renderMonths()}</tbody>
                     </table>
-                </div>)
+                </div>
     }
 }
 export default onClickOutside(MonthView);

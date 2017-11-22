@@ -122,7 +122,7 @@ export default class Editor extends Component {
 
         if (/^\*{2}[\s\S]+\*{2}$/.test(midText)) {
             midText = midText.replace(/^\*{2}|\*{2}$/g, "");
-        } else if ((/\*{2}$/.test(startText) && /^\*{2}/.test(endText))) {
+        } else if (/\*{2}$/.test(startText) && /^\*{2}/.test(endText)) {
             startText = startText.replace(/\*{2}$/, "");
             endText = endText.replace(/^\*{2}/, "");
         } else {
@@ -265,7 +265,7 @@ export default class Editor extends Component {
         let midText = value.slice(selectionStart, selectionEnd) || handler;
         let endText = value.slice(selectionEnd);
         let offset = 1;
-        if ((!startText.length && />\s*[\s\S]+[\r\n\f]+$/.test(midText)) || (/\s*/.test(endText) && /[\r\n\f]+>\s*[\s\S]+[\r\n\f]*$/.test(midText))) {
+        if (!startText.length && />\s*[\s\S]+[\r\n\f]+$/.test(midText) || /\s*/.test(endText) && /[\r\n\f]+>\s*[\s\S]+[\r\n\f]*$/.test(midText)) {
             midText = midText.replace(/[\s]*>\s*|[\r\n\f]*$/g, "");
         } else if (/[\r\n\f]+>\s*$/.test(startText) || /^[\r\n\f]*>\s*$/.test(startText)) {
             offset = 0;
@@ -370,9 +370,9 @@ export default class Editor extends Component {
             midText = "## " + midText.replace(/[\r\n\f]*-+$/, " ##");
         } else if (/^#{1,6}[\s\S]*(#{1,6})$/.test(midText)) {
             midText = midText.replace(/^#{1,6}\s*/, "").replace(/\s*#{1,6}$/, "");
-        } else if ((/[\r\n\f]+$/.test(midText) && /^={2,}/.test(endText)) || /^[\r\n\f]+={2,}/.test(endText)) {
+        } else if (/[\r\n\f]+$/.test(midText) && /^={2,}/.test(endText) || /^[\r\n\f]+={2,}/.test(endText)) {
             endText = endText.replace(/=+/, "----");
-        } else if ((/[\r\n\f]+$/.test(midText) && /^-{2,}/.test(endText)) || /^[\r\n\f]+-{2,}/.test(endText)) {
+        } else if (/[\r\n\f]+$/.test(midText) && /^-{2,}/.test(endText) || /^[\r\n\f]+-{2,}/.test(endText)) {
             startText = startText + (hasBreakInStart ? "" : "\n") + "## ";
             midText = midText.replace(/[\r\n\f]*/g, "");
             endText = endText.replace(/^[\r\n\f]*-+/, " ##");
