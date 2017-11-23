@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Grid} from 'el-ui';
+export const basic = `import {Grid} from 'asumi';
 
 ReactDOM.render(
 <div>
@@ -99,7 +99,7 @@ ReactDOM.render(
     </Grid.Row>
 </div>, div)`;
 
-export const offset = `import {Grid} from 'el-ui';
+export const offset = `import {Grid} from 'asumi';
 
 ReactDOM.render(
 <div>

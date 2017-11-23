@@ -11,7 +11,7 @@ export default class Button extends Component {
     }
 
     render() {
-        let {type, size, disabled, children, href, submit, className, ...other} = this.props;
+        let {type, size, disabled, children, href, submit, reset, className, ...other} = this.props;
         let classObj = {
             'el-btn': true,
             'el-disabled': disabled,
@@ -30,10 +30,11 @@ export default class Button extends Component {
                 <a {...other} href={disabled ? 'javascript:;' : href} className={_className}>{children}</a>
             )
         } else {
+            let type = submit ? "submit" : reset ? "reset" : "button";
             return (
                 <button {...other}
+                        type={type}
                         className={_className}
-                        type={submit ? "submit" : "button"}
                         disabled={disabled}>{children}</button>
             )
         }
@@ -41,6 +42,8 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
+    reset: PropTypes.bool,
+    submit: PropTypes.bool,
     href: PropTypes.string,
     disabled: PropTypes.bool,
     size: PropTypes.oneOf(['default', 'large', 'small']),

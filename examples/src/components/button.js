@@ -26,9 +26,11 @@ export default  class Main extends Component {
                 >
                     <Group>
                         <Button>default</Button>
-                        <Button type="secondary">secondary | warning</Button>
+                        <Button type="secondary">secondary</Button>
+                        <Button type="warning">warning</Button>
                         <Button type="primary">primary</Button>
                         <Button type="danger">danger</Button>
+                        <Button type="error">error</Button>
                         <Button type="success">success</Button>
                         <Button disabled>disabled</Button>
                         <Button type="text">text</Button>
@@ -40,9 +42,11 @@ export default  class Main extends Component {
                 >
                     <Group>
                         <Button href="#">default</Button>
-                        <Button href="#" type="secondary">secondary | warning</Button>
+                        <Button href="#" type="secondary">secondary</Button>
+                        <Button href="#" type="warning">warning</Button>
                         <Button href="#" type="primary">primary</Button>
                         <Button href="#" type="danger">danger</Button>
+                        <Button href="#" type="error">error</Button>
                         <Button href="#" type="success">success</Button>
                         <Button href="#" disabled>disabled</Button>
                         <Button href="#" type="text">text</Button>
@@ -54,27 +58,33 @@ export default  class Main extends Component {
                 >
                     <Group size="large" style={{marginBottom: 10}}>
                         <Button>default large</Button>
-                        <Button type="secondary">secondary | warning large</Button>
+                        <Button type="secondary">secondary large</Button>
+                        <Button type="warning">warning large</Button>
                         <Button type="primary">primary large</Button>
                         <Button type="danger">danger large</Button>
+                        <Button type="error">error large</Button>
                         <Button type="success">success large</Button>
                         <Button disabled>disabled large</Button>
                         <Button type="text">text large</Button>
                     </Group>
                     <Group style={{marginBottom: 10}}>
                         <Button >default default</Button>
-                        <Button type="secondary">secondary | warning default</Button>
+                        <Button type="secondary">secondary default</Button>
+                        <Button type="warning">warning default</Button>
                         <Button type="primary">primary default</Button>
                         <Button type="danger">danger default</Button>
+                        <Button type="error">error default</Button>
                         <Button type="success">success default</Button>
                         <Button disabled>disabled default</Button>
                         <Button type="text">text default</Button>
                     </Group>
                     <Group size="small" style={{marginBottom: 10}}>
                         <Button >default small</Button>
-                        <Button type="secondary">secondary | warning small</Button>
+                        <Button type="secondary">secondary small</Button>
+                        <Button type="warning">warning small</Button>
                         <Button type="primary">primary small</Button>
                         <Button type="danger">danger small</Button>
+                        <Button type="error">error small</Button>
                         <Button type="success">success small</Button>
                         <Button disabled>disabled small</Button>
                         <Button type="text">text small</Button>

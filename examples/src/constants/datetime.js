@@ -1,4 +1,4 @@
-export const basic = `import {DateTime} from 'el-ui';
+export const basic = `import {DateTime} from 'asumi';
 
 class Foo extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class Foo extends Component {
     }
 }`;
 
-export const week = `import {DateTime} from 'el-ui';
+export const week = `import {DateTime} from 'asumi';
 
 class Foo extends Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class Foo extends Component {
 }`;
 
 
-export const year = `import {DateTime} from 'el-ui';
+export const year = `import {DateTime} from 'asumi';
 
 class Foo extends Component {
     constructor(props) {

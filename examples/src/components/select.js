@@ -142,6 +142,13 @@ export default class Main extends Component {
                             <Option value="lion">Lion</Option>
                             <Option value="elephant">Elephant</Option>
                             <Option value="chicken">Chicken</Option>
+                            <Option value="chicken1">Chicken1</Option>
+                            <Option value="chicken2">Chicken2</Option>
+                            <Option value="chicken3">Chicken3</Option>
+                            <Option value="chicken4">Chicken4</Option>
+                            <Option value="chicken5">Chicken5</Option>
+                            <Option value="chicken6">Chicken6</Option>
+                            <Option value="chicken7">Chicken7</Option>
                         </Select>
                     </Group>
                 </Panel>

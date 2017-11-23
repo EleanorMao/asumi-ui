@@ -40,10 +40,10 @@ export default class CheckGroup extends Component {
     }
 
     render() {
-        let {hasCheckAll, disableAll, options, checkedList, className} = this.props;
+        let {hasCheckAll, disableAll, options, checkedList, style, className} = this.props;
         let _className = classnames('el-checkbox-group', className);
         return (
-            <div className={_className}>
+            <div className={_className} style={style}>
                 <div className="el-checkbox-row el-check-all">
                     {hasCheckAll &&
                     <Checkbox
@@ -83,7 +83,10 @@ CheckGroup.propTypes = {
     options: PropTypes.array,
     disableAll: PropTypes.bool,
     hasCheckAll: PropTypes.bool,
-    checkedList: PropTypes.array
+    checkedList: PropTypes.array,
+    style: PropTypes.object,
+    onChange: PropTypes.func,
+    className: PropTypes.string,
 };
 
 CheckGroup.defaultProps = {

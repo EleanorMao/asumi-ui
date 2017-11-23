@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Select, Option , Group} from 'el-ui';
+export const basic = `import {Select, Option , Group} from 'asumi';
 //const Option = Select.Option;
 
 let style = {
@@ -56,7 +56,7 @@ class Foo extends Component {
     }
 }`;
 
-export const size = `import {Select, Option , Group} from 'el-ui';
+export const size = `import {Select, Option , Group} from 'asumi';
 //const Option = Select.Option;
 
 let style = {
@@ -110,7 +110,7 @@ class Foo extends Component {
     }
 }`;
 
-export const searchable = `import {Select, Option , Group} from 'el-ui';
+export const searchable = `import {Select, Option , Group} from 'asumi';
 //const Option = Select.Option;
 
 let style = {
@@ -164,7 +164,7 @@ class Foo extends Component {
     }
 }`;
 
-export const multiple = `import {Select, Option , Group} from 'el-ui';
+export const multiple = `import {Select, Option , Group} from 'asumi';
 //const Option = Select.Option;
 
 let style = {
@@ -262,10 +262,26 @@ export const api = [{
     'default': "null",
     description: "Tell if matchCase when search",
 }, {
+    property: "dropdownClassName",
+    type: "string",
+    'default': "null",
+    description: "class name of dropdown options",
+}, {
+    property: "dropdownStyle",
+    type: "object",
+    'default': "null",
+    description: "style of dropdown options",
+}, {
     property: "onChange",
     type: "function",
     'default': "({e, name, value, selectedValue, selected})=>{}",
     description: "Callback when value change. Basic, it will return arguments {e, name, value, selectedValue, selected}, when it trigger multiple select, value will be array type",
+}, {
+    property: "onSearch",
+    type: "function",
+    'default': "(value)=>{}",
+    description: "Callback when search. Only if searchable is true",
+
 }, {
     property: "...others",
     type: "",

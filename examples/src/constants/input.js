@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Input, Group} from 'el-ui';
+export const basic = `import {Input, Group} from 'asumi';
 
 let style = {
     width: 300,
@@ -19,7 +19,7 @@ ReactDOM.render(
     </Group>
 </div>, div)`;
 
-export const size = `import {Input, Group} from 'el-ui';
+export const size = `import {Input, Group} from 'asumi';
 
 let style = {
     width: 300,
@@ -43,13 +43,13 @@ ReactDOM.render(
     </Group>
 </div>, div)`;
 
-export const icon = `import {Input, Group} from 'el-ui'
+export const icon = `import {Input, Group} from 'asumi'
 
 ReactDOM.render(
 <div>
     <Input icon={<i className="fa fa-bed"/>}/>
 </div>,div)`;
-export const pattern = `import {Input, Group} from 'el-ui';
+export const pattern = `import {Input, Group} from 'asumi';
 
 let style = {
     width: 300,
@@ -90,7 +90,7 @@ class Foo extends Component {
     }
 }`;
 
-export const prefix = `import {Input, Group} from 'el-ui';
+export const prefix = `import {Input, Group} from 'asumi';
 
 let style = {
     width: 300,
@@ -152,6 +152,11 @@ export const api = [{
     type: "function",
     'default': "({e, name, value})=>{}",
     description: "Callback when value change",
+}, {
+    property: "onPressEnter",
+    type: "function",
+    'default': "(e)=>{}",
+    description: "Callback when enter pressed",
 }, {
     property: "...others",
     type: "",

@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Radio} from 'el-ui';
+export const basic = `import {Radio} from 'asumi';
 
 class Foo extends React.Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class Foo extends React.Component {
 
 ReactDOM.render(<Foo />, div)`;
 
-export const _switch = `import {Radio} from 'el-ui';
+export const _switch = `import {Radio} from 'asumi';
 
 class Foo extends React.Component {
     constructor(props) {
@@ -70,7 +70,7 @@ class Foo extends React.Component {
 
 ReactDOM.render(<Foo />, div)`;
 
-export const disabled = `import {Radio} from 'el-ui';
+export const disabled = `import {Radio} from 'asumi';
 
 ReactDOM.render(
 <div>
@@ -96,8 +96,8 @@ ReactDOM.render(
         checked={true}/>
 </div>, div)`;
 
-export const radioGroup = `import {Radio} from 'el-ui';
-//import {RadioGroup} from 'el-ui';
+export const radioGroup = `import {Radio} from 'asumi';
+//import {RadioGroup} from 'asumi';
 
 class Foo extends React.Component {
     constructor(props) {

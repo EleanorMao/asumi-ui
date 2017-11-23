@@ -17,8 +17,9 @@ export default class Main extends Component {
         super(props);
     }
 
-    handleUpload(fileList, failed, name) {
+    handleUpload(fileList, succeed, failed, name) {
         console.dir(fileList);
+        console.dir(succeed);
         let names = [];
         for (let i = 0; i < fileList.length; i++) {
             names.push(fileList[i].name);

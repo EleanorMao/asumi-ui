@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Checkbox} from 'el-ui';
+export const basic = `import {Checkbox} from 'asumi';
 
 class Foo extends React.Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class Foo extends React.Component {
 
 ReactDOM.render(<Foo />, div)`;
 
-export const _switch = `import {Checkbox} from 'el-ui';
+export const _switch = `import {Checkbox} from 'asumi';
 
 class Foo extends React.Component {
     constructor(props) {
@@ -70,7 +70,7 @@ class Foo extends React.Component {
 
 ReactDOM.render(<Foo />, div)`;
 
-export const disabled = `import {Checkbox} from 'el-ui';
+export const disabled = `import {Checkbox} from 'asumi';
 
 ReactDOM.render(
 <div>
@@ -96,7 +96,7 @@ ReactDOM.render(
         checked={true}/>
 </div>, div)`;
 
-export const indeterminate = `import {Checkbox} from 'el-ui';
+export const indeterminate = `import {Checkbox} from 'asumi';
 
 ReactDOM.render(
 <div>
@@ -106,8 +106,8 @@ ReactDOM.render(
     />
 </div>, div)`;
 
-export const checkboxGroup = `import {Checkbox} from 'el-ui';
-//import {CheckboxGroup} from 'el-ui';
+export const checkboxGroup = `import {Checkbox} from 'asumi';
+//import {CheckboxGroup} from 'asumi';
 
 class Foo extends React.Component {
     constructor(props) {
@@ -180,6 +180,11 @@ export const api = [{
     type: "bool",
     'default': "false",
     description: "Is checkbox checked or not, default is false"
+}, {
+    property: "indeterminate",
+    type: "bool",
+    'default': "false",
+    description: "Is checkbox indeterminate or not"
 }, {
     property: "onChange",
     type: "function",

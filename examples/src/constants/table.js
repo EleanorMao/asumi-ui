@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Table, Col} from 'el-ui';
+export const basic = `import {Table, Col} from 'asumi';
 import {list} from './data';
 
 class Foo extends Component {
@@ -33,7 +33,7 @@ class Foo extends Component {
     }
 }`;
 
-export const pagination = `import {Table, Col} from 'el-ui';
+export const pagination = `import {Table, Col} from 'asumi';
 import {list} from './data';
 
 class Foo extends Component {
@@ -76,7 +76,7 @@ class Foo extends Component {
     }
 }`;
 
-export const sort = `import {Table, Col} from 'el-ui';
+export const sort = `import {Table, Col} from 'asumi';
 import {list} from './data';
 
 class Foo extends Component {
@@ -108,7 +108,7 @@ class Foo extends Component {
     }
 }`;
 
-export const colspan_rowspan = `import {Table, Col} from 'el-ui';
+export const colspan_rowspan = `import {Table, Col} from 'asumi';
 import {list} from './data';
 
 class Foo extends Component {
@@ -152,7 +152,7 @@ class Foo extends Component {
     }
 }`;
 
-export const checkbox_radio = `import {Table, Col} from 'el-ui';
+export const checkbox_radio = `import {Table, Col} from 'asumi';
 import {list} from './data';
 
 class Foo extends Component {
@@ -275,7 +275,7 @@ class Foo extends Component {
     }
 }`;
 
-export const fixed = `import {Table, Col} from 'el-ui';
+export const fixed = `import {Table, Col} from 'asumi';
 import {list} from './data';
 
 class Foo extends Component {
@@ -312,7 +312,7 @@ class Foo extends Component {
     }
 }`;
 
-export const tree = `import {Table, Col} from 'el-ui';
+export const tree = `import {Table, Col} from 'asumi';
 import {data, noKeyData} from './data';
 
 class Foo extends Component {

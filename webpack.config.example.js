@@ -10,7 +10,7 @@ module.exports = {
     entry: './examples/src/index.js',
     output: {
         filename: 'index.js',
-        publicPath: "http://0.0.s0.0:9010/lib/",
+        publicPath: "http://0.0.0.0:9010/lib/",
         path: path.join(__dirname, './examples/lib')
     },
     devServer: {

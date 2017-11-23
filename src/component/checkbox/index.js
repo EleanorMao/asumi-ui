@@ -21,7 +21,7 @@ export default class Checkbox extends Component {
     render() {
         let {type, label, checked, className, indeterminate, onChange, disabled, children, ...other} = this.props;
         let _className = classnames('el-checkbox-wrapper', disabled ? 'el-disabled' : '', className);
-        let _innerClassName = classnames('el-checkbox', type ? 'el-switch' : null);
+        let _innerClassName = classnames('el-checkbox', type === "switch" ? 'el-switch' : '');
         return (
             <label className={_className}>
                 <span className={_innerClassName}>
@@ -32,13 +32,13 @@ export default class Checkbox extends Component {
                         disabled={disabled}
                         className="el-checkbox-input"
                         onChange={this.handleChange.bind(this)}/>
-                    {type ? <span/> : 
+                    {type === "switch" ? <span/> :
                         indeterminate ?
                             <span className="fa fa-minus-square el-checked"/> :
                             checked ?
-                                    <span className="fa fa-check-square el-checked"/> :
-                                    <span className="fa fa-square-o el-unchecked"/>
-                            
+                                <span className="fa fa-check-square el-checked"/> :
+                                <span className="fa fa-square-o el-unchecked"/>
+
                     }
                 </span>
                 <span>{children || label}</span>
@@ -48,7 +48,13 @@ export default class Checkbox extends Component {
 }
 
 Checkbox.propTypes = {
-    type: PropTypes.oneOf(['switch'])
+    label: PropTypes.any,
+    checked: PropTypes.any,
+    onChange: PropTypes.func,
+    disabled: PropTypes.bool,
+    className: PropTypes.string,
+    indeterminate: PropTypes.bool,
+    type: PropTypes.oneOf(['switch', 'default', 'checkbox']),
 };
 
 Checkbox.defaultProps = {

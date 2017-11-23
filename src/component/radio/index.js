@@ -20,7 +20,7 @@ export default class Radio extends Component {
     render() {
         let {label, type, checked, className, onChange, disabled, children, ...other} = this.props;
         let _className = classnames('el-checkbox-wrapper', disabled ? 'el-disabled' : '', className);
-        let _innerClassName = classnames('el-checkbox', type ? 'el-switch' : 'el-radio');
+        let _innerClassName = classnames('el-checkbox', type === "switch" ? 'el-switch' : 'el-radio');
         return (
             <label className={_className}>
                 <span className={_innerClassName}>
@@ -42,11 +42,15 @@ export default class Radio extends Component {
 }
 
 Radio.propTypes = {
-    type: PropTypes.oneOf(['switch'])
+    label: PropTypes.any,
+    checked: PropTypes.any,
+    onChange: PropTypes.func,
+    disabled: PropTypes.bool,
+    className: PropTypes.string,
+    indeterminate: PropTypes.bool,
+    type: PropTypes.oneOf(['switch', 'default', 'radio']),
 };
 
 Radio.defaultProps = {
     onChange: noop
 };
-
-//TODO: defaultChecked

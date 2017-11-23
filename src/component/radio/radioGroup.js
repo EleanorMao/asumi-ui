@@ -13,10 +13,10 @@ export default class RadioGroup extends Component {
     }
 
     render() {
-        let {disableAll, options, value, onChange, className} = this.props;
+        let {disableAll, options, value, onChange, style, className} = this.props;
         let _className = classnames('el-checkbox-group', className);
         return (
-            <div className={_className}>
+            <div className={_className} style={style}>
                 <div className="el-checkbox-row">
                     {
                         !!options && options.map((item, index) => {
@@ -41,9 +41,11 @@ export default class RadioGroup extends Component {
 }
 
 RadioGroup.propTypes = {
+    style: PropTypes.object,
+    onChange: PropTypes.func,
     options: PropTypes.array,
     disableAll: PropTypes.bool,
-    checkedList: PropTypes.array
+    className: PropTypes.string,
 };
 
 RadioGroup.defaultProps = {

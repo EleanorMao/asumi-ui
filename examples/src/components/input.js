@@ -11,7 +11,7 @@ import {
 import Panel from './panel';
 import {basic, icon, size, prefix, pattern, api} from '../constants/input';
 
-export default  class Main extends Component {
+export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -87,13 +87,13 @@ export default  class Main extends Component {
                     </Group>
                 </Panel>
                 <Panel
-                    title="prefix"
+                    title="prefix&suffix"
                     code={prefix}
                 >
                     <Group style={style}>
                         <Input placeholder="prefix input" prepend="Http://"/>
-                        <Input placeholder="prefix input" append=".com"/>
-                        <Input placeholder="prefix input" prepend="Http://" append=".com"/>
+                        <Input placeholder="suffix input" append=".com"/>
+                        <Input placeholder="prefix & suffix input" prepend="Http://" append=".com"/>
                     </Group>
                 </Panel>
                 <h1>API</h1>

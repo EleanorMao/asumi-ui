@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import {KeyCode} from "../util";
 
 export default class Input extends Component {
     constructor(props) {
@@ -46,6 +47,13 @@ export default class Input extends Component {
         this.props.onChange && this.props.onChange({e, name, value});
     }
 
+    handleKeyPress(e) {
+        if (e.which === KeyCode.ENTER) {
+            this.props.onPressEnter && this.props.onPressEnter(e);
+        }
+        this.props.onKeyPress && this.props.onKeyPress(e);
+    }
+
     render() {
         let {type, size, rule, icon, style, inputStyle, append, prepend, className, ...other} = this.props;
         let {onClick} = {...other};
@@ -63,7 +71,7 @@ export default class Input extends Component {
                 </div>
             )
         } else {
-            let input = 
+            let input =
                 <div className={_className} style={style}>
                     {!!icon && <span className="el-input-icon" onClick={onClick}>{icon}</span>}
                     <input
@@ -71,6 +79,7 @@ export default class Input extends Component {
                         type={type}
                         style={inputStyle}
                         onChange={this.handleChange.bind(this)}
+                        onKeyPress={this.handleKeyPress.bind(this)}
                     />
                 </div>
             ;
@@ -94,6 +103,7 @@ export default class Input extends Component {
 Input.propTypes = {
     type: PropTypes.string,
     onChange: PropTypes.func,
+    onPressEnter: PropTypes.func,
     pattern: PropTypes.instanceOf(RegExp),
     size: PropTypes.oneOf(['large', 'small']),
     icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),

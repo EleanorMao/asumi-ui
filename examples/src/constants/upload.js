@@ -1,7 +1,7 @@
 /**
  * Created by elly on 2017/4/18.
  */
-export const basic = `import {Upload, Button, Group} from 'el-ui';
+export const basic = `import {Upload, Button, Group} from 'asumi';
 
 class Foo extends Component {
     constructor(props) {
@@ -56,7 +56,7 @@ class Foo extends Component {
     }
 `;
 
-export const validator = `import {Upload, Button} from 'el-ui';
+export const validator = `import {Upload, Button} from 'asumi';
 
 class Foo extends Component {
     constructor(props) {
@@ -120,7 +120,17 @@ export const api = [{
     property: "disabled",
     type: "boolean",
     'default': "null",
-    description: "Disable uploader or not"
+    description: "Disable upload or not"
+}, {
+    property: "className",
+    type: "string",
+    'default': "null",
+    description: "Class name of upload"
+}, {
+    property: "style",
+    type: "object",
+    'default': "null",
+    description: "Style of upload"
 }, {
     property: "validator",
     type: "function",
@@ -134,6 +144,6 @@ export const api = [{
 }, {
     property: "onUpload",
     type: "function",
-    'default': "(fileList, failed, name, e)=>{}",
+    'default': "(fileList, succeed, failed, name, e)=>{}",
     description: "Callback when upload"
 }];

@@ -175,14 +175,25 @@ export default class Select extends Component {
     }
 
     handleRemoveClass() {
-        if (this.index >= 0 && this.el_select_ul.children[this.index]) {
-            this.el_select_ul.children[this.index].classList.remove('el-select-selected');
+        let child = this.el_select_ul && this.el_select_ul.children && this.el_select_ul.children[this.index];
+        if (this.index >= 0 && child) {
+            child.classList.remove('el-select-selected');
         }
     }
 
     handleAddClass() {
-        if (this.index >= 0 && this.el_select_ul.children[this.index]) {
-            this.el_select_ul.children[this.index].classList.add('el-select-selected');
+        let child = this.el_select_ul && this.el_select_ul.children && this.el_select_ul.children[this.index];
+        if (this.index >= 0 && child) {
+            let offsetTop = child.offsetTop;
+            let height = child.offsetHeight;
+            let parentHeight = this.el_select_menu.offsetHeight;
+            let parentScrollTop = this.el_select_menu.scrollTop;
+            if (offsetTop + height - parentHeight - parentScrollTop > 0) {
+                this.el_select_menu.scrollTop = offsetTop + height - parentHeight;
+            } else if (offsetTop + height / 2 <= parentScrollTop) {
+                this.el_select_menu.scrollTop = offsetTop < height ? 0 : offsetTop;
+            }
+            child.classList.add('el-select-selected');
         }
     }
 
@@ -213,7 +224,8 @@ export default class Select extends Component {
 
     handleChange(e) {
         let {value} = e;
-        let {onMatch, matchCase} = this.props;
+        let {onMatch, matchCase, onSearch} = this.props;
+        onSearch(value);
         this.setState(prev => {
             prev.renderValue = value;
             let renderData = onMatch ? onMatch(value) :
@@ -294,9 +306,12 @@ export default class Select extends Component {
 
     optionsRender() {
         let {renderData, allValue, selectedValue} = this.state;
-        let {multiple, searchable, selectAllText, noMatchText} = this.props;
+        let {multiple, searchable, selectAllText, dropdownClassName, dropdownStyle, noMatchText} = this.props;
+        let className = classnames("el-select-dropdown", dropdownClassName || "");
         return (
-            <div className="el-select-dropdown">
+            <div className={className} style={dropdownStyle} ref={c => {
+                this.el_select_menu = c
+            }}>
                 <ul ref={c => {
                     this.el_select_ul = c
                 }}>
@@ -333,8 +348,8 @@ export default class Select extends Component {
         let {renderValue, visible} = this.state;
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
-            size, style, value, noMatchText, matchCase, onMatch,
-            searchable, selectAll, defaultValue, selectAllText,
+            size, style, value, noMatchText, matchCase, onMatch, onSearch,
+            searchable, selectAll, defaultValue, selectAllText, dropdownClassName, dropdownStyle,
             multiple, onChange, className, children, closeAfterSelect, ...other
         } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
@@ -363,21 +378,25 @@ export default class Select extends Component {
 Select.propTypes = {
     onMatch: PropTypes.func,
     multiple: PropTypes.bool,
+    onSearch: PropTypes.func,
     matchCase: PropTypes.bool,
-    searchable: PropTypes.bool,
     selectAll: PropTypes.bool,
+    searchable: PropTypes.bool,
     onSelectAll: PropTypes.func,
     noMatchText: PropTypes.string,
-    closeAfterSelect: PropTypes.bool,
+    dropdownStyle: PropTypes.object,
     selectAllText: PropTypes.string,
+    closeAfterSelect: PropTypes.bool,
+    dropdownClassName: PropTypes.string,
     size: PropTypes.oneOf(['default', 'large', 'small'])
 };
 
 Select.defaultProps = {
     value: "",
-    closeAfterSelect: true,
-    selectAllText: "全选",
-    noMatchText: "暂无匹配数据",
     onChange: noop,
-    defaultValue: ""
+    onSearch: noop,
+    defaultValue: "",
+    selectAllText: "全选",
+    closeAfterSelect: true,
+    noMatchText: "暂无匹配数据",
 };

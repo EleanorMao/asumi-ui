@@ -92,10 +92,11 @@ export default class Form extends Component {
     }
 
     render() {
-        let {data, options, colNum, error, disabled, style, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
+        let {data, options, colNum, error, colon, disabled, style, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         let _disabled = this.state.disabled || disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
+        let _children = React.Children.toArray(children);
         return (
             <form className={_className} style={style}>
                 {!!title && <div className="el-form-title">{title}</div>}
@@ -104,6 +105,7 @@ export default class Form extends Component {
                         <FormItem
                             onChange={this.handleChange.bind(this, props)}
                             labelWidth={labelWidth}
+                            colon={colon}
                             {...props}
                             col={col}
                             key={index}
@@ -113,7 +115,25 @@ export default class Form extends Component {
                             validator={this.handleDisabled.bind(this, props)}
                         />)
                 })}
-                {children}
+                {React.Children.map(_children, (elm, index) => {
+                    if (elm && elm.type && elm.type.name === "FormItem") {
+                        let props = elm.props;
+                        return React.cloneElement(elm, extend({
+                            key: index,
+                            colon: colon,
+                            labelWidth: labelWidth,
+                            onChange: this.handleChange.bind(this, props),
+                        }, props, {
+                            col: col,
+                            data: data[props.name],
+                            required: isRequired(props),
+                            beforeSubmit: this.state.beforeSubmit,
+                            validator: this.handleDisabled.bind(this, props)
+                        }))
+                    } else {
+                        return React.cloneElement(elm, {key: index});
+                    }
+                })}
                 <FormItem labelWidth={labelWidth}>
                     {!hideSubmitButton &&
                     <Button
@@ -132,12 +152,13 @@ export default class Form extends Component {
 }
 
 Form.propTypes = {
+    colon: PropTypes.bool,
     error: PropTypes.string,
     colNum: PropTypes.number,
+    disabled: PropTypes.bool,
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
     validator: PropTypes.func,
-    disabled: PropTypes.bool,
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
@@ -162,13 +183,16 @@ Form.propTypes = {
             maxLength: PropTypes.any,
             minLength: PropTypes.any,
             length: PropTypes.number,
+            instance: PropTypes.any,
             required: PropTypes.bool,
             validator: PropTypes.func,
             message: PropTypes.string,
             regExp: PropTypes.instanceOf(RegExp),
+            min: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+            max: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
             trigger: PropTypes.oneOf(['blur', 'change', 'submit']),
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
-            type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
+            type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
         })),
         type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
     })),

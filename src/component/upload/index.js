@@ -13,21 +13,44 @@ export default class Upload extends Component {
 
     handleChange(e) {
         e.preventDefault();
-        let failed = [];
+        let failed = [], succeed = [];
         let fileList = e.target.files || e.dataTransfer.files;
-        let {maxSize, onUpload, name, validator, validatorError} = this.props;
+        let {maxSize, onUpload, accept, name, validator, validatorError} = this.props;
+        let acceptList = accept.split(/\s*,\s*/);
         for (let i = 0, len = fileList.length; i < len; i++) {
+            let isValid = true;
             let file = fileList.item(i);
+            let acceptable = acceptList.some(type => {
+                if (type === file.type) {
+                    return true;
+                } else {
+                    let _file_type = file.type.split('/');
+                    let _type = type.split('/');
+                    if (_type[1] === "*" && _type[0] === _file_type[0]) {
+                        return true;
+                    }
+                }
+            });
             if (maxSize && file.size > maxSize) {
                 validatorError(file, i, fileList);
+                isValid = false;
+                failed.push(i);
+            }
+            if (!acceptable) {
+                validatorError(file, i, fileList);
+                isValid = false;
                 failed.push(i);
             }
             if (validator && !validator(file)) {
                 validatorError(file, i, fileList);
+                isValid = false;
                 failed.push(i);
             }
+            if (isValid) {
+                succeed.push(file);
+            }
         }
-        onUpload(fileList, failed, name, e);
+        onUpload(fileList, succeed, failed, name, e);
         this._uploader.value = '';
     }
 
@@ -62,12 +85,14 @@ export default class Upload extends Component {
 
 Upload.propTypes = {
     name: PropTypes.string,
+    style: PropTypes.object,
     accept: PropTypes.string,
     multiple: PropTypes.bool,
-    maxSize: PropTypes.number,
     disabled: PropTypes.bool,
-    validator: PropTypes.func,
     onUpload: PropTypes.func,
+    validator: PropTypes.func,
+    maxSize: PropTypes.number,
+    className: PropTypes.string,
     validatorError: PropTypes.func,
 };
 
