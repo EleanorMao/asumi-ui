@@ -287,7 +287,7 @@ export default class DateTime extends React.Component {
     }
 
     onInputChange(e) {
-        let value = e.target === null ? e : e.target.value,
+        let value = e.target === null ? e : e.value,
             localMoment = this.localMoment(value, this.state.inputFormat),
             update = {inputValue: value};
 
@@ -316,7 +316,7 @@ export default class DateTime extends React.Component {
         if (input) {
             children.push(
                 <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
-                       onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange}
+                       onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
                        onKeyDown={this.onInputKey} value={this.renderInput(inputValue)}/>
             );
         }
