@@ -524,7 +524,7 @@ export default class Editor extends Component {
 
     render() {
         let {link, imgUrl, imgVisible, linkVisible} = this.state;
-        let {name, value, placeholder, linkPlaceholder, imgPlaceholder, linkModalTitle, canUploadImg, linkImgTitle, uploadImgTitle} = this.props;
+        let {name, value, placeholder, uploadImgOptions, linkPlaceholder, imgPlaceholder, linkModalTitle, canUploadImg, linkImgTitle, uploadImgTitle} = this.props;
         return (
             <div className="editor">
                 {this.toolbarRender()}
@@ -569,9 +569,11 @@ export default class Editor extends Component {
                         {canUploadImg &&
                         <TabPanel label={uploadImgTitle} key="1">
                             <Uploader
+                                {...uploadImgOptions}
                                 onUpload={(fileList) => {
                                     this.upload(fileList.item(0))
-                                }}>
+                                }}
+                            >
                                 <div className="el-uploader-inner">
                                     {imgUrl ?
                                         <img src={imgUrl}/> :
@@ -606,7 +608,6 @@ Editor.propTypes = {
     onUpload: PropTypes.func,
     handler: PropTypes.string,
     maxCache: PropTypes.number,
-    originText: PropTypes.string,
     canUploadImg: PropTypes.bool,
     placeholder: PropTypes.string,
     linkImgTitle: PropTypes.string,
@@ -615,6 +616,7 @@ Editor.propTypes = {
     linkModalTitle: PropTypes.string,
     linkPlaceholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
+    uploadImgOptions: PropTypes.object
 };
 
 Editor.defaultProps = {

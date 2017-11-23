@@ -37,8 +37,6 @@ import DateTime from './component/datetime';
 
 const Tooltip = Popover;
 
-Table.Col = Col;
-
 Select.Option = Option;
 
 Tabs.TabPanel = TabPanel;

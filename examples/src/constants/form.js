@@ -107,6 +107,7 @@ class Main extends Component {
 
 export const validate = `import {Form, FormItem} from 'asumi';
 import React, {Component} from 'react';
+//const FormItem = Form.FormItem;
 
 class Main extends Component {
     constructor(props) {

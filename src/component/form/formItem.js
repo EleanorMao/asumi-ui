@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import Input from '../input';
 import Radio from '../radio';
 import Select from '../select';
+import Editor from '../editor';
 import Popover from '../popover';
 import Datetime from '../datetime';
 import Option from '../select/option';
@@ -224,6 +225,15 @@ export default class FormItem extends Component {
                     onChange={this.handleChange.bind(this)}
                 />;
                 break;
+            case  "editor":
+                output = <Editor
+                    {...config}
+                    name={name}
+                    value={data}
+                    onBlur={this.handleBlur.bind(this)}
+                    onChange={this.handleChange.bind(this)}
+                />;
+                break;
             case "static":
                 output = <div
                     className="el-form-control-static">
@@ -317,7 +327,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'static', 'datetime', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
 };
 
 FormItem.defaultProps = {
