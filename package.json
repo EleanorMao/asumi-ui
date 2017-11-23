@@ -1,6 +1,6 @@
 {
   "name": "asumi",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.5.1",
   "description": "react ui design",
   "main": "lib/index.js",
   "files": [
@@ -12,7 +12,8 @@
     "dev": "webpack-dev-server --config webpack.config.example.js --color",
     "pages": "webpack --config webpack.config.pages.js -p",
     "mock": "json-server --watch db.json --port 3000",
-    "eslint": "eslint src"
+    "eslint": "eslint src",
+    "test": "jest --config jest.config.json"
   },
   "keywords": [
     "react"
@@ -30,6 +31,7 @@
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.1",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-es3-member-expression-literals": "^6.8.0",
     "babel-plugin-transform-es3-property-literals": "^6.8.0",
@@ -39,13 +41,17 @@
     "babel-preset-stage-1": "^6.5.0",
     "babel-preset-stage-3": "^6.22.0",
     "css-loader": "^0.23.1",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "file-loader": "^0.11.1",
     "history": "^4.6.1",
+    "jest": "^21.2.1",
     "json-server": "^0.8.20",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "nyan-progress-webpack-plugin": "^1.1.4",
     "open-browser-webpack-plugin": "0.0.2",
+    "raf": "^3.4.0",
     "react": ">=0.14.3",
     "react-dom": ">=0.14.3",
     "react-router": "^4.0.0",
