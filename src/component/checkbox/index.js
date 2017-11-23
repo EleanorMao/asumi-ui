@@ -32,13 +32,13 @@ export default class Checkbox extends Component {
                         disabled={disabled}
                         className="el-checkbox-input"
                         onChange={this.handleChange.bind(this)}/>
-                    {type ? <span/> : (
+                    {type ? <span/> : 
                         indeterminate ?
                             <span className="fa fa-minus-square el-checked"/> :
-                            (checked ?
+                            checked ?
                                     <span className="fa fa-check-square el-checked"/> :
                                     <span className="fa fa-square-o el-unchecked"/>
-                            ))
+                            
                     }
                 </span>
                 <span>{children || label}</span>

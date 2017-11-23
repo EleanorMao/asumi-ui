@@ -12,7 +12,7 @@ export default  class TablePanel extends Component {
 
     render() {
         let {_active, className, style, children} = this.props;
-        let _classNames = classnames('el-tabs-panel', (_active ? " el-tabs-panel-active" : ""), className);
+        let _classNames = classnames('el-tabs-panel', _active ? " el-tabs-panel-active" : "", className);
         return (
             <div className={_classNames} style={style}>
                 {children}

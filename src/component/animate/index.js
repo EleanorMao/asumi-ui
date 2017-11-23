@@ -74,7 +74,7 @@ function isSameChildren(c1, c2) {
         c1.forEach((child, index) => {
             const child2 = c2[index];
             if (child && child2) {
-                if ((child && !child2) || (!child && child2)) {
+                if (child && !child2 || !child && child2) {
                     same = false;
                 } else if (child.key !== child2.key) {
                     same = false;

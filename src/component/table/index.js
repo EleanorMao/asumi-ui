@@ -388,13 +388,13 @@ export default class Table extends Component {
                     if (typeof ValueA === 'string') {
                         return ValueA.localeCompare(ValueB);
                     } else {
-                        return ValueA < ValueB ? -1 : (ValueA > ValueB ? 1 : 0);
+                        return ValueA < ValueB ? -1 : ValueA > ValueB ? 1 : 0;
                     }
                 } else {
                     if (typeof ValueB === 'string') {
                         return ValueB.localeCompare(ValueA);
                     } else {
-                        return ValueB < ValueA ? -1 : (ValueB > ValueA ? 1 : 0);
+                        return ValueB < ValueA ? -1 : ValueB > ValueA ? 1 : 0;
                     }
                 }
             });
@@ -816,7 +816,7 @@ export default class Table extends Component {
         }
         let paddingBottom = 0;
         let container = this._instance.container;
-        if (container && typeof parseFloat(height) === "number" && (container.scrollWidth > container.clientWidth)) {
+        if (container && typeof parseFloat(height) === "number" && container.scrollWidth > container.clientWidth) {
             paddingBottom = parseFloat(height) - container.clientHeight;
         }
         if (isNaN(paddingBottom)) {

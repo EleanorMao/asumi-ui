@@ -63,7 +63,7 @@ export default class Input extends Component {
                 </div>
             )
         } else {
-            let input = (
+            let input = 
                 <div className={_className} style={style}>
                     {!!icon && <span className="el-input-icon" onClick={onClick}>{icon}</span>}
                     <input
@@ -73,7 +73,7 @@ export default class Input extends Component {
                         onChange={this.handleChange.bind(this)}
                     />
                 </div>
-            );
+            ;
             if (prepend || append) {
                 let _wrapperClass = classnames('el-input-wrapper', className, size ? `el-${size}` : '');
                 return (

@@ -35,7 +35,7 @@ export default class Modal extends Component {
                             {footer !== null &&
                             <div className="el-modal-footer">
                                 {footer ||
-                                (<div>
+                                <div>
                                     {close && <Button
                                         style={{marginRight: 10}}
                                         size={size === "large" ? "default" : "small"}
@@ -45,7 +45,7 @@ export default class Modal extends Component {
                                         type="primary"
                                         size={size === "large" ? "default" : "small"}
                                         onClick={onOk}>{okText}</Button>}
-                                </div>)}
+                                </div>}
                             </div>}
                         </div>
                     </div>

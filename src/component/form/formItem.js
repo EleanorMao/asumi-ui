@@ -21,9 +21,9 @@ let rules = {
 };
 
 function isRequired(validate, required) {
-    return (required || (validate && validate.some(item => {
+    return required || validate && validate.some(item => {
         return item.required;
-    })));
+    });
 }
 
 export default class FormItem extends Component {
@@ -49,7 +49,7 @@ export default class FormItem extends Component {
         let {maxLength, length, minLength, message, regExp, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
         let valueType = typeof data;
-        let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
+        let hasLen = valueType === "array" && (!type || type === "array") || valueType === "string" && (!type || type === "string");
         if (!fail && required && (data == null || data === "")) {
             fail = true
         }
@@ -130,7 +130,7 @@ export default class FormItem extends Component {
         let output = null;
         switch (type) {
             case "textarea":
-                output = (
+                output = 
                     <Input
                         {...config}
                         type="textarea"
@@ -138,10 +138,10 @@ export default class FormItem extends Component {
                         value={data}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}/>
-                );
+                ;
                 break;
             case "select":
-                output = (
+                output = 
                     <Select
                         {...config}
                         name={name}
@@ -154,10 +154,10 @@ export default class FormItem extends Component {
                             )
                         })}
                     </Select>
-                );
+                ;
                 break;
             case "switch":
-                output = (
+                output = 
                     <Radio
                         {...config}
                         type="switch"
@@ -168,10 +168,10 @@ export default class FormItem extends Component {
                         onChange={this.handleChange.bind(this)}
                         checked={typeof data === "boolean" ? data : on === data}
                     />
-                );
+                ;
                 break;
             case "radio":
-                output = (
+                output = 
                     <RadioGroup
                         {...config}
                         name={name}
@@ -180,10 +180,10 @@ export default class FormItem extends Component {
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
-                );
+                ;
                 break;
             case "radiogroup":
-                output = (
+                output = 
                     <RadioGroup
                         {...config}
                         name={name}
@@ -192,10 +192,10 @@ export default class FormItem extends Component {
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
-                );
+                ;
                 break;
             case "checkbox":
-                output = (
+                output = 
                     <CheckGroup
                         {...config}
                         name={name}
@@ -204,10 +204,10 @@ export default class FormItem extends Component {
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
-                );
+                ;
                 break;
             case "checkgroup":
-                output = (
+                output = 
                     <CheckGroup
                         {...config}
                         name={name}
@@ -216,7 +216,7 @@ export default class FormItem extends Component {
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />
-                );
+                ;
                 break;
             case "static":
                 output = <div className="el-form-control-static">{content || value || data}</div>;
@@ -232,7 +232,7 @@ export default class FormItem extends Component {
                 });
                 break;
             default:
-                output = (
+                output = 
                     <Input
                         {...config}
                         type={type}
@@ -240,7 +240,7 @@ export default class FormItem extends Component {
                         value={data}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
-                    />);
+                    />;
                 break;
         }
         return output;
@@ -257,8 +257,8 @@ export default class FormItem extends Component {
         this._required = _required;
         return (
             <div className={_className} ref={c => this._form_item = c}>
-                {(!label && _required) && <span className="el-required">*</span>}
-                {!!label && (
+                {!label && _required && <span className="el-required">*</span>}
+                {!!label && 
                     <label className="el-form-label" style={labelWidth ? {width: labelWidth, float: 'left'} : null}>
                         {_required && <span className="el-required">*</span>}
                         {label}
@@ -266,7 +266,7 @@ export default class FormItem extends Component {
                         <Popover {...tips} trigger="hover" placement="top">
                             <span className="el-form-tips fa fa-question-circle-o" style={{paddingLeft: 4}}/>
                         </Popover>}
-                    </label>)
+                    </label>
                 }
                 <div className="el-form-control"
                      style={labelWidth ? {marginLeft: labelWidth, display: 'block'} : null}>
