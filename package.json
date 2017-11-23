@@ -12,7 +12,7 @@
     "dev": "webpack-dev-server --config webpack.config.example.js --color",
     "pages": "webpack --config webpack.config.pages.js -p",
     "mock": "json-server --watch db.json --port 3000",
-    "eslint": "eslint src --fix"
+    "eslint": "eslint src"
   },
   "keywords": [
     "react"

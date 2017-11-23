@@ -33,7 +33,7 @@ import TabPanel from './component/tabs/tabPanel';
 import RadioGroup from './component/radio/radioGroup';
 import CheckboxGroup from './component/checkbox/checkGroup';
 import SimplePagination from './component/pagination/simplePagination';
-import DateTime from './component/datetime/datetime';
+import DateTime from './component/datetime';
 
 const Tooltip = Popover;
 
@@ -82,10 +82,10 @@ export {
     TabPanel,
     Dropdown,
     Checkbox,
+    DateTime,
     Pagination,
     RadioGroup,
     CheckboxGroup,
     MenuItemGroup,
     SimplePagination,
-    DateTime
 };

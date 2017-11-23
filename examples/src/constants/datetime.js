@@ -12,8 +12,8 @@ class Foo extends Component {
         return moment(currentDate).isAfter(moment());
     }
 
-    handleChange(name, moment) {
-        this.setState({ date: moment })
+    handleChange({name, value}) {
+        this.setState({ date: value })
     }
 
     render() {
@@ -21,8 +21,8 @@ class Foo extends Component {
         return (
             <div>
                 <DateTime
-                    onChange={this.handleChange.bind(this, 'date')}
-                    value={date}
+                    onChange={this.handleChange.bind(this)}
+                    value={date} name='date'
                     viewMode='days' isValidDate={this.handleValidDate.bind(this)}/>
             </div>
         )
@@ -43,8 +43,8 @@ class Foo extends Component {
         return moment(currentDate).isAfter(moment());
     }
 
-    handleChange(name, moment) {
-        this.setState({ date: moment })
+    handleChange({name, value}) {
+        this.setState({ date: value })
     }
 
     render() {
@@ -54,7 +54,7 @@ class Foo extends Component {
                 <DateTime
                     onChange={this.handleChange.bind(this, 'date')}
                     dateFormat='YYYY年MM月'
-                    value={date}
+                    value={date}  name='date'
                     viewMode='months' isValidDate={this.handleValidDate.bind(this)} />
             </div>
         )
@@ -76,8 +76,8 @@ class Foo extends Component {
         return moment(currentDate).isAfter(moment());
     }
 
-    handleChange(name, moment) {
-        this.setState({ date: moment })
+    handleChange({name, value}) {
+        this.setState({ date: value })
     }
 
     render() {
@@ -85,9 +85,9 @@ class Foo extends Component {
         return (
             <div>
                 <DateTime
-                    onChange={this.handleChange.bind(this, 'date')}
+                    onChange={this.handleChange.bind(this)}
                     dateFormat='YYYY年'
-                    value={date}
+                    value={date} name='date'
                     viewMode='years' />
             </div>
         )
@@ -115,8 +115,13 @@ export const api = [{
     'default': "true",
     description: "If true the time will be displayed using the defaults for the current locale. If false the timepicker is disabled and the component can be used as datepicker."
 }, {
+    property: "name",
+    type: "string",
+    'default': "",
+    description: "name of datetime."
+}, {
     property: "onChange",
-    type: "function(moment|string)",
+    type: "function({value: moment|string, name})",
     'default': "empty function",
     description: "callback trigger when the date changes."
 }, {

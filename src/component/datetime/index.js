@@ -1,20 +1,18 @@
 import React from 'react';
-import assign from 'object-assign';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
 import moment from 'moment';
 import Input from '../input';
+import {noop} from "../util";
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import CalendarContainer from './calendarContainer';
-
-const nof = function () { };
 
 export default class DateTime extends React.Component {
     constructor(props) {
         super(props);
         this.moment = moment;
         this.componentProps = {
-            fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek'],
             fromState: ['viewDate', 'selectedDate', 'updateOn'],
+            fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek'],
             fromThis: ['setDate', 'setTime', 'showView', 'addTime', 'subtractTime', 'updateSelectedDate', 'localMoment', 'handleClickOutside']
         };
         this.allowedSetTime = ['hours', 'minutes', 'seconds', 'milliseconds'];
@@ -49,12 +47,12 @@ export default class DateTime extends React.Component {
             inputValue = date || '';
         }
         return {
+            open: props.open,
             updateOn: updateOn,
-            inputFormat: formats.datetime,
             viewDate: viewDate,
-            selectedDate: selectedDate,
             inputValue: inputValue,
-            open: props.open
+            selectedDate: selectedDate,
+            inputFormat: formats.datetime,
         };
     }
 
@@ -110,9 +108,9 @@ export default class DateTime extends React.Component {
 
     getFormats(props) {
         let formats = {
-            date: props.dateFormat || '',
-            time: props.timeFormat || ''
-        },
+                date: props.dateFormat || '',
+                time: props.timeFormat || ''
+            },
             locale = this.localMoment(props.date, null, props).localeData();
 
         if (formats.date === true) {
@@ -143,9 +141,9 @@ export default class DateTime extends React.Component {
     }
 
     handleClickOutside() {
-        let { open, selectedDate, inputValue } = this.state;
+        let {open, selectedDate, inputValue} = this.state;
         if (this.props.input && open && !this.props.open) {
-            this.setState({ open: false }, () => {
+            this.setState({open: false}, () => {
                 this.props.onBlur(selectedDate || inputValue);
             })
         }
@@ -190,13 +188,13 @@ export default class DateTime extends React.Component {
                 inputValue: date.format(state.inputFormat)
             });
         }
-        this.props.onChange(date);
+        this.props.onChange({name: this.props.name, value: date});
     }
 
     showView(view) {
         let me = this;
         return () => {
-            me.setState({ currentView: view });
+            me.setState({currentView: view});
         }
     }
 
@@ -250,12 +248,12 @@ export default class DateTime extends React.Component {
                 this.closeCalendar();
             }
         }
-        this.props.onChange(date);
+        this.props.onChange({name: this.props.name, value: date});
     }
 
     openCalendar() {
         if (!this.state.open) {
-            this.setState({ open: true }, () => {
+            this.setState({open: true}, () => {
                 this.props.onFocus();
             })
         }
@@ -274,7 +272,7 @@ export default class DateTime extends React.Component {
     getComponentProps() {
         let me = this,
             formats = this.getFormats(this.props),
-            props = { dateFormat: formats.date, timeFormat: formats.time };
+            props = {dateFormat: formats.date, timeFormat: formats.time};
 
         this.componentProps.fromProps.forEach(name => {
             props[name] = me.props[name];
@@ -291,7 +289,7 @@ export default class DateTime extends React.Component {
     onInputChange(e) {
         let value = e.target === null ? e : e.target.value,
             localMoment = this.localMoment(value, this.state.inputFormat),
-            update = { inputValue: value };
+            update = {inputValue: value};
 
         if (localMoment.isValid() && !this.props.value) {
             update.selectedDate = localMoment;
@@ -300,7 +298,10 @@ export default class DateTime extends React.Component {
             update.selectedDate = null;
         }
         return this.setState(update, () => {
-            return this.props.onChange(localMoment.isValid() ? localMoment : this.state.inputValue);
+            return this.props.onChange({
+                value: localMoment.isValid() ? localMoment : this.state.inputValue,
+                name: this.props.name
+            });
         })
     }
 
@@ -309,18 +310,19 @@ export default class DateTime extends React.Component {
     }
 
     render() {
-        let { className, input } = this.props,
-            { inputValue, open, currentView } = this.state,
+        let {className, input} = this.props,
+            {inputValue, open, currentView} = this.state,
             children = [];
         if (input) {
             children.push(
-                <Input key='i' icon={<i className="fa fa-calendar-minus-o" />}
-                    onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange}
-                    onKeyDown={this.onInputKey} value={this.renderInput(inputValue)} />
+                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
+                       onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange}
+                       onKeyDown={this.onInputKey} value={this.renderInput(inputValue)}/>
             );
-        } 
+        }
         return (
-            <div ref='gaga' className={classnames('el-datetime', className, { 'el-static': input }, { 'el-datetime-open': open })}>
+            <div ref='gaga'
+                 className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}>
                 {children}
                 <div key='dt' className='el-datetime-picker'>
                     <CalendarContainer
@@ -340,6 +342,7 @@ DateTime.propTypes = {
     onChange: PropTypes.func,
     locale: PropTypes.string,
     utc: PropTypes.bool,
+    name: PropTypes.string,
     input: PropTypes.bool,
     inputProps: PropTypes.object,
     timeConstraints: PropTypes.object,
@@ -352,15 +355,15 @@ DateTime.propTypes = {
     showWeeks: PropTypes.bool,
     isWeek: PropTypes.bool,
     renderInput: PropTypes.func
-}
+};
 DateTime.defaultProps = {
     className: '',
     defaultValue: '',
     inputProps: {},
     input: true,
-    onFocus: nof,
-    onBlur: nof,
-    onChange: nof,
+    onFocus: noop,
+    onBlur: noop,
+    onChange: noop,
     timeFormat: true,
     timeConstraints: {},
     dateFormat: true,
@@ -370,4 +373,4 @@ DateTime.defaultProps = {
     utc: false,
     showWeeks: false,
     isWeek: false
-}
+};

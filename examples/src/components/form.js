@@ -12,6 +12,7 @@ export default class Main extends Component {
         super(props);
         this.state = {
             data: {
+                date: "",
                 sex: 1,
                 on: "",
                 name: "",
@@ -127,6 +128,10 @@ export default class Main extends Component {
                             label: "上课",
                             on: 1,
                             off: 0,
+                        }, {
+                            name: "date",
+                            type: "datetime",
+                            label: "出生年月"
                         }, {
                             type: "radiogroup",
                             name: "sex",

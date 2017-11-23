@@ -9,9 +9,9 @@ import Button from '../button';
 import {noop, extend} from "../util";
 
 function isRequired({validate, required}) {
-    return required || validate && validate.some(item => {
+    return required || (validate && validate.some(item => {
         return item.required;
-    });
+    }));
 }
 
 export default class Form extends Component {
@@ -149,6 +149,7 @@ Form.propTypes = {
         onChange: PropTypes.func,
         colSpan: PropTypes.number,
         name: PropTypes.string,
+        dataFormat: PropTypes.func,
         labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
         tips: PropTypes.oneOfType([
             PropTypes.string,
@@ -169,7 +170,7 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline'])
 };

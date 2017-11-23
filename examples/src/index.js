@@ -50,8 +50,8 @@ const router = [
             <NavLink to={'/radio'} activeClassName="active">RADIO</NavLink>,
             <NavLink to={'/checkbox'} activeClassName="active">CHECKBOX</NavLink>,
             <NavLink to={'/upload'} activeClassName="active">UPLOAD</NavLink>,
+            <NavLink to={'/datetime'} activeClassName="active">DATETIME</NavLink>,
             <NavLink to={'/form'} activeClassName="active">FORM</NavLink>,
-            <NavLink to={'/datetime'} activeClassName="active">DATETIME</NavLink>
         ]
     },
     {
@@ -86,8 +86,7 @@ const router = [
             <NavLink to={'/animate'} activeClassName="active">ANIMATE</NavLink>,
             <NavLink to={'/Loading'} activeClassName="active">LOADING</NavLink>,
         ]
-    },
-    <NavLink to={'/calendar'} activeClassName="active">CALENDAR</NavLink>
+    }
 ];
 
 ReactDOM.render(

@@ -1,5 +1,5 @@
 import React from 'react';
-import assign from 'object-assign';
+import {extend} from "../util";
 import onClickOutside from 'react-onclickoutside';
 
 class TimeView extends React.Component {
@@ -17,14 +17,14 @@ class TimeView extends React.Component {
     componentWillMount() {
         let me = this;
         me.timeConstraints = {
-            hours: { min: 0, max: 23, step: 1 },
-            minutes: { min: 0, max: 59, step: 1 },
-            seconds: { min: 0, max: 59, step: 1 },
-            milliseconds: { min: 0, max: 999, step: 1 }
+            hours: {min: 0, max: 23, step: 1},
+            minutes: {min: 0, max: 59, step: 1},
+            seconds: {min: 0, max: 59, step: 1},
+            milliseconds: {min: 0, max: 999, step: 1}
         };
         Object.keys(me.timeConstraints).forEach(type => {
-            assign(me.timeConstraints[type], me.props.timeConstraints[type]);
-        })
+            extend(me.timeConstraints[type], me.props.timeConstraints[type]);
+        });
         this.setState(this.calculateState(this.props));
     }
 
@@ -88,7 +88,7 @@ class TimeView extends React.Component {
         let milli = parseInt(e.target.value, 10);
         if (milli === e.target.value && milli >= 0 && milli < 1000) {
             this.props.setTime('milliseconds', milli);
-            this.setState({ milliseconds: milli });
+            this.setState({milliseconds: milli});
         }
     }
 
@@ -131,9 +131,10 @@ class TimeView extends React.Component {
         let date = this.props.selectedDate || this.props.viewDate;
         return (
             <thead key='h'>
-                <tr>
-                    <th className='el-datetime-switch' colSpan='4' onClick={this.props.showView('days')}>{date.format(this.props.dateFormat)}</th>
-                </tr>
+            <tr>
+                <th className='el-datetime-switch' colSpan='4'
+                    onClick={this.props.showView('days')}>{date.format(this.props.dateFormat)}</th>
+            </tr>
             </thead>
         )
     }
@@ -147,9 +148,11 @@ class TimeView extends React.Component {
             }
             return (
                 <div key={type} className='el-datetime-counter'>
-                    <span key='up' className='el-datetime-btn' onMouseDown={this.onStartClicking('increase', type)}>▲</span>
+                    <span key='up' className='el-datetime-btn'
+                          onMouseDown={this.onStartClicking('increase', type)}>▲</span>
                     <div key='c' className='el-datetime-count'>{value}</div>
-                    <span key='do' className='el-datetime-btn' onMouseDown={this.onStartClicking('decrease', type)}>▼</span>
+                    <span key='do' className='el-datetime-btn'
+                          onMouseDown={this.onStartClicking('decrease', type)}>▼</span>
                 </div>
             )
         }
@@ -159,9 +162,11 @@ class TimeView extends React.Component {
     renderDayPart() {
         return (
             <div key='dayPart' className='el-datetimeCounter'>
-                <span key='up' className='el-datetimeBtn' onMouseDown={this.onStartClicking('toggleDayPart', 'hours')}>▲</span>
+                <span key='up' className='el-datetimeBtn'
+                      onMouseDown={this.onStartClicking('toggleDayPart', 'hours')}>▲</span>
                 <div key={this.state.daypart} className='el-datetimeCount'>{this.state.daypart}</div>
-                <span key='do' className='el-datetimeBtn' onMouseDown={this.onStartClicking('toggleDayPart', 'hours')}>▼</span>
+                <span key='do' className='el-datetimeBtn'
+                      onMouseDown={this.onStartClicking('toggleDayPart', 'hours')}>▼</span>
             </div>
         )
     }
@@ -183,7 +188,7 @@ class TimeView extends React.Component {
         if (this.state.counters.length === 3 && this.props.timeFormat.indexOf('S') !== -1) {
             counters.push(<div className='el-datetimeCounterSeparator' key='sep5'>:</div>);
             counters.push(<div className='el-datetimeCounter el-datetimeMilli' key='m'>
-                <input type='text' value={this.state.milliseconds} onChange={this.updateMilli.bind(this)} />
+                <input type='text' value={this.state.milliseconds} onChange={this.updateMilli.bind(this)}/>
             </div>)
         }
         return (
@@ -191,9 +196,11 @@ class TimeView extends React.Component {
                 <table>
                     {this.renderHeader()}
                     <tbody key='b'>
-                        <tr>
-                            <td><div className='el-datetime-counters'>{counters}</div></td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <div className='el-datetime-counters'>{counters}</div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

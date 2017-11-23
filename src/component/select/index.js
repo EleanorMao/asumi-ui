@@ -81,8 +81,8 @@ export default class Select extends Component {
     getData(props) {
         let data = [], renderData = [], allValue = [], selectedLabel = [], selectedValue = [];
         let {value, defaultValue, children} = props;
-        value = isArr(value) ? value :  !value && value != '0' ? [] : [value];
-        defaultValue = isArr(defaultValue) ? defaultValue :  !defaultValue && defaultValue != '0' ? [] : [defaultValue];
+        value = isArr(value) ? value : ( !value && value != '0' ? [] : [value]);
+        defaultValue = isArr(defaultValue) ? defaultValue : ( !defaultValue && defaultValue != '0' ? [] : [defaultValue]);
         selectedValue = value.length ? value : defaultValue;
         if (children) {
             React.Children.map(children, (elm) => {
@@ -158,7 +158,7 @@ export default class Select extends Component {
     handleClose(e) {
         if (this.state.visible && this.el_select && !contains(this.el_select, e.target)) {
             let closeAfterSelect = this.props.closeAfterSelect;
-            if (closeAfterSelect || !closeAfterSelect && !contains(this.el_select_ul, e.target)) {
+            if (closeAfterSelect || (!closeAfterSelect && !contains(this.el_select_ul, e.target))) {
                 this.hideComponent();
             }
         }
@@ -300,7 +300,7 @@ export default class Select extends Component {
                 <ul ref={c => {
                     this.el_select_ul = c
                 }}>
-                    {searchable && !renderData.length &&
+                    {(searchable && !renderData.length) &&
                     <li key="no-data" className="el-select-no-data">{noMatchText}</li>}
                     {this.hasSelectAll() &&
                     <Option

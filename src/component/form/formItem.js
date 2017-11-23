@@ -9,9 +9,11 @@ import Input from '../input';
 import Radio from '../radio';
 import Select from '../select';
 import Popover from '../popover';
+import Datetime from '../datetime';
 import Option from '../select/option';
 import RadioGroup from '../radio/radioGroup';
 import CheckGroup from '../checkbox/checkGroup';
+import {noop} from "../util";
 
 let rules = {
     price: /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/,
@@ -21,9 +23,9 @@ let rules = {
 };
 
 function isRequired(validate, required) {
-    return required || validate && validate.some(item => {
+    return required || (validate && validate.some(item => {
         return item.required;
-    });
+    }));
 }
 
 export default class FormItem extends Component {
@@ -49,7 +51,7 @@ export default class FormItem extends Component {
         let {maxLength, length, minLength, message, regExp, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
         let valueType = typeof data;
-        let hasLen = valueType === "array" && (!type || type === "array") || valueType === "string" && (!type || type === "string");
+        let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
         if (!fail && required && (data == null || data === "")) {
             fail = true
         }
@@ -125,23 +127,22 @@ export default class FormItem extends Component {
     }
 
     itemRender() {
-        let {on, off, tips, col, name, data, component, className, content, value, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, labelWidth, ...config} = this.props;
+        let {on, off, tips, col, name, data, component, className, dataFormat, content, value, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, labelWidth, ...config} = this.props;
         if (children) return children;
         let output = null;
         switch (type) {
             case "textarea":
-                output = 
+                output =
                     <Input
                         {...config}
                         type="textarea"
                         name={name}
                         value={data}
                         onBlur={this.handleBlur.bind(this)}
-                        onChange={this.handleChange.bind(this)}/>
-                ;
+                        onChange={this.handleChange.bind(this)}/>;
                 break;
             case "select":
-                output = 
+                output =
                     <Select
                         {...config}
                         name={name}
@@ -153,11 +154,10 @@ export default class FormItem extends Component {
                                 <Option key={item.value} {...item}/>
                             )
                         })}
-                    </Select>
-                ;
+                    </Select>;
                 break;
             case "switch":
-                output = 
+                output =
                     <Radio
                         {...config}
                         type="switch"
@@ -167,11 +167,10 @@ export default class FormItem extends Component {
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                         checked={typeof data === "boolean" ? data : on === data}
-                    />
-                ;
+                    />;
                 break;
             case "radio":
-                output = 
+                output =
                     <RadioGroup
                         {...config}
                         name={name}
@@ -179,11 +178,10 @@ export default class FormItem extends Component {
                         options={options}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
-                    />
-                ;
+                    />;
                 break;
             case "radiogroup":
-                output = 
+                output =
                     <RadioGroup
                         {...config}
                         name={name}
@@ -191,11 +189,10 @@ export default class FormItem extends Component {
                         options={options}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
-                    />
-                ;
+                    />;
                 break;
             case "checkbox":
-                output = 
+                output =
                     <CheckGroup
                         {...config}
                         name={name}
@@ -203,11 +200,10 @@ export default class FormItem extends Component {
                         checkedList={data}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
-                    />
-                ;
+                    />;
                 break;
             case "checkgroup":
-                output = 
+                output =
                     <CheckGroup
                         {...config}
                         name={name}
@@ -215,11 +211,22 @@ export default class FormItem extends Component {
                         checkedList={data}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
-                    />
-                ;
+                    />;
+                break;
+            case "datetime":
+                output = <Datetime
+                    {...config}
+                    name={name}
+                    value={data}
+                    onBlur={this.handleBlur.bind(this)}
+                    onChange={this.handleChange.bind(this)}
+                />;
                 break;
             case "static":
-                output = <div className="el-form-control-static">{content || value || data}</div>;
+                output = <div
+                    className="el-form-control-static">
+                    {dataFormat ? dataFormat(data) : (content || value || data)}
+                </div>;
                 break;
             case "component":
                 output = React.cloneElement(component, {
@@ -232,7 +239,7 @@ export default class FormItem extends Component {
                 });
                 break;
             default:
-                output = 
+                output =
                     <Input
                         {...config}
                         type={type}
@@ -258,15 +265,15 @@ export default class FormItem extends Component {
         return (
             <div className={_className} ref={c => this._form_item = c}>
                 {!label && _required && <span className="el-required">*</span>}
-                {!!label && 
-                    <label className="el-form-label" style={labelWidth ? {width: labelWidth, float: 'left'} : null}>
-                        {_required && <span className="el-required">*</span>}
-                        {label}
-                        {!!tips &&
-                        <Popover {...tips} trigger="hover" placement="top">
-                            <span className="el-form-tips fa fa-question-circle-o" style={{paddingLeft: 4}}/>
-                        </Popover>}
-                    </label>
+                {!!label &&
+                <label className="el-form-label" style={labelWidth ? {width: labelWidth, float: 'left'} : null}>
+                    {_required && <span className="el-required">*</span>}
+                    {label}
+                    {!!tips &&
+                    <Popover {...tips} trigger="hover" placement="top">
+                        <span className="el-form-tips fa fa-question-circle-o" style={{paddingLeft: 4}}/>
+                    </Popover>}
+                </label>
                 }
                 <div className="el-form-control"
                      style={labelWidth ? {marginLeft: labelWidth, display: 'block'} : null}>
@@ -285,6 +292,7 @@ FormItem.propTypes = {
     required: PropTypes.bool,
     onChange: PropTypes.func,
     labelWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    dataFormat: PropTypes.func,
     tips: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
@@ -303,7 +311,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'static', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+    type: PropTypes.oneOf(['text', 'color', 'static', 'datetime', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
 };
 
 FormItem.defaultProps = {

@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
 import moment from 'moment';
 import Panel from "./panel";
-import { basic, week, year, api } from '../constants/datetime'
-import { DateTime, Table, Col } from '../../../src';
+import React, {Component} from 'react';
+import {DateTime, Table, Col} from '../../../src';
+import {basic, week, year, api} from '../constants/datetime'
+
 moment.locale('zh-CN');
 
 export default class Main extends Component {
@@ -17,12 +18,12 @@ export default class Main extends Component {
         return moment(currentDate).isBefore(moment());
     }
 
-    handleChange(name, moment) {
-        this.setState({ [name]: moment })
+    handleChange({name, value}) {
+        this.setState({[name]: value})
     }
 
     render() {
-        let { date } = this.state;
+        let {date} = this.state;
         return (
             <div className="content">
                 <h1>DateTime 日期选择器</h1>
@@ -31,9 +32,9 @@ export default class Main extends Component {
                     code={basic}
                 >
                     <DateTime
-                        onChange={this.handleChange.bind(this, 'date')} className={['aaa', 'bbb']}
-                        value={date}
-                        viewMode='days' isValidDate={this.handleValidDate.bind(this)} />
+                        onChange={this.handleChange.bind(this)} className={['aaa', 'bbb']}
+                        value={date} name="date"
+                        viewMode='days' isValidDate={this.handleValidDate.bind(this)}/>
                 </Panel>
 
 
@@ -42,10 +43,10 @@ export default class Main extends Component {
                     code={week}
                 >
                     <DateTime
-                        onChange={this.handleChange.bind(this, 'date')}
+                        onChange={this.handleChange.bind(this)}
                         dateFormat='YYYY年MM月'
-                        value={date}
-                        viewMode='months' isValidDate={this.handleValidDate.bind(this)} />
+                        value={date} name="date"
+                        viewMode='months' isValidDate={this.handleValidDate.bind(this)}/>
                 </Panel>
 
 
@@ -54,10 +55,10 @@ export default class Main extends Component {
                     code={year}
                 >
                     <DateTime
-                        onChange={this.handleChange.bind(this, 'date')}
+                        onChange={this.handleChange.bind(this)}
                         dateFormat='YYYY年'
-                        value={date}
-                        viewMode='years' />
+                        value={date} name="date"
+                        viewMode='years'/>
                 </Panel>
 
                 <h1>API of DateTime</h1>

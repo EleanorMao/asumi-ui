@@ -265,7 +265,7 @@ export default class Editor extends Component {
         let midText = value.slice(selectionStart, selectionEnd) || handler;
         let endText = value.slice(selectionEnd);
         let offset = 1;
-        if (!startText.length && />\s*[\s\S]+[\r\n\f]+$/.test(midText) || /\s*/.test(endText) && /[\r\n\f]+>\s*[\s\S]+[\r\n\f]*$/.test(midText)) {
+        if ((!startText.length && />\s*[\s\S]+[\r\n\f]+$/.test(midText)) || (/\s*/.test(endText) && /[\r\n\f]+>\s*[\s\S]+[\r\n\f]*$/.test(midText))) {
             midText = midText.replace(/[\s]*>\s*|[\r\n\f]*$/g, "");
         } else if (/[\r\n\f]+>\s*$/.test(startText) || /^[\r\n\f]*>\s*$/.test(startText)) {
             offset = 0;
