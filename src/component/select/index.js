@@ -175,13 +175,13 @@ export default class Select extends Component {
     }
 
     handleRemoveClass() {
-        if (this.index >= 0) {
+        if (this.index >= 0 && this.el_select_ul.children[this.index]) {
             this.el_select_ul.children[this.index].classList.remove('el-select-selected');
         }
     }
 
     handleAddClass() {
-        if (this.index >= 0) {
+        if (this.index >= 0 && this.el_select_ul.children[this.index]) {
             this.el_select_ul.children[this.index].classList.add('el-select-selected');
         }
     }
