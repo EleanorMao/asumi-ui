@@ -9,7 +9,6 @@ import CalendarContainer from './calendarContainer';
 export default class DateTime extends React.Component {
     constructor(props) {
         super(props);
-        this.moment = moment;
         this.componentProps = {
             fromState: ['viewDate', 'selectedDate', 'updateOn'],
             fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek'],

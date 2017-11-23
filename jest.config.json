@@ -1,0 +1,15 @@
+{
+  "setupFiles": [
+    "./__tests__/setup.js"
+  ],
+  "testRegex": "__tests__.*.test.(ts|tsx|js)$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "json"
+  ],
+  "transform": {
+    "^.+\\.js$": "babel-jest"
+  }
+}

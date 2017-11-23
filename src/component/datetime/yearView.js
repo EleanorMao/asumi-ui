@@ -23,12 +23,12 @@ class YearView extends React.Component {
     }
 
     renderYears(year) {
-        let years = [],
+        let { renderYear, selectedDate, isValidDate, viewDate, updateOn, setDate } = this.props,
+            years = [],
             i = -1,
             rows = [],
-            renderer = this.props.renderYear || this.renderYear,
-            selectedDate = this.props.selectedDate,
-            isValid = this.props.isValidDate || this.alwaysValidDate,
+            renderer = renderYear || this.renderYear,
+            isValid = isValidDate || this.alwaysValidDate,
             classes, props, currentYear, isDisabled, noOfDaysInYear, daysInYear, validDay,
             irrelevantMonth = 0,
             irrelevantDate = 1;
@@ -36,7 +36,7 @@ class YearView extends React.Component {
         year--;
         while (i < 11) {
             classes = 'el-datetime-year';
-            currentYear = this.props.viewDate.clone().set(
+            currentYear = viewDate.clone().set(
                 { year: year, month: irrelevantMonth, date: irrelevantDate }
             );
 
@@ -62,8 +62,8 @@ class YearView extends React.Component {
             }
 
             if (!isDisabled) {
-                props.onClick = this.props.updateOn === 'years' ?
-                    this.updateSelectedYear.bind(this) : this.props.setDate('year');
+                props.onClick = updateOn === 'years' ?
+                    this.updateSelectedYear.bind(this) : setDate('year');
             }
             years.push(renderer(props, year, selectedDate && selectedDate.clone()));
             if (years.length === 4) {
@@ -80,7 +80,7 @@ class YearView extends React.Component {
         let year = parseInt(this.props.viewDate.year() / 10, 10) * 10;
         return (
             <div className='el-datetime-years'>
-                <table key='a'>
+                <table>
                     <thead>
                         <tr>
                             <th key='prev' className='el-datetime-prev'><span onClick={this.props.subtractTime(10, 'years')}>‹</span></th>
