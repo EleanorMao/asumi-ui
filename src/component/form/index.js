@@ -117,19 +117,18 @@ export default class Form extends Component {
                 })}
                 {React.Children.map(_children, (elm, index) => {
                     if (elm && elm.type && elm.type.name === "FormItem") {
-                        let props = elm.props;
-                        return React.cloneElement(elm, extend({
-                            key: index,
+                        let props = extend({
                             colon: colon,
                             labelWidth: labelWidth,
-                            onChange: this.handleChange.bind(this, props),
+                            onChange: this.handleChange.bind(this, elm.props),
                         }, props, {
                             col: col,
-                            data: data[props.name],
-                            required: isRequired(props),
+                            required: isRequired(elm.props),
                             beforeSubmit: this.state.beforeSubmit,
-                            validator: this.handleDisabled.bind(this, props)
-                        }))
+                            data: elm.props ? data[elm.props.name] : undefined,
+                            validator: this.handleDisabled.bind(this, elm.props)
+                        });
+                        return React.cloneElement(elm, props)
                     } else {
                         return React.cloneElement(elm, {key: index});
                     }
