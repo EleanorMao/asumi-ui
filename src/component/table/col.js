@@ -1,3 +1,6 @@
+/**
+ * Created by elly on 2016/9/19.
+ */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 

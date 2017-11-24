@@ -1,5 +1,6 @@
 /**
  * Created by Elly on 2016/5/27.
+ * This project is by Eleanor Mao.
  */
 
 import Menu from './component/menu';

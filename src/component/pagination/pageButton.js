@@ -1,3 +1,6 @@
+/**
+ * Created by elly on 2017/4/28.
+ */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classSet from 'classnames';
