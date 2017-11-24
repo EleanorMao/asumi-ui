@@ -92,13 +92,13 @@ export default class Form extends Component {
     }
 
     render() {
-        let {data, options, colNum, error, colon, disabled, style, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children} = this.props;
+        let {data, options, colNum, error, colon, disabled, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children, ...other} = this.props;
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         let _disabled = this.state.disabled || disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
         let renderChildren = isArr(children) ? children : [children];
         return (
-            <form className={_className} style={style}>
+            <form className={_className} {...other}>
                 {!!title && <div className="el-form-title">{title}</div>}
                 {options.map((props, index) => {
                     return (
@@ -158,18 +158,27 @@ export default class Form extends Component {
 
 Form.propTypes = {
     colon: PropTypes.bool,
+    name: PropTypes.string,
     error: PropTypes.string,
+    action: PropTypes.string,
+    method: PropTypes.string,
+    target: PropTypes.string,
     colNum: PropTypes.number,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
+    encType: PropTypes.string,
     validator: PropTypes.func,
+    submitText: PropTypes.any,
+    submitItems: PropTypes.any,
+    novalidate: PropTypes.string,
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
     submitButtonOptions: PropTypes.object,
     labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     options: PropTypes.arrayOf(PropTypes.shape({
+        colon: PropTypes.bool,
         label: PropTypes.string,
         required: PropTypes.bool,
         onChange: PropTypes.func,
@@ -192,7 +201,7 @@ Form.propTypes = {
             required: PropTypes.bool,
             validator: PropTypes.func,
             message: PropTypes.string,
-            regExp: PropTypes.instanceOf(RegExp),
+            pattern: PropTypes.instanceOf(RegExp),
             min: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
             max: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
             trigger: PropTypes.oneOf(['blur', 'change', 'submit']),
@@ -201,7 +210,7 @@ Form.propTypes = {
         })),
         type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup']),
     })),
-    layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline'])
+    layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline']),
 };
 
 Form.defaultProps = {

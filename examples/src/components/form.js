@@ -3,8 +3,18 @@
  */
 import React, {Component, PropTypes} from 'react';
 import Panel from './panel';
-import {Form, FormItem} from '../../../src';
-import {basic, validate} from "../constants/form";
+import {Form, FormItem, Table, Col} from '../../../src';
+import {
+    inline,
+    horizontal,
+    vertical,
+    col,
+    validate,
+    formitem,
+    api,
+    apiOfFormItem,
+    apiOfValidate
+} from "../constants/form";
 
 export default class Main extends Component {
     constructor(props) {
@@ -31,7 +41,7 @@ export default class Main extends Component {
                 avatar: "",
                 checkbox: "",
                 classes: [1],
-                markdown: "",
+                markdown: "所有您定义在Form上的props都会传入FormItem, 当然您可以选择覆盖他",
                 description: "",
             }
         }
@@ -50,13 +60,13 @@ export default class Main extends Component {
             <div className="content">
                 <h1>Form 表单</h1>
                 <Panel
-                    title="basic"
-                    code={basic}
+                    title="basic inline"
+                    code={inline}
                 >
                     <Form
                         layout="inline"
                         data={this.state.basic}
-                        title="basic inlie form"
+                        title="basic inline form"
                         onChange={this.handleChange.bind(this, 'basic')}
                         options={[{
                             type: "text",
@@ -70,7 +80,11 @@ export default class Main extends Component {
                             placeholder: "请输入手机号",
                         }]}
                     />
-                    <hr/>
+                </Panel>
+                <Panel
+                    title="basic col"
+                    code={col}
+                >
                     <Form
                         colNum={3}
                         colon={true}
@@ -85,7 +99,11 @@ export default class Main extends Component {
                             }
                         })}
                     />
-                    <hr/>
+                </Panel>
+                <Panel
+                    title="basic horizontal"
+                    code={horizontal}
+                >
                     <Form
                         data={this.state.basic}
                         title="basic horizontal form"
@@ -103,7 +121,11 @@ export default class Main extends Component {
                             required: true
                         }]}
                     />
-                    <hr/>
+                </Panel>
+                <Panel
+                    title="basic vertical"
+                    code={vertical}
+                >
                     <Form
                         colon={true}
                         layout="vertical"
@@ -201,7 +223,16 @@ export default class Main extends Component {
                                 label: "出生年月"
                             }
                         ]}
-                    >
+                    />
+                </Panel>
+                <Panel
+                    title="form item"
+                    code={formitem}
+                >
+                    <Form
+                        labelWidth={120}
+                        data={this.state.data}
+                        onChange={this.handleChange.bind(this, 'data')}>
                         <FormItem
                             type="radiogroup"
                             name="sex"
@@ -237,6 +268,27 @@ export default class Main extends Component {
                         <div style={{marginLeft: 120}}>请认真填写您的信息</div>
                     </Form>
                 </Panel>
+                <h1>API of Form</h1>
+                <Table isKey="property" data={api} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
+                <h1>API of FormItem</h1>
+                <Table isKey="property" data={apiOfFormItem} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
+                <h1>API of Validate</h1>
+                <Table isKey="property" data={apiOfValidate} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
             </div>
         )
     }

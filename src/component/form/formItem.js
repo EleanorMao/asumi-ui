@@ -49,7 +49,7 @@ export default class FormItem extends Component {
     }
 
     validator(item, data) {
-        let {maxLength, length, minLength, message, regExp, instance, rule, required, validator, type} = item;
+        let {maxLength, length, isLocaleCompare, min, max, minLength, message, pattern, instance, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
         let valueType = Object.prototype.toString.call(data).toLowerCase().slice(8, -1);
         let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
@@ -62,6 +62,20 @@ export default class FormItem extends Component {
         if (!fail && type && valueType !== type) {
             fail = true;
         }
+        if (!fail && min != null) {
+            if (isLocaleCompare && valueType === "string" && data.localeCompare(min) < 0) {
+                fail = true;
+            } else if (data < min) {
+                fail = true;
+            }
+        }
+        if (!fail && max != null) {
+            if (isLocaleCompare && valueType === "string" && data.localeCompare(max) > 0) {
+                fail = true;
+            } else if (data > max) {
+                fail = true;
+            }
+        }
         if (!fail && length != null && hasLen && data.length !== length) {
             fail = true;
         }
@@ -71,8 +85,8 @@ export default class FormItem extends Component {
         if (!fail && maxLength != null && hasLen && data.length > maxLength) {
             fail = true;
         }
-        if (!fail && Object.prototype.toString.call(regExp) === '[object RegExp]') {
-            reg = regExp;
+        if (!fail && Object.prototype.toString.call(pattern) === '[object RegExp]') {
+            reg = pattern;
         } else if (!fail && rule) {
             reg = rules[rule];
         }
@@ -328,7 +342,8 @@ FormItem.propTypes = {
         length: PropTypes.number,
         strict: PropTypes.bool,
         validator: PropTypes.func,
-        regExp: PropTypes.instanceOf(RegExp),
+        isLocaleCompare: PropTypes.bool,
+        pattern: PropTypes.instanceOf(RegExp),
         instance: PropTypes.any,
         trigger: PropTypes.oneOf(['blur', 'change', 'submit']),
         mix: PropTypes.oneOf([PropTypes.string, PropTypes.number]),

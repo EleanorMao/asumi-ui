@@ -1,4 +1,4 @@
-export const basic = `import {Form} from 'asumi';
+export const inline = `import {Form} from 'asumi';
 import React, {Component} from 'react';
 
 class Main extends Component {
@@ -8,21 +8,13 @@ class Main extends Component {
             basic: {
                 name: "",
                 phone: ""
-            },
-            col: {
-                field1: "",
-                field2: "",
-                field3: "",
-                field4: "",
-                field5: "",
-                field6: "",
             }
         }
     }
     
-    handleChange(stateName, {name, value}) {
+    handleChange({name, value}) {
         this.setState(prev => {
-            prev[stateName][name] = value;
+            prev.basic[name] = value;
             return prev;
         });
     }
@@ -34,7 +26,7 @@ class Main extends Component {
                     layout="inline"
                     data={this.state.basic}
                     title="basic inlie form"
-                    onChange={this.handleChange.bind(this, 'basic')}
+                    onChange={this.handleChange.bind(this)}
                     options={[{
                         type: "text",
                         name: "name",
@@ -47,13 +39,46 @@ class Main extends Component {
                         placeholder: "请输入手机号",
                     }]}
                 />
-                <hr/>
+            </div>
+        )
+    }
+}
+`;
+
+export const col = `import {Form} from 'asumi';
+import React, {Component} from 'react';
+
+class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            col: {
+                field1: "",
+                field2: "",
+                field3: "",
+                field4: "",
+                field5: "",
+                field6: "",
+            }
+        }
+    }
+    
+    handleChange({name, value}) {
+        this.setState(prev => {
+            prev.col[name] = value;
+            return prev;
+        });
+    }
+    
+    render(){
+        return (
+            <div>
                 <Form
                     colNum={3}
                     colon={true}
                     data={this.state.col}
                     title="basic col form"
-                    onChange={this.handleChange.bind(this, 'col')}
+                    onChange={this.handleChange.bind(this)}
                     options={Object.keys(this.state.col).map(name => {
                         return {
                             name: name,
@@ -62,31 +87,41 @@ class Main extends Component {
                         }
                     })}
                 />
-                <hr/>
+            </div>
+        )
+    }
+}
+`;
+
+export const horizontal = `import {Form} from 'asumi';
+import React, {Component} from 'react';
+
+class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            basic: {
+                name: "",
+                phone: ""
+            }
+        }
+    }
+    
+    handleChange(stateName, {name, value}) {
+        this.setState(prev => {
+            prev.basic[name] = value;
+            return prev;
+        });
+    }
+    
+    render(){
+        return (
+            <div>
                 <Form
                     data={this.state.basic}
                     title="basic horizontal form"
                     submitButtonOptions={{style: {marginLeft: 80}}}
-                    onChange={this.handleChange.bind(this, 'basic')}
-                    options={[{
-                        type: "text",
-                        label: "登录名",
-                        name: "name",
-                        required: true
-                    }, {
-                        type: "text",
-                        label: "手机号",
-                        name: "phone",
-                        required: true
-                    }]}
-                />
-                <hr/>
-                <Form
-                    colon={true}
-                    layout="vertical"
-                    data={this.state.basic}
-                    title="basic vertical form"
-                    onChange={this.handleChange.bind(this, 'basic')}
+                    onChange={this.handleChange.bind(this)}
                     options={[{
                         type: "text",
                         label: "登录名",
@@ -105,9 +140,56 @@ class Main extends Component {
 }
 `;
 
-export const validate = `import {Form, FormItem} from 'asumi';
+export const vertical = `import {Form} from 'asumi';
 import React, {Component} from 'react';
-//const FormItem = Form.FormItem;
+
+class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            basic: {
+                name: "",
+                phone: ""
+            }
+        }
+    }
+    
+    handleChange(stateName, {name, value}) {
+        this.setState(prev => {
+            prev.basic[name] = value;
+            return prev;
+        });
+    }
+    
+    render(){
+        return (
+            <div>
+                <Form
+                    colon={true}
+                    layout="vertical"
+                    data={this.state.basic}
+                    title="basic vertical form"
+                    onChange={this.handleChange.bind(this)}
+                    options={[{
+                        type: "text",
+                        label: "登录名",
+                        name: "name",
+                        required: true
+                    }, {
+                        type: "text",
+                        label: "手机号",
+                        name: "phone",
+                        required: true
+                    }]}
+                />
+            </div>
+        )
+    }
+}
+`;
+
+export const validate = `import {Form} from 'asumi';
+import React, {Component} from 'react';
 
 class Main extends Component {
     constructor(props) {
@@ -139,7 +221,7 @@ class Main extends Component {
                 <Form
                     labelWidth={120}
                     data={this.state.data}
-                    onChange={this.handleChange.bind(this, 'data')}
+                    onChange={this.handleChange.bind(this)}
                     options={[
                         {
                             type: "text",
@@ -211,6 +293,49 @@ class Main extends Component {
                         }
                     ]}
                 >
+                </Form>
+            </div>
+        )
+    }
+}
+`;
+
+export const formitem = `import {Form, FormItem} from 'asumi';
+import React, {Component} from 'react';
+//const FormItem = Form.FormItem;
+
+class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: {
+                date: "",
+                sex: 1,
+                on: "",
+                name: "",
+                grade: "",
+                checkbox: "",
+                classes: [1],
+                description: "",
+            }
+        }
+    }
+    
+    handleChange({name, value}) {
+        this.setState(prev => {
+            prev.data[name] = value;
+            return prev;
+        });
+    }
+    
+    render(){
+        return (
+            <div>
+                <Form
+                    labelWidth={120}
+                    data={this.state.data}
+                    onChange={this.handleChange.bind(this)}
+                >
                     <FormItem
                         type="radiogroup"
                         name="sex"
@@ -245,3 +370,264 @@ class Main extends Component {
     }
 }
 `;
+
+export const api = [{
+    property: "layout",
+    type: "string",
+    'default': "horizontal",
+    description: "Define the layout. Options: horizontal, vertical, inline."
+}, {
+    property: "data",
+    type: "object",
+    'default': "",
+    description: "form data. is required."
+}, {
+    property: "options",
+    type: "array",
+    'default': "",
+    description: "Define form item. more detail api please refer to FormItem."
+}, {
+    property: "labelWidth",
+    type: "number | string",
+    'default': "",
+    description: "label width"
+}, {
+    property: "title",
+    type: "any",
+    'default': "",
+    description: "form title"
+}, {
+    property: "className",
+    type: "string",
+    'default': "",
+    description: "form class name"
+}, {
+    property: "style",
+    type: "object",
+    'default': "",
+    description: "form style"
+}, {
+    property: "colon",
+    type: "bool",
+    'default': "",
+    description: "whether display :  after label text"
+}, {
+    property: "colNum",
+    type: "number",
+    'default': "",
+    description: "col number of form item in one row, max is 12"
+}, {
+    property: "disabled",
+    type: "bool",
+    'default': "",
+    description: "disabled submit button"
+}, {
+    property: "error",
+    type: "string",
+    'default': "",
+    description: "error message in form"
+}, {
+    property: "hideSubmitButton",
+    type: "bool",
+    'default': "",
+    description: "whether hide submit button or not"
+}, {
+    property: "submitText",
+    type: "any",
+    'default': "",
+    description: "text in submit button"
+}, {
+    property: "submitItems",
+    type: "any",
+    'default': "",
+    description: "items display after submit button"
+}, {
+    property: "submitButtonOptions",
+    type: "object",
+    'default': "",
+    description: "submit button props"
+}, {
+    property: "validator",
+    type: "func",
+    'default': "()=>{ return disabled}",
+    description: "form validator. return if disabled"
+}, {
+    property: "onChange",
+    type: "func",
+    'default': "({e, name, value})=>{}",
+    description: "invoke when form item on change"
+}, {
+    property: "onSubmit",
+    type: "func",
+    'default': "()=>{}",
+    description: "invoke when press submit button"
+}, {
+    property: "...other",
+    type: "",
+    'default': "",
+    description: "Other property can work on a <form> tag"
+}];
+
+export const apiOfFormItem = [{
+    property: "label",
+    type: "string",
+    'default': "",
+    description: "label text"
+}, {
+    property: "name",
+    type: "string",
+    'default': "",
+    description: "form item name"
+}, {
+    property: "data",
+    type: "any",
+    'default': "",
+    description: "form item data, form will define automatically according to the name"
+}, {
+    property: "required",
+    type: "bool",
+    'default': "",
+    description: "if data required"
+}, {
+    property: "labelWidth",
+    type: "number | string",
+    'default': "",
+    description: "label width"
+}, {
+    property: "type",
+    type: "string",
+    'default': "text",
+    description: "type of form item. Options: text, color, editor, static, datetime, component, password, textarea, select, checkbox, radio, switch, upload, radiogroup, checkgroup"
+}, {
+    property: "tips",
+    type: "string | {title: string, content: any}",
+    'default': "",
+    description: "define tips"
+}, {
+    property: "validateType",
+    type: "string",
+    'default': "error",
+    description: "define validate type, when validator failed, message will display by this type. Options: error, warning"
+}, {
+    property: "validate",
+    type: "array[object]",
+    'default': "[]",
+    description: "detail information please view validate api"
+}, {
+    property: "onChange",
+    type: "func",
+    'default': "({name, value})=>{}",
+    description: "you can register onChange function on form, so you needn't define this in every form item"
+}, {
+    property: "onBlur",
+    type: "func",
+    'default': "()=>{}",
+    description: "invoke when blur"
+}, {
+    property: "colon",
+    type: "bool",
+    'default': "",
+    description: "whether display :  after label text"
+}, {
+    property: "colSpan",
+    type: "number",
+    'default': "",
+    description: "defined how much col form item hold, only effect when colNum defined."
+}, {
+    property: "dataFormat",
+    type: "func",
+    'default': "(data)=>{}",
+    description: "format data, only effect when type is static"
+}, {
+    property: "content | value",
+    type: "any",
+    'default': "",
+    description: "content of static form item"
+}, {
+    property: "component",
+    type: "any",
+    'default': "",
+    description: "define custom component, when form item type is component. FormItem will give component props {name, value, data, onBlur, onChange}, and you can cover it, if you want"
+}, {
+    property: "options",
+    type: "array",
+    'default': "",
+    description: "define options, when form item type is radiogroup, checkboxgroup, select"
+}, {
+    property: "children",
+    type: "any",
+    'default': "",
+    description: "it while cover other form item type except its a upload"
+}, {
+    property: "...Other",
+    type: "",
+    'default': "",
+    description: "other props can use in form item or custom component"
+}];
+
+export const apiOfValidate = [{
+    property: "trigger",
+    type: "string",
+    'default': "",
+    description: "define when trigger validate. Options: blur, change, submit"
+}, {
+    property: "message",
+    type: "string",
+    'default': "",
+    description: "message when validate fail"
+}, {
+    property: "rule",
+    type: "string",
+    'default': "",
+    description: "Options: color(/^#[0-9a-fA-F]{0,6}$/), price(/^((0|[1-9]d{0,7})(.d{0,2})?)?$/), nature(/^(0?|[1-9]d{0,7})$/), positiveInt( /^([1-9]d{0,7})?$/)"
+}, {
+    property: "type",
+    type: "string",
+    'default': "",
+    description: "type of form item value. Options: boolean, array, string, object, number, moment"
+}, {
+    property: "instance",
+    type: "any",
+    'default': "",
+    description: "instance of form item value."
+}, {
+    property: "pattern",
+    type: "RegExp",
+    'default': "",
+    description: "Regexp pattern"
+}, {
+    property: "length",
+    type: "number",
+    'default': "",
+    description: "define value length"
+}, {
+    property: "maxLength",
+    type: "number",
+    'default': "",
+    description: "define max length of value"
+}, {
+    property: "mixLength",
+    type: "number",
+    'default': "",
+    description: "define min length of value"
+}, {
+    property: "max",
+    type: "any",
+    'default': "",
+    description: "max value"
+}, {
+    property: "min",
+    type: "any",
+    'default': "",
+    description: "min value"
+}, {
+    property: "isLocaleCompare",
+    type: "bool",
+    'default': "",
+    description: "whether use localeCompare or not when compare, only if form item value is string type"
+}, {
+    property: "validator",
+    type: "func",
+    'default': "(form props)=>{ return disabled}",
+    description: "define custom validator"
+}];
