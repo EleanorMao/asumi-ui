@@ -30,7 +30,7 @@ export default class CheckGroup extends Component {
         let checkedList = [];
         if (checked) {
             checkedList = options.map(item => {
-                if (typeof  item === "string") {
+                if (typeof item === "string") {
                     return item;
                 }
                 return item.value

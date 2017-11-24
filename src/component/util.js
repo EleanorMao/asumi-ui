@@ -116,3 +116,10 @@ export let KeyCode = {
     DOWN: 40,
     UP: 38
 };
+
+export let rules = {
+    price: /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/,
+    positiveInt: /^([1-9]\d{0,7})?$/,
+    nature: /^(0?|[1-9]\d{0,7})$/,
+    color: /^#[0-9a-fA-F]{0,6}$/
+}

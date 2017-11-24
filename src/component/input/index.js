@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {KeyCode} from "../util";
+import {KeyCode, rules} from "../util";
 
 export default class Input extends Component {
     constructor(props) {
@@ -15,22 +15,22 @@ export default class Input extends Component {
         const {name, value} = e.target;
         const {rule, pattern, maxLength} = this.props;
         if (rule === 'price') { //金额相关 8+2
-            let reg = /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/;
+            let reg = rules.price;
             if (!reg.test(value)) {
                 return;
             }
         } else if (rule === 'positiveInt') { //正整数 8
-            let reg = /^([1-9]\d{0,7})?$/;
+            let reg = rules.positiveInt;
             if (!reg.test(value)) {
                 return;
             }
         } else if (rule === 'nature') { //自然数 非负整数
-            let reg = /^(0?|[1-9]\d{0,7})$/;
+            let reg = rules.nature;
             if (!reg.test(value)) {
                 return;
             }
         } else if (rule === 'color') { //颜色
-            let reg = /^#[0-9a-fA-F]{0,6}$/;
+            let reg = rules.color;
             if (value && !reg.test(value)) {
                 return;
             }

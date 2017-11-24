@@ -15,13 +15,8 @@ import Datetime from '../datetime';
 import Option from '../select/option';
 import RadioGroup from '../radio/radioGroup';
 import CheckGroup from '../checkbox/checkGroup';
+import {rules} from "../util";
 
-let rules = {
-    price: /^((0|[1-9]\d{0,7})(\.\d{0,2})?)?$/,
-    positiveInt: /^([1-9]\d{0,7})?$/,
-    nature: /^(0?|[1-9]\d{0,7})$/,
-    color: /^#[0-9a-fA-F]{0,6}$/
-};
 
 function isRequired(validate, required) {
     return required || (validate && validate.some(item => {

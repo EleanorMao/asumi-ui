@@ -4,18 +4,18 @@
 import React, {Component} from 'react';
 import {extend} from '../util';
 
-export default  class Group extends Component {
+export default class Group extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        let {children, style, ...other} = this.props;
+        let {children, defaultStyle, style, ...other} = this.props;
         return (
             <div className="el-group">
                 {React.Children.map(children, (elm) => {
-                    if (!elm)return;
-                    return React.cloneElement(elm, {style: extend({}, {marginRight: 10}, style), ...other});
+                    if (!elm) return;
+                    return React.cloneElement(elm, {style: extend({}, defaultStyle, style), ...other});
                 })}
             </div>
         )
@@ -23,3 +23,8 @@ export default  class Group extends Component {
 }
 
 
+Group.defaultProps = {
+    defaultStyle: {
+        marginRight: 10
+    }
+};
