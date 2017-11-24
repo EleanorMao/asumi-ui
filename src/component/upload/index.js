@@ -15,13 +15,13 @@ export default class Upload extends Component {
         e.preventDefault();
         let failed = [], succeed = [];
         let fileList = e.target.files || e.dataTransfer.files;
-        let {maxSize, onUpload, accept, name, validator, validatorError} = this.props;
-        let acceptList = accept.split(/\s*,\s*/);
+        let {maxSize, onUpload, accept, name, validator, typeValidatorError, sizeValidatorError, validatorError} = this.props;
+        let acceptList = accept ? accept.split(/\s*,\s*/) : [];
         for (let i = 0, len = fileList.length; i < len; i++) {
             let isValid = true;
             let file = fileList.item(i);
             let acceptable = acceptList.some(type => {
-                if (type === file.type) {
+                if (type === file.type || type === "*") {
                     return true;
                 } else {
                     let _file_type = file.type.split('/');
@@ -33,11 +33,13 @@ export default class Upload extends Component {
             });
             if (maxSize && file.size > maxSize) {
                 validatorError(file, i, fileList);
+                sizeValidatorError(file, i, fileList);
                 isValid = false;
                 failed.push(i);
             }
-            if (!acceptable) {
+            if (accept && !acceptable) {
                 validatorError(file, i, fileList);
+                typeValidatorError(file, i, fileList);
                 isValid = false;
                 failed.push(i);
             }
@@ -50,7 +52,7 @@ export default class Upload extends Component {
                 succeed.push(file);
             }
         }
-        onUpload(fileList, succeed, failed, name, e);
+        onUpload({files: fileList, succeed, value: succeed, failed, name, e});
         this._uploader.value = '';
     }
 
@@ -94,9 +96,13 @@ Upload.propTypes = {
     maxSize: PropTypes.number,
     className: PropTypes.string,
     validatorError: PropTypes.func,
+    sizeValidatorError: PropTypes.func,
+    typeValidatorError: PropTypes.func,
 };
 
 Upload.defaultProps = {
     onUpload: noop,
-    validatorError: noop
+    validatorError: noop,
+    typeValidatorError: noop,
+    sizeValidatorError: noop
 };

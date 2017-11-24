@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Input from '../input';
 import Radio from '../radio';
+import Upload from '../upload';
 import Select from '../select';
 import Editor from '../editor';
 import Popover from '../popover';
@@ -131,7 +132,7 @@ export default class FormItem extends Component {
 
     itemRender() {
         let {on, off, tips, col, name, data, colon, component, className, dataFormat, content, value, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, labelWidth, ...config} = this.props;
-        if (children) return children;
+        if (type !== "upload" && children) return children;
         let output = null;
         switch (type) {
             case "textarea":
@@ -234,6 +235,14 @@ export default class FormItem extends Component {
                     onChange={this.handleChange.bind(this)}
                 />;
                 break;
+            case "upload":
+                output = <Upload
+                    {...config}
+                    name={name}
+                    value={data}
+                    children={children}
+                />;
+                break;
             case "static":
                 output = <div
                     className="el-form-control-static">
@@ -327,7 +336,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup']),
 };
 
 FormItem.defaultProps = {

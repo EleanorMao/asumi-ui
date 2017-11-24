@@ -1,41 +1,38 @@
-@editor: #EFF2F7;
-@previewColor: #1f2d3d;
-
-.editor {
-  position: relative;
+.el-editor {
   z-index: 1;
+  min-width: 525px;
   min-height: 300px;
-  border: 1px solid @border;
+  position: relative;
   border-radius: 3px;
-  margin: 20px 0;
+  border: 1px solid @border;
   * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
   }
-  .editor-toolbar {
-    position: absolute;
+  .el-editor-toolbar {
     top: 0;
-    width: 100%;
     z-index: 6;
+    width: 100%;
+    position: absolute;
     border-bottom: 1px solid @border;
   }
-  .editor__menu {
-    list-style: none;
+  .el-editor-menu {
     margin: 0;
     padding: 0 5px;
+    list-style: none;
     background-color: #fff;
-    .editor__menu--divider {
-      margin: 5px 4px;
+    .el-editor-menu-divider {
       width: 0;
       height: 30px;
+      margin: 5px 4px;
       padding-left: 0;
       padding-right: 0;
-      border-right: 1px solid @lightText;
       text-indent: 110%;
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
       text-transform: capitalize;
+      border-right: 1px solid @lightText;
     }
     li {
       float: left;
@@ -55,7 +52,7 @@
       line-height: 30px;
       text-transform: capitalize;
       box-sizing: content-box;
-      &.disabled {
+      &.el-disabled {
         color: @disabledText;
         cursor: not-allowed;
       }
@@ -65,7 +62,7 @@
       }
     }
   }
-  .wmd {
+  .el-wmd {
     width: 100%;
     margin-top: 41px;
     position: relative;
@@ -79,7 +76,7 @@
     -webkit-transition: width .3s ease;
     transition: width .3s ease;
   }
-  .editor-line, .editor-preview {
+  .el-editor-line, .el-editor-preview {
     left: 50%;
     top: 0;
     bottom: 0;
@@ -88,17 +85,17 @@
     height: 100%;
     z-index: 9;
   }
-  .wmd-input {
+  .el-wmd-input {
     width: 50%;
     height: 100%;
     min-height: 420px;
     overflow: auto;
     border: none;
-    .form-control {
+    .el-editor-form-control {
       border-radius: 0;
       box-shadow: inset 0 1px 1px @shadow;
     }
-    &.mono.form-control {
+    &.el-mono.el-editor-form-control {
       padding: 10px 20px !important;
       resize: none;
       -moz-tab-size: 4;
@@ -106,7 +103,7 @@
       tab-size: 4;
     }
   }
-  .editor-preview {
+  .el-editor-preview {
     overflow: auto;
     width: 50%;
     padding: 10px 20px;
@@ -202,7 +199,7 @@
   }
 }
 
-.editor-input {
+.el-editor-input {
   display: block;
 }
 

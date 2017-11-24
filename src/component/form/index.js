@@ -194,7 +194,7 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'uploader', 'radiogroup', 'checkgroup']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline'])
 };

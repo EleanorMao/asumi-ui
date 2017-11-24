@@ -28,8 +28,10 @@ export default class Main extends Component {
                 on: "",
                 name: "",
                 grade: "",
+                avatar: "",
                 checkbox: "",
                 classes: [1],
+                markdown: "",
                 description: "",
             }
         }
@@ -41,6 +43,7 @@ export default class Main extends Component {
             return prev;
         });
     }
+
 
     render() {
         return (
@@ -225,6 +228,11 @@ export default class Main extends Component {
                                 label: '英语',
                                 value: 3
                             }]}
+                        />
+                        <FormItem
+                            type="editor"
+                            name="markdown"
+                            label="写写你的想法"
                         />
                         <div style={{marginLeft: 120}}>请认真填写您的信息</div>
                     </Form>

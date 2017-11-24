@@ -8,12 +8,30 @@ class Foo extends Component {
         super(props);
     }
 
-    handleUpload(fileList, failed, name, e) {
+    handleUpload({files, succeed, value, failed, name}) {
+        console.dir(files);
+        console.dir(value);
         let names = [];
-        for (let i = 0; i < fileList.length; i++) {
-            names.push(fileList[i].name);
+        for (let i = 0; i < files.length; i++) {
+            names.push(files[i].name);
         }
         alert(\`input[name="\${name}"] uploaded file: \${names.join(', ')} and failed \${failed.length}\`);
+    }
+
+    validator(file) {
+        if (~file.name.indexOf('a')) return true;
+    }
+
+    validatorError(file) {
+        alert('validatorError! ' + file.name);
+    }
+
+    typeValidatorError(file) {
+        alert('type error!' + file.name);
+    }
+
+    sizeValidatorError(file) {
+        alert('size error!' + file.name);
     }
     
     render(){
@@ -34,13 +52,17 @@ class Foo extends Component {
                    <Upload
                        accept="image/jpg"
                        name="upload_image/jpg_type_files"
-                       onUpload={this.handleUpload.bind(this)}>
+                       onUpload={this.handleUpload.bind(this)}
+                       typeValidatorError={this.typeValidatorError.bind(this)}
+                    >
                        <Button type="primary">upload image/jpg type files</Button>
                    </Upload>
                    <Upload
                         maxSize={1024 * 30}
                         name="max_size_is_1kb"
-                        onUpload={this.handleUpload.bind(this)}>
+                        onUpload={this.handleUpload.bind(this)}
+                        sizeValidatorError={this.sizeValidatorError.bind(this)}
+                    >
                         <Button type="primary">max size is 30kb</Button>
                     </Upload>
                    <Upload
@@ -63,10 +85,10 @@ class Foo extends Component {
         super(props);
     }
 
-    handleUpload(fileList, failed, name, e) {
+    handleUpload({files, succeed, value, failed, name}) {
         let names = [];
-        for (let i = 0; i < fileList.length; i++) {
-            names.push(fileList[i].name);
+        for (let i = 0; i < files.length; i++) {
+            names.push(files[i].name);
         }
         alert(\`input[name="\${name}"] uploaded file: \${names.join(', ')} and failed \${failed.length}\`);
     }
@@ -139,11 +161,21 @@ export const api = [{
 }, {
     property: "validatorError",
     type: "function",
-    'default': "(file)=>{}",
+    'default': "(file, i, files)=>{}",
     description: "if file validator failed, the callback while be called"
+}, {
+    property: "sizeValidatorError",
+    type: "function",
+    'default': "(file, i, files)=>{}",
+    description: "if file size is over max size, the callback while be called"
+}, {
+    property: "typeValidatorError",
+    type: "function",
+    'default': "(file, i, files)=>{}",
+    description: "if file type not accept, the callback while be called"
 }, {
     property: "onUpload",
     type: "function",
-    'default': "(fileList, succeed, failed, name, e)=>{}",
+    'default': "({files, succeed, failed, name, value, e})=>{}",
     description: "Callback when upload"
 }];

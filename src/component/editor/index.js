@@ -455,64 +455,64 @@ export default class Editor extends Component {
 
     toolbarRender() {
         return (
-            <div className="editor-toolbar">
-                <ul className="editor__menu clearfix">
+            <div className="el-editor-toolbar">
+                <ul className="el-editor-menu clearfix">
                     <Popover trigger="hover" title="加粗 <strong> Ctrl+B">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-bold" onClick={this.handleBold.bind(this)}/>
                         </li>
                     </Popover>
                     <Popover trigger="hover" title="斜体 <em> Ctrl+I">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-italic" onClick={this.handleItalic.bind(this)}/>
                         </li>
                     </Popover>
-                    <li className="editor__menu--divider wmd-spacer1"/>
+                    <li className="el-editor-menu-divider el-wmd-spacer1"/>
                     <Popover trigger="hover" title="链接 <a> Ctrl+L">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-link" onClick={this.handleLink.bind(this)}/>
                         </li>
                     </Popover>
                     <Popover trigger="hover" title="引用 <blockquote> Ctrl+Q">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-quote-left" onClick={this.handleQuote.bind(this)}/>
                         </li>
                     </Popover>
                     <Popover trigger="hover" title="图片 <img> Ctrl+G">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-image" onClick={this.handleImg.bind(this)}/>
                         </li>
                     </Popover>
-                    <li className="editor__menu--divider wmd-spacer2"/>
+                    <li className="el-editor-menu-divider el-wmd-spacer2"/>
                     <Popover trigger="hover" title="数字列表 <ol> Ctrl+O">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-list-ol" onClick={this.handleOl.bind(this)}/>
                         </li>
                     </Popover>
                     <Popover trigger="hover" title="普通列表 <ul> Ctrl+U">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-list-ul" onClick={this.handleUl.bind(this)}/>
                         </li>
                     </Popover>
                     <Popover trigger="hover" title="标题 <h1>/<h2> Ctrl+H">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-header" onClick={this.handleTitle.bind(this)}/>
                         </li>
                     </Popover>
                     <Popover trigger="hover" title="分割线 <hr> Ctrl+R">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className="fa fa-hr" onClick={this.handleHr.bind(this)}>hr</a>
                         </li>
                     </Popover>
-                    <li className="editor__menu--divider wmd-spacer3"/>
+                    <li className="el-editor-menu-divider el-wmd-spacer3"/>
                     <Popover trigger="hover" title="撤销 - Ctrl+Z">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className={"fa fa-undo" + (!this.state.cacheForUndo.length ? ' disabled' : '')}
                                onClick={this.handleUndo.bind(this)}/>
                         </li>
                     </Popover>
                     <Popover trigger="hover" title="重做 - Ctrl+Shift+Z">
-                        <li className="wmd-button">
+                        <li className="el-wmd-button">
                             <a className={"fa fa-repeat" + (!this.state.cacheForRedo.length ? ' disabled' : '')}
                                onClick={this.handleRedo.bind(this)}/>
                         </li>
@@ -524,11 +524,11 @@ export default class Editor extends Component {
 
     render() {
         let {link, imgUrl, imgVisible, linkVisible} = this.state;
-        let {name, value, placeholder, uploadImgOptions, linkPlaceholder, imgPlaceholder, linkModalTitle, canUploadImg, linkImgTitle, uploadImgTitle} = this.props;
+        let {name, value, placeholder, onBlur, uploadImgOptions, linkPlaceholder, imgPlaceholder, linkModalTitle, canUploadImg, linkImgTitle, uploadImgTitle} = this.props;
         return (
-            <div className="editor">
+            <div className="el-editor">
                 {this.toolbarRender()}
-                <div className="wmd">
+                <div className="el-wmd">
                     <textarea
                         name={name}
                         value={value}
@@ -536,13 +536,14 @@ export default class Editor extends Component {
                             this._editor = c
                         }}
                         placeholder={placeholder}
+                        onBlur={onBlur}
                         onPaste={this.handlePaste.bind(this)}
                         onChange={this.handleChange.bind(this)}
                         onKeyDown={this.handleKeyDown.bind(this)}
-                        className="mono el-textarea__inner form-control wmd-input"
+                        className="el-mono el-textarea-inner el-editor-form-control el-wmd-input"
                     />
-                    <div className="editor-line"/>
-                    <div className="editor-preview" dangerouslySetInnerHTML={{__html: parser.makeHtml(value)}}/>
+                    <div className="el-editor-line"/>
+                    <div className="el-editor-preview" dangerouslySetInnerHTML={{__html: parser.makeHtml(value)}}/>
                 </div>
                 <Modal
                     size="small"
@@ -555,7 +556,7 @@ export default class Editor extends Component {
                         name="link"
                         type="text"
                         value={link}
-                        className="editor-input"
+                        className="el-editor-input"
                         placeholder={linkPlaceholder}
                         autoFocus onChange={this.handleModalChange.bind(this)}/>
                 </Modal>
@@ -590,7 +591,7 @@ export default class Editor extends Component {
                                 type="text"
                                 name="imgUrl"
                                 value={imgUrl}
-                                className="editor-input"
+                                className="el-editor-input"
                                 placeholder={imgPlaceholder}
                                 autoFocus onChange={this.handleModalChange.bind(this)}
                             />
@@ -604,6 +605,7 @@ export default class Editor extends Component {
 
 Editor.propTypes = {
     name: PropTypes.string,
+    onBlur: PropTypes.func,
     value: PropTypes.string,
     onUpload: PropTypes.func,
     handler: PropTypes.string,
@@ -616,12 +618,13 @@ Editor.propTypes = {
     linkModalTitle: PropTypes.string,
     linkPlaceholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    uploadImgOptions: PropTypes.object
+    uploadImgOptions: PropTypes.object,
 };
 
 Editor.defaultProps = {
     value: '',
     maxCache: 6,
+    onBlur: noop,
     onChange: noop,
     onUpload: noop,
     handler: 'handler',

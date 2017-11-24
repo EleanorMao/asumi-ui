@@ -17,12 +17,12 @@ export default class Main extends Component {
         super(props);
     }
 
-    handleUpload(fileList, succeed, failed, name) {
-        console.dir(fileList);
-        console.dir(succeed);
+    handleUpload({files, succeed, value, failed, name}) {
+        console.dir(files);
+        console.dir(value);
         let names = [];
-        for (let i = 0; i < fileList.length; i++) {
-            names.push(fileList[i].name);
+        for (let i = 0; i < files.length; i++) {
+            names.push(files[i].name);
         }
         alert(`input[name="${name}"] uploaded file: ${names.join(', ')} and failed ${failed.length}`);
     }
@@ -33,6 +33,14 @@ export default class Main extends Component {
 
     validatorError(file) {
         alert('validatorError! ' + file.name);
+    }
+
+    typeValidatorError(file) {
+        alert('type error!' + file.name);
+    }
+
+    sizeValidatorError(file) {
+        alert('size error!' + file.name);
     }
 
     render() {
@@ -58,13 +66,17 @@ export default class Main extends Component {
                         <Upload
                             accept="image/png"
                             name="upload_image/jpg_type_files"
-                            onUpload={this.handleUpload.bind(this)}>
+                            onUpload={this.handleUpload.bind(this)}
+                            typeValidatorError={this.typeValidatorError.bind(this)}
+                        >
                             <Button type="secondary">upload image/png type files</Button>
                         </Upload>
                         <Upload
                             maxSize={1024 * 30}
                             name="max_size_is_1kb"
-                            onUpload={this.handleUpload.bind(this)}>
+                            onUpload={this.handleUpload.bind(this)}
+                            sizeValidatorError={this.sizeValidatorError.bind(this)}
+                        >
                             <Button type="danger">max size is 30kb</Button>
                         </Upload>
                         <Upload
@@ -83,8 +95,8 @@ export default class Main extends Component {
                     <Upload
                         name="validator"
                         validator={this.validator.bind(this)}
-                        validatorError={this.validatorError.bind(this)}
                         onUpload={this.handleUpload.bind(this)}
+                        validatorError={this.validatorError.bind(this)}
                     >
                         <Button type="primary">file name should have an 'a'</Button>
                     </Upload>
