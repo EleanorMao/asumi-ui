@@ -28,9 +28,9 @@ export default class Main extends Component {
                     <br/>
                     <code>
                         <span>&lt;link</span>
-                        <span>rel=</span>
+                        <span> rel=</span>
                         <span>"stylesheet"</span>
-                        <span>href=</span>
+                        <span> href=</span>
                         <span>"path/to/font-awesome/css/font-awesome.min.css"</span>
                         <span>&gt;</span>
                     </code>
