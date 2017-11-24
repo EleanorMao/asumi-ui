@@ -121,7 +121,7 @@ export default class Form extends Component {
                             colon: colon,
                             labelWidth: labelWidth,
                             onChange: this.handleChange.bind(this, elm.props),
-                        }, props, {
+                        }, elm.props, {
                             col: col,
                             required: isRequired(elm.props),
                             beforeSubmit: this.state.beforeSubmit,
