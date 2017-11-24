@@ -344,3 +344,5 @@ FormItem.defaultProps = {
     validateType: "error",
 };
 
+
+FormItem._component_name = "FormItem";

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
-import {noop, extend} from "../util";
+import {noop, extend, isArr} from "../util";
 
 function isRequired({validate, required}) {
     return required || (validate && validate.some(item => {
@@ -96,7 +96,7 @@ export default class Form extends Component {
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         let _disabled = this.state.disabled || disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
-        let _children = React.Children.toArray(children);
+        let renderChildren = isArr(children) ? children : [children];
         return (
             <form className={_className} style={style}>
                 {!!title && <div className="el-form-title">{title}</div>}
@@ -115,21 +115,27 @@ export default class Form extends Component {
                             validator={this.handleDisabled.bind(this, props)}
                         />)
                 })}
-                {React.Children.map(_children, (elm, index) => {
-                    if (elm && elm.type && elm.type.name === "FormItem") {
-                        let props = extend({
-                            colon: colon,
-                            labelWidth: labelWidth,
-                            onChange: this.handleChange.bind(this, elm.props),
-                        }, elm.props, {
+                {React.Children.map(renderChildren, (elm, index) => {
+                    if (elm && elm.type && elm.type._component_name === "FormItem") {
+                        let props = elm.props;
+                        let newProps = {
                             col: col,
-                            required: isRequired(elm.props),
+                            data: data[props.name],
+                            required: isRequired(props),
                             beforeSubmit: this.state.beforeSubmit,
-                            data: elm.props ? data[elm.props.name] : undefined,
-                            validator: this.handleDisabled.bind(this, elm.props)
-                        });
-                        return React.cloneElement(elm, props)
-                    } else {
+                            validator: this.handleDisabled.bind(this, props)
+                        };
+                        if (!props.onChange) {
+                            newProps.onChange = this.handleChange.bind(this, props)
+                        }
+                        if (typeof props.colon !== "boolean") {
+                            newProps.colon = colon;
+                        }
+                        if (typeof props.labelWidth !== "number" && typeof props.labelWidth !== "string") {
+                            newProps.labelWidth = labelWidth;
+                        }
+                        return React.cloneElement(elm, newProps)
+                    } else if (elm) {
                         return React.cloneElement(elm, {key: index});
                     }
                 })}
