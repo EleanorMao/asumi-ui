@@ -26,6 +26,7 @@ export default class Main extends Component {
                     <code>import ReactDOM from 'react-dom';</code>
                     <code dangerouslySetInnerHTML={{__html: "import { Button } from 'asumi';"}}/>
                     <code>import 'asumi/style/index.less';</code>
+                    <code>// import 'asumi/style/asumi-default-theme.css';</code>
                     <br/>
                     <code>
                         <span>&lt;link</span>

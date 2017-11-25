@@ -1,6 +1,6 @@
 {
   "name": "asumi",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "description": "react ui design",
   "main": "lib/index.js",
   "files": [
@@ -13,7 +13,8 @@
     "pages": "webpack --config webpack.config.pages.js -p",
     "mock": "json-server --watch db.json --port 3000",
     "eslint": "eslint src",
-    "test": "jest --config jest.config.json"
+    "test": "jest --config jest.config.json",
+    "css": "lessc --autoprefix='> 1%' --clean-css='--compatibility=ie8' style/index.less style/asumi-default-theme.css"
   },
   "keywords": [
     "react"
@@ -47,8 +48,10 @@
     "history": "^4.6.1",
     "jest": "^21.2.1",
     "json-server": "^0.8.20",
-    "less": "^2.7.2",
+    "less": "^2.7.3",
     "less-loader": "^4.0.3",
+    "less-plugin-autoprefix": "^1.5.1",
+    "less-plugin-clean-css": "^1.5.1",
     "nyan-progress-webpack-plugin": "^1.1.4",
     "open-browser-webpack-plugin": "0.0.2",
     "raf": "^3.4.0",
