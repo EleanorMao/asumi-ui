@@ -35,58 +35,58 @@ import NumberInput from './components/numberInput';
 import DateTime from './components/datetime';
 
 const router = [
-    <NavLink to={'/'} activeClassName="">HOME</NavLink>,
+    <NavLink to={'/'} activeClassName="">Home</NavLink>,
     {
         title: 'Basic',
         children: [
-            <NavLink to={'/grid'} activeClassName="active">GRID</NavLink>,
-            <NavLink to={'/button'} activeClassName="active">BUTTON</NavLink>
+            <NavLink to={'/grid'} activeClassName="active">Grid</NavLink>,
+            <NavLink to={'/button'} activeClassName="active">Button</NavLink>
         ]
     },
     {
         title: 'Form',
         children: [
-            <NavLink to={'/input'} activeClassName="active">INPUT</NavLink>,
-            <NavLink to={'/numberinput'} activeClassName="active">NUMBERINPUT</NavLink>,
-            <NavLink to={'/select'} activeClassName="active">SELECT</NavLink>,
-            <NavLink to={'/radio'} activeClassName="active">RADIO</NavLink>,
-            <NavLink to={'/checkbox'} activeClassName="active">CHECKBOX</NavLink>,
-            <NavLink to={'/upload'} activeClassName="active">UPLOAD</NavLink>,
-            <NavLink to={'/datetime'} activeClassName="active">DATETIME</NavLink>,
-            <NavLink to={'/editor'} activeClassName="active">EDITOR</NavLink>,
-            <NavLink to={'/form'} activeClassName="active">FORM</NavLink>,
+            <NavLink to={'/input'} activeClassName="active">Input</NavLink>,
+            <NavLink to={'/numberinput'} activeClassName="active">Number Input</NavLink>,
+            <NavLink to={'/select'} activeClassName="active">Select</NavLink>,
+            <NavLink to={'/radio'} activeClassName="active">Radio</NavLink>,
+            <NavLink to={'/checkbox'} activeClassName="active">Checkbox</NavLink>,
+            <NavLink to={'/upload'} activeClassName="active">Upload</NavLink>,
+            <NavLink to={'/datetime'} activeClassName="active">Datetime</NavLink>,
+            <NavLink to={'/editor'} activeClassName="active">Editor</NavLink>,
+            <NavLink to={'/form'} activeClassName="active">Form</NavLink>,
         ]
     },
     {
         title: 'Display',
         children: [
-            <NavLink to={'/tag'} activeClassName="active">TAG</NavLink>,
-            <NavLink to={'/table'} activeClassName="active">TABLE</NavLink>,
-            <NavLink to={'/pagination'} activeClassName="active">PAGINATION</NavLink>,
+            <NavLink to={'/tag'} activeClassName="active">Tag</NavLink>,
+            <NavLink to={'/table'} activeClassName="active">Table</NavLink>,
+            <NavLink to={'/pagination'} activeClassName="active">Pagination</NavLink>,
         ]
     },
     {
         title: 'Message',
         children: [
-            <NavLink to={'/tooltip'} activeClassName="active">TOOLTIP</NavLink>,
-            <NavLink to={'/popover'} activeClassName="active">POPOVER</NavLink>,
-            <NavLink to={'/message'} activeClassName="active">MESSAGE</NavLink>
+            <NavLink to={'/tooltip'} activeClassName="active">Tooltip</NavLink>,
+            <NavLink to={'/popover'} activeClassName="active">Popover</NavLink>,
+            <NavLink to={'/message'} activeClassName="active">Message</NavLink>
         ]
     },
     {
         title: 'Navigation',
         children: [
-            <NavLink to={'/dropdown'} activeClassName="active">DROPDOWN</NavLink>,
-            <NavLink to={'/tabs'} activeClassName="active">TABS</NavLink>,
-            <NavLink to={'/menu'} activeClassName="active">MENU</NavLink>,
+            <NavLink to={'/dropdown'} activeClassName="active">Dropdown</NavLink>,
+            <NavLink to={'/tabs'} activeClassName="active">Tabs</NavLink>,
+            <NavLink to={'/menu'} activeClassName="active">Menu</NavLink>,
         ]
     },
     {
         title: 'Others',
         children: [
-            <NavLink to={'/modal'} activeClassName="active">MODAL</NavLink>,
-            <NavLink to={'/animate'} activeClassName="active">ANIMATE</NavLink>,
-            <NavLink to={'/Loading'} activeClassName="active">LOADING</NavLink>,
+            <NavLink to={'/modal'} activeClassName="active">Modal</NavLink>,
+            <NavLink to={'/animate'} activeClassName="active">Animate</NavLink>,
+            <NavLink to={'/Loading'} activeClassName="active">Loading</NavLink>,
         ]
     }
 ];
