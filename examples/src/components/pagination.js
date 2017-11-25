@@ -137,7 +137,7 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
                 <h1>API of SimplePagination</h1>
-                <Table isKey="property" data={api} lineWrap="break">
+                <Table isKey="property" data={apiOfSimple} lineWrap="break">
                     <Col dataField="property">Property</Col>
                     <Col dataField="description">Description</Col>
                     <Col dataField="type">Type</Col>
