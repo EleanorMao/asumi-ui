@@ -1,11 +1,12 @@
 /**
  * Created by elly on 2017/4/11.
  */
+import ReactDOM from 'react-dom';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default  class Stretch extends Component {
+export default class Stretch extends Component {
     constructor(props) {
         super(props);
     }
@@ -40,11 +41,33 @@ export default  class Stretch extends Component {
     }
 }
 
+let _el_loading_content = null;
+
+Stretch.loading = (props = {}) => {
+    props.mask = true;
+    props.fullScreen = true;
+    if (!_el_loading_content) {
+        _el_loading_content = document.createElement('div');
+        document.body.appendChild(_el_loading_content);
+    }
+    ReactDOM.render(<Stretch {...props}/>, _el_loading_content);
+};
+
+Stretch.close = () => {
+    if (_el_loading_content) {
+        ReactDOM.unmountComponentAtNode(_el_loading_content);
+        document.body.removeChild(_el_loading_content);
+        _el_loading_content = null;
+    }
+};
+
 Stretch.propTypes = {
-    size: PropTypes.oneOf(['small', 'large']),
     mask: PropTypes.bool,
+    title: PropTypes.any,
     loading: PropTypes.bool,
-    fullScreen: PropTypes.bool
+    fullScreen: PropTypes.bool,
+    className: PropTypes.string,
+    size: PropTypes.oneOf(['small', 'large']),
 };
 
 Stretch.defaultProps = {
