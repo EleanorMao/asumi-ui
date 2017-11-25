@@ -110,6 +110,8 @@ export default class Wrap extends Component {
 }
 
 Wrap.propTypes = {
+    title: PropTypes.any,
+    content: PropTypes.any,
     trigger: PropTypes.oneOf(['click', 'hover']),
     hideTrigger: PropTypes.oneOf(['click', 'hover']),
     placement: PropTypes.oneOf(['left', 'right', 'top', 'bottom'])
