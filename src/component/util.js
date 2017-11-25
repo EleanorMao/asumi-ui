@@ -122,4 +122,6 @@ export let rules = {
     positiveInt: /^([1-9]\d{0,7})?$/,
     nature: /^(0?|[1-9]\d{0,7})$/,
     color: /^#[0-9a-fA-F]{0,6}$/
-}
+};
+
+export const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;

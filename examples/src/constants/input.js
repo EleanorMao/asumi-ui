@@ -111,7 +111,7 @@ export const api = [{
     property: "type",
     type: "string",
     'default': "text",
-    description: "Type of input. Options: text, textarea (, color or others if you want but not recommend)"
+    description: "Type of input. Options: text, textarea, color or others if you want but not recommend)"
 }, {
     property: "size",
     type: "string",
@@ -134,17 +134,17 @@ export const api = [{
     description: "Regexp pattern"
 }, {
     property: "icon",
-    type: "ReactNode",
+    type: "any",
     'default': "null",
     description: "icon of input"
 }, {
     property: "prepend",
-    type: "string | ReactNode",
+    type: "any",
     'default': "null",
     description: "Input with prefix icon",
 }, {
     property: "append",
-    type: "string | ReactNode",
+    type: "any",
     'default': "null",
     description: "Input with suffix icon",
 }, {

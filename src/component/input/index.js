@@ -41,7 +41,7 @@ export default class Input extends Component {
                 return;
             }
         }
-        if (value.length >= maxLength) {
+        if (value.length > maxLength) {
             return;
         }
         this.props.onChange && this.props.onChange({e, name, value});
@@ -101,14 +101,14 @@ export default class Input extends Component {
 }
 
 Input.propTypes = {
+    icon: PropTypes.any,
+    append: PropTypes.any,
+    prepend: PropTypes.any,
     type: PropTypes.string,
     onChange: PropTypes.func,
     onPressEnter: PropTypes.func,
     pattern: PropTypes.instanceOf(RegExp),
     size: PropTypes.oneOf(['large', 'small']),
-    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    append: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    prepend: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
 };
 

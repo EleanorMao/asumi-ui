@@ -210,3 +210,44 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   }
 }
 
+.el-input-wrapper.el-number-input {
+  width: 110px;
+  .el-input-append {
+    padding: 0;
+    width: 30px;
+    background: #fff;
+    position: relative;
+    .el-number-input-handler {
+      .el-number-input-up, .el-number-input-down {
+        position: absolute;
+        line-height: 1.2;
+        right: 0;
+        left: 0;
+        &:hover {
+          color: @primary;
+        }
+      }
+      .el-number-input-up {
+        top: 0;
+        bottom: 50%;
+        border-bottom: 1px solid @border;
+      }
+      .el-number-input-down {
+        bottom: 0;
+        top: 50%;
+      }
+    }
+  }
+  &.el-number-input-disabled {
+    .el-input-append {
+      cursor: not-allowed;
+      background: @l_disabled;
+      .el-number-input-up, .el-number-input-down {
+        &:hover {
+          color: @normalText;
+        }
+      }
+    }
+  }
+
+}

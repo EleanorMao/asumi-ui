@@ -31,6 +31,7 @@ import Upload from './components/upload';
 import Checkbox from './components/checkbox';
 import Dropdown from './components/dropdown';
 import Pagination from './components/pagination';
+import NumberInput from './components/numberInput';
 import DateTime from './components/datetime';
 
 const router = [
@@ -46,6 +47,7 @@ const router = [
         title: 'Form',
         children: [
             <NavLink to={'/input'} activeClassName="active">INPUT</NavLink>,
+            <NavLink to={'/numberinput'} activeClassName="active">NUMBERINPUT</NavLink>,
             <NavLink to={'/select'} activeClassName="active">SELECT</NavLink>,
             <NavLink to={'/radio'} activeClassName="active">RADIO</NavLink>,
             <NavLink to={'/checkbox'} activeClassName="active">CHECKBOX</NavLink>,
@@ -143,6 +145,7 @@ ReactDOM.render(
                 <Route path="/upload" component={Upload}/>
                 <Route path="/checkbox" component={Checkbox}/>
                 <Route path="/dropdown" component={Dropdown}/>
+                <Route path="/numberinput" component={NumberInput}/>
                 <Route path="/pagination" component={Pagination}/>
                 <Route path="/datetime" component={DateTime}/>
             </div>

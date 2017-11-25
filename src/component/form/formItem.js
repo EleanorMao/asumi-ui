@@ -13,6 +13,7 @@ import Editor from '../editor';
 import Popover from '../popover';
 import Datetime from '../datetime';
 import Option from '../select/option';
+import NumberInput from '../numberInput';
 import RadioGroup from '../radio/radioGroup';
 import CheckGroup from '../checkbox/checkGroup';
 import {rules} from "../util";
@@ -149,6 +150,15 @@ export default class FormItem extends Component {
                     <Input
                         {...config}
                         type="textarea"
+                        name={name}
+                        value={data}
+                        onBlur={this.handleBlur.bind(this)}
+                        onChange={this.handleChange.bind(this)}/>;
+                break;
+            case "number":
+                output =
+                    <NumberInput
+                        {...config}
                         name={name}
                         value={data}
                         onBlur={this.handleBlur.bind(this)}
@@ -346,7 +356,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup']),
+    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup']),
 };
 
 FormItem.defaultProps = {

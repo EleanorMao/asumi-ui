@@ -36,6 +36,7 @@ export default class Main extends Component {
                 date: "",
                 sex: 1,
                 on: "",
+                age: 18,
                 name: "",
                 grade: "",
                 avatar: "",
@@ -244,6 +245,11 @@ export default class Main extends Component {
                                 label: '女',
                                 value: 2
                             }]}
+                        />
+                        <FormItem
+                            type="number"
+                            name="age"
+                            label="年龄"
                         />
                         <FormItem
                             type="checkgroup"

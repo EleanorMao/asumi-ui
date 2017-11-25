@@ -312,6 +312,7 @@ class Main extends Component {
                 date: "",
                 sex: 1,
                 on: "",
+                age: 18,
                 name: "",
                 grade: "",
                 checkbox: "",
@@ -347,6 +348,11 @@ class Main extends Component {
                             label: '女',
                             value: 2
                         }]}
+                    />
+                    <FormItem
+                        type="number"
+                        name="age"
+                        label="年龄"
                     />
                     <FormItem
                         type="checkgroup"
@@ -497,7 +503,7 @@ export const apiOfFormItem = [{
     property: "type",
     type: "string",
     'default': "text",
-    description: "type of form item. Options: text, color, editor, static, datetime, component, password, textarea, select, checkbox, radio, switch, upload, radiogroup, checkgroup"
+    description: "type of form item. Options: text, color, number, editor, static, datetime, component, password, textarea, select, checkbox, radio, switch, upload, radiogroup, checkgroup"
 }, {
     property: "tips",
     type: "string | {title: string, content: any}",
@@ -584,7 +590,7 @@ export const apiOfValidate = [{
     property: "type",
     type: "string",
     'default': "",
-    description: "type of form item value. Options: boolean, array, string, object, number, moment"
+    description: "type of form item value. Options: boolean, array, string, object, number"
 }, {
     property: "instance",
     type: "any",

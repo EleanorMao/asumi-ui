@@ -20,17 +20,18 @@ import Editor from './component/editor';
 import Col from './component/table/col';
 import Button from './component/button';
 import Select from './component/select';
+import Upload from './component/upload';
 import Loading from './component/loading';
 import Popover from './component/popover';
 import Message from './component/message';
 import Animate from './component/animate';
-import Upload from './component/upload';
 import Checkbox from './component/checkbox';
 import Dropdown from './component/dropdown';
 import Option from './component/select/option';
 import Pagination from './component/pagination';
 import FormItem from './component/form/formItem';
 import TabPanel from './component/tabs/tabPanel';
+import NumberInput from './component/numberInput';
 import RadioGroup from './component/radio/radioGroup';
 import CheckboxGroup from './component/checkbox/checkGroup';
 import SimplePagination from './component/pagination/simplePagination';
@@ -84,6 +85,7 @@ export {
     DateTime,
     Pagination,
     RadioGroup,
+    NumberInput,
     CheckboxGroup,
     MenuItemGroup,
     SimplePagination,
