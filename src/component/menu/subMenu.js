@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default  class SubMenu extends Component {
+export default class SubMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,7 +21,7 @@ export default  class SubMenu extends Component {
     }
 
     render() {
-        let {title, openAll, defaultOpenKey, children} = this.props;
+        let {title, openAll, openKey, children} = this.props;
         return (
             <li className={`el-submenu${this.state.open ? ' el-submenu-expand' : ' el-submenu-closed'}`}>
                 <div className="el-submenu-title" onClick={this.handleToggle.bind(this)}>{title}</div>
@@ -29,8 +29,8 @@ export default  class SubMenu extends Component {
                     {React.Children.map(children, (elm) => {
                         if (!elm) return;
                         let open = openAll;
-                        if (!open && defaultOpenKey === elm.key) open = true;
-                        return React.cloneElement(elm, {open, openAll, defaultOpenKey});
+                        if (!open && openKey === elm.key) open = true;
+                        return React.cloneElement(elm, {open, openAll, openKey});
                     })}
                 </ul>
             </li>
@@ -38,6 +38,10 @@ export default  class SubMenu extends Component {
     }
 }
 
-SubMenu.propTypes = {};
+SubMenu.propTypes = {
+    title: PropTypes.any,
+    openAll: PropTypes.bool,
+    openKey: PropTypes.any
+};
 
 SubMenu.defaultProps = {};

@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-export default  class MenuItemGroup extends Component {
+export default class MenuItemGroup extends Component {
     constructor(props) {
         super(props);
     }
@@ -20,6 +20,8 @@ export default  class MenuItemGroup extends Component {
     }
 }
 
-MenuItemGroup.propTypes = {};
+MenuItemGroup.propTypes = {
+    title: PropTypes.any
+};
 
 MenuItemGroup.defaultProps = {};

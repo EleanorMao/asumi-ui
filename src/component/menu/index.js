@@ -11,15 +11,15 @@ export default class Menu extends Component {
     }
 
     render() {
-        let {width, children, className, openAll, defaultOpenKey, style} = this.props;
+        let {width, children, className, openAll, openKey, style} = this.props;
         return (
             <div className={"el-side-menu " + className} style={extend({}, {width}, style)}>
                 <ul className="el-menu">
                     {React.Children.map(children, (elm) => {
                         if (!elm) return;
                         let open = openAll;
-                        if (!open && defaultOpenKey === elm.key) open = true;
-                        return React.cloneElement(elm, {open, openAll, defaultOpenKey});
+                        if (!open && openKey === elm.key) open = true;
+                        return React.cloneElement(elm, {open, openAll, openKey});
                     })}
                 </ul>
             </div>
@@ -27,10 +27,14 @@ export default class Menu extends Component {
     }
 }
 Menu.propTypes = {
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    className: PropTypes.string,
+    style: PropTypes.object,
     openAll: PropTypes.bool,
-    defaultOpenKey: PropTypes.any
+    openKey: PropTypes.any
 };
 Menu.defaultProps = {
     width: 220,
-    className: ''
+    className: '',
+    openAll: false
 };
