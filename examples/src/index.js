@@ -35,16 +35,16 @@ import NumberInput from './components/numberInput';
 import DateTime from './components/datetime';
 
 const router = [
-    <NavLink to={'/'} activeClassName="">Home</NavLink>,
+    <NavLink to={'/'} activeClassName="">HOME</NavLink>,
     {
-        title: 'Basic',
+        title: 'BASIC',
         children: [
             <NavLink to={'/grid'} activeClassName="active">Grid</NavLink>,
             <NavLink to={'/button'} activeClassName="active">Button</NavLink>
         ]
     },
     {
-        title: 'Form',
+        title: 'FORM',
         children: [
             <NavLink to={'/input'} activeClassName="active">Input</NavLink>,
             <NavLink to={'/numberinput'} activeClassName="active">Number Input</NavLink>,
@@ -58,7 +58,7 @@ const router = [
         ]
     },
     {
-        title: 'Display',
+        title: 'DISPLAY',
         children: [
             <NavLink to={'/tag'} activeClassName="active">Tag</NavLink>,
             <NavLink to={'/table'} activeClassName="active">Table</NavLink>,
@@ -66,7 +66,7 @@ const router = [
         ]
     },
     {
-        title: 'Message',
+        title: 'MESSAGE',
         children: [
             <NavLink to={'/tooltip'} activeClassName="active">Tooltip</NavLink>,
             <NavLink to={'/popover'} activeClassName="active">Popover</NavLink>,
@@ -74,7 +74,7 @@ const router = [
         ]
     },
     {
-        title: 'Navigation',
+        title: 'NAVIGATION',
         children: [
             <NavLink to={'/dropdown'} activeClassName="active">Dropdown</NavLink>,
             <NavLink to={'/tabs'} activeClassName="active">Tabs</NavLink>,
@@ -82,7 +82,7 @@ const router = [
         ]
     },
     {
-        title: 'Others',
+        title: 'OTHERS',
         children: [
             <NavLink to={'/modal'} activeClassName="active">Modal</NavLink>,
             <NavLink to={'/animate'} activeClassName="active">Animate</NavLink>,
