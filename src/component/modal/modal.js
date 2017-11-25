@@ -58,7 +58,15 @@ export default class Modal extends Component {
 Modal.propTypes = {
     mask: PropTypes.bool,
     onOk: PropTypes.func,
-    onClick: PropTypes.func,
+    title: PropTypes.any,
+    okText: PropTypes.any,
+    ok: PropTypes.bool,
+    close: PropTypes.bool,
+    closeText: PropTypes.any,
+    onClose: PropTypes.func,
+    style: PropTypes.object,
+    footer: PropTypes.any,
+    className: PropTypes.string,
     size: PropTypes.oneOf(['default', 'small', 'large'])
 };
 

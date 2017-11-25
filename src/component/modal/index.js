@@ -18,7 +18,7 @@ function renderComponent(instance) {
     }
 }
 
-export default  class Wrap extends Component {
+export default class Wrap extends Component {
     constructor(props) {
         super(props);
     }
