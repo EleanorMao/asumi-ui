@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import PageButton from './pageButton';
+import {noop} from "../util";
 
 class SimplePagination extends Component {
     constructor(props) {
@@ -37,17 +38,20 @@ class SimplePagination extends Component {
 }
 
 SimplePagination.PropTypes = {
+    prevLabel: PropTypes.any,
+    nextLabel: PropTypes.any,
     current: PropTypes.number,
     dataSize: PropTypes.number,
+    onPageChange: PropTypes.func,
     sizePerPage: PropTypes.number,
     showTotalPages: PropTypes.bool,
-    onPageChange: PropTypes.func
 };
 
 SimplePagination.defaultProps = {
     current: 1,
     dataSize: 0,
     sizePerPage: 10,
+    onPageChange: noop,
     showTotalPages: true,
     prevLabel: <span><span className="el-caret el-left"/>上一页</span>,
     nextLabel: <span>下一页<span className="el-caret el-right"/></span>,

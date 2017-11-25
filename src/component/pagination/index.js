@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import PageButton from './pageButton';
+import {noop} from "../util";
 
 export default class Pagination extends Component {
     constructor(props) {
@@ -86,14 +87,19 @@ export default class Pagination extends Component {
 }
 
 Pagination.propTypes = {
+    endLabel: PropTypes.any,
+    nextLabel: PropTypes.any,
+    prevLabel: PropTypes.any,
+    startLabel: PropTypes.any,
     current: PropTypes.number,
     dataSize: PropTypes.number,
-    sizePerPage: PropTypes.number,
+    onPageChange: PropTypes.func,
     hideEndLabel: PropTypes.bool,
+    sizePerPage: PropTypes.number,
     hideStartLabel: PropTypes.bool,
     showTotalPages: PropTypes.bool,
-    paginationSize: PropTypes.number
-}
+    paginationSize: PropTypes.number,
+};
 
 Pagination.defaultProps = {
     current: 1,
@@ -105,5 +111,6 @@ Pagination.defaultProps = {
     prevLabel: <span><span className="el-caret el-left"/>上一页</span>,
     nextLabel: <span>下一页<span className="el-caret el-right"/></span>,
     startLabel: '首页',
-    endLabel: '尾页'
-}
+    endLabel: '尾页',
+    onPageChange: noop
+};

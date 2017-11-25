@@ -5,7 +5,8 @@ import React, {Component, PropTypes} from 'react';
 import {
     Tooltip
 } from '../../../src';
-export default  class Panel extends Component {
+
+export default class Panel extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,4 +51,6 @@ export default  class Panel extends Component {
 
 Panel.propTypes = {};
 
-Panel.defaultProps = {};
+Panel.defaultProps = {
+    code: ""
+};
