@@ -4,10 +4,13 @@
 import React, {Component} from 'react';
 import {
     Group,
-    Dropdown
+    Dropdown,
+    Table, Col
 } from '../../../src';
+import Panel from './panel';
+import {basic, link, select, api} from "../constants/dropdown";
 
-export default  class Main extends Component {
+export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,65 +27,76 @@ export default  class Main extends Component {
     }
 
     render() {
+        const basicList = ['HOME', 'Dropdown'];
+        const linkList = [{label: 'HOME', href: '/'}, {label: 'Dropdown', href: '/dropdown'}];
         return (
             <div className="content">
-                <h1>TEXT Dropdown</h1>
-                <Group list={['HOME', 'Dropdown']}
-                       onClick={this.handleClick.bind(this)}>
-                    <Dropdown>
+                <h1>Dropdown 下拉列表</h1>
+                <Panel
+                    title="basic"
+                    code={basic}
+                >
+                    <Group>
+                        <Dropdown
+                            list={basicList}
+                            onClick={this.handleClick.bind(this)}>
+                            Menu
+                        </Dropdown>
+                        <Dropdown
+                            type="primary"
+                            list={basicList}
+                            onClick={this.handleClick.bind(this)}>
+                            Menu
+                        </Dropdown>
+                        <Dropdown
+                            type="secondary"
+                            list={basicList}
+                            onClick={this.handleClick.bind(this)}>
+                            Menu
+                        </Dropdown>
+                        <Dropdown
+                            type="success"
+                            list={basicList}
+                            onClick={this.handleClick.bind(this)}>
+                            Menu
+                        </Dropdown>
+                        <Dropdown
+                            type="danger"
+                            list={basicList}
+                            onClick={this.handleClick.bind(this)}>
+                            Menu
+                        </Dropdown>
+                    </Group>
+                </Panel>
+                <Panel
+                    title="link"
+                    code={link}
+                >
+                    <Dropdown
+                        type="success"
+                        list={linkList}
+                        onClick={this.handleClick.bind(this)}>
                         Menu
                     </Dropdown>
-                    <Dropdown type="primary">
-                        Menu
-                    </Dropdown>
-                    <Dropdown type="secondary">
-                        Menu
-                    </Dropdown>
-                    <Dropdown type="success">
-                        Menu
-                    </Dropdown>
-                    <Dropdown type="danger">
-                        Menu
-                    </Dropdown>
-                </Group>
-                <h1>Link Dropdown</h1>
-                <Group list={[{label: 'HOME', href: '/'}, {label: 'Dropdown', href: '/dropdown'}]}
-                       onClick={this.handleClick.bind(this)}>
-                    <Dropdown>
-                        Menu
-                    </Dropdown>
-                    <Dropdown type="primary">
-                        Menu
-                    </Dropdown>
-                    <Dropdown type="secondary">
-                        Menu
-                    </Dropdown>
-                    <Dropdown type="success">
-                        Menu
-                    </Dropdown>
-                    <Dropdown type="danger">
-                        Menu
-                    </Dropdown>
-                </Group>
-                <h1>Select Dropdown</h1>
-                <Group list={['HOME', 'Dropdown']}
-                       onClick={this.handleSelect.bind(this)}>
-                    <Dropdown>
+                </Panel>
+                <Panel
+                    title="select"
+                    code={select}
+                >
+                    <Dropdown
+                        type="primary"
+                        list={basicList}
+                        onClick={this.handleSelect.bind(this)}>
                         {this.state.current}
                     </Dropdown>
-                    <Dropdown type="primary">
-                        {this.state.current}
-                    </Dropdown>
-                    <Dropdown type="secondary">
-                        {this.state.current}
-                    </Dropdown>
-                    <Dropdown type="success">
-                        {this.state.current}
-                    </Dropdown>
-                    <Dropdown type="danger">
-                        {this.state.current}
-                    </Dropdown>
-                </Group>
+                </Panel>
+                <h1>API</h1>
+                <Table isKey="property" data={api} lineWrap="break">
+                    <Col dataField="property">Property</Col>
+                    <Col dataField="description">Description</Col>
+                    <Col dataField="type">Type</Col>
+                    <Col dataField="default">Default</Col>
+                </Table>
             </div>
         )
     }
