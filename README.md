@@ -20,6 +20,7 @@ asumi icons use <a href="http://fontawesome.io/">Font Awesome</a>
 * <input type="checkbox" checked/> Tag
 * <input type="checkbox" checked/> Tab
 * <input type="checkbox" checked/> Input
+* <input type="checkbox" checked/> NumberInput
 * <input type="checkbox" checked/> Select
 * <input type="checkbox" checked/> Radio
 * <input type="checkbox" checked/> Checkbox
@@ -85,6 +86,8 @@ and
 @borderRadio: 4px;
 @smallBorderRadio: 2px;
 
+@editor: #EFF2F7;
+@previewColor: #1f2d3d;
 ```
 
 you can change theme color if you want!
