@@ -93,7 +93,7 @@ const router = [
 ];
 
 ReactDOM.render(
-    <Router>
+    <Router basename={app.basename}>
         <div>
             <Header/>
             <Menu
