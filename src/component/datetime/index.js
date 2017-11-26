@@ -285,6 +285,10 @@ export default class DateTime extends React.Component {
         return props;
     }
 
+    onInputKey() {
+
+    }
+
     onInputChange(e) {
         let value = e.target === null ? e : e.value,
             localMoment = this.localMoment(value, this.state.inputFormat),
@@ -316,12 +320,11 @@ export default class DateTime extends React.Component {
             children.push(
                 <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
                        onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
-                       onKeyDown={this.onInputKey} value={this.renderInput(inputValue)}/>
+                       onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)}/>
             );
         }
         return (
-            <div ref='gaga'
-                 className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}>
+            <div className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}>
                 {children}
                 <div key='dt' className='el-datetime-picker'>
                     <CalendarContainer

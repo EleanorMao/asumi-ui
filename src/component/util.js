@@ -111,6 +111,19 @@ export let contains = function (root, el) {
     return false;
 };
 
+export let findHighest = function (el, componentNode, ignoreClass) {
+    if (el === componentNode) {
+        return true;
+    }
+    while (el.parentNode) {
+        if (el === componentNode || el.className.indexOf(ignoreClass) > -1) {
+            return true;
+        }
+        el = el.parentNode;
+    }
+    return el;
+};
+
 export let KeyCode = {
     ENTER: 13,
     DOWN: 40,
