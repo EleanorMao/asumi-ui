@@ -108,7 +108,7 @@ export default class Main extends Component {
                     <Form
                         data={this.state.basic}
                         title="basic horizontal form"
-                        submitButtonOptions={{style: {marginLeft: 80}}}
+                        submitButtonProps={{style: {marginLeft: 80}}}
                         onChange={this.handleChange.bind(this, 'basic')}
                         options={[{
                             type: "text",

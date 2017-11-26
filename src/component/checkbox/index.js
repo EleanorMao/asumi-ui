@@ -53,7 +53,7 @@ Checkbox.propTypes = {
     onChange: PropTypes.func,
     disabled: PropTypes.bool,
     className: PropTypes.string,
-    indeterminate: PropTypes.bool,
+    indeterminate: PropTypes.any,
     type: PropTypes.oneOf(['switch', 'default', 'checkbox']),
 };
 

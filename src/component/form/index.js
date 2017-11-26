@@ -92,7 +92,7 @@ export default class Form extends Component {
     }
 
     render() {
-        let {data, options, colNum, error, colon, disabled, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonOptions, children, ...other} = this.props;
+        let {data, options, colNum, error, colon, disabled, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonProps, children, ...other} = this.props;
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         let _disabled = this.state.disabled || disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
@@ -142,10 +142,10 @@ export default class Form extends Component {
                 <FormItem labelWidth={labelWidth}>
                     {!hideSubmitButton &&
                     <Button
-                        {...submitButtonOptions}
+                        {...submitButtonProps}
                         disabled={_disabled}
                         onClick={this.handleSubmit.bind(this, _disabled)}
-                        type={_disabled ? null : submitButtonOptions.type || "success"}
+                        type={_disabled ? null : submitButtonProps.type || "success"}
                     >
                         {submitText}
                     </Button>}{submitItems}
@@ -175,7 +175,7 @@ Form.propTypes = {
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
-    submitButtonOptions: PropTypes.object,
+    submitButtonProps: PropTypes.object,
     labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     options: PropTypes.arrayOf(PropTypes.shape({
         colon: PropTypes.bool,
@@ -219,5 +219,5 @@ Form.defaultProps = {
     onChange: noop,
     submitText: '提交',
     layout: "horizontal",
-    submitButtonOptions: {}
+    submitButtonProps: {}
 };

@@ -247,6 +247,7 @@ Animate.propTypes = {
     component: PropTypes.any,
     className: PropTypes.string,
     transitionLeave: PropTypes.bool,
+    transitionEnter: PropTypes.bool,
     componentProps: PropTypes.object,
     transitionAppear: PropTypes.bool,
     transitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
@@ -264,6 +265,7 @@ Animate.defaultProps = {
     onLeave: noop,
     onAppear: noop,
     onEnter: noop,
+    componentProps: {},
     component: 'span',
     transitionEnter: true,
     transitionLeave: true,

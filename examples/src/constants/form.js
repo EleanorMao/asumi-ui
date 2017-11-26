@@ -120,7 +120,7 @@ class Main extends Component {
                 <Form
                     data={this.state.basic}
                     title="basic horizontal form"
-                    submitButtonOptions={{style: {marginLeft: 80}}}
+                    submitButtonProps={{style: {marginLeft: 80}}}
                     onChange={this.handleChange.bind(this)}
                     options={[{
                         type: "text",
@@ -448,7 +448,7 @@ export const api = [{
     'default': "",
     description: "items display after submit button"
 }, {
-    property: "submitButtonOptions",
+    property: "submitButtonProps",
     type: "object",
     'default': "",
     description: "submit button props"

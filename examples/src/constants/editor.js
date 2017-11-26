@@ -59,7 +59,7 @@ export const api = [{
     'default': "false",
     description: "can editor upload images or not"
 }, {
-    property: "uploadImgOptions",
+    property: "uploadImgProps",
     type: "object",
     'default': "",
     description: "receive upload props"

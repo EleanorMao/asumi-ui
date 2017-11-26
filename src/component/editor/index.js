@@ -524,7 +524,7 @@ export default class Editor extends Component {
 
     render() {
         let {link, imgUrl, imgVisible, linkVisible} = this.state;
-        let {name, value, placeholder, onBlur, uploadImgOptions, linkPlaceholder, imgPlaceholder, linkModalTitle, canUploadImg, linkImgTitle, uploadImgTitle} = this.props;
+        let {name, value, placeholder, onBlur, uploadImgProps, linkPlaceholder, imgPlaceholder, linkModalTitle, canUploadImg, linkImgTitle, uploadImgTitle} = this.props;
         return (
             <div className="el-editor">
                 {this.toolbarRender()}
@@ -570,7 +570,7 @@ export default class Editor extends Component {
                         {canUploadImg &&
                         <TabPanel label={uploadImgTitle} key="1">
                             <Uploader
-                                {...uploadImgOptions}
+                                {...uploadImgProps}
                                 onUpload={(fileList) => {
                                     this.upload(fileList.item(0))
                                 }}
@@ -618,7 +618,7 @@ Editor.propTypes = {
     linkModalTitle: PropTypes.string,
     linkPlaceholder: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    uploadImgOptions: PropTypes.object,
+    uploadImgProps: PropTypes.object,
 };
 
 Editor.defaultProps = {
