@@ -39,6 +39,6 @@ module.exports = {
     plugins: [
         new Nyan(),
         new webpack.HotModuleReplacementPlugin(),
-        new openBrowserPlugin({url: 'http://localhost:9010'})
+        // new openBrowserPlugin({url: 'http://localhost:9010'})
     ]
 };
