@@ -10,6 +10,7 @@
   display: inline-block;
   box-shadow: 0 1px 6px @shadow;
   border-right: 1px solid @border;
+  overflow-y: hidden;
   .el-menu {
     position: relative;
   }
@@ -19,13 +20,13 @@
     position: relative;
     padding: 0 1.5384rem;
     color: darken(@midText, 10%);
-    > * {
+    a, > * {
       z-index: 0;
       position: relative;
       display: inline-block;
       color: darken(@midText, 10%);
     }
-    > a {
+    a, span {
       display: block;
       &.active {
         color: @d_primary;
@@ -40,10 +41,10 @@
         top: 0;
         right: 0;
         bottom: 0;
-        left: -100px;
+        left: -999px;
         background: @l_primary;
       }
-      > * {
+      a, > * {
         color: @d_primary;
       }
     }
@@ -62,7 +63,7 @@
         &:hover {
           color: @d_primary;
         }
-        > * {
+        a, > * {
           color: @midText;
           &:hover {
             color: @d_primary;
@@ -103,7 +104,7 @@
       background: @l_default;
       .el-menu-item {
         color: @midText;
-        > * {
+        a, > * {
           color: @midText;
           &:hover {
             color: @d_primary;

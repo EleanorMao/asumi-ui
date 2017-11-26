@@ -9,30 +9,31 @@ import '../../style/index.less';
 import './assets/public.less';
 import {Menu, SubMenu, MenuItem} from '../../src';
 
+import Tag from './components/tag';
 import Form from './components/form';
 import Home from './components/home';
-import Tag from './components/tag';
 import Tabs from './components/tabs';
 import Grid from './components/grid';
 import Table from './components/table';
 import Radio from './components/radio';
 import Modal from './components/modal';
 import Input from './components/input';
+import MenuPage from './components/menu';
 import Select from './components/select';
 import Header from './components/header';
 import Editor from './components/editor';
 import Button from './components/button';
+import Upload from './components/upload';
 import Animate from './components/animate';
 import Loading from './components/loading';
 import Popover from './components/popover';
 import Message from './components/message';
 import Tooltip from './components/tooltip';
-import Upload from './components/upload';
 import Checkbox from './components/checkbox';
 import Dropdown from './components/dropdown';
+import DateTime from './components/datetime';
 import Pagination from './components/pagination';
 import NumberInput from './components/numberInput';
-import DateTime from './components/datetime';
 
 const router = [
     <NavLink to={'/'} activeClassName="">HOME</NavLink>,
@@ -143,6 +144,7 @@ ReactDOM.render(
                 <Route path="/popover" component={Popover}/>
                 <Route path="/tooltip" component={Tooltip}/>
                 <Route path="/upload" component={Upload}/>
+                <Route path="/menu" component={MenuPage}/>
                 <Route path="/checkbox" component={Checkbox}/>
                 <Route path="/dropdown" component={Dropdown}/>
                 <Route path="/numberinput" component={NumberInput}/>

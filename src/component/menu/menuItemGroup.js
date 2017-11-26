@@ -21,7 +21,8 @@ export default class MenuItemGroup extends Component {
 }
 
 MenuItemGroup.propTypes = {
-    title: PropTypes.any
+    title: PropTypes.any,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 MenuItemGroup.defaultProps = {};

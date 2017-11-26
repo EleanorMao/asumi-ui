@@ -8,7 +8,7 @@ export default class SubMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: props.open
+            open: props.open || props.openAll
         }
     }
 
@@ -21,16 +21,16 @@ export default class SubMenu extends Component {
     }
 
     render() {
-        let {title, openAll, openKey, children} = this.props;
+        let {title, openAll, openIds, children} = this.props;
         return (
             <li className={`el-submenu${this.state.open ? ' el-submenu-expand' : ' el-submenu-closed'}`}>
                 <div className="el-submenu-title" onClick={this.handleToggle.bind(this)}>{title}</div>
                 <ul className="el-submenu-list">
-                    {React.Children.map(children, (elm) => {
+                    {React.Children.map(React.Children.toArray(children), (elm) => {
                         if (!elm) return;
-                        let open = openAll;
-                        if (!open && openKey === elm.key) open = true;
-                        return React.cloneElement(elm, {open, openAll, openKey});
+                        let open = openAll || elm.props.openAll;
+                        if (!open && ~openIds.indexOf(elm.props.id)) open = true;
+                        return React.cloneElement(elm, {open, openAll, openIds});
                     })}
                 </ul>
             </li>
@@ -41,7 +41,10 @@ export default class SubMenu extends Component {
 SubMenu.propTypes = {
     title: PropTypes.any,
     openAll: PropTypes.bool,
-    openKey: PropTypes.any
+    openIds: PropTypes.array,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-SubMenu.defaultProps = {};
+SubMenu.defaultProps = {
+    openIds: []
+};
