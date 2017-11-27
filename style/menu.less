@@ -26,12 +26,6 @@
       display: inline-block;
       color: darken(@midText, 10%);
     }
-    a, span {
-      display: block;
-      &.active {
-        color: @d_primary;
-      }
-    }
     &:hover {
       color: @d_primary;
       &:before {
@@ -45,6 +39,12 @@
         background: @l_primary;
       }
       a, > * {
+        color: @d_primary;
+      }
+    }
+    a, span {
+      display: block;
+      &.active {
         color: @d_primary;
       }
     }
@@ -69,8 +69,10 @@
             color: @d_primary;
           }
         }
-        > a.active {
-          color: @d_primary;
+        a, span {
+          &.active {
+            color: @d_primary;
+          }
         }
       }
     }
@@ -110,11 +112,13 @@
             color: @d_primary;
           }
         }
-        > a.active {
-          color: @d_primary;
-        }
         &:hover {
           color: @d_primary;
+        }
+        a, span {
+          &.active {
+            color: @d_primary;
+          }
         }
       }
     }

@@ -21,19 +21,20 @@ class MonthView extends React.Component{
 
             while(i < 12){
                 currentMonth = this.props.viewDate.clone().set({year: viewDate.year(), month: i, date: 1});
-                daysInMonth = Array.from({length: currentMonth.endOf('month').format('D')}, (e, i)=>{
-                    return i + 1;
-                })
-                isDisabled = !!!(daysInMonth.find(d=>{
+                let daysLength = currentMonth.endOf('month').format('D');
+                daysInMonth =[];
+                for (let d = 1; d <= daysLength; d++) {
+                    daysInMonth.push(d);
+                }
+                isDisabled = !(daysInMonth.find(d=>{
                     let day = currentMonth.clone().set('date', d);
                     return isValidDate(day);
-                }))
-
+                }));
                 props = {
                     key: i,
                     'data-value': i,
-                    className: classnames('el-datetime-month', 
-                        {'el-datetime-disabled': isDisabled, 
+                    className: classnames('el-datetime-month',
+                        {'el-datetime-disabled': isDisabled,
                         'el-datetime-active': selectedDate && i === selectedDate.month() && viewDate.year() === selectedDate.year()})
                 };
                 if(!isDisabled){
@@ -77,7 +78,7 @@ class MonthView extends React.Component{
                             </tr>
                         </thead>
                     </table>
-                        
+
                     <table key='months'>
                         <tbody key='b'>{this.renderMonths()}</tbody>
                     </table>
