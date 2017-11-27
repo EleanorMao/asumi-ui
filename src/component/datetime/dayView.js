@@ -8,23 +8,19 @@ class DayView extends React.Component {
         super(props)
     }
 
-    updateSelectedDate(event) {
-        this.props.updateSelectedDate(event, true);
-    }
-
-    
-
     getDaysOfWeek(locale) {
-        let days = locale._weekdaysMin,
-            first = locale.firstDayOfWeek(),
+        let first = locale.firstDayOfWeek(),
+            days = locale._weekdaysMin,
             dow = [],
             i = 0;
         days.forEach(day => {
             dow[(7 + i++ - first) % 7] = day;
-        })
-        this.props.showWeeks && dow.unshift('周');
+        });
+        let {showWeeks, renderWeeksTitle} = this.props;
+        showWeeks && dow.unshift(renderWeeksTitle());
         return dow.map((day, index) => {
-            return <th key={day + index} className={classnames(day === '周' ? 'dow dow-week' : 'dow')}>{day}</th>
+            return <th key={day + index}
+                       className={classnames(showWeeks && index === 0 ? 'dow dow-week' : 'dow')}>{day}</th>
         });
     }
 
@@ -34,54 +30,57 @@ class DayView extends React.Component {
             return '';
         }
         let date = selectedDate || viewDate;
-
         return (
-            <tfoot key='tf'>
-                <tr><td onClick={showView('time')} colSpan={showWeeks ? '8' : '7'} className='el-datetime-timetoggle'>{date.format(timeFormat)}</td></tr>
+            <tfoot key="tf">
+            <tr>
+                <td onClick={showView("time")} colSpan={showWeeks ? "8" : "7"}
+                    className="el-datetime-timetoggle">{date.format(timeFormat)}</td>
+            </tr>
             </tfoot>
         )
     }
 
     renderDays() {
-        let {renderDay, isValidDate, viewDate, selectedDate, showWeeks, isWeek} = this.props,
-            selected = selectedDate && selectedDate.clone(),
-            prevMonth = viewDate.clone().subtract(1, 'months'),
-            currentYear = viewDate.year(),
-            currentMonth = viewDate.month(),
-            weeks = [],
-            classes, isDisabled, dayArr = [], dayProps, currentdate, filterArr;
+        let {renderDay, isValidDate, viewDate, selectedDate, showWeeks, updateSelectedDate, isWeek} = this.props;
+        let prevMonth = viewDate.clone().subtract(1, 'months');
+        let selected = selectedDate && selectedDate.clone();
+        let currentMonth = viewDate.month();
+        let currentYear = viewDate.year();
+        let weeks = [], dayArr = [], filterArr;
 
         prevMonth.date(prevMonth.daysInMonth()).startOf('week');
         let lastDay = prevMonth.clone().add(42, 'd');
+
         while (prevMonth.isBefore(lastDay)) {
-            currentdate = prevMonth.clone();
-
-            isDisabled = !isValidDate(currentdate, selected);
-
-            dayProps = {
+            let currentdate = prevMonth.clone();
+            let isDisabled = !isValidDate(currentdate, selected);
+            let dayProps = {
                 key: prevMonth.clone().format('M_D'),
                 'data-value': prevMonth.clone().date(),
                 className: classnames('el-datetime-day', {
-                                'el-datetime-old': prevMonth.year() === currentYear && prevMonth.month() < currentMonth || prevMonth.year() < currentYear,
-                                'el-datetime-new': prevMonth.year() === currentYear && prevMonth.month() > currentMonth || prevMonth.year() > currentYear,
-                                'el-datetime-active': selected && prevMonth.isSame(selected, 'day'),
-                                'el-datetime-today': prevMonth.isSame(moment(), 'day'),
-                                'el-datetime-disabled': isDisabled
-                            }),
+                    'el-datetime-old': prevMonth.year() === currentYear && prevMonth.month() < currentMonth || prevMonth.year() < currentYear,
+                    'el-datetime-new': prevMonth.year() === currentYear && prevMonth.month() > currentMonth || prevMonth.year() > currentYear,
+                    'el-datetime-active': selected && prevMonth.isSame(selected, 'day'),
+                    'el-datetime-today': prevMonth.isSame(moment(), 'day'),
+                    'el-datetime-disabled': isDisabled
+                }),
                 'data-currentdate': currentdate.clone()
             };
-
-            !isDisabled && (dayProps.onClick = this.updateSelectedDate.bind(this));
+            !isDisabled && (dayProps.onClick = (e) => {
+                updateSelectedDate(e, true);
+            });
 
             dayArr.push(dayProps);
+
             if (dayArr.length === 7) {
                 if (isWeek) {
                     filterArr = dayArr.filter(item => {
-                        return item.className.indexOf('el-datetime-active') !== -1
+                        return ~item.className.indexOf('el-datetime-active')
                     });
+
                     if (filterArr.length) {
                         dayArr.map(item => {
-                            if (item.className.indexOf('el-datetime-active') === -1) {
+                            if (!~item.className.indexOf('el-datetime-active')) {
                                 item.className += ' el-datetime-active';
                             }
                         })
@@ -90,9 +89,12 @@ class DayView extends React.Component {
 
                 dayArr = dayArr.map(item => {
                     return renderDay(item, item['data-currentdate'], selected);
-                })
-                showWeeks && dayArr.unshift(<td key={currentdate.valueOf()} className='el-datetime-week'>{currentdate.isoWeek()}</td>);
-                weeks.push(<tr key={prevMonth.format('M_D')}>{dayArr}</tr>)
+                });
+
+                showWeeks && dayArr.unshift(<td key={currentdate.valueOf()}
+                                                className='el-datetime-week'>{currentdate.isoWeek()}</td>);
+
+                weeks.push(<tr key={prevMonth.format('M_D')}>{dayArr}</tr>);
                 dayArr = [];
             }
             prevMonth.add(1, 'd');
@@ -101,38 +103,47 @@ class DayView extends React.Component {
     }
 
     render() {
-        let footer = this.renderFooter(),
-            date = this.props.viewDate,
-            locale = date.localeData(),
-            tableChildren = [
-                <thead key='th'>
-                    <tr key='h'>
-                        <th key='p' className='el-datetime-prev'><span onClick={this.props.subtractTime(1, 'months')}>‹</span></th>
-                        <th key='s' className='el-datetime-switch' onClick={this.props.showView('months')} colSpan={this.props.showWeeks ? '6' : '5'} data-value={this.props.viewDate.month()}>{locale.months(date) + ' ' + date.year()}</th>
-                        <th key='n' className='el-datetime-next'><span onClick={this.props.addTime(1, 'months')}>›</span></th>
-                    </tr>
-                    <tr key='d'>{this.getDaysOfWeek(locale)}</tr>
-                </thead>
-            ];
-        tableChildren.push(<tbody key='tb'>{this.renderDays()}</tbody>)
-        if (footer) {
-            tableChildren.push(footer);
-        }
+        let {viewDate, subtractTime, showWeeks, showView, addTime} = this.props;
+        let locale = viewDate.localeData();
+        let nextViewType = "months";
         return (
-            <div className='el-datetime-days'>
-                <table>{tableChildren}</table>
+            <div className="el-datetime-days">
+                <table>
+                    <thead key="th">
+                    <tr key="h">
+                        <th key="p" className="el-datetime-prev">
+                            <span onClick={subtractTime(1, nextViewType)}>‹</span>
+                        </th>
+                        <th key="s" className="el-datetime-switch"
+                            colSpan={showWeeks ? "6" : "5"}
+                            onClick={showView(nextViewType)}
+                            data-value={viewDate.month()}>
+                            {locale.months(viewDate) + " " + viewDate.year()}
+                        </th>
+                        <th key="n" className="el-datetime-next">
+                            <span onClick={addTime(1, nextViewType)}>›</span>
+                        </th>
+                    </tr>
+                    <tr key="d">{this.getDaysOfWeek(locale)}</tr>
+                    </thead>
+                    <tbody key="tb">{this.renderDays()}</tbody>
+                    {this.renderFooter()}
+                </table>
             </div>
         )
     }
 }
 
 DayView.defaultProps = {
-    renderDay: (props, currentdate)=>{
-        return <td {...props}>{currentdate.date()}</td>
+    renderDay: (props, currentDate) => {
+        return <td {...props}>{currentDate.date()}</td>
     },
-    isValidDate: ()=>{
+    renderWeeksTitle: () => {
+        return '周'
+    },
+    isValidDate: () => {
         return 1;
-    }
-}
+    },
+};
 
 export default onClickOutside(DayView);
