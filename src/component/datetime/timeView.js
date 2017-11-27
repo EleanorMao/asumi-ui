@@ -153,10 +153,12 @@ class TimeView extends React.Component {
             return (
                 <div key={type} className="el-datetime-counter">
                     <span key="up" className="el-datetime-btn"
-                          onMouseDown={this.onStartClicking("increase", type)}>▲</span>
+                          onMouseDown={this.onStartClicking("increase", type)}>
+                        <i className="fa fa-caret-up fa-2x"/></span>
                     <div key="c" className="el-datetime-count">{value}</div>
                     <span key="do" className="el-datetime-btn"
-                          onMouseDown={this.onStartClicking("decrease", type)}>▼</span>
+                          onMouseDown={this.onStartClicking("decrease", type)}><i
+                        className="fa fa-caret-down fa-2x"/></span>
                 </div>
             )
         }
