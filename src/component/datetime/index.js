@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import Input from '../input';
-import {noop} from "../util";
+import { noop } from "../util";
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import CalendarContainer from './calendarContainer';
@@ -12,7 +12,7 @@ export default class DateTime extends React.Component {
         this.componentProps = {
             fromState: ['viewDate', 'selectedDate', 'updateOn'],
             fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek'],
-            fromThis: ['setDate', 'setTime', 'showView', 'addTime', 'subtractTime', 'updateSelectedDate', 'localMoment', 'handleClickOutside']
+            fromThis: ['setDate', 'setTime', 'updateTime', 'showView', 'updateSelectedDate', 'localMoment', 'handleClickOutside']
         };
         this.allowedSetTime = ['hours', 'minutes', 'seconds', 'milliseconds'];
         let state = this.getStateFromProps(props);
@@ -105,9 +105,9 @@ export default class DateTime extends React.Component {
 
     getFormats(props) {
         let formats = {
-                date: props.dateFormat || '',
-                time: props.timeFormat || ''
-            },
+            date: props.dateFormat || '',
+            time: props.timeFormat || ''
+        },
             locale = this.localMoment(props.date, null, props).localeData();
 
         if (formats.date === true) {
@@ -138,10 +138,11 @@ export default class DateTime extends React.Component {
     }
 
     handleClickOutside() {
-        let {open, selectedDate, inputValue} = this.state;
-        if (this.props.input && open && !this.props.open) {
-            this.setState({open: false}, () => {
-                this.props.onBlur(selectedDate || inputValue);
+        let { open, selectedDate, inputValue } = this.state;
+        let { openProps, input, onBlur } = this.props;
+        if (input && open && !openProps) {
+            this.setState({ open: false }, () => {
+                onBlur(selectedDate || inputValue);
             })
         }
     }
@@ -161,19 +162,11 @@ export default class DateTime extends React.Component {
         }
     }
 
-    addTime(...opt) {
-        return this.updateTime('add', ...opt);
-    }
-
-    subtractTime(...opt) {
-        return this.updateTime('subtract', ...opt)
-    }
-
     setTime(type, value) {
-        let index = this.allowedSetTime.indexOf(type) + 1,
+        let nextType,
             state = this.state,
-            date = (state.selectedDate || state.viewDate).clone(),
-            nextType;
+            index = this.allowedSetTime.indexOf(type) + 1,
+            date = (state.selectedDate || state.viewDate).clone();
         date[type](value);
         for (; index < this.allowedSetTime.length; index++) {
             nextType = this.allowedSetTime[index];
@@ -185,23 +178,19 @@ export default class DateTime extends React.Component {
                 inputValue: date.format(state.inputFormat)
             });
         }
-        this.props.onChange({name: this.props.name, value: date});
+        this.props.onChange({ name: this.props.name, value: date });
     }
 
     showView(view) {
-        return () => {
-            this.setState({currentView: view});
-        }
+        this.setState({ currentView: view });
     }
 
     updateTime(op, amount, type, toSelected) {
-        let me = this;
-        return () => {
-            let update = {},
-                date = toSelected ? 'selectedDate' : 'viewDate';
-            update[date] = me.state[date].clone()[op](amount, type);
-            me.setState(update);
-        }
+        let date = toSelected ? 'selectedDate' : 'viewDate';
+        this.setState(old => {
+            old[date] = old[date].clone()[op](amount, type);
+            return old;
+        })
     }
 
     updateSelectedDate(e, close) {
@@ -244,12 +233,15 @@ export default class DateTime extends React.Component {
                 this.closeCalendar();
             }
         }
-        this.props.onChange({name: this.props.name, value: date});
+        this.props.onChange({ name: this.props.name, value: date });
     }
 
     openCalendar() {
-        if (!this.state.open) {
-            this.setState({open: true}, () => {
+        let {open} = this.state;
+        if(!open){
+            this.setState({
+                open: !open
+            }, ()=>{
                 this.props.onFocus();
             })
         }
@@ -266,7 +258,7 @@ export default class DateTime extends React.Component {
     getComponentProps() {
         let me = this,
             formats = this.getFormats(this.props),
-            props = {dateFormat: formats.date, timeFormat: formats.time};
+            props = { dateFormat: formats.date, timeFormat: formats.time };
 
         this.componentProps.fromProps.forEach(name => {
             props[name] = me.props[name];
@@ -281,15 +273,15 @@ export default class DateTime extends React.Component {
     }
 
     onInputKey(e) {
-        if ( e.which === 9 && this.props.closeOnTab ) {
-			this.closeCalendar();
-		}
+        if (e.which === 9 && this.props.closeOnTab) {
+            this.closeCalendar();
+        }
     }
 
     onInputChange(e) {
         let value = e.target === null ? e : e.value,
             localMoment = this.localMoment(value, this.state.inputFormat),
-            update = {inputValue: value};
+            update = { inputValue: value };
 
         if (localMoment.isValid() && !this.props.value) {
             update.selectedDate = localMoment;
@@ -306,22 +298,23 @@ export default class DateTime extends React.Component {
     }
 
     renderInput(value) {
-        return this.props.renderInput ? this.props.renderInput(this.state.selectedDate) : value;
+        let { renderInput } = this.props;
+        return renderInput ? renderInput(this.state.selectedDate) : value;
     }
 
     render() {
-        let {className, input} = this.props,
-            {inputValue, open, currentView} = this.state,
+        let { className, input } = this.props,
+            { inputValue, open, currentView } = this.state,
             children = [];
         if (input) {
             children.push(
-                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
-                       onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
-                       onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)}/>
+                <Input key='i' icon={<i className="fa fa-calendar-minus-o" />}
+                    onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
+                    onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)} />
             );
         }
         return (
-            <div className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}>
+            <div className={classnames('el-datetime', className, { 'el-static': input }, { 'el-datetime-open': open })}>
                 {children}
                 <div key='dt' className='el-datetime-picker'>
                     <CalendarContainer

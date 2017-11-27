@@ -1,5 +1,6 @@
 import React from 'react';
-import {extend} from "../util";
+import { extend } from "../util";
+import Input from '../input';
 import onClickOutside from 'react-onclickoutside';
 
 class TimeView extends React.Component {
@@ -13,10 +14,10 @@ class TimeView extends React.Component {
             milliseconds: 3
         };
         this.timeConstraints = {
-            hours: {min: 0, max: 23, step: 1},
-            minutes: {min: 0, max: 59, step: 1},
-            seconds: {min: 0, max: 59, step: 1},
-            milliseconds: {min: 0, max: 999, step: 1}
+            hours: { min: 0, max: 23, step: 1 },
+            minutes: { min: 0, max: 59, step: 1 },
+            seconds: { min: 0, max: 59, step: 1 },
+            milliseconds: { min: 0, max: 999, step: 1 }
         };
     }
 
@@ -60,33 +61,30 @@ class TimeView extends React.Component {
     }
 
     onStartClicking(action, type) {
-        let me = this;
-        return () => {
-            let update = {};
-            update[type] = me[action](type);
-            me.setState(update);
-            me.timer = setTimeout(() => {
-                me.increaseTimer = setInterval(() => {
-                    update[type] = me[action](type);
-                    me.setState(update);
-                }, 70);
-            }, 500);
+        let update = {};
+        update[type] = this[action](type);
+        this.setState(update);
+        this.timer = setTimeout(() => {
+            this.increaseTimer = setInterval(() => {
+                update[type] = this[action](type);
+                this.setState(update);
+            }, 70);
+        }, 500);
 
-            me.mouseUpListener = () => {
-                clearTimeout(me.timer);
-                clearInterval(me.increaseTimer);
-                me.props.setTime(type, me.state[type]);
-                document.body.removeEventListener('mouseup', me.mouseUpListener);
-            };
-            document.body.addEventListener('mouseup', me.mouseUpListener);
-        }
+        this.mouseUpListener = () => {
+            clearTimeout(this.timer);
+            clearInterval(this.increaseTimer);
+            this.props.setTime(type, this.state[type]);
+            document.body.removeEventListener('mouseup', this.mouseUpListener);
+        };
+        document.body.addEventListener('mouseup', this.mouseUpListener);
     }
 
     handleChange(e) {
-        let milli = parseInt(e.target.value, 10);
-        if (milli === e.target.value && milli >= 0 && milli < 1000) {
+        let milli = parseInt(e.target === null ? e : e.value, 10);
+        if (!isNaN(milli) && milli >= 0 && milli < 1000) {
             this.props.setTime('milliseconds', milli);
-            this.setState({milliseconds: milli});
+            this.setState({ milliseconds: milli });
         }
     }
 
@@ -126,19 +124,19 @@ class TimeView extends React.Component {
     }
 
     renderHeader() {
-        let {dateFormat, selectedDate, viewDate, showView} = this.props;
+        let { dateFormat, selectedDate, viewDate, showView } = this.props;
         if (!dateFormat) {
             return null;
         }
         let date = selectedDate || viewDate;
         return (
             <thead key="h">
-            <tr>
-                <th className="el-datetime-switch" colSpan="4"
-                    onClick={showView("days")}>
-                    {date.format(dateFormat)}
-                </th>
-            </tr>
+                <tr>
+                    <th className="el-datetime-switch" colSpan="4"
+                        onClick={e => showView("days")}>
+                        {date.format(dateFormat)}
+                    </th>
+                </tr>
             </thead>
         )
     }
@@ -153,12 +151,12 @@ class TimeView extends React.Component {
             return (
                 <div key={type} className="el-datetime-counter">
                     <span key="up" className="el-datetime-btn"
-                          onMouseDown={this.onStartClicking("increase", type)}>
-                        <i className="fa fa-caret-up fa-2x"/></span>
+                        onMouseDown={this.onStartClicking.bind(this, "increase", type)}>
+                        <i className="fa fa-caret-up fa-2x" /></span>
                     <div key="c" className="el-datetime-count">{value}</div>
                     <span key="do" className="el-datetime-btn"
-                          onMouseDown={this.onStartClicking("decrease", type)}><i
-                        className="fa fa-caret-down fa-2x"/></span>
+                        onMouseDown={this.onStartClicking.bind(this, "decrease", type)}><i
+                            className="fa fa-caret-down fa-2x" /></span>
                 </div>
             )
         }
@@ -168,19 +166,21 @@ class TimeView extends React.Component {
     renderDayPart() {
         let daypart = this.state.daypart;
         return (
-            <div key="dayPart" className="el-datetimeCounter">
-                <span key="up" className="el-datetimeBtn"
-                      onMouseDown={this.onStartClicking("toggleDayPart", "hours")}>▲</span>
-                <div key={daypart} className="el-datetimeCount">{daypart}</div>
-                <span key="do" className="el-datetimeBtn"
-                      onMouseDown={this.onStartClicking("toggleDayPart", "hours")}>▼</span>
+            <div key="dayPart" className="el-datetime-counter">
+                <span key="up" className="el-datetime-btn"
+                    onMouseDown={this.onStartClicking.bind(this, "toggleDayPart", "hours")}>
+                    <i className="fa fa-caret-up fa-2x" /></span>
+                <div key={daypart} className="el-datetime-count">{daypart}</div>
+                <span key="do" className="el-datetime-btn"
+                    onMouseDown={this.onStartClicking.bind(this, "toggleDayPart", "hours")}><i
+                        className="fa fa-caret-down fa-2x" /></span>
             </div>
         )
     }
 
     renderBody() {
         let output = [];
-        let {counters, daypart, milliseconds} = this.state;
+        let { counters, daypart, milliseconds } = this.state;
 
         counters.forEach(c => {
             if (output.length) {
@@ -194,9 +194,9 @@ class TimeView extends React.Component {
         }
 
         if (counters.length === 3 && ~this.props.timeFormat.indexOf("S")) {
-            output.push(<div className="el-datetimeCounterSeparator" key="sep5">:</div>);
-            output.push(<div className="el-datetimeCounter el-datetimeMilli" key="m">
-                <input type="text" value={milliseconds} onChange={this.handleChange.bind(this)}/>
+            output.push(<div className="el-datetime-counter-separator" key="sep5">:</div>);
+            output.push(<div className="el-datetime-counter el-datetime-milli" key="m">
+                <Input value={milliseconds} onChange={this.handleChange.bind(this)} />
             </div>)
         }
         return output;
@@ -208,11 +208,11 @@ class TimeView extends React.Component {
                 <table>
                     {this.renderHeader()}
                     <tbody key="b">
-                    <tr>
-                        <td>
-                            <div className="el-datetime-counters">{this.renderBody()}</div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <div className="el-datetime-counters">{this.renderBody()}</div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
