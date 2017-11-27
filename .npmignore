@@ -11,3 +11,4 @@ webpack.config.example.js
 webpack.config.pages.js
 .DS_Store
 db.json
+jest.config.json
