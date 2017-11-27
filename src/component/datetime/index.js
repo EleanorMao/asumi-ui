@@ -25,10 +25,8 @@ export default class DateTime extends React.Component {
             date = props.value || props.defaultValue,
             selectedDate, viewDate, updateOn, inputValue;
 
-        if (date && typeof date === 'string') {
-            selectedDate = this.localMoment(date, formats.datetime);
-        } else if (date) {
-            selectedDate = this.localMoment(date);
+        if (date) {
+            selectedDate = this.localMoment(date, typeof date === 'string' ? formats.datetime : null);
         }
 
         if (selectedDate && !selectedDate.isValid()) {
@@ -191,9 +189,8 @@ export default class DateTime extends React.Component {
     }
 
     showView(view) {
-        let me = this;
         return () => {
-            me.setState({currentView: view});
+            this.setState({currentView: view});
         }
     }
 
@@ -258,10 +255,8 @@ export default class DateTime extends React.Component {
         }
     }
 
-    localMoment(date, format, props) {
-        props = props || this.props;
-        let momentFn = props.utc ? moment.utc : moment;
-        let m = momentFn(date, format, props.strictParsing);
+    localMoment(date, format, props = this.props) {
+        let m = (props.utc ? moment.utc : moment)(date, format, props.strictParsing);
         if (props.locale) {
             m.locale(props.locale);
         }

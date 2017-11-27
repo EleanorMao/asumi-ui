@@ -32,13 +32,12 @@ export default class Main extends Component {
                     code={basic}
                 >
                     <DateTime
-                        onChange={this.handleChange.bind(this)} className={['aaa', 'bbb']}
-                        value={date} name="date"
-                        viewMode='days' />
+                        onChange={this.handleChange.bind(this)} className={['aaa', 'bbb']} 
+                        value={date} name="date"/>
                 </Panel>
 
 
-                <Panel
+                {/* <Panel
                     title="month"
                     code={week}
                 >
@@ -59,7 +58,7 @@ export default class Main extends Component {
                         dateFormat='YYYY年'
                         value={date} name="date"
                         viewMode='years' isValidDate={this.handleValidDate.bind(this)} />
-                </Panel>
+                </Panel> */}
 
                 <h1>API of DateTime</h1>
                 <Table isKey="property" data={api} lineWrap="break">

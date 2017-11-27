@@ -84,7 +84,7 @@ class MonthView extends React.Component{
     }
 }
 
-MonthView.defaltProps = {
+MonthView.defaultProps = {
     isValidDate: ()=> {
         return 1;
     }
