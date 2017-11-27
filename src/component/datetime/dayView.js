@@ -33,7 +33,7 @@ class DayView extends React.Component {
         return (
             <tfoot key="tf">
             <tr>
-                <td onClick={showView("time")} colSpan={showWeeks ? "8" : "7"}
+                <td onClick={e=>showView("time")} colSpan={showWeeks ? "8" : "7"}
                     className="el-datetime-timetoggle">{date.format(timeFormat)}</td>
             </tr>
             </tfoot>
@@ -103,7 +103,7 @@ class DayView extends React.Component {
     }
 
     render() {
-        let {viewDate, subtractTime, showWeeks, showView, addTime} = this.props;
+        let {viewDate, showWeeks, showView, updateTime} = this.props;
         let locale = viewDate.localeData();
         let nextViewType = "months";
         return (
@@ -112,16 +112,16 @@ class DayView extends React.Component {
                     <thead key="th">
                     <tr key="h">
                         <th key="p" className="el-datetime-prev">
-                            <span onClick={subtractTime(1, nextViewType)}>‹</span>
+                            <span onClick={e=>updateTime('subtract', 1, nextViewType)}>‹</span>
                         </th>
                         <th key="s" className="el-datetime-switch"
                             colSpan={showWeeks ? "6" : "5"}
-                            onClick={showView(nextViewType)}
+                            onClick={e=>showView(nextViewType)}
                             data-value={viewDate.month()}>
                             {locale.months(viewDate) + " " + viewDate.year()}
                         </th>
                         <th key="n" className="el-datetime-next">
-                            <span onClick={addTime(1, nextViewType)}>›</span>
+                            <span onClick={e=>updateTime('add', 1, nextViewType)}>›</span>
                         </th>
                     </tr>
                     <tr key="d">{this.getDaysOfWeek(locale)}</tr>

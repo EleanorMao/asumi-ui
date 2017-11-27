@@ -51,7 +51,7 @@ class YearView extends React.Component {
 
     render() {
         let type = "years";
-        let {viewDate, subtractTime, showView, addTime} = this.props;
+        let {viewDate, showView, updateTime} = this.props;
         let year = parseInt(viewDate.year() / 10, 10) * 10;
         return (
             <div className="el-datetime-years">
@@ -59,14 +59,14 @@ class YearView extends React.Component {
                     <thead>
                     <tr>
                         <th key="prev" className="el-datetime-prev">
-                            <span onClick={subtractTime(10, type)}>‹</span>
+                            <span onClick={e=>updateTime('subtract', 10, type)}>‹</span>
                         </th>
                         <th key="year" className="el-datetime-switch">
-                            <span onClick={showView(type)}
+                            <span onClick={e=>showView(type)}
                                   colSpan="2">{year + "-" + (year + 9)}</span>
                         </th>
                         <th key="next" className="el-datetime-next">
-                            <span onClick={addTime(10, type)}>›</span>
+                            <span onClick={e=>updateTime('add', 10, type)}>›</span>
                         </th>
                     </tr>
                     </thead>

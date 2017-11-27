@@ -65,14 +65,15 @@ class MonthView extends React.Component{
     }
 
     render(){
+        let {updateTime, showView} = this.props;
         let type = 'years';
         return <div className='el-datetime-months'>
                     <table key='a'>
                         <thead>
                             <tr>
-                                <th key='prev' className='el-datetime-prev'><span onClick={this.props.subtractTime(1, type)}>‹</span></th>
-                                <th key='year' className='el-datetime-switch' onClick={this.props.showView(type)} colSpan='2' data-value={this.props.viewDate.year()}>{this.props.viewDate.year()}</th>
-                                <th key='next' className='el-datetime-next'><span onClick={this.props.addTime(1, type)}>›</span></th>
+                                <th key='prev' className='el-datetime-prev'><span onClick={e=>updateTime('subtract', 1, type)}>‹</span></th>
+                                <th key='year' className='el-datetime-switch' onClick={e=>showView(type)} colSpan='2' data-value={this.props.viewDate.year()}>{this.props.viewDate.year()}</th>
+                                <th key='next' className='el-datetime-next'><span onClick={e=>updateTime('add', 1, type)}>›</span></th>
                             </tr>
                         </thead>
                     </table>
