@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
+import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 
 import '../../style/index.less';
 import './assets/public.less';
