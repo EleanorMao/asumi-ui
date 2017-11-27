@@ -285,8 +285,10 @@ export default class DateTime extends React.Component {
         return props;
     }
 
-    onInputKey() {
-
+    onInputKey(e) {
+        if ( e.which === 9 && this.props.closeOnTab ) {
+			this.closeCalendar();
+		}
     }
 
     onInputChange(e) {
