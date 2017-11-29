@@ -92,13 +92,15 @@ export default class Form extends Component {
     }
 
     render() {
-        let {data, options, colNum, error, colon, disabled, labelWidth, hideSubmitButton, layout, title, className, submitText, submitItems, submitButtonProps, children, ...other} = this.props;
+        let {data, options, colNum, error, colon, disabled, labelWidth, hideSubmitButton, layout, title, className, submitText, name, submitItems, submitButtonProps, children, style, encType, action, method, autoComplete, target, noValidate, acceptCharset} = this.props;
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         let _disabled = this.state.disabled || disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
         let renderChildren = isArr(children) ? children : [children];
         return (
-            <form className={_className} {...other}>
+            <form className={_className} style={style} encType={encType}
+                  action={action} method={method} autoComplete={autoComplete}
+                  name={name} target={target} noValidate={noValidate} acceptCharset={acceptCharset}>
                 {!!title && <div className="el-form-title">{title}</div>}
                 {options.map((props, index) => {
                     return (
