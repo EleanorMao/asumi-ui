@@ -1,56 +1,57 @@
 @charset "utf-8";
 @import "variables";
 @import "normalize";
+
 :root {
-    font-size: @fontSize;
+  font-size: @fontSize;
 }
 
 body {
-    font-family: '微软雅黑', "Microsoft YaHei", Arial, Microsoft YaHei, Helvetica, sans-serif;
-    margin: 0;
-    color: @normalText;
-    line-height: 1.42857;
+  font-family: '微软雅黑', "Microsoft YaHei", Arial, Microsoft YaHei, Helvetica, sans-serif;
+  margin: 0;
+  color: @normalText;
+  line-height: 1.42857;
 }
 
 a {
-    color: @primary;
-    &:hover,
-    &:active,
-    &:visited,
-    &:focus {
-        color: @d_primary;
-    }
+  color: @primary;
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus {
+    color: @d_primary;
+  }
 }
 
 .el-shadow {
-    box-shadow: 0 0.4615rem 0.9230rem @shadow;
-    -webkit-box-shadow: 0 0.4615rem 0.9230rem @shadow;
+  box-shadow: 0 0.4615rem 0.9230rem @shadow;
+  -webkit-box-shadow: 0 0.4615rem 0.9230rem @shadow;
 }
 
 .el-mirror-shadow {
-    box-shadow: 0 -0.2rem 0.9230rem @shadow;
-    -webkit-box-shadow: 0 -0.2rem 0.9230rem @shadow;
+  box-shadow: 0 -0.2rem 0.9230rem @shadow;
+  -webkit-box-shadow: 0 -0.2rem 0.9230rem @shadow;
 }
 
 .overflow {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .clearfix {
-    &:before,
-    &:after {
-        content: " ";
-        display: table;
-    }
-    &:after {
-        clear: both;
-    }
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
 }
 
 .el-text-center {
-    text-align: center;
+  text-align: center;
 }
 
 @import "tag";

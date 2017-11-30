@@ -16,16 +16,16 @@ export default class TransferPanel extends Component {
         }
     }
 
-    handleChange({ value }) {
+    handleChange({value}) {
         this.props.changeChecked(value)
     }
 
     handleInputChange(e) {
-        this.setState({ query: e.value });
+        this.setState({query: e.value});
     };
 
     get filterData() {
-        const { data, propsAlias, filterMethod } = this.props;
+        const {data, propsAlias, filterMethod} = this.props;
         return data.filter(item => {
             if (typeof filterMethod === 'function') {
                 return filterMethod(this.state.query, item);
@@ -37,34 +37,32 @@ export default class TransferPanel extends Component {
     }
 
     render() {
-        const { data, title, checkedList, filterable, filterPlaceholder } = this.props;
+        const {data, title, checkedList, filterable, filterPlaceholder} = this.props;
         return (
-            <div className="el-transfer-panel" >
-                <p className="el-transfer-panel__header" >
+            <div className="el-transfer-panel">
+                <p className="el-transfer-panel-header">
                     <span>{title}</span>
                     <span>{checkedList.length}/{data.length}</span>
                 </p>
                 {filterable &&
-                    <Input
-                        size="small"
-                        placeholder={filterPlaceholder}
-                        onChange={this.handleInputChange.bind(this)}
-                    />}
+                <Input
+                    size="small"
+                    placeholder={filterPlaceholder}
+                    onChange={this.handleInputChange.bind(this)}
+                />}
                 <div>
-                    {data.length == 0
-                        ? <span className="el-transfer-no-data" >无数据</span>
-                        : this.filterData.length == 0
-                            ? <span className="el-transfer-no-data" >无匹配数据</span>
+                    {data.length === 0
+                        ? <span className="el-transfer-no-data">无数据</span>
+                        : this.filterData.length === 0
+                            ? <span className="el-transfer-no-data">无匹配数据</span>
                             : null
                     }
-                    {
-                        <Checkbox.Group
-                            className="el-transfer-checkGroup"
-                            options={this.filterData}
-                            checkedList={checkedList}
-                            onChange={this.handleChange.bind(this)}
-                        />
-                    }
+                    <Checkbox.Group
+                        className="el-transfer-check-group"
+                        options={this.filterData}
+                        checkedList={checkedList}
+                        onChange={this.handleChange.bind(this)}
+                    />
                 </div>
             </div>
         )
@@ -90,5 +88,6 @@ TransferPanel.defaultProps = {
     title: '',
     props: {},
     checkedList: [],
-    onChange: () => { }
+    onChange: () => {
+    }
 };

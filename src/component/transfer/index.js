@@ -6,6 +6,7 @@ import classnames from 'classnames';
 
 import Button from '../button';
 import TransferPanel from './transferPanel';
+import {noop} from "../util";
 
 export default class Transfer extends Component {
     constructor(props) {
@@ -63,8 +64,8 @@ export default class Transfer extends Component {
         const { data, titles, ...others } = this.props;
         const { leftChecked, rightChecked } = this.state;
 
-        let isTopBtnDisabled = leftChecked.length == 0 ? true : false;
-        let isBottmBtnDisabled = rightChecked.length == 0 ? true : false;
+        let isTopBtnDisabled = leftChecked.length === 0;
+        let isBottomBtnDisabled = rightChecked.length === 0;
         return (
             <div className="el-transfer" >
                 <TransferPanel
@@ -74,22 +75,22 @@ export default class Transfer extends Component {
                     changeChecked={this.handleChange.bind(this, true)}
                     {...others}
                 />
-                <div className="el-transfer__buttons">
+                <div className="el-transfer-buttons">
                     <Button
                         type="primary"
-                        className="el-transfer__button"
+                        className="el-transfer-button"
                         disabled={isTopBtnDisabled}
                         onClick={this.addToRight.bind(this)}
                     >
-                        <i className="fa fa-chevron-right"></i>
+                        <i className="fa fa-chevron-right"/>
                     </Button>
                     <Button
                         type="primary"
-                        className="el-transfer__button"
-                        disabled={isBottmBtnDisabled}
+                        className="el-transfer-button"
+                        disabled={isBottomBtnDisabled}
                         onClick={this.addToLeft.bind(this)}
                     >
-                        <i className="fa fa-chevron-left"></i>
+                        <i className="fa fa-chevron-left"/>
                     </Button>
                 </div>
                 <TransferPanel
@@ -121,7 +122,7 @@ Transfer.defaultProps = {
     filterPlaceholder: '请输入搜索内容',
     titles: ['', ''],
     props: {},
-    onChange: () => { },
+    onChange: noop,
     propsAlias: {
         label: 'label',
         value: 'value',

@@ -55,9 +55,9 @@ const router = [
             <NavLink to={'/checkbox'} activeClassName="active">Checkbox</NavLink>,
             <NavLink to={'/upload'} activeClassName="active">Upload</NavLink>,
             <NavLink to={'/datetime'} activeClassName="active">Datetime</NavLink>,
+            <NavLink to={'/transfer'} activeClassName="active">Transfer</NavLink>,
             <NavLink to={'/editor'} activeClassName="active">Editor</NavLink>,
             <NavLink to={'/form'} activeClassName="active">Form</NavLink>,
-            <NavLink to={'/transfer'} activeClassName="active">Transfer</NavLink>,
         ]
     },
     {

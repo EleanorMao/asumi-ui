@@ -1,82 +1,82 @@
 .el-transfer {
-    .el-transfer-panel {
-        position: relative;
-        display: inline-block;
-        width: 15.3846rem;
-        border: 1px solid #e6ebf5;
-        border-radius: 0.3077rem;
-        overflow: hidden;
-        background: #fff;
-        vertical-align: middle;
-        .el-transfer-panel__header {
-            height: 3.0769rem;
-            line-height: 3.0769rem;
-            margin: 0;
-            padding-left: 2.1538rem;
-            border-bottom: 1px solid #e6ebf5;
-            font-size: 15px;
-            background: #f5f7fa;
-            color: #000;
-            span:last-child {
-                float: right;
-                padding-right: 1rem;
-                font-size: 0.6rem;
-                color: #9c9c9c;
-            }
-        }
-        .el-input {
-            display: block;
-            margin: 0.7692rem 0.7692rem 0;
-        }
-        .el-transfer-checkGroup {
-            .el-check-all {
-                position: absolute;
-                top: 0;
-                .el-checkbox-wrapper {
-                    >span:last-child {
-                        display: none;
-                    }
-                }
-            }
-            .el-checkbox-row {
-                height: 14rem;
-                overflow: auto;
-                .el-checkbox-wrapper {
-                    display: block;
-                    &:hover {
-                        background: #f5f7fa;
-                    }
-                    .el-checkbox {
-                        width: 1rem;
-                        margin-right: 0.846rem;
-                        font-size: 1.2308rem;
-                    }
-                }
-            }
-        }
-        .el-transfer-no-data {
-            position: absolute;
-            left: 50%;
-            width: 6rem;
-            margin-left: -3rem;
-            margin-top: 1rem;
-            text-align: center;
-            font-size: 1rem;
-            color: #b9b9b9;
-        }
-    }
-}
-
-.el-transfer__buttons {
+  .el-transfer-panel {
+    overflow: hidden;
+    background: #fff;
+    width: 15.3846rem;
+    position: relative;
     display: inline-block;
     vertical-align: middle;
-    padding: 0 30px;
-    .el-transfer__button {
-        display: block;
-        min-width: 35px;
-        border-radius: 25px;
-        &.el-transfer__button:first-child {
-            margin-bottom: 10px;
-        }
+    border-radius: 0.3077rem;
+    border: 1px solid @border;
+    .el-transfer-panel-header {
+      margin: 0;
+      height: 3.0769rem;
+      color: @normalText;
+      font-size: 1.15384rem;
+      line-height: 3.0769rem;
+      padding-left: 2.1538rem;
+      border-bottom: 1px solid @border;
+      span:last-child {
+        float: right;
+        color: @midText;
+        font-size: 0.6rem;
+        padding-right: 1rem;
+      }
     }
+    .el-input {
+      display: block;
+      margin: 0.7692rem 0.7692rem 0;
+    }
+    .el-transfer-check-group {
+      &.el-checkbox-group {
+        padding-bottom: 0;
+      }
+      .el-check-all {
+        top: 0;
+        position: absolute;
+        .el-checkbox-wrapper {
+          > span:last-child {
+            display: none;
+          }
+        }
+      }
+      .el-checkbox-row {
+        height: 14rem;
+        overflow: auto;
+        .el-checkbox-wrapper {
+          display: block;
+          .el-checkbox {
+            width: 1rem;
+            font-size: 1.2308rem;
+            margin-right: 0.846rem;
+          }
+        }
+      }
+    }
+    .el-transfer-no-data {
+      width: 6rem;
+      left: 50%;
+      position: absolute;
+      margin-left: -3rem;
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 1rem;
+      color: @disabled;
+    }
+  }
+}
+
+.el-transfer-buttons {
+  padding: 0 20px;
+  display: inline-block;
+  vertical-align: middle;
+  .el-transfer-button {
+    height: 25px;
+    display: block;
+    min-width: 35px;
+    line-height: 25px;
+    &.el-transfer-button:first-child {
+      margin-bottom: 10px;
+    }
+  }
 }
