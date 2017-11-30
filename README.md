@@ -44,6 +44,7 @@ asumi icons use <a href="http://fontawesome.io/">Font Awesome</a>
 * <input type="checkbox" checked/> SubMenu
 * <input type="checkbox" checked/> Animate
 * <input type="checkbox" checked/> Loading
+* <input type="checkbox" checked/> Transfer
 
 ## Theme
 default font-size is **13px**.
