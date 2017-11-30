@@ -50,7 +50,7 @@ export default class CheckGroup extends Component {
                         label="全选"
                         disabled={disableAll}
                         onChange={this.handleToggle.bind(this)}
-                        checked={options.length === checkedList.length}
+                        checked={options.length && options.length === checkedList.length}
                         indeterminate={checkedList.length && options.length !== checkedList.length}
                     />}
                 </div>
