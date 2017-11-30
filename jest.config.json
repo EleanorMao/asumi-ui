@@ -4,8 +4,6 @@
   ],
   "testRegex": "__tests__.*.test.(ts|tsx|js)$",
   "moduleFileExtensions": [
-    "ts",
-    "tsx",
     "js",
     "json"
   ],
