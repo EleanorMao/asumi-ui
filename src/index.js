@@ -36,6 +36,7 @@ import RadioGroup from './component/radio/radioGroup';
 import CheckboxGroup from './component/checkbox/checkGroup';
 import SimplePagination from './component/pagination/simplePagination';
 import DateTime from './component/datetime';
+import Transfer from './component/transfer';
 
 const Tooltip = Popover;
 
@@ -89,4 +90,5 @@ export {
     CheckboxGroup,
     MenuItemGroup,
     SimplePagination,
+    Transfer
 };
