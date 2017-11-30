@@ -1,6 +1,6 @@
 {
   "name": "asumi",
-  "version": "0.1.0-beta",
+  "version": "0.1.0-beta.1",
   "description": "light react ui design",
   "main": "lib/index.js",
   "files": [
@@ -16,10 +16,26 @@
     "test": "jest --config jest.config.json",
     "css": "lessc --autoprefix='> 1%' --clean-css='--compatibility=ie8' style/index.less style/asumi-default-theme.css"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EleanorMao/asumi-ui.git"
+  },
   "keywords": [
     "react"
   ],
-  "author": "Eleanor Mao",
+  "author": {
+    "name": "Eleanor Mao",
+    "email": "danningmao@outlook.com",
+    "url": "http://chashaobao.net/"
+  },
+  "contributors": [
+    "bengbeng"
+  ],
+  "bugs": {
+    "url": "http://chashaobao.net/asumi-ui/",
+    "email": "danningmao@outlook.com"
+  },
+  "homepage": "https://github.com/EleanorMao/React-TreeTable#readme",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",

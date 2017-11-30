@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import onClickOutside from 'react-onclickoutside';
 
 class MonthView extends React.Component{
@@ -10,53 +11,41 @@ class MonthView extends React.Component{
         this.props.updateSelectedDate(event);
     }
 
-    alwaysValidDate(){
-        return 1;
-    }
-
     renderMonths(){
-        let date = this.props.selectedDate,
-            month = this.props.viewDate.month(),
-            year = this.props.viewDate.year(),
+        let {isValidDate, selectedDate, viewDate, renderMonth} = this.props,
             rows = [],
             i = 0,
             months = [],
-            renderer = this.props.renderMonth || this.renderMonth.bind(this),
-            isValid = this.props.isValidDate || this.alwaysValidDate,
-            classes, props, currentMonth, isDisabled, noOfDaysInMonth, daysInMonth, validDay,
-            irrelevantDate = 1;
+            renderer = renderMonth || this.renderMonth.bind(this),
+            props, currentMonth, isDisabled, daysInMonth, validDay;
 
             while(i < 12){
-                classes = 'el-datetime-month';
-                currentMonth = this.props.viewDate.clone().set({year: year, month: i, date: irrelevantDate});
-                noOfDaysInMonth = currentMonth.endOf('month').format('D');
-                daysInMonth = Array.from({length: noOfDaysInMonth}, (e, i)=>{
-                    return i + 1;
-                })
-                validDay = daysInMonth.find(d=>{
+                currentMonth = this.props.viewDate.clone().set({year: viewDate.year(), month: i, date: 1});
+                let daysLength = currentMonth.endOf('month').format('D');
+                daysInMonth =[];
+                for (let d = 1; d <= daysLength; d++) {
+                    daysInMonth.push(d);
+                }
+                isDisabled = !(daysInMonth.find(d=>{
                     let day = currentMonth.clone().set('date', d);
-                    return isValid(day);
-                })
-
-                isDisabled = validDay === undefined;
-
-                isDisabled && (classes += ' el-datetime-disabled');
-                date && i === month && year === date.year() && (classes += ' el-datetime-active');
-
+                    return isValidDate(day);
+                }));
                 props = {
                     key: i,
                     'data-value': i,
-                    className: classes
+                    className: classnames('el-datetime-month',
+                        {'el-datetime-disabled': isDisabled,
+                        'el-datetime-active': selectedDate && i === selectedDate.month() && viewDate.year() === selectedDate.year()})
                 };
                 if(!isDisabled){
                     props.onClick = this.props.updateOn === 'months' ?
                         this.updateSelectedMonth.bind(this) : this.props.setDate('month');
                 }
 
-                months.push(renderer(props, i, year, date && date.clone()));
+                months.push(renderer(props, i, viewDate.year(), selectedDate && selectedDate.clone()));
 
                 if(months.length === 4){
-                    rows.push(<tr key={month + '_' + rows.length}>{months}</tr>);
+                    rows.push(<tr key={viewDate.month() + '_' + rows.length}>{months}</tr>);
                     months = [];
                 }
                 i++;
@@ -77,22 +66,29 @@ class MonthView extends React.Component{
     }
 
     render(){
-        
+        let {updateTime, showView} = this.props;
+        let type = 'years';
         return <div className='el-datetime-months'>
                     <table key='a'>
                         <thead>
                             <tr>
-                                <th key='prev' className='el-datetime-prev'><span onClick={this.props.subtractTime(1, 'years')}>‹</span></th>
-                                <th key='year' className='el-datetime-switch' onClick={this.props.showView('years')} colSpan='2' data-value={this.props.viewDate.year()}>{this.props.viewDate.year()}</th>
-                                <th key='next' className='el-datetime-next'><span onClick={this.props.addTime(1, 'years')}>›</span></th>
+                                <th key='prev' className='el-datetime-prev'><span onClick={e=>updateTime('subtract', 1, type)}>‹</span></th>
+                                <th key='year' className='el-datetime-switch' onClick={e=>showView(type)} colSpan='2' data-value={this.props.viewDate.year()}>{this.props.viewDate.year()}</th>
+                                <th key='next' className='el-datetime-next'><span onClick={e=>updateTime('add', 1, type)}>›</span></th>
                             </tr>
                         </thead>
                     </table>
-                        
+
                     <table key='months'>
                         <tbody key='b'>{this.renderMonths()}</tbody>
                     </table>
                 </div>
+    }
+}
+
+MonthView.defaultProps = {
+    isValidDate: ()=> {
+        return 1;
     }
 }
 export default onClickOutside(MonthView);

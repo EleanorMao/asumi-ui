@@ -18,14 +18,14 @@ export default class Main extends Component {
                     <code>npm install asumi -S</code>
                 </pre>
                 <h1>Environment Support</h1>
-                <p>Modern browsers and Internet Explorer 9+ (with classList polyfills)</p>
+                <p>Modern browsers and Internet Explorer 8+ (with classList & getBoundingClientRect polyfills)</p>
                 <h1>Usage</h1>
                 <pre>
                     <code>import React from 'react';</code>
                     <code>import ReactDOM from 'react-dom';</code>
                     <code dangerouslySetInnerHTML={{__html: "import { Button } from 'asumi';"}}/>
                     <code>import 'asumi/style/index.less';</code>
-                    <code>// import 'asumi/style/asumi-default-theme.css';</code>
+                    <code>// import 'asumi/style/asumi-default-theme.css';  compatible IE8</code>
                     <br/>
                     <code>
                         <span>&lt;link</span>

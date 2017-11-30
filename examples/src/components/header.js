@@ -15,10 +15,12 @@ export default class Header extends Component {
             <header className="header">
                 <h1 className="title"><a href="/">ASUMI-UI</a></h1>
                 <div className="copyright">
-                    <span className="author">© Eleanor Mao</span>
-                    <a className="github-button"
-                       href="https://github.com/EleanorMao" data-show-count="true"
-                       aria-label="Follow @EleanorMao on GitHub">Follow Me</a>
+                    <span className="author">©
+                        <a href="https://github.com/EleanorMao" style={{color: "#fff", marginLeft: 5}}>EleanorMao</a>,
+                        <a href="https://github.com/EleanorMao" style={{color: "#fff", marginLeft: 2}}>嘣嘣</a>
+                    </span>
+                    <a className="github-button" href="https://github.com/EleanorMao/asumi-ui"
+                       data-show-count="true" aria-label="Star EleanorMao/asumi-ui on GitHub"/>
                 </div>
             </header>
         )

@@ -80,14 +80,15 @@ class WeekView extends React.Component{
     }
 
     render(){
+        let {updateTime, showView} = this.props;
         let date = this.props.viewDate,
             locale = date.localeData(),
             tableChildren = [
                 <thead key='th'>
                     <tr key='h'>
-                        <th key='p' className='el-datetime-prev'><span onClick={this.props.subtractTime(1, 'months')}>‹</span></th>
-                        <th key='s' className='el-datetime-switch' onClick={this.props.showView('months')} colSpan='5' data-value={this.props.viewDate.month()}>{locale.months(date)+' '+date.year()}</th>
-                        <th key='n' className='el-datetime-next'><span onClick={this.props.addTime(1, 'months')}>›</span></th>
+                        <th key='p' className='el-datetime-prev'><span onClick={e=>updateTime('subtract', 1, 'months')}>‹</span></th>
+                        <th key='s' className='el-datetime-switch' onClick={e=>showView('months')} colSpan='5' data-value={this.props.viewDate.month()}>{locale.months(date)+' '+date.year()}</th>
+                        <th key='n' className='el-datetime-next'><span onClick={e=>updateTime('add', 1, 'months')}>›</span></th>
                     </tr>
                     <tr key='d'>{this.getDaysOfWeek(locale).map((day, index)=>{return <th key={day+index} className='dow'>{day}</th>})}</tr>
                 </thead>
