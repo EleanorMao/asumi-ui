@@ -14,7 +14,7 @@
     "mock": "json-server --watch db.json --port 3000",
     "eslint": "eslint src",
     "test": "jest --config jest.config.json",
-    "css": "lessc --autoprefix='> 1%' --clean-css='--compatibility=ie8' style/index.less style/asumi-default-theme.css"
+    "prepublish": "lessc --autoprefix='> 1%' --clean-css='--compatibility=ie8' style/index.less style/asumi-default-theme.css"
   },
   "repository": {
     "type": "git",
