@@ -12,10 +12,31 @@ export default class CheckGroup extends Component {
         super(props);
     }
 
+    get getValue() {
+        return this.props.value || this.props.checkedList;
+    }
+
+    get isCheckedAll() {
+        let {options} = this.props;
+        let checkedList = this.getValue;
+        return !options.filter(v => {
+            if (typeof v === 'string' || typeof v === "number") {
+                return !~checkedList.indexOf(v)
+            } else {
+                return !~checkedList.indexOf(v.value || v.children)
+            }
+        }).length;
+    }
+
+    get hasCheckAll() {
+        let {hasCheckAll, max, min} = this.props;
+        return hasCheckAll && (max == null || max != null && max >= options.length) && !min
+    }
+
     handleChange({onChange}, e) {
         let {checked, value} = e;
-        let {min, max, name, checkedList} = this.props;
-        checkedList = checkedList.slice();
+        let {min, max, name} = this.props;
+        let checkedList = this.getValue.slice();
         if (max != null && checkedList.length === max) return;
         if (min != null && !checked && checkedList.length === min + 1) return;
         let index = checkedList.indexOf(value);
@@ -30,7 +51,7 @@ export default class CheckGroup extends Component {
         let checkedList = [];
         if (checked) {
             checkedList = options.map(item => {
-                if (typeof item === "string") {
+                if (typeof item === "string" || typeof  item === "number") {
                     return item;
                 }
                 return item.value
@@ -40,24 +61,26 @@ export default class CheckGroup extends Component {
     }
 
     render() {
-        let {hasCheckAll, disableAll, options, checkedList, style, className} = this.props;
+        let {disableAll, options, style, checkAllLabel, className} = this.props;
         let _className = classnames('el-checkbox-group', className);
+        let isCheckedAll = this.isCheckedAll;
+        let checkedList = this.getValue;
         return (
             <div className={_className} style={style}>
                 <div className="el-checkbox-row el-check-all">
-                    {hasCheckAll &&
+                    {this.hasCheckAll &&
                     <Checkbox
-                        label="全选"
+                        label={checkAllLabel}
                         disabled={disableAll}
                         onChange={this.handleToggle.bind(this)}
-                        checked={options.length && options.length === checkedList.length}
-                        indeterminate={checkedList.length && options.length !== checkedList.length}
+                        checked={options.length && isCheckedAll}
+                        indeterminate={checkedList.length && !isCheckedAll}
                     />}
                 </div>
                 <div className="el-checkbox-row">
                     {
                         options && options.map((item, index) => {
-                            if (typeof item === 'string') {
+                            if (typeof item === 'string' || typeof item === "number") {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }
                             return (
@@ -81,17 +104,20 @@ CheckGroup.propTypes = {
     min: PropTypes.number,
     max: PropTypes.number,
     options: PropTypes.array,
+    value: PropTypes.array,
     disableAll: PropTypes.bool,
     hasCheckAll: PropTypes.bool,
     checkedList: PropTypes.array,
     style: PropTypes.object,
     onChange: PropTypes.func,
     className: PropTypes.string,
+    checkAllLabel: PropTypes.any
 };
 
 CheckGroup.defaultProps = {
     checkedList: [],
     disableAll: false,
     hasCheckAll: true,
+    checkAllLabel: "全选",
     onChange: noop
 };

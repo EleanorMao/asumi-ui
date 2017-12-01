@@ -20,7 +20,7 @@ export default class RadioGroup extends Component {
                 <div className="el-checkbox-row">
                     {
                         !!options && options.map((item, index) => {
-                            if (typeof item === 'string') {
+                            if (typeof item === 'string' || typeof item === "number") {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }
                             return (

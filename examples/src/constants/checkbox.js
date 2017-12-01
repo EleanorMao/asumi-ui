@@ -159,7 +159,6 @@ class Foo extends React.Component {
 
 ReactDOM.render(<Foo />, div)`;
 
-//TODO 补全
 export const api = [{
     property: "type",
     type: "string",
@@ -214,7 +213,7 @@ export const api = [{
 
 export const apiofgroup = [{
     property: "options",
-    type: "string[] | array<{label: any, name: string, value: string|number, disabled: bool, ...other}>",
+    type: "string[] | number[] | array<{label: any, name: string, value: string|number, disabled: bool, ...other}>",
     'default': "",
     description: "Set checkbox group optional. please refer to aip of checkbox"
 }, {
@@ -223,23 +222,38 @@ export const apiofgroup = [{
     'default': "false",
     description: "disable all checkbox"
 }, {
+    property: "checkAllLabel",
+    type: "any",
+    'default': "全选",
+    description: "label of check all checkbox"
+}, {
     property: "value",
-    type: "string | number",
-    'default': "",
+    type: "array",
+    'default': "[]",
     description: "value of checkbox group"
+}, {
+    property: "min",
+    type: "number",
+    'default': "",
+    description: "min length of checked value"
+}, {
+    property: "max",
+    type: "number",
+    'default': "",
+    description: "max length of checked value"
 }, {
     property: "onChange",
     type: "function",
-    'default': "({e, name, value, checked})=>{}",
+    'default': "({e, name, value})=>{}",
     description: "Callback when value change.",
 }, {
     property: "style",
     type: "object",
     'default': "",
-    description: "Style of checkbox"
+    description: "Style of checkbox group"
 }, {
     property: "className",
     type: "object",
     'default': "",
-    description: "ClassName of checkbox"
+    description: "ClassName of checkbox group"
 }];

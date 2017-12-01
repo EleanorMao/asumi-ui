@@ -198,7 +198,7 @@ export const api = [{
 
 export const apiofgroup = [{
     property: "options",
-    type: "string[] | array<{label: any, name: string, value: string|number, disabled: bool, ...other}>",
+    type: "string[] | number[] | array<{label: any, name: string, value: string|number, disabled: bool, ...other}>",
     'default': "",
     description: "Set radio group optional. please refer to aip of radio"
 }, {
