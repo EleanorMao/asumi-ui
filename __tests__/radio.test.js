@@ -75,7 +75,6 @@ describe('Radio', () => {
     });
 });
 
-
 describe("Radio Group", () => {
     it("create component", () => {
         const component = mount(

@@ -7,6 +7,9 @@
     "js",
     "json"
   ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
   "transform": {
     "^.+\\.js$": "babel-jest"
   }
