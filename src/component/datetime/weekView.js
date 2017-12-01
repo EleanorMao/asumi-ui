@@ -105,7 +105,7 @@ class WeekView extends React.Component {
         let locale = viewDate.localeData();
         let nextViewType = "months";
         return (
-            <div className="el-datetime-weeks" data-value={updateOn}>
+            <div className="el-datetime-weeks el-datetime-weeks-panel" data-value={updateOn}>
                 <table>
                     <thead key="th">
                         <tr key="h">
