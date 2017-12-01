@@ -348,7 +348,7 @@ export default class Select extends Component {
         let {renderValue, visible} = this.state;
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
-            size, style, value, noMatchText, matchCase, onMatch, onSearch,
+            size, style, value, noMatchText, matchCase, onMatch, onSearch, readOnly,
             searchable, selectAll, defaultValue, selectAllText, dropdownClassName, dropdownStyle,
             multiple, onChange, className, children, closeAfterSelect, ...other
         } = this.props;
@@ -363,10 +363,10 @@ export default class Select extends Component {
                     icon={icon}
                     autoComplete="off"
                     value={renderValue}
-                    readOnly={!searchable}
                     onClick={this.handleToggle.bind(this)}
                     onChange={this.handleChange.bind(this)}
                     onKeyDown={this.handleKeyDown.bind(this)}
+                    readOnly={readOnly ? readOnly : !searchable}
                     onFocus={this.handleToggleInput.bind(this, true)}
                     onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : null}
                 />
