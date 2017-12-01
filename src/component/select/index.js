@@ -363,10 +363,10 @@ export default class Select extends Component {
                     icon={icon}
                     autoComplete="off"
                     value={renderValue}
+                    readOnly={readOnly || !searchable}
                     onClick={this.handleToggle.bind(this)}
                     onChange={this.handleChange.bind(this)}
                     onKeyDown={this.handleKeyDown.bind(this)}
-                    readOnly={readOnly ? readOnly : !searchable}
                     onFocus={this.handleToggleInput.bind(this, true)}
                     onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : null}
                 />
