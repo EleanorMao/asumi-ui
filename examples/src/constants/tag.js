@@ -54,4 +54,9 @@ export const api = [{
     type: "function",
     'default': "null",
     description: "Callback when close button"
+}, {
+    property: "className",
+    type: "string",
+    'default': "",
+    description: "class name"
 }];

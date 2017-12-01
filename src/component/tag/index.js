@@ -12,16 +12,17 @@ export default class Tag extends Component {
     }
 
     render() {
-        let {type, children, closeable, onClose} = this.props;
-        let className = classnames({
+        let {type, children, closeable, className, onClose} = this.props;
+        let _className = classnames({
             'el-tag': true,
             'el-success': type === 'success',
             'el-primary': type === 'primary',
             'el-danger': type === 'danger' || type === 'error',
             'el-secondary': type === 'secondary' || type === 'warning',
+            [className]: !!className
         });
         return (
-            <div className={className}>
+            <div className={_className}>
                 {children}
                 {closeable && <i className="fa fa-close el-tag-close" onClick={onClose}/>}
             </div>
