@@ -1,23 +1,25 @@
 import React from 'react';
 import moment from 'moment';
 import Input from '../input';
-import { noop } from "../util";
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import CalendarContainer from './calendarContainer';
+import Shortcuts from './shortcuts';
+import { contains, addEvent, removeEvent, noop } from '../util';
 
+const allowedSetTime = ['hours', 'minutes', 'seconds', 'milliseconds'];
 export default class DateTime extends React.Component {
     constructor(props) {
         super(props);
         this.componentProps = {
             fromState: ['viewDate', 'selectedDate', 'updateOn'],
-            fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek'],
+            fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek', 'shortcuts'],
             fromThis: ['setDate', 'setTime', 'updateTime', 'showView', 'updateSelectedDate', 'localMoment', 'handleClickOutside']
         };
-        this.allowedSetTime = ['hours', 'minutes', 'seconds', 'milliseconds'];
         let state = this.getStateFromProps(props);
         state.currentView = props.dateFormat ? props.viewMode || state.updateOn || 'days' : 'time';
         this.state = state;
+
     }
 
     getStateFromProps(props) {
@@ -26,7 +28,7 @@ export default class DateTime extends React.Component {
             selectedDate, viewDate, updateOn, inputValue;
 
         if (date) {
-            selectedDate = this.localMoment(date, typeof date === 'string' ? formats.datetime : null);
+            selectedDate = this.localMoment(date, formats.datetime);
         }
 
         if (selectedDate && !selectedDate.isValid()) {
@@ -53,9 +55,18 @@ export default class DateTime extends React.Component {
         };
     }
 
+    componentDidMount() {
+        addEvent(window, 'click', this.clickToClose.bind(this));
+
+    }
+
+    componentWillUnmount() {
+        removeEvent(window, 'click', this.clickToClose.bind(this));
+    }
+
     componentWillReceiveProps(nextProps) {
         let formats = this.getFormats(nextProps),
-            updatedState = {};
+            updatedState = {}, tag = '';
         if (nextProps.value !== this.props.value || formats.datetime !== this.getFormats(this.props).datetime) {
             updatedState = this.getStateFromProps(nextProps);
         }
@@ -75,29 +86,20 @@ export default class DateTime extends React.Component {
                 updatedState.viewDate = this.state.viewDate.clone().locale(nextProps.locale);
             }
             if (this.state.selectedDate) {
-                let updateSelectedDate = this.state.selectedDate.clone().locale(nextProps.locale);
-                updatedState.selectedDate = updateSelectedDate;
-                updatedState.inputValue = updateSelectedDate.format(formats.datetime);
+                updatedState.selectedDate = this.state.selectedDate.clone().locale(nextProps.locale);
+                updatedState.inputValue = updatedState.selectedDate.format(formats.datetime);
             }
         }
 
         if (nextProps.utc !== this.props.utc) {
-            if (nextProps.utc) {
-                if (this.state.viewDate) {
-                    updatedState.viewDate = this.state.viewDate.clone().utc();
-                }
-                if (this.state.selectedDate) {
-                    updatedState.selectedDate = this.state.selectedDate.clone().utc();
-                    updatedState.inputValue = updatedState.selectedDate.format(formats.datetime);
-                }
-            } else {
-                if (this.state.viewDate) {
-                    updatedState.viewDate = this.state.viewDate.clone().locale();
-                }
-                if (this.state.selectedDate) {
-                    updatedState.selectedDate = this.state.selectedDate.clone().local();
-                    updatedState.inputValue = updatedState.selectedDate.format(formats.datetime);
-                }
+            tag = nextProps.utc ? 'utc' : 'local';
+
+            if (this.state.viewDate) {
+                updatedState.viewDate = this.state.viewDate.clone()[tag]();
+            }
+            if (this.state.selectedDate) {
+                updatedState.selectedDate = this.state.selectedDate.clone()[tag]();
+                updatedState.inputValue = updatedState.selectedDate.format(formats.datetime);
             }
         }
         this.setState(updatedState);
@@ -129,12 +131,32 @@ export default class DateTime extends React.Component {
     getUpdateOn(formats) {
         if (formats.date.match(/[1LD]/)) {
             return 'days';
+        } else if (formats.date.indexOf('w') !== -1 || formats.date.indexOf('W') !== -1) {
+            return 'weeks';
         } else if (formats.date.indexOf('M') !== -1) {
             return 'months';
         } else if (formats.date.indexOf('Y') !== -1) {
             return 'years';
         }
         return 'days';
+    }
+
+
+
+    clickToClose(e) {
+        let { updateOn, selectedDate, inputValue } = this.state;
+        let { input, onBlur } = this.props;
+        let el = e.target, _isContains;
+        while (el = el.parentNode) {
+            if (el.getAttribute && el.getAttribute('data-value') === updateOn) {
+                _isContains = true;
+            }
+        }
+        if (input && !_isContains) {
+            this.setState({ open: false }, () => {
+                onBlur(selectedDate || inputValue);
+            })
+        }
     }
 
     handleClickOutside() {
@@ -147,29 +169,26 @@ export default class DateTime extends React.Component {
         }
     }
 
-    setDate(type) {
-        let me = this,
-            nextView = {
-                week: 'days',
-                month: 'days',
-                year: 'months'
-            };
-        return e => {
-            me.setState({
-                viewDate: me.state.viewDate.clone()[type](parseInt(e.target.getAttribute('data-value'), 10)).startOf(type),
-                currentView: nextView[type]
-            })
+    setDate(type, item) {
+        let { updateOn, viewDate } = this.state;
+        let nextView = {
+            month: updateOn,
+            year: 'months'
         }
+        this.setState({
+            viewDate: viewDate.clone()[type](item.value).startOf(type),
+            currentView: nextView[type]
+        })
     }
 
     setTime(type, value) {
         let nextType,
             state = this.state,
-            index = this.allowedSetTime.indexOf(type) + 1,
+            index = allowedSetTime.indexOf(type) + 1,
             date = (state.selectedDate || state.viewDate).clone();
         date[type](value);
-        for (; index < this.allowedSetTime.length; index++) {
-            nextType = this.allowedSetTime[index];
+        for (; index < allowedSetTime.length; index++) {
+            nextType = allowedSetTime[index];
             date[nextType](date[nextType]());
         }
         if (!this.props.value) {
@@ -193,30 +212,33 @@ export default class DateTime extends React.Component {
         })
     }
 
-    updateSelectedDate(e, close) {
-        let target = e.target,
+    updateSelectedDate(item, close) {
+        let { viewDate, selectedDate, updateOn, inputFormat } = this.state,
             modifier = 0,
-            viewDate = this.state.viewDate,
-            currentdate = this.state.selectedDate || viewDate,
+            currentdate = selectedDate || viewDate,
             date;
-        if (target.className.indexOf('el-datetime-day') !== -1) {
-            if (target.className.indexOf('el-datetime-new') !== -1) {
-                modifier = 1;
-            } else if (target.className.indexOf('el-datetime-old') !== -1) {
-                modifier = -1;
-            }
-            date = viewDate.clone().month(viewDate.month() + modifier).date(parseInt(target.getAttribute('data-value'), 10));
-        } else if (target.className.indexOf('el-datetime-month') !== -1) {
-            date = viewDate.clone().month(parseInt(target.getAttribute('data-value'), 10)).date(currentdate.date())
-        } else if (target.className.indexOf('el-datetime-year') !== -1) {
+        if (updateOn === 'days') {
+            item.new && (modifier = 1);
+            item.old && (modifier = -1);
             date = viewDate.clone()
-                .month(currentdate.month()).date(currentdate.date())
-                .year(parseInt(target.getAttribute('data-value'), 10));
+                .set({ month: viewDate.month() + modifier, date: item.value.date() });
+        } else if (updateOn === 'weeks') {
+            item.new && (modifier = 1);
+            item.old && (modifier = -1);
+            date = viewDate.clone()
+                .set({ month: viewDate.month() + modifier, date: item.value.date() });
         }
-        date.hours(currentdate.hours())
-            .minutes(currentdate.minutes())
-            .seconds(currentdate.seconds())
-            .milliseconds(currentdate.milliseconds());
+        else if (updateOn === 'months') {
+            date = viewDate.clone()
+                .set({ month: item.value, date: currentdate.date() });
+        }
+        else if (updateOn === 'years') {
+            date = viewDate.clone()
+                .set({ year: item.value, month: currentdate.month(), date: currentdate.date() });
+        }
+        date.set({
+            hour: currentdate.hours(), minute: currentdate.minutes(), second: currentdate.seconds(), millisecond: currentdate.milliseconds()
+        });
         if (!this.props.value) {
             let open = !(this.props.closeOnSelect && close);
             if (!open) {
@@ -225,7 +247,7 @@ export default class DateTime extends React.Component {
             this.setState({
                 selectedDate: date,
                 viewDate: date.clone().startOf('month'),
-                inputValue: date.format(this.state.inputFormat),
+                inputValue: date.format(inputFormat),
                 open: open
             })
         } else {
@@ -233,19 +255,31 @@ export default class DateTime extends React.Component {
                 this.closeCalendar();
             }
         }
-        this.props.onChange({ name: this.props.name, value: date });
+        setTimeout(() => {
+            this.props.onChange({ name: this.props.name, value: date });
+        }, 0);
     }
 
     openCalendar() {
-        let {open} = this.state;
-        if(!open){
+        let { open } = this.state;
+        if (!open) {
             this.setState({
-                open: !open
-            }, ()=>{
+                open: true
+            }, () => {
                 this.props.onFocus();
             })
         }
     }
+
+    closeCalendar() {
+        let { open, selectedDate, inputValue } = this.state;
+        this.setState({
+            open: false
+        }, () => {
+            this.props.onBlur(selectedDate || inputValue);
+        });
+    }
+
 
     localMoment(date, format, props = this.props) {
         let m = (props.utc ? moment.utc : moment)(date, format, props.strictParsing);
@@ -303,8 +337,8 @@ export default class DateTime extends React.Component {
     }
 
     render() {
-        let { className, input } = this.props,
-            { inputValue, open, currentView } = this.state,
+        let { className, input, shortcuts } = this.props,
+            { inputValue, open, currentView, updateOn } = this.state,
             children = [];
         if (input) {
             children.push(
@@ -314,13 +348,14 @@ export default class DateTime extends React.Component {
             );
         }
         return (
-            <div className={classnames('el-datetime', className, { 'el-static': input }, { 'el-datetime-open': open })}>
+            <div className={classnames('el-datetime', className, { 'el-static': input }, { 'el-datetime-open': open })}
+                data-value={updateOn}>
                 {children}
                 <div key='dt' className='el-datetime-picker'>
+                    {!!shortcuts.length && <Shortcuts shortcuts={shortcuts} />}
                     <CalendarContainer
                         view={currentView}
                         viewProps={this.getComponentProps()}
-                        onClickOutside={this.handleClickOutside.bind(this)}
                     />
                 </div>
             </div>
@@ -346,7 +381,8 @@ DateTime.propTypes = {
     closeOnTab: PropTypes.bool,
     showWeeks: PropTypes.bool,
     isWeek: PropTypes.bool,
-    renderInput: PropTypes.func
+    renderInput: PropTypes.func,
+    shortcuts: PropTypes.array
 };
 DateTime.defaultProps = {
     className: '',
@@ -364,5 +400,6 @@ DateTime.defaultProps = {
     closeOnTab: true,
     utc: false,
     showWeeks: false,
-    isWeek: false
+    isWeek: false,
+    shortcuts: []
 };

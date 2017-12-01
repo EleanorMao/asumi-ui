@@ -19,6 +19,8 @@ export default class CalendarContainer extends React.Component{
         }
     }
 
+    
+
     render(){
         let {view, viewProps} = this.props;
         return React.createElement(this.viewComponents[view], viewProps);

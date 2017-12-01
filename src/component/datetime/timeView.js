@@ -1,7 +1,6 @@
 import React from 'react';
 import { extend } from "../util";
 import Input from '../input';
-import onClickOutside from 'react-onclickoutside';
 
 class TimeView extends React.Component {
     constructor(props) {
@@ -203,8 +202,9 @@ class TimeView extends React.Component {
     }
 
     render() {
+        let { updateOn } = this.props;
         return (
-            <div className="el-datetimeTime">
+            <div className="el-datetimeTime" data-value={updateOn}>
                 <table>
                     {this.renderHeader()}
                     <tbody key="b">
@@ -220,4 +220,4 @@ class TimeView extends React.Component {
     }
 }
 
-export default onClickOutside(TimeView);
+export default TimeView;

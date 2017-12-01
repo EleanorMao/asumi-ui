@@ -9,25 +9,25 @@ class Foo extends Component {
     }
 
     handleValidDate(currentDate, selectedDate) {
-        return moment(currentDate).isAfter(moment());
+        return moment(currentDate).isBefore(moment());
     }
 
-    handleChange({name, value}) {
-        this.setState({ date: value })
+    handleChange({ name, value }) {
+        this.setState({ [name]: value })
     }
 
     render() {
         let { date } = this.state;
         return (
             <div>
-                <DateTime
-                    onChange={this.handleChange.bind(this)}
-                    value={date} name='date'
-                    viewMode='days' isValidDate={this.handleValidDate.bind(this)}/>
+            <DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                onChange={this.handleChange.bind(this)}
+                value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} />
             </div>
         )
     }
 }`;
+
 
 export const week = `import {DateTime} from 'asumi';
 
@@ -38,24 +38,58 @@ class Foo extends Component {
             date: moment()
         }
     }
-
+    
     handleValidDate(currentDate, selectedDate) {
-        return moment(currentDate).isAfter(moment());
+        return moment(currentDate).isBefore(moment());
     }
 
-    handleChange({name, value}) {
-        this.setState({ date: value })
+    handleChange({ name, value }) {
+        this.setState({ [name]: value })
     }
 
     render() {
         let { date } = this.state;
         return (
             <div>
-                <DateTime
-                    onChange={this.handleChange.bind(this, 'date')}
-                    dateFormat='YYYY年MM月'
-                    value={date}  name='date'
-                    viewMode='months' isValidDate={this.handleValidDate.bind(this)} />
+            <DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                onChange={this.handleChange.bind(this)}
+                dateFormat='YYYY年w周'
+                viewMode='weeks'
+                value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} />
+            </div>
+        )
+    }
+}`;
+
+
+export const month = `import {DateTime} from 'asumi';
+
+class Foo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: moment()
+        }
+    }
+    
+    handleValidDate(currentDate, selectedDate) {
+        return moment(currentDate).isBefore(moment());
+    }
+
+    handleChange({ name, value }) {
+        this.setState({ [name]: value })
+    }
+
+    render() {
+        let { date } = this.state;
+        return (
+            <div>
+            <DateTime
+                closeOnSelect={true}
+                onChange={this.handleChange.bind(this)}
+                dateFormat='YYYY年MM月'
+                value={date} name="date"
+                viewMode='months' isValidDate={this.handleValidDate.bind(this)} />
             </div>
         )
     }
@@ -71,24 +105,67 @@ class Foo extends Component {
             date: moment()
         }
     }
-
+    
     handleValidDate(currentDate, selectedDate) {
-        return moment(currentDate).isAfter(moment());
+        return moment(currentDate).isBefore(moment());
     }
 
-    handleChange({name, value}) {
-        this.setState({ date: value })
+    handleChange({ name, value }) {
+        this.setState({ [name]: value })
     }
 
     render() {
         let { date } = this.state;
         return (
             <div>
-                <DateTime
-                    onChange={this.handleChange.bind(this)}
-                    dateFormat='YYYY年'
-                    value={date} name='date'
-                    viewMode='years' />
+            <DateTime
+                onChange={this.handleChange.bind(this)}
+                dateFormat='YYYY年'
+                value={date} name="date"
+                viewMode='years' isValidDate={this.handleValidDate.bind(this)} />
+            </div>
+        )
+    }
+}`;
+
+
+
+export const shortcut = `import {DateTime} from 'asumi';
+
+class Foo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: moment()
+        }
+    }
+    
+    handleValidDate(currentDate, selectedDate) {
+        return moment(currentDate).isBefore(moment());
+    }
+
+    handleChange({ name, value }) {
+        this.setState({ [name]: value })
+    }
+
+    render() {
+        let { date } = this.state;
+        return (
+            <div>
+            <DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                onChange={this.handleChange.bind(this)}
+                shortcuts={[{
+                    text: '昨日',
+                    onClick: ()=> {
+                    this.setState({date: moment().add(-1, 'd')})
+                    }
+                }, {
+                    text: '上周',
+                    onClick: ()=> {
+                    this.setState({date: moment().add(-1, 'w')})
+                    }
+                }]}
+                value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} />
             </div>
         )
     }

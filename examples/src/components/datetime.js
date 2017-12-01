@@ -2,7 +2,7 @@ import moment from 'moment';
 import Panel from "./panel";
 import React, { Component } from 'react';
 import { DateTime, Table, Col } from '../../../src';
-import { basic, week, year, api } from '../constants/datetime'
+import { basic, week, month, year, shortcuts, api, shortcut } from '../constants/datetime'
 
 moment.locale('zh-CN');
 
@@ -31,15 +31,25 @@ export default class Main extends Component {
                     title="basic"
                     code={basic}
                 >
-                    <DateTime showWeeks={true} timeFormat='HH:mm:ss'
-                        onChange={this.handleChange.bind(this)} className={['aaa', 'bbb']} 
-                        value={date} name="date"/>
+                    <DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                        onChange={this.handleChange.bind(this)}
+                        value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} />
                 </Panel>
 
+                <Panel
+                    title="week"
+                    code={week}
+                >
+                    <DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                        onChange={this.handleChange.bind(this)}
+                        dateFormat='YYYY年w周'
+                        viewMode='weeks'
+                        value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} />
+                </Panel>
 
                 <Panel
                     title="month"
-                    code={week}
+                    code={month}
                 >
                     <DateTime
                         onChange={this.handleChange.bind(this)}
@@ -50,7 +60,7 @@ export default class Main extends Component {
 
 
                 <Panel
-                    title="years"
+                    title="year"
                     code={year}
                 >
                     <DateTime
@@ -58,6 +68,26 @@ export default class Main extends Component {
                         dateFormat='YYYY年'
                         value={date} name="date"
                         viewMode='years' isValidDate={this.handleValidDate.bind(this)} />
+                </Panel> 
+
+                <Panel
+                    title="shortcuts"
+                    code={shortcut}
+                >
+                    <DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                        onChange={this.handleChange.bind(this)}
+                        shortcuts={[{
+                            text: '昨日',
+                            onClick: ()=> {
+                              this.setState({date: moment().add(-1, 'd')})
+                            }
+                          }, {
+                            text: '上周',
+                            onClick: ()=> {
+                              this.setState({date: moment().add(-1, 'w')})
+                            }
+                          }]}
+                        value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} />
                 </Panel>
 
                 <h1>API of DateTime</h1>

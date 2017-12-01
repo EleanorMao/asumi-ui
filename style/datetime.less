@@ -3,7 +3,6 @@
 }
 
 .el-datetime-picker {
-  width: 250px;
   display: none;
   z-index: 1000;
   margin-top: 1px;
@@ -47,7 +46,7 @@
         cursor: pointer;
         text-align: center;
       }
-      &.el-datetime-week {
+      &.el-datetime-week-number {
         width: 32px;
         height: 32px;
         color: @midText;
@@ -71,11 +70,17 @@
       &.el-datetime-new {
         color: @lightText;
       }
+
+      &.el-datetime-disabled {
+        color: @lightText;
+        cursor: not-allowed;
+        background-color: @l_disabled;
+      }
       &.el-datetime-active:not(.el-datetime-disabled) {
         color: #fff;
         background-color: @primary;
       }
-      &:not(.el-datetime-disabled):not(.el-datetime-today):not(.el-datetime-active):hover,
+      &:not(.el-datetime-disabled):not(.el-datetime-today):not(.el-datetime-active):not(.el-datetime-week-number):hover,
       &.el-datetime-day:not(.el-datetime-disabled):not(.el-datetime-today):not(.el-datetime-active):hover,
       &.el-datetime-hour:hover,
       &.el-datetime-minute:hover,
@@ -86,6 +91,7 @@
     }
   }
   .el-datetime-days, .el-datetime-weeks {
+    width: 250px;
     thead {
       tr {
         th {
@@ -101,6 +107,7 @@
     }
   }
   .el-datetime-months, .el-datetime-years {
+    width: 250px;
     thead {
       tr {
         th {
@@ -112,17 +119,30 @@
       }
     }
   }
-}
+  .el-datetime-shortcuts{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 94px;
+    padding: 5px 8px;
+    background-color: @l_success;
+    a{
+      color: @midText;
+      display: block;
+      padding: 5px 0;
+    }
+    &+.el-datetime-days{
+      margin-left: 110px;
+    }
+  }
 
-.el-datetime-disabled {
-  color: @lightText;
-  cursor: not-allowed;
-  background-color: @l_disabled;
 }
 
 .el-datetime-open {
   .el-datetime-picker {
     display: block;
+    
   }
 }
 

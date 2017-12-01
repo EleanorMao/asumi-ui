@@ -1,49 +1,59 @@
 import React from 'react';
 import classnames from 'classnames';
-import onClickOutside from 'react-onclickoutside';
 
 class YearView extends React.Component {
     constructor(props) {
         super(props)
     }
 
+    handleClick(item, e){
+        let {updateOn, setDate, updateSelectedDate} = this.props;
+        if(!item.disabled){
+            updateOn === 'years' ? updateSelectedDate(item) : setDate('year', item);
+        }
+    }
+
+    renderTbody(year){
+        let {renderYear, selectedDate} = this.props;
+        let yearArr = this.renderYears(year);
+        let tds = [], trs = [], props = {};
+        for(let i = 0; i < 12; i++){
+            let item = yearArr[i];
+            if(!item){
+                tds.push(<td key={i}></td>);
+            }else{
+                props = {
+                    key: item.value,
+                    className: classnames('el-datetime-year', {
+                        'el-datetime-disabled': item.disabled,
+                        'el-datetime-active': item.active
+                    }),
+                    onClick: this.handleClick.bind(this, item)
+                }
+                tds.push(renderYear(props, item.value, selectedDate && selectedDate.clone()))
+            }
+            if((i+1) % 4 === 0){
+                trs.push(<tr key={i}>{tds}</tr>);
+                tds = [];
+            }
+        }
+        return trs;
+    }
+
     renderYears(year) {
-        let i = 0;
-        let rows = [];
-        let years = [];
-        let {renderYear, selectedDate, isValidDate, viewDate, updateOn, setDate, updateSelectedDate} = this.props;
-
-        year--;
-
-        for (; i < 12; i++) {
-            let currentYear = viewDate.clone().set({year: year, month: 0, day: 1});
-            let daysLength = currentYear.endOf('year').format('DDD');
-            let daysInYear = [];
-            for (let d = 1; d <= daysLength; d++) {
-                daysInYear.push(d);
+        let {selectedDate, isValidDate, viewDate} = this.props;
+        let rows = [], endYear = year + 10;
+        while(year < endYear){
+            let row = {};
+            let currentYear = viewDate.clone().set({year: year}).startOf('year');
+            row = {
+                value: year,
+                disabled: !~(new Array(currentYear.endOf('year').dayOfYear())).findIndex((d, idx)=>{
+                    return isValidDate(currentYear.clone().dayOfYear(idx+1));
+                }),
+                active: selectedDate && selectedDate.year() === year
             }
-            let isDisabled = !daysInYear.find(d => {
-                return isValidDate(currentYear.clone().dayOfYear(d));
-            });
-            let props = {
-                key: year,
-                'data-value': year,
-                className: classnames('el-datetime-year', {
-                    'el-datetime-disabled': isDisabled,
-                    'el-datetime-active': selectedDate && selectedDate.year() === year
-                })
-            };
-            if (!isDisabled) {
-                props.onClick = updateOn === 'years' ? updateSelectedDate : setDate('year');
-            }
-
-            years.push(renderYear(props, year, selectedDate && selectedDate.clone()));
-
-            if (years.length === 4) {
-                rows.push(<tr key={i}>{years}</tr>);
-                years = [];
-            }
-
+            rows.push(row);
             year++;
         }
         return rows;
@@ -51,10 +61,10 @@ class YearView extends React.Component {
 
     render() {
         let type = "years";
-        let {viewDate, showView, updateTime} = this.props;
+        let {viewDate, showView, updateTime, updateOn} = this.props;
         let year = parseInt(viewDate.year() / 10, 10) * 10;
         return (
-            <div className="el-datetime-years">
+            <div className="el-datetime-years" data-value={updateOn}>
                 <table>
                     <thead>
                     <tr>
@@ -72,7 +82,11 @@ class YearView extends React.Component {
                     </thead>
                 </table>
                 <table key={type}>
-                    <tbody>{this.renderYears(year)}</tbody>
+                    <tbody>
+                        {
+                            this.renderTbody(year)
+                        }
+                    </tbody>
                 </table>
             </div>
         )
@@ -88,4 +102,4 @@ YearView.defaultProps = {
     }
 };
 
-export default onClickOutside(YearView);
+export default YearView;
