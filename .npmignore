@@ -12,3 +12,4 @@ webpack.config.pages.js
 .DS_Store
 db.json
 jest.config.json
+__tests__
