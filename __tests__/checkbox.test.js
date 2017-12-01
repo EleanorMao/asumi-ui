@@ -75,7 +75,6 @@ describe('Checkbox', () => {
     });
 });
 
-
 describe("Checkbox Group", () => {
     it("create component", () => {
         const component = mount(

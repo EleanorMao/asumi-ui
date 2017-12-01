@@ -19,7 +19,7 @@ export default class Upload extends Component {
         let acceptList = accept ? accept.split(/\s*,\s*/) : [];
         for (let i = 0, len = fileList.length; i < len; i++) {
             let isValid = true;
-            let file = fileList.item(i);
+            let file = fileList[i];
             let acceptable = acceptList.some(type => {
                 if (type === file.type || type === "*") {
                     return true;

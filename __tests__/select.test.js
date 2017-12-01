@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {shallow, mount} from 'enzyme';
 import {Select, Option} from '../src';
-import focusTest from './shared/focusTest';
 
 describe('Select', () => {
     it('create component', () => {
@@ -79,10 +78,6 @@ describe('Select', () => {
         }];
         expect(component.instance().state.data).toEqual(data);
     });
-});
-
-describe('Select focus', () => {
-    focusTest(Select, 'handleToggleInput', 'handleToggleInput');
 });
 
 describe('Select change', () => {

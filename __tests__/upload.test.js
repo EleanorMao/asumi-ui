@@ -1,8 +1,15 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import {Upload} from '../src';
 
 describe('Upload', () => {
+    beforeAll(() => {
+        jest.useFakeTimers();
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+    });
     it('create component', () => {
         const component = shallow(<Upload/>);
         expect(component).toBeDefined();
@@ -21,21 +28,19 @@ describe('Upload', () => {
     it('define accept & typeValidatorError', () => {
         const handleValidatorError = jest.fn();
         const validatorError = jest.fn();
-        const component = shallow(<Upload accept="image/*" validatorError={validatorError}
-                                          typeValidatorError={handleValidatorError}/>);
+        const component = mount(<Upload accept="image/*" validatorError={validatorError}
+                                        typeValidatorError={handleValidatorError}/>);
         expect(component).toBeDefined();
         expect(component.find('.el-uploader-wrapper input[accept="image/*"]').length).toEqual(1);
         component.find('input').simulate('change', {
             target: {
                 files: [{filename: 'foo.png', type: "image/png"},],
-            },
-            preventDefault: jest.fn()
+            }
         });
         component.find('input').simulate('change', {
             target: {
                 files: [{filename: 'foo.html', type: "text/html"},],
-            },
-            preventDefault: jest.fn()
+            }
         });
         jest.runAllTimers();
         expect(handleValidatorError).toBeCalled();
@@ -44,21 +49,19 @@ describe('Upload', () => {
     it('define maxSize & sizeValidatorError', () => {
         const handleValidatorError = jest.fn();
         const validatorError = jest.fn();
-        const component = shallow(<Upload maxSize={1024} validatorError={validatorError}
-                                          sizeValidatorError={handleValidatorError}/>);
+        const component = mount(<Upload maxSize={1024} validatorError={validatorError}
+                                        sizeValidatorError={handleValidatorError}/>);
         expect(component).toBeDefined();
         expect(component.find('.el-uploader-wrapper input').length).toEqual(1);
         component.find('input').simulate('change', {
             target: {
                 files: [{filename: 'foo.png', size: 100},],
-            },
-            preventDefault: jest.fn()
+            }
         });
         component.find('input').simulate('change', {
             target: {
                 files: [{filename: 'foo.html', size: 2000},],
-            },
-            preventDefault: jest.fn()
+            }
         });
         jest.runAllTimers();
         expect(handleValidatorError).toBeCalled();
@@ -81,14 +84,13 @@ describe('Upload', () => {
     });
     it('define onUpload', () => {
         const handleUpload = jest.fn();
-        const component = shallow(<Upload onUpload={handleUpload}/>);
+        const component = mount(<Upload onUpload={handleUpload}/>);
         expect(component).toBeDefined();
         expect(component.find('.el-uploader-wrapper input').length).toEqual(1);
         component.find('input').simulate('change', {
             target: {
                 files: [{filename: 'foo.png', size: 100},],
-            },
-            preventDefault: jest.fn()
+            }
         });
         jest.runAllTimers();
         expect(handleUpload).toBeCalled();
@@ -98,7 +100,7 @@ describe('Upload', () => {
             return false
         };
         const validatorError = jest.fn();
-        const component = shallow(<Upload validator={validator} validatorError={validatorError}/>);
+        const component = mount(<Upload validator={validator} validatorError={validatorError}/>);
         expect(component).toBeDefined();
         expect(component.find('.el-uploader-wrapper input').length).toEqual(1);
         component.find('input').simulate('change', {
