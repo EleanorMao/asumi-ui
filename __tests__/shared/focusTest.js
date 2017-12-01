@@ -24,7 +24,11 @@ export default function focusTest(Component, focus = "focus", blur = "blur") {
         it('focus() and onFocus', () => {
             const handleFocus = jest.fn();
             const wrapper = mount(<Component onFocus={handleFocus}/>, {attachTo: container});
-            wrapper.instance()[focus](true);
+            if (wrapper.instance()[focus]) {
+                wrapper.instance()[focus](true);
+            } else {
+                wrapper.find(focus).focus();
+            }
             jest.runAllTimers();
             expect(handleFocus).toBeCalled();
         });
