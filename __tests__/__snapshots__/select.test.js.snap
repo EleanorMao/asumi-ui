@@ -1851,7 +1851,6 @@ ReactWrapper {
           "value": "",
         },
         "memoizedState": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -2758,6 +2757,7 @@ ReactWrapper {
         "updateQueue": null,
       },
       "_reactInternalInstance": Object {},
+      "allValue": Array [],
       "context": Object {},
       "el_select": <div
         class="el-select-wrapper"
@@ -2792,7 +2792,6 @@ ReactWrapper {
       },
       "refs": Object {},
       "state": Object {
-        "allValue": Array [],
         "data": Array [],
         "focus": false,
         "renderData": Array [],
@@ -3496,7 +3495,6 @@ ReactWrapper {
                   "value": "",
                 },
                 "memoizedState": Object {
-                  "allValue": Array [],
                   "data": Array [],
                   "focus": false,
                   "renderData": Array [],
@@ -3918,6 +3916,7 @@ ReactWrapper {
                 "stateNode": Select {
                   "_reactInternalFiber": [Circular],
                   "_reactInternalInstance": Object {},
+                  "allValue": Array [],
                   "context": Object {},
                   "el_select": <div
                     class="el-select-wrapper"
@@ -3952,7 +3951,6 @@ ReactWrapper {
                   },
                   "refs": Object {},
                   "state": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -4613,7 +4611,6 @@ ReactWrapper {
                         "value": "",
                       },
                       "memoizedState": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -5035,6 +5032,7 @@ ReactWrapper {
                       "stateNode": Select {
                         "_reactInternalFiber": [Circular],
                         "_reactInternalInstance": Object {},
+                        "allValue": Array [],
                         "context": Object {},
                         "el_select": <div
                           class="el-select-wrapper"
@@ -5069,7 +5067,6 @@ ReactWrapper {
                         },
                         "refs": Object {},
                         "state": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -5577,7 +5574,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -5869,6 +5865,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper"
@@ -5903,7 +5900,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -6257,7 +6253,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -6549,6 +6544,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper"
@@ -6583,7 +6579,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -8635,7 +8630,6 @@ ReactWrapper {
             "value": "",
           },
           "memoizedState": Object {
-            "allValue": Array [],
             "data": Array [],
             "focus": false,
             "renderData": Array [],
@@ -9542,6 +9536,7 @@ ReactWrapper {
           "updateQueue": null,
         },
         "_reactInternalInstance": Object {},
+        "allValue": Array [],
         "context": Object {},
         "el_select": <div
           class="el-select-wrapper"
@@ -9576,7 +9571,6 @@ ReactWrapper {
         },
         "refs": Object {},
         "state": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -10280,7 +10274,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -10702,6 +10695,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper"
@@ -10736,7 +10730,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -11397,7 +11390,6 @@ ReactWrapper {
                           "value": "",
                         },
                         "memoizedState": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -11819,6 +11811,7 @@ ReactWrapper {
                         "stateNode": Select {
                           "_reactInternalFiber": [Circular],
                           "_reactInternalInstance": Object {},
+                          "allValue": Array [],
                           "context": Object {},
                           "el_select": <div
                             class="el-select-wrapper"
@@ -11853,7 +11846,6 @@ ReactWrapper {
                           },
                           "refs": Object {},
                           "state": Object {
-                            "allValue": Array [],
                             "data": Array [],
                             "focus": false,
                             "renderData": Array [],
@@ -12361,7 +12353,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -12653,6 +12644,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper"
@@ -12687,7 +12679,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -13041,7 +13032,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -13333,6 +13323,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper"
@@ -13367,7 +13358,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -13630,7 +13620,7 @@ ShallowWrapper {
             className="el-caret"
           />
         }
-        onBlur={null}
+        onBlur={undefined}
         onChange={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -13653,7 +13643,7 @@ ShallowWrapper {
         "icon": <i
           className="el-caret"
         />,
-        "onBlur": null,
+        "onBlur": undefined,
         "onChange": [Function],
         "onClick": [Function],
         "onFocus": [Function],
@@ -13682,7 +13672,7 @@ ShallowWrapper {
               className="el-caret"
             />
           }
-          onBlur={null}
+          onBlur={undefined}
           onChange={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
@@ -13705,7 +13695,7 @@ ShallowWrapper {
           "icon": <i
             className="el-caret"
           />,
-          "onBlur": null,
+          "onBlur": undefined,
           "onChange": [Function],
           "onClick": [Function],
           "onFocus": [Function],
@@ -15634,7 +15624,6 @@ ReactWrapper {
           "value": "",
         },
         "memoizedState": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -16566,6 +16555,7 @@ ReactWrapper {
         "updateQueue": null,
       },
       "_reactInternalInstance": Object {},
+      "allValue": Array [],
       "context": Object {},
       "el_select": <div
         class="el-select-wrapper"
@@ -16602,7 +16592,6 @@ ReactWrapper {
       },
       "refs": Object {},
       "state": Object {
-        "allValue": Array [],
         "data": Array [],
         "focus": false,
         "renderData": Array [],
@@ -17329,7 +17318,6 @@ ReactWrapper {
                   "value": "",
                 },
                 "memoizedState": Object {
-                  "allValue": Array [],
                   "data": Array [],
                   "focus": false,
                   "renderData": Array [],
@@ -17764,6 +17752,7 @@ ReactWrapper {
                 "stateNode": Select {
                   "_reactInternalFiber": [Circular],
                   "_reactInternalInstance": Object {},
+                  "allValue": Array [],
                   "context": Object {},
                   "el_select": <div
                     class="el-select-wrapper"
@@ -17800,7 +17789,6 @@ ReactWrapper {
                   },
                   "refs": Object {},
                   "state": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -18481,7 +18469,6 @@ ReactWrapper {
                         "value": "",
                       },
                       "memoizedState": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -18916,6 +18903,7 @@ ReactWrapper {
                       "stateNode": Select {
                         "_reactInternalFiber": [Circular],
                         "_reactInternalInstance": Object {},
+                        "allValue": Array [],
                         "context": Object {},
                         "el_select": <div
                           class="el-select-wrapper"
@@ -18952,7 +18940,6 @@ ReactWrapper {
                         },
                         "refs": Object {},
                         "state": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -19475,7 +19462,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -19776,6 +19762,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper"
@@ -19812,7 +19799,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -20177,7 +20163,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -20478,6 +20463,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper"
@@ -20514,7 +20500,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -22623,7 +22608,6 @@ ReactWrapper {
             "value": "",
           },
           "memoizedState": Object {
-            "allValue": Array [],
             "data": Array [],
             "focus": false,
             "renderData": Array [],
@@ -23555,6 +23539,7 @@ ReactWrapper {
           "updateQueue": null,
         },
         "_reactInternalInstance": Object {},
+        "allValue": Array [],
         "context": Object {},
         "el_select": <div
           class="el-select-wrapper"
@@ -23591,7 +23576,6 @@ ReactWrapper {
         },
         "refs": Object {},
         "state": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -24318,7 +24302,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -24753,6 +24736,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper"
@@ -24789,7 +24773,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -25470,7 +25453,6 @@ ReactWrapper {
                           "value": "",
                         },
                         "memoizedState": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -25905,6 +25887,7 @@ ReactWrapper {
                         "stateNode": Select {
                           "_reactInternalFiber": [Circular],
                           "_reactInternalInstance": Object {},
+                          "allValue": Array [],
                           "context": Object {},
                           "el_select": <div
                             class="el-select-wrapper"
@@ -25941,7 +25924,6 @@ ReactWrapper {
                           },
                           "refs": Object {},
                           "state": Object {
-                            "allValue": Array [],
                             "data": Array [],
                             "focus": false,
                             "renderData": Array [],
@@ -26464,7 +26446,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -26765,6 +26746,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper"
@@ -26801,7 +26783,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -27166,7 +27147,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -27467,6 +27447,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper"
@@ -27503,7 +27484,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -29601,7 +29581,6 @@ ReactWrapper {
           "value": "",
         },
         "memoizedState": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -30515,6 +30494,7 @@ ReactWrapper {
         "updateQueue": null,
       },
       "_reactInternalInstance": Object {},
+      "allValue": Array [],
       "context": Object {},
       "el_select": <div
         class="el-select-wrapper el-large"
@@ -30550,7 +30530,6 @@ ReactWrapper {
       },
       "refs": Object {},
       "state": Object {
-        "allValue": Array [],
         "data": Array [],
         "focus": false,
         "renderData": Array [],
@@ -31263,7 +31242,6 @@ ReactWrapper {
                   "value": "",
                 },
                 "memoizedState": Object {
-                  "allValue": Array [],
                   "data": Array [],
                   "focus": false,
                   "renderData": Array [],
@@ -31692,6 +31670,7 @@ ReactWrapper {
                 "stateNode": Select {
                   "_reactInternalFiber": [Circular],
                   "_reactInternalInstance": Object {},
+                  "allValue": Array [],
                   "context": Object {},
                   "el_select": <div
                     class="el-select-wrapper el-large"
@@ -31727,7 +31706,6 @@ ReactWrapper {
                   },
                   "refs": Object {},
                   "state": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -32396,7 +32374,6 @@ ReactWrapper {
                         "value": "",
                       },
                       "memoizedState": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -32825,6 +32802,7 @@ ReactWrapper {
                       "stateNode": Select {
                         "_reactInternalFiber": [Circular],
                         "_reactInternalInstance": Object {},
+                        "allValue": Array [],
                         "context": Object {},
                         "el_select": <div
                           class="el-select-wrapper el-large"
@@ -32860,7 +32838,6 @@ ReactWrapper {
                         },
                         "refs": Object {},
                         "state": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -33376,7 +33353,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -33675,6 +33651,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper el-large"
@@ -33710,7 +33687,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -34072,7 +34048,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -34371,6 +34346,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper el-large"
@@ -34406,7 +34382,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -36466,7 +36441,6 @@ ReactWrapper {
             "value": "",
           },
           "memoizedState": Object {
-            "allValue": Array [],
             "data": Array [],
             "focus": false,
             "renderData": Array [],
@@ -37380,6 +37354,7 @@ ReactWrapper {
           "updateQueue": null,
         },
         "_reactInternalInstance": Object {},
+        "allValue": Array [],
         "context": Object {},
         "el_select": <div
           class="el-select-wrapper el-large"
@@ -37415,7 +37390,6 @@ ReactWrapper {
         },
         "refs": Object {},
         "state": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -38128,7 +38102,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -38557,6 +38530,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper el-large"
@@ -38592,7 +38566,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -39261,7 +39234,6 @@ ReactWrapper {
                           "value": "",
                         },
                         "memoizedState": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -39690,6 +39662,7 @@ ReactWrapper {
                         "stateNode": Select {
                           "_reactInternalFiber": [Circular],
                           "_reactInternalInstance": Object {},
+                          "allValue": Array [],
                           "context": Object {},
                           "el_select": <div
                             class="el-select-wrapper el-large"
@@ -39725,7 +39698,6 @@ ReactWrapper {
                           },
                           "refs": Object {},
                           "state": Object {
-                            "allValue": Array [],
                             "data": Array [],
                             "focus": false,
                             "renderData": Array [],
@@ -40241,7 +40213,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -40540,6 +40511,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper el-large"
@@ -40575,7 +40547,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -40937,7 +40908,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -41236,6 +41206,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper el-large"
@@ -41271,7 +41242,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -43362,7 +43332,6 @@ ReactWrapper {
           "value": "",
         },
         "memoizedState": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -44276,6 +44245,7 @@ ReactWrapper {
         "updateQueue": null,
       },
       "_reactInternalInstance": Object {},
+      "allValue": Array [],
       "context": Object {},
       "el_select": <div
         class="el-select-wrapper el-small"
@@ -44311,7 +44281,6 @@ ReactWrapper {
       },
       "refs": Object {},
       "state": Object {
-        "allValue": Array [],
         "data": Array [],
         "focus": false,
         "renderData": Array [],
@@ -45024,7 +44993,6 @@ ReactWrapper {
                   "value": "",
                 },
                 "memoizedState": Object {
-                  "allValue": Array [],
                   "data": Array [],
                   "focus": false,
                   "renderData": Array [],
@@ -45453,6 +45421,7 @@ ReactWrapper {
                 "stateNode": Select {
                   "_reactInternalFiber": [Circular],
                   "_reactInternalInstance": Object {},
+                  "allValue": Array [],
                   "context": Object {},
                   "el_select": <div
                     class="el-select-wrapper el-small"
@@ -45488,7 +45457,6 @@ ReactWrapper {
                   },
                   "refs": Object {},
                   "state": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -46157,7 +46125,6 @@ ReactWrapper {
                         "value": "",
                       },
                       "memoizedState": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -46586,6 +46553,7 @@ ReactWrapper {
                       "stateNode": Select {
                         "_reactInternalFiber": [Circular],
                         "_reactInternalInstance": Object {},
+                        "allValue": Array [],
                         "context": Object {},
                         "el_select": <div
                           class="el-select-wrapper el-small"
@@ -46621,7 +46589,6 @@ ReactWrapper {
                         },
                         "refs": Object {},
                         "state": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -47137,7 +47104,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -47436,6 +47402,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper el-small"
@@ -47471,7 +47438,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -47833,7 +47799,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -48132,6 +48097,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper el-small"
@@ -48167,7 +48133,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -50227,7 +50192,6 @@ ReactWrapper {
             "value": "",
           },
           "memoizedState": Object {
-            "allValue": Array [],
             "data": Array [],
             "focus": false,
             "renderData": Array [],
@@ -51141,6 +51105,7 @@ ReactWrapper {
           "updateQueue": null,
         },
         "_reactInternalInstance": Object {},
+        "allValue": Array [],
         "context": Object {},
         "el_select": <div
           class="el-select-wrapper el-small"
@@ -51176,7 +51141,6 @@ ReactWrapper {
         },
         "refs": Object {},
         "state": Object {
-          "allValue": Array [],
           "data": Array [],
           "focus": false,
           "renderData": Array [],
@@ -51889,7 +51853,6 @@ ReactWrapper {
                     "value": "",
                   },
                   "memoizedState": Object {
-                    "allValue": Array [],
                     "data": Array [],
                     "focus": false,
                     "renderData": Array [],
@@ -52318,6 +52281,7 @@ ReactWrapper {
                   "stateNode": Select {
                     "_reactInternalFiber": [Circular],
                     "_reactInternalInstance": Object {},
+                    "allValue": Array [],
                     "context": Object {},
                     "el_select": <div
                       class="el-select-wrapper el-small"
@@ -52353,7 +52317,6 @@ ReactWrapper {
                     },
                     "refs": Object {},
                     "state": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -53022,7 +52985,6 @@ ReactWrapper {
                           "value": "",
                         },
                         "memoizedState": Object {
-                          "allValue": Array [],
                           "data": Array [],
                           "focus": false,
                           "renderData": Array [],
@@ -53451,6 +53413,7 @@ ReactWrapper {
                         "stateNode": Select {
                           "_reactInternalFiber": [Circular],
                           "_reactInternalInstance": Object {},
+                          "allValue": Array [],
                           "context": Object {},
                           "el_select": <div
                             class="el-select-wrapper el-small"
@@ -53486,7 +53449,6 @@ ReactWrapper {
                           },
                           "refs": Object {},
                           "state": Object {
-                            "allValue": Array [],
                             "data": Array [],
                             "focus": false,
                             "renderData": Array [],
@@ -54002,7 +53964,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -54301,6 +54262,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper el-small"
@@ -54336,7 +54298,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],
@@ -54698,7 +54659,6 @@ ReactWrapper {
                       "value": "",
                     },
                     "memoizedState": Object {
-                      "allValue": Array [],
                       "data": Array [],
                       "focus": false,
                       "renderData": Array [],
@@ -54997,6 +54957,7 @@ ReactWrapper {
                     "stateNode": Select {
                       "_reactInternalFiber": [Circular],
                       "_reactInternalInstance": Object {},
+                      "allValue": Array [],
                       "context": Object {},
                       "el_select": <div
                         class="el-select-wrapper el-small"
@@ -55032,7 +54993,6 @@ ReactWrapper {
                       },
                       "refs": Object {},
                       "state": Object {
-                        "allValue": Array [],
                         "data": Array [],
                         "focus": false,
                         "renderData": Array [],

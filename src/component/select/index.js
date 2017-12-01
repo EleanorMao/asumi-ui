@@ -20,10 +20,10 @@ export default class Select extends Component {
     constructor(props) {
         super(props);
         this.index = -1;
+        this.allValue = [];
         this.state = {
             data: [],
             focus: false,
-            allValue: [],
             visible: false,
             renderValue: '',
             selectedValue: [],
@@ -78,6 +78,13 @@ export default class Select extends Component {
         return !!(multiple && selectAll && renderData.length === data.length)
     }
 
+    isSelectAll(selectedAll) {
+        let allValue = this.allValue;
+        return !allValue.filter(v => {
+            return !~selectedAll.indexOf(v)
+        }).length;
+    };
+
     getData(props) {
         let data = [], renderData = [], allValue = [], selectedLabel = [], selectedValue = [];
         let {value, defaultValue, children} = props;
@@ -97,9 +104,9 @@ export default class Select extends Component {
                 renderData.push({value, disabled, label: children || label});
             });
         }
+        this.allValue = allValue;
         this.setState({
             data,
-            allValue,
             renderData,
             selectedValue,
             selectedLabel,
@@ -239,7 +246,7 @@ export default class Select extends Component {
     }
 
 
-    handleToggleInput(focus) {
+    handleToggleInput(focus, e) {
         this.setState(prev => {
             prev.focus = focus;
             if (!focus) {
@@ -248,6 +255,11 @@ export default class Select extends Component {
             }
             return prev
         });
+        if (focus) {
+            this.props.onFocus && this.props.onFocus(e);
+        } else {
+            this.props.onBlur && this.props.onBlur(e);
+        }
     }
 
     handleSelect(e, value, selected) {
@@ -305,7 +317,8 @@ export default class Select extends Component {
     }
 
     optionsRender() {
-        let {renderData, allValue, selectedValue} = this.state;
+        let allValue = this.allValue;
+        let {renderData, selectedValue} = this.state;
         let {multiple, searchable, selectAllText, dropdownClassName, dropdownStyle, noMatchText} = this.props;
         let className = classnames("el-select-dropdown", dropdownClassName || "");
         return (
@@ -324,7 +337,7 @@ export default class Select extends Component {
                         label={selectAllText}
                         value={allValue.slice()}
                         onChange={this.handleSelectAll.bind(this)}
-                        selected={allValue.slice().sort().join("") === selectedValue.slice().sort().join("")}
+                        selected={this.isSelectAll(selectedValue)}
                     />
                     }
                     {renderData.map((props) => {
@@ -348,7 +361,7 @@ export default class Select extends Component {
         let {renderValue, visible} = this.state;
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
-            size, style, value, noMatchText, matchCase, onMatch, onSearch, readOnly,
+            size, style, value, noMatchText, matchCase, onMatch, onSearch, readOnly, onBlur,
             searchable, selectAll, defaultValue, selectAllText, dropdownClassName, dropdownStyle,
             multiple, onChange, className, children, closeAfterSelect, ...other
         } = this.props;
@@ -368,7 +381,7 @@ export default class Select extends Component {
                     onChange={this.handleChange.bind(this)}
                     onKeyDown={this.handleKeyDown.bind(this)}
                     onFocus={this.handleToggleInput.bind(this, true)}
-                    onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : null}
+                    onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : onBlur}
                 />
             </div>
         )
@@ -376,7 +389,9 @@ export default class Select extends Component {
 }
 
 Select.propTypes = {
+    onBlur: PropTypes.func,
     onMatch: PropTypes.func,
+    onFocus: PropTypes.func,
     multiple: PropTypes.bool,
     onSearch: PropTypes.func,
     matchCase: PropTypes.bool,

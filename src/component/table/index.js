@@ -812,7 +812,9 @@ export default class Table extends Component {
         });
         let renderList = (topPagination || pagination) && !remote ? this._sliceData(renderedList, currentPage, length) : renderedList.slice();
         if (selectRow.mode && selectRow.mode !== 'none') {
-            checked = this._getAllValue(renderList.slice(), this._getKeyName()).sort().toString() === selectRow.selected.slice().sort().toString();
+            checked = !this._getAllValue(renderList.slice(), this._getKeyName()).filter(v => {
+                return !~selectRow.selected.indexOf(v);
+            }).length;
         }
         let paddingBottom = 0;
         let container = this._instance.container;
