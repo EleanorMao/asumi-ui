@@ -115,6 +115,7 @@ CheckGroup.propTypes = {
 };
 
 CheckGroup.defaultProps = {
+    options: [],
     checkedList: [],
     disableAll: false,
     hasCheckAll: true,

@@ -1,0 +1,3325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form create component 1`] = `
+<Form
+  data={Object {}}
+  id="id"
+  layout="horizontal"
+  name="jest"
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "label": "文字",
+        "name": "text",
+        "type": "text",
+      },
+    ]
+  }
+  submitButtonProps={Object {}}
+  submitText="提交"
+>
+  <form
+    className="el-form el-horizontal"
+    name="jest"
+  >
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      key="0"
+      label="文字"
+      name="text"
+      onChange={[Function]}
+      requiredMark="*"
+      type="text"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <label
+          className="el-form-label"
+          style={null}
+        >
+          文字
+        </label>
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            label="文字"
+            name="text"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="text"
+          >
+            <div
+              className="el-input"
+            >
+              <input
+                label="文字"
+                name="text"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyPress={[Function]}
+                type="text"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      requiredMark="*"
+      type="text"
+      validateType="error"
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Button
+            disabled={false}
+            onClick={[Function]}
+            size="default"
+            type="success"
+          >
+            <button
+              className="el-btn el-success"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              提交
+            </button>
+          </Button>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+  </form>
+</Form>
+`;
+
+exports[`Form create form by form items 1`] = `
+<Form
+  data={
+    Object {
+      "checkbox": 2,
+      "checkgroup": Array [
+        6,
+      ],
+      "color": "#fff",
+      "datetime": 1512213506421,
+      "number": 10,
+      "password": "password",
+      "radio": 3,
+      "radiogroup": 5,
+      "select": 1,
+      "static": "static",
+      "switch": 4,
+      "text": "text",
+      "textarea": "textarea",
+      "upload": "",
+    }
+  }
+  id="id"
+  layout="horizontal"
+  onChange={[Function]}
+  options={Array []}
+  submitButtonProps={Object {}}
+  submitText="提交"
+>
+  <form
+    className="el-form el-horizontal"
+  >
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="text"
+      key=".$0"
+      name="text"
+      onChange={[Function]}
+      requiredMark="*"
+      type="text"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="text"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="text"
+            value="text"
+          >
+            <div
+              className="el-input"
+            >
+              <input
+                name="text"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyPress={[Function]}
+                type="text"
+                value="text"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="#fff"
+      key=".$1"
+      name="color"
+      onChange={[Function]}
+      requiredMark="*"
+      type="color"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="color"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="color"
+            value="#fff"
+          >
+            <div
+              className="el-input"
+            >
+              <input
+                name="color"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyPress={[Function]}
+                type="color"
+                value="#fff"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="password"
+      key=".$2"
+      name="password"
+      onChange={[Function]}
+      requiredMark="*"
+      type="password"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="password"
+            value="password"
+          >
+            <div
+              className="el-input"
+            >
+              <input
+                name="password"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyPress={[Function]}
+                type="password"
+                value="password"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={1512213506421}
+      key=".$3"
+      name="datetime"
+      onChange={[Function]}
+      requiredMark="*"
+      type="datetime"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <DateTime
+            className=""
+            closeOnSelect={false}
+            closeOnTab={true}
+            dateFormat={true}
+            defaultValue=""
+            input={true}
+            inputProps={Object {}}
+            isWeek={false}
+            name="datetime"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            shortcuts={Array []}
+            showWeeks={false}
+            strictParsing={true}
+            timeConstraints={Object {}}
+            timeFormat={true}
+            utc={false}
+            value={1512213506421}
+          >
+            <div
+              className="el-datetime el-static"
+              data-value="days"
+            >
+              <Input
+                icon={
+                  <i
+                    className="fa fa-calendar-minus-o"
+                  />
+                }
+                key="i"
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                type="text"
+                value={1512213506421}
+              >
+                <div
+                  className="el-input"
+                >
+                  <span
+                    className="el-input-icon"
+                  >
+                    <i
+                      className="fa fa-calendar-minus-o"
+                    />
+                  </span>
+                  <input
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    type="text"
+                    value={1512213506421}
+                  />
+                </div>
+              </Input>
+              <div
+                className="el-datetime-picker"
+                key="dt"
+              >
+                <CalendarContainer
+                  view="days"
+                  viewProps={
+                    Object {
+                      "dateFormat": "MM/DD/YYYY",
+                      "handleClickOutside": [Function],
+                      "isValidDate": undefined,
+                      "isWeek": false,
+                      "localMoment": [Function],
+                      "renderDay": undefined,
+                      "renderMonth": undefined,
+                      "renderYear": undefined,
+                      "selectedDate": null,
+                      "setDate": [Function],
+                      "setTime": [Function],
+                      "shortcuts": Array [],
+                      "showView": [Function],
+                      "showWeeks": false,
+                      "timeConstraints": Object {},
+                      "timeFormat": "h:mm A",
+                      "updateOn": "days",
+                      "updateSelectedDate": [Function],
+                      "updateTime": [Function],
+                      "value": 1512213506421,
+                      "viewDate": "2017-11-30T16:00:00.000Z",
+                    }
+                  }
+                >
+                  <DayView
+                    dateFormat="MM/DD/YYYY"
+                    handleClickOutside={[Function]}
+                    isValidDate={[Function]}
+                    isWeek={false}
+                    localMoment={[Function]}
+                    renderDay={[Function]}
+                    renderWeeksTitle={[Function]}
+                    selectedDate={null}
+                    setDate={[Function]}
+                    setTime={[Function]}
+                    shortcuts={Array []}
+                    showView={[Function]}
+                    showWeeks={false}
+                    timeConstraints={Object {}}
+                    timeFormat="h:mm A"
+                    updateOn="days"
+                    updateSelectedDate={[Function]}
+                    updateTime={[Function]}
+                    value={1512213506421}
+                    viewDate={"2017-11-30T16:00:00.000Z"}
+                  >
+                    <div
+                      className="el-datetime-days"
+                      data-value="days"
+                    >
+                      <table>
+                        <thead
+                          key="th"
+                        >
+                          <tr
+                            key="h"
+                          >
+                            <th
+                              className="el-datetime-prev"
+                              key="p"
+                            >
+                              <span
+                                onClick={[Function]}
+                              >
+                                ‹
+                              </span>
+                            </th>
+                            <th
+                              className="el-datetime-switch"
+                              colSpan="5"
+                              data-value={11}
+                              key="s"
+                              onClick={[Function]}
+                            >
+                              December 2017
+                            </th>
+                            <th
+                              className="el-datetime-next"
+                              key="n"
+                            >
+                              <span
+                                onClick={[Function]}
+                              >
+                                ›
+                              </span>
+                            </th>
+                          </tr>
+                          <tr
+                            key="d"
+                          >
+                            <th
+                              className="dow"
+                              key="Su0"
+                            >
+                              Su
+                            </th>
+                            <th
+                              className="dow"
+                              key="Mo1"
+                            >
+                              Mo
+                            </th>
+                            <th
+                              className="dow"
+                              key="Tu2"
+                            >
+                              Tu
+                            </th>
+                            <th
+                              className="dow"
+                              key="We3"
+                            >
+                              We
+                            </th>
+                            <th
+                              className="dow"
+                              key="Th4"
+                            >
+                              Th
+                            </th>
+                            <th
+                              className="dow"
+                              key="Fr5"
+                            >
+                              Fr
+                            </th>
+                            <th
+                              className="dow"
+                              key="Sa6"
+                            >
+                              Sa
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          key="tb"
+                        >
+                          <tr
+                            key="6"
+                          >
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_26"
+                              onClick={[Function]}
+                            >
+                              26
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_27"
+                              onClick={[Function]}
+                            >
+                              27
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_28"
+                              onClick={[Function]}
+                            >
+                              28
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_29"
+                              onClick={[Function]}
+                            >
+                              29
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_30"
+                              onClick={[Function]}
+                            >
+                              30
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_1"
+                              onClick={[Function]}
+                            >
+                              1
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-today"
+                              key="12_2"
+                              onClick={[Function]}
+                            >
+                              2
+                            </td>
+                          </tr>
+                          <tr
+                            key="13"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_3"
+                              onClick={[Function]}
+                            >
+                              3
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_4"
+                              onClick={[Function]}
+                            >
+                              4
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_5"
+                              onClick={[Function]}
+                            >
+                              5
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_6"
+                              onClick={[Function]}
+                            >
+                              6
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_7"
+                              onClick={[Function]}
+                            >
+                              7
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_8"
+                              onClick={[Function]}
+                            >
+                              8
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_9"
+                              onClick={[Function]}
+                            >
+                              9
+                            </td>
+                          </tr>
+                          <tr
+                            key="20"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_10"
+                              onClick={[Function]}
+                            >
+                              10
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_11"
+                              onClick={[Function]}
+                            >
+                              11
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_12"
+                              onClick={[Function]}
+                            >
+                              12
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_13"
+                              onClick={[Function]}
+                            >
+                              13
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_14"
+                              onClick={[Function]}
+                            >
+                              14
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_15"
+                              onClick={[Function]}
+                            >
+                              15
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_16"
+                              onClick={[Function]}
+                            >
+                              16
+                            </td>
+                          </tr>
+                          <tr
+                            key="27"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_17"
+                              onClick={[Function]}
+                            >
+                              17
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_18"
+                              onClick={[Function]}
+                            >
+                              18
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_19"
+                              onClick={[Function]}
+                            >
+                              19
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_20"
+                              onClick={[Function]}
+                            >
+                              20
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_21"
+                              onClick={[Function]}
+                            >
+                              21
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_22"
+                              onClick={[Function]}
+                            >
+                              22
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_23"
+                              onClick={[Function]}
+                            >
+                              23
+                            </td>
+                          </tr>
+                          <tr
+                            key="34"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_24"
+                              onClick={[Function]}
+                            >
+                              24
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_25"
+                              onClick={[Function]}
+                            >
+                              25
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_26"
+                              onClick={[Function]}
+                            >
+                              26
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_27"
+                              onClick={[Function]}
+                            >
+                              27
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_28"
+                              onClick={[Function]}
+                            >
+                              28
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_29"
+                              onClick={[Function]}
+                            >
+                              29
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_30"
+                              onClick={[Function]}
+                            >
+                              30
+                            </td>
+                          </tr>
+                          <tr
+                            key="41"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_31"
+                              onClick={[Function]}
+                            >
+                              31
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_1"
+                              onClick={[Function]}
+                            >
+                              1
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_2"
+                              onClick={[Function]}
+                            >
+                              2
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_3"
+                              onClick={[Function]}
+                            >
+                              3
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_4"
+                              onClick={[Function]}
+                            >
+                              4
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_5"
+                              onClick={[Function]}
+                            >
+                              5
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_6"
+                              onClick={[Function]}
+                            >
+                              6
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot
+                          key="tf"
+                        >
+                          <tr>
+                            <td
+                              className="el-datetime-timetoggle"
+                              colSpan="7"
+                              onClick={[Function]}
+                            >
+                              12:00 AM
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </DayView>
+                </CalendarContainer>
+              </div>
+            </div>
+          </DateTime>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={10}
+      key=".$4"
+      name="number"
+      onChange={[Function]}
+      requiredMark="*"
+      type="number"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <NumberInput
+            dataFormat={[Function]}
+            defaultValue=""
+            max={9007199254740991}
+            min={-9007199254740991}
+            name="number"
+            onBlur={[Function]}
+            onChange={[Function]}
+            step={1}
+            value={10}
+          >
+            <Input
+              append={
+                <span
+                  className="el-number-input-handler"
+                >
+                  <span
+                    className="fa fa-angle-up el-number-input-up"
+                    onClick={[Function]}
+                  />
+                  <span
+                    className="fa fa-angle-down el-number-input-down"
+                    onClick={[Function]}
+                  />
+                </span>
+              }
+              className="el-number-input"
+              max={9007199254740991}
+              min={-9007199254740991}
+              name="number"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="text"
+              value={10}
+            >
+              <div
+                className="el-input-wrapper el-number-input"
+              >
+                <div
+                  className="el-input el-number-input"
+                >
+                  <input
+                    max={9007199254740991}
+                    min={-9007199254740991}
+                    name="number"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyPress={[Function]}
+                    type="text"
+                    value={10}
+                  />
+                </div>
+                <span
+                  className="el-input-append"
+                >
+                  <span
+                    className="el-number-input-handler"
+                  >
+                    <span
+                      className="fa fa-angle-up el-number-input-up"
+                      onClick={[Function]}
+                    />
+                    <span
+                      className="fa fa-angle-down el-number-input-down"
+                      onClick={[Function]}
+                    />
+                  </span>
+                </span>
+              </div>
+            </Input>
+          </NumberInput>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="static"
+      key=".$5"
+      name="static"
+      onChange={[Function]}
+      requiredMark="*"
+      type="static"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <div
+            className="el-form-control-static"
+          >
+            static
+          </div>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="textarea"
+      key=".$6"
+      name="textarea"
+      onChange={[Function]}
+      requiredMark="*"
+      type="textarea"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="textarea"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="textarea"
+            value="textarea"
+          >
+            <div
+              className="el-input"
+            >
+              <textarea
+                className="el-input"
+                name="textarea"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="textarea"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={1}
+      key=".$7"
+      name="select"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": 1,
+            "value": 1,
+          },
+        ]
+      }
+      requiredMark="*"
+      type="select"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Select
+            closeAfterSelect={true}
+            defaultValue=""
+            name="select"
+            noMatchText="暂无匹配数据"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onSearch={[Function]}
+            selectAllText="全选"
+            value={1}
+          >
+            <div
+              className="el-select-wrapper"
+            >
+              <Input
+                autoComplete="off"
+                icon={
+                  <i
+                    className="el-caret"
+                  />
+                }
+                name="select"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                readOnly={true}
+                type="text"
+                value="1"
+              >
+                <div
+                  className="el-input"
+                >
+                  <span
+                    className="el-input-icon"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="el-caret"
+                    />
+                  </span>
+                  <input
+                    autoComplete="off"
+                    name="select"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    readOnly={true}
+                    type="text"
+                    value="1"
+                  />
+                </div>
+              </Input>
+            </div>
+          </Select>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={2}
+      key=".$8"
+      name="checkbox"
+      onChange={[Function]}
+      requiredMark="*"
+      type="checkbox"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Checkbox
+            checked={false}
+            name="checkbox"
+            onBlur={[Function]}
+            onChange={[Function]}
+            value={2}
+          >
+            <label
+              className="el-checkbox-wrapper"
+            >
+              <span
+                className="el-checkbox"
+              >
+                <input
+                  checked={false}
+                  className="el-checkbox-input"
+                  name="checkbox"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value={2}
+                />
+                <span
+                  className="fa fa-square-o el-unchecked"
+                />
+              </span>
+              <span />
+            </label>
+          </Checkbox>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={3}
+      key=".$9"
+      name="radio"
+      onChange={[Function]}
+      requiredMark="*"
+      type="radio"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Radio
+            checked={false}
+            name="radio"
+            onBlur={[Function]}
+            onChange={[Function]}
+            value={3}
+          >
+            <label
+              className="el-checkbox-wrapper"
+            >
+              <span
+                className="el-checkbox el-radio"
+              >
+                <input
+                  checked={false}
+                  className="el-checkbox-input"
+                  name="radio"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  type="radio"
+                  value={3}
+                />
+                <span />
+              </span>
+              <span />
+            </label>
+          </Radio>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={4}
+      key=".$10"
+      name="switch"
+      onChange={[Function]}
+      requiredMark="*"
+      type="switch"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Radio
+            checked={false}
+            label={null}
+            name="switch"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="switch"
+          >
+            <label
+              className="el-checkbox-wrapper"
+            >
+              <span
+                className="el-checkbox el-switch"
+              >
+                <input
+                  checked={false}
+                  className="el-checkbox-input"
+                  name="switch"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  type="radio"
+                />
+                <span />
+              </span>
+              <span />
+            </label>
+          </Radio>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data=""
+      key=".$11"
+      name="upload"
+      onChange={[Function]}
+      requiredMark="*"
+      type="upload"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Upload
+            name="upload"
+            onUpload={[Function]}
+            sizeValidatorError={[Function]}
+            typeValidatorError={[Function]}
+            validatorError={[Function]}
+            value=""
+          >
+            <div
+              className="el-uploader-wrapper"
+              onDragOver={[Function]}
+            >
+              <input
+                className="el-uploader"
+                name="upload"
+                onChange={[Function]}
+                type="file"
+              />
+            </div>
+          </Upload>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={5}
+      key=".$12"
+      name="radiogroup"
+      onChange={[Function]}
+      requiredMark="*"
+      type="radiogroup"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <RadioGroup
+            disableAll={false}
+            name="radiogroup"
+            onBlur={[Function]}
+            onChange={[Function]}
+            value={5}
+          >
+            <div
+              className="el-checkbox-group"
+            >
+              <div
+                className="el-checkbox-row"
+              />
+            </div>
+          </RadioGroup>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={
+        Array [
+          6,
+        ]
+      }
+      key=".$13"
+      name="checkgroup"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": 1,
+            "value": 1,
+          },
+          Object {
+            "label": 6,
+            "value": 6,
+          },
+        ]
+      }
+      requiredMark="*"
+      type="checkgroup"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <CheckGroup
+            checkAllLabel="全选"
+            checkedList={
+              Array [
+                6,
+              ]
+            }
+            disableAll={false}
+            hasCheckAll={true}
+            name="checkgroup"
+            onBlur={[Function]}
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "label": 1,
+                  "value": 1,
+                },
+                Object {
+                  "label": 6,
+                  "value": 6,
+                },
+              ]
+            }
+          >
+            <div
+              className="el-checkbox-group"
+            >
+              <div
+                className="el-checkbox-row el-check-all"
+              >
+                <Checkbox
+                  checked={false}
+                  disabled={false}
+                  indeterminate={true}
+                  label="全选"
+                  onChange={[Function]}
+                >
+                  <label
+                    className="el-checkbox-wrapper"
+                  >
+                    <span
+                      className="el-checkbox"
+                    >
+                      <input
+                        checked={false}
+                        className="el-checkbox-input"
+                        disabled={false}
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                      <span
+                        className="fa fa-minus-square el-checked"
+                      />
+                    </span>
+                    <span>
+                      全选
+                    </span>
+                  </label>
+                </Checkbox>
+              </div>
+              <div
+                className="el-checkbox-row"
+              >
+                <Checkbox
+                  checked={0}
+                  disabled={false}
+                  key="0"
+                  label={1}
+                  onChange={[Function]}
+                  value={1}
+                >
+                  <label
+                    className="el-checkbox-wrapper"
+                  >
+                    <span
+                      className="el-checkbox"
+                    >
+                      <input
+                        checked={0}
+                        className="el-checkbox-input"
+                        disabled={false}
+                        onChange={[Function]}
+                        type="checkbox"
+                        value={1}
+                      />
+                      <span
+                        className="fa fa-square-o el-unchecked"
+                      />
+                    </span>
+                    <span>
+                      1
+                    </span>
+                  </label>
+                </Checkbox>
+                <Checkbox
+                  checked={-1}
+                  disabled={false}
+                  key="1"
+                  label={6}
+                  onChange={[Function]}
+                  value={6}
+                >
+                  <label
+                    className="el-checkbox-wrapper"
+                  >
+                    <span
+                      className="el-checkbox"
+                    >
+                      <input
+                        checked={-1}
+                        className="el-checkbox-input"
+                        disabled={false}
+                        onChange={[Function]}
+                        type="checkbox"
+                        value={6}
+                      />
+                      <span
+                        className="fa fa-check-square el-checked"
+                      />
+                    </span>
+                    <span>
+                      6
+                    </span>
+                  </label>
+                </Checkbox>
+              </div>
+            </div>
+          </CheckGroup>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      requiredMark="*"
+      type="text"
+      validateType="error"
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Button
+            disabled={false}
+            onClick={[Function]}
+            size="default"
+            type="success"
+          >
+            <button
+              className="el-btn el-success"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              提交
+            </button>
+          </Button>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+  </form>
+</Form>
+`;
+
+exports[`Form create form by options 1`] = `
+<Form
+  data={
+    Object {
+      "checkbox": 2,
+      "checkgroup": Array [
+        6,
+      ],
+      "color": "#fff",
+      "datetime": 1512213506421,
+      "number": 10,
+      "password": "password",
+      "radio": 3,
+      "radiogroup": 5,
+      "select": 1,
+      "static": "static",
+      "switch": 4,
+      "text": "text",
+      "textarea": "textarea",
+      "upload": "",
+    }
+  }
+  id="id"
+  layout="horizontal"
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "name": "text",
+        "type": "text",
+      },
+      Object {
+        "name": "color",
+        "type": "color",
+      },
+      Object {
+        "name": "password",
+        "type": "password",
+      },
+      Object {
+        "name": "datetime",
+        "type": "datetime",
+      },
+      Object {
+        "name": "number",
+        "type": "number",
+      },
+      Object {
+        "name": "static",
+        "type": "static",
+      },
+      Object {
+        "name": "textarea",
+        "type": "textarea",
+      },
+      Object {
+        "name": "select",
+        "options": Array [
+          Object {
+            "label": 1,
+            "value": 1,
+          },
+        ],
+        "type": "select",
+      },
+      Object {
+        "name": "checkbox",
+        "type": "checkbox",
+      },
+      Object {
+        "name": "radio",
+        "type": "radio",
+      },
+      Object {
+        "name": "switch",
+        "type": "switch",
+      },
+      Object {
+        "name": "upload",
+        "type": "upload",
+      },
+      Object {
+        "name": "radiogroup",
+        "type": "radiogroup",
+      },
+      Object {
+        "name": "checkgroup",
+        "options": Array [
+          Object {
+            "label": 1,
+            "value": 1,
+          },
+          Object {
+            "label": 6,
+            "value": 6,
+          },
+        ],
+        "type": "checkgroup",
+      },
+    ]
+  }
+  submitButtonProps={Object {}}
+  submitText="提交"
+>
+  <form
+    className="el-form el-horizontal"
+  >
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="text"
+      key="0"
+      name="text"
+      onChange={[Function]}
+      requiredMark="*"
+      type="text"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="text"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="text"
+            value="text"
+          >
+            <div
+              className="el-input"
+            >
+              <input
+                name="text"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyPress={[Function]}
+                type="text"
+                value="text"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="#fff"
+      key="1"
+      name="color"
+      onChange={[Function]}
+      requiredMark="*"
+      type="color"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="color"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="color"
+            value="#fff"
+          >
+            <div
+              className="el-input"
+            >
+              <input
+                name="color"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyPress={[Function]}
+                type="color"
+                value="#fff"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="password"
+      key="2"
+      name="password"
+      onChange={[Function]}
+      requiredMark="*"
+      type="password"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="password"
+            value="password"
+          >
+            <div
+              className="el-input"
+            >
+              <input
+                name="password"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onKeyPress={[Function]}
+                type="password"
+                value="password"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={1512213506421}
+      key="3"
+      name="datetime"
+      onChange={[Function]}
+      requiredMark="*"
+      type="datetime"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <DateTime
+            className=""
+            closeOnSelect={false}
+            closeOnTab={true}
+            dateFormat={true}
+            defaultValue=""
+            input={true}
+            inputProps={Object {}}
+            isWeek={false}
+            name="datetime"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            shortcuts={Array []}
+            showWeeks={false}
+            strictParsing={true}
+            timeConstraints={Object {}}
+            timeFormat={true}
+            utc={false}
+            value={1512213506421}
+          >
+            <div
+              className="el-datetime el-static"
+              data-value="days"
+            >
+              <Input
+                icon={
+                  <i
+                    className="fa fa-calendar-minus-o"
+                  />
+                }
+                key="i"
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                type="text"
+                value={1512213506421}
+              >
+                <div
+                  className="el-input"
+                >
+                  <span
+                    className="el-input-icon"
+                  >
+                    <i
+                      className="fa fa-calendar-minus-o"
+                    />
+                  </span>
+                  <input
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    type="text"
+                    value={1512213506421}
+                  />
+                </div>
+              </Input>
+              <div
+                className="el-datetime-picker"
+                key="dt"
+              >
+                <CalendarContainer
+                  view="days"
+                  viewProps={
+                    Object {
+                      "dateFormat": "MM/DD/YYYY",
+                      "handleClickOutside": [Function],
+                      "isValidDate": undefined,
+                      "isWeek": false,
+                      "localMoment": [Function],
+                      "renderDay": undefined,
+                      "renderMonth": undefined,
+                      "renderYear": undefined,
+                      "selectedDate": null,
+                      "setDate": [Function],
+                      "setTime": [Function],
+                      "shortcuts": Array [],
+                      "showView": [Function],
+                      "showWeeks": false,
+                      "timeConstraints": Object {},
+                      "timeFormat": "h:mm A",
+                      "updateOn": "days",
+                      "updateSelectedDate": [Function],
+                      "updateTime": [Function],
+                      "value": 1512213506421,
+                      "viewDate": "2017-11-30T16:00:00.000Z",
+                    }
+                  }
+                >
+                  <DayView
+                    dateFormat="MM/DD/YYYY"
+                    handleClickOutside={[Function]}
+                    isValidDate={[Function]}
+                    isWeek={false}
+                    localMoment={[Function]}
+                    renderDay={[Function]}
+                    renderWeeksTitle={[Function]}
+                    selectedDate={null}
+                    setDate={[Function]}
+                    setTime={[Function]}
+                    shortcuts={Array []}
+                    showView={[Function]}
+                    showWeeks={false}
+                    timeConstraints={Object {}}
+                    timeFormat="h:mm A"
+                    updateOn="days"
+                    updateSelectedDate={[Function]}
+                    updateTime={[Function]}
+                    value={1512213506421}
+                    viewDate={"2017-11-30T16:00:00.000Z"}
+                  >
+                    <div
+                      className="el-datetime-days"
+                      data-value="days"
+                    >
+                      <table>
+                        <thead
+                          key="th"
+                        >
+                          <tr
+                            key="h"
+                          >
+                            <th
+                              className="el-datetime-prev"
+                              key="p"
+                            >
+                              <span
+                                onClick={[Function]}
+                              >
+                                ‹
+                              </span>
+                            </th>
+                            <th
+                              className="el-datetime-switch"
+                              colSpan="5"
+                              data-value={11}
+                              key="s"
+                              onClick={[Function]}
+                            >
+                              December 2017
+                            </th>
+                            <th
+                              className="el-datetime-next"
+                              key="n"
+                            >
+                              <span
+                                onClick={[Function]}
+                              >
+                                ›
+                              </span>
+                            </th>
+                          </tr>
+                          <tr
+                            key="d"
+                          >
+                            <th
+                              className="dow"
+                              key="Su0"
+                            >
+                              Su
+                            </th>
+                            <th
+                              className="dow"
+                              key="Mo1"
+                            >
+                              Mo
+                            </th>
+                            <th
+                              className="dow"
+                              key="Tu2"
+                            >
+                              Tu
+                            </th>
+                            <th
+                              className="dow"
+                              key="We3"
+                            >
+                              We
+                            </th>
+                            <th
+                              className="dow"
+                              key="Th4"
+                            >
+                              Th
+                            </th>
+                            <th
+                              className="dow"
+                              key="Fr5"
+                            >
+                              Fr
+                            </th>
+                            <th
+                              className="dow"
+                              key="Sa6"
+                            >
+                              Sa
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody
+                          key="tb"
+                        >
+                          <tr
+                            key="6"
+                          >
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_26"
+                              onClick={[Function]}
+                            >
+                              26
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_27"
+                              onClick={[Function]}
+                            >
+                              27
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_28"
+                              onClick={[Function]}
+                            >
+                              28
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_29"
+                              onClick={[Function]}
+                            >
+                              29
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-old"
+                              key="11_30"
+                              onClick={[Function]}
+                            >
+                              30
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_1"
+                              onClick={[Function]}
+                            >
+                              1
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-today"
+                              key="12_2"
+                              onClick={[Function]}
+                            >
+                              2
+                            </td>
+                          </tr>
+                          <tr
+                            key="13"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_3"
+                              onClick={[Function]}
+                            >
+                              3
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_4"
+                              onClick={[Function]}
+                            >
+                              4
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_5"
+                              onClick={[Function]}
+                            >
+                              5
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_6"
+                              onClick={[Function]}
+                            >
+                              6
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_7"
+                              onClick={[Function]}
+                            >
+                              7
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_8"
+                              onClick={[Function]}
+                            >
+                              8
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_9"
+                              onClick={[Function]}
+                            >
+                              9
+                            </td>
+                          </tr>
+                          <tr
+                            key="20"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_10"
+                              onClick={[Function]}
+                            >
+                              10
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_11"
+                              onClick={[Function]}
+                            >
+                              11
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_12"
+                              onClick={[Function]}
+                            >
+                              12
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_13"
+                              onClick={[Function]}
+                            >
+                              13
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_14"
+                              onClick={[Function]}
+                            >
+                              14
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_15"
+                              onClick={[Function]}
+                            >
+                              15
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_16"
+                              onClick={[Function]}
+                            >
+                              16
+                            </td>
+                          </tr>
+                          <tr
+                            key="27"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_17"
+                              onClick={[Function]}
+                            >
+                              17
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_18"
+                              onClick={[Function]}
+                            >
+                              18
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_19"
+                              onClick={[Function]}
+                            >
+                              19
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_20"
+                              onClick={[Function]}
+                            >
+                              20
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_21"
+                              onClick={[Function]}
+                            >
+                              21
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_22"
+                              onClick={[Function]}
+                            >
+                              22
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_23"
+                              onClick={[Function]}
+                            >
+                              23
+                            </td>
+                          </tr>
+                          <tr
+                            key="34"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_24"
+                              onClick={[Function]}
+                            >
+                              24
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_25"
+                              onClick={[Function]}
+                            >
+                              25
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_26"
+                              onClick={[Function]}
+                            >
+                              26
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_27"
+                              onClick={[Function]}
+                            >
+                              27
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_28"
+                              onClick={[Function]}
+                            >
+                              28
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_29"
+                              onClick={[Function]}
+                            >
+                              29
+                            </td>
+                            <td
+                              className="el-datetime-day"
+                              key="12_30"
+                              onClick={[Function]}
+                            >
+                              30
+                            </td>
+                          </tr>
+                          <tr
+                            key="41"
+                          >
+                            <td
+                              className="el-datetime-day"
+                              key="12_31"
+                              onClick={[Function]}
+                            >
+                              31
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_1"
+                              onClick={[Function]}
+                            >
+                              1
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_2"
+                              onClick={[Function]}
+                            >
+                              2
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_3"
+                              onClick={[Function]}
+                            >
+                              3
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_4"
+                              onClick={[Function]}
+                            >
+                              4
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_5"
+                              onClick={[Function]}
+                            >
+                              5
+                            </td>
+                            <td
+                              className="el-datetime-day el-datetime-new"
+                              key="1_6"
+                              onClick={[Function]}
+                            >
+                              6
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot
+                          key="tf"
+                        >
+                          <tr>
+                            <td
+                              className="el-datetime-timetoggle"
+                              colSpan="7"
+                              onClick={[Function]}
+                            >
+                              12:00 AM
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </DayView>
+                </CalendarContainer>
+              </div>
+            </div>
+          </DateTime>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={10}
+      key="4"
+      name="number"
+      onChange={[Function]}
+      requiredMark="*"
+      type="number"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <NumberInput
+            dataFormat={[Function]}
+            defaultValue=""
+            max={9007199254740991}
+            min={-9007199254740991}
+            name="number"
+            onBlur={[Function]}
+            onChange={[Function]}
+            step={1}
+            value={10}
+          >
+            <Input
+              append={
+                <span
+                  className="el-number-input-handler"
+                >
+                  <span
+                    className="fa fa-angle-up el-number-input-up"
+                    onClick={[Function]}
+                  />
+                  <span
+                    className="fa fa-angle-down el-number-input-down"
+                    onClick={[Function]}
+                  />
+                </span>
+              }
+              className="el-number-input"
+              max={9007199254740991}
+              min={-9007199254740991}
+              name="number"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              type="text"
+              value={10}
+            >
+              <div
+                className="el-input-wrapper el-number-input"
+              >
+                <div
+                  className="el-input el-number-input"
+                >
+                  <input
+                    max={9007199254740991}
+                    min={-9007199254740991}
+                    name="number"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyPress={[Function]}
+                    type="text"
+                    value={10}
+                  />
+                </div>
+                <span
+                  className="el-input-append"
+                >
+                  <span
+                    className="el-number-input-handler"
+                  >
+                    <span
+                      className="fa fa-angle-up el-number-input-up"
+                      onClick={[Function]}
+                    />
+                    <span
+                      className="fa fa-angle-down el-number-input-down"
+                      onClick={[Function]}
+                    />
+                  </span>
+                </span>
+              </div>
+            </Input>
+          </NumberInput>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="static"
+      key="5"
+      name="static"
+      onChange={[Function]}
+      requiredMark="*"
+      type="static"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <div
+            className="el-form-control-static"
+          >
+            static
+          </div>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data="textarea"
+      key="6"
+      name="textarea"
+      onChange={[Function]}
+      requiredMark="*"
+      type="textarea"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Input
+            name="textarea"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="textarea"
+            value="textarea"
+          >
+            <div
+              className="el-input"
+            >
+              <textarea
+                className="el-input"
+                name="textarea"
+                onBlur={[Function]}
+                onChange={[Function]}
+                value="textarea"
+              />
+            </div>
+          </Input>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={1}
+      key="7"
+      name="select"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": 1,
+            "value": 1,
+          },
+        ]
+      }
+      requiredMark="*"
+      type="select"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Select
+            closeAfterSelect={true}
+            defaultValue=""
+            name="select"
+            noMatchText="暂无匹配数据"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onSearch={[Function]}
+            selectAllText="全选"
+            value={1}
+          >
+            <div
+              className="el-select-wrapper"
+            >
+              <Input
+                autoComplete="off"
+                icon={
+                  <i
+                    className="el-caret"
+                  />
+                }
+                name="select"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                readOnly={true}
+                type="text"
+                value="1"
+              >
+                <div
+                  className="el-input"
+                >
+                  <span
+                    className="el-input-icon"
+                    onClick={[Function]}
+                  >
+                    <i
+                      className="el-caret"
+                    />
+                  </span>
+                  <input
+                    autoComplete="off"
+                    name="select"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyPress={[Function]}
+                    readOnly={true}
+                    type="text"
+                    value="1"
+                  />
+                </div>
+              </Input>
+            </div>
+          </Select>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={2}
+      key="8"
+      name="checkbox"
+      onChange={[Function]}
+      requiredMark="*"
+      type="checkbox"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Checkbox
+            checked={false}
+            name="checkbox"
+            onBlur={[Function]}
+            onChange={[Function]}
+            value={2}
+          >
+            <label
+              className="el-checkbox-wrapper"
+            >
+              <span
+                className="el-checkbox"
+              >
+                <input
+                  checked={false}
+                  className="el-checkbox-input"
+                  name="checkbox"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value={2}
+                />
+                <span
+                  className="fa fa-square-o el-unchecked"
+                />
+              </span>
+              <span />
+            </label>
+          </Checkbox>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={3}
+      key="9"
+      name="radio"
+      onChange={[Function]}
+      requiredMark="*"
+      type="radio"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Radio
+            checked={false}
+            name="radio"
+            onBlur={[Function]}
+            onChange={[Function]}
+            value={3}
+          >
+            <label
+              className="el-checkbox-wrapper"
+            >
+              <span
+                className="el-checkbox el-radio"
+              >
+                <input
+                  checked={false}
+                  className="el-checkbox-input"
+                  name="radio"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  type="radio"
+                  value={3}
+                />
+                <span />
+              </span>
+              <span />
+            </label>
+          </Radio>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={4}
+      key="10"
+      name="switch"
+      onChange={[Function]}
+      requiredMark="*"
+      type="switch"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Radio
+            checked={false}
+            label={null}
+            name="switch"
+            onBlur={[Function]}
+            onChange={[Function]}
+            type="switch"
+          >
+            <label
+              className="el-checkbox-wrapper"
+            >
+              <span
+                className="el-checkbox el-switch"
+              >
+                <input
+                  checked={false}
+                  className="el-checkbox-input"
+                  name="switch"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  type="radio"
+                />
+                <span />
+              </span>
+              <span />
+            </label>
+          </Radio>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data=""
+      key="11"
+      name="upload"
+      onChange={[Function]}
+      requiredMark="*"
+      type="upload"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Upload
+            name="upload"
+            onUpload={[Function]}
+            sizeValidatorError={[Function]}
+            typeValidatorError={[Function]}
+            validatorError={[Function]}
+            value=""
+          >
+            <div
+              className="el-uploader-wrapper"
+              onDragOver={[Function]}
+            >
+              <input
+                className="el-uploader"
+                name="upload"
+                onChange={[Function]}
+                type="file"
+              />
+            </div>
+          </Upload>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={5}
+      key="12"
+      name="radiogroup"
+      onChange={[Function]}
+      requiredMark="*"
+      type="radiogroup"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <RadioGroup
+            disableAll={false}
+            name="radiogroup"
+            onBlur={[Function]}
+            onChange={[Function]}
+            value={5}
+          >
+            <div
+              className="el-checkbox-group"
+            >
+              <div
+                className="el-checkbox-row"
+              />
+            </div>
+          </RadioGroup>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      beforeSubmit={false}
+      col={0}
+      data={
+        Array [
+          6,
+        ]
+      }
+      key="13"
+      name="checkgroup"
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": 1,
+            "value": 1,
+          },
+          Object {
+            "label": 6,
+            "value": 6,
+          },
+        ]
+      }
+      requiredMark="*"
+      type="checkgroup"
+      validateType="error"
+      validator={[Function]}
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <CheckGroup
+            checkAllLabel="全选"
+            checkedList={
+              Array [
+                6,
+              ]
+            }
+            disableAll={false}
+            hasCheckAll={true}
+            name="checkgroup"
+            onBlur={[Function]}
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "label": 1,
+                  "value": 1,
+                },
+                Object {
+                  "label": 6,
+                  "value": 6,
+                },
+              ]
+            }
+          >
+            <div
+              className="el-checkbox-group"
+            >
+              <div
+                className="el-checkbox-row el-check-all"
+              >
+                <Checkbox
+                  checked={false}
+                  disabled={false}
+                  indeterminate={true}
+                  label="全选"
+                  onChange={[Function]}
+                >
+                  <label
+                    className="el-checkbox-wrapper"
+                  >
+                    <span
+                      className="el-checkbox"
+                    >
+                      <input
+                        checked={false}
+                        className="el-checkbox-input"
+                        disabled={false}
+                        onChange={[Function]}
+                        type="checkbox"
+                      />
+                      <span
+                        className="fa fa-minus-square el-checked"
+                      />
+                    </span>
+                    <span>
+                      全选
+                    </span>
+                  </label>
+                </Checkbox>
+              </div>
+              <div
+                className="el-checkbox-row"
+              >
+                <Checkbox
+                  checked={0}
+                  disabled={false}
+                  key="0"
+                  label={1}
+                  onChange={[Function]}
+                  value={1}
+                >
+                  <label
+                    className="el-checkbox-wrapper"
+                  >
+                    <span
+                      className="el-checkbox"
+                    >
+                      <input
+                        checked={0}
+                        className="el-checkbox-input"
+                        disabled={false}
+                        onChange={[Function]}
+                        type="checkbox"
+                        value={1}
+                      />
+                      <span
+                        className="fa fa-square-o el-unchecked"
+                      />
+                    </span>
+                    <span>
+                      1
+                    </span>
+                  </label>
+                </Checkbox>
+                <Checkbox
+                  checked={-1}
+                  disabled={false}
+                  key="1"
+                  label={6}
+                  onChange={[Function]}
+                  value={6}
+                >
+                  <label
+                    className="el-checkbox-wrapper"
+                  >
+                    <span
+                      className="el-checkbox"
+                    >
+                      <input
+                        checked={-1}
+                        className="el-checkbox-input"
+                        disabled={false}
+                        onChange={[Function]}
+                        type="checkbox"
+                        value={6}
+                      />
+                      <span
+                        className="fa fa-check-square el-checked"
+                      />
+                    </span>
+                    <span>
+                      6
+                    </span>
+                  </label>
+                </Checkbox>
+              </div>
+            </div>
+          </CheckGroup>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+    <FormItem
+      requiredMark="*"
+      type="text"
+      validateType="error"
+    >
+      <div
+        className="el-form-item clearfix"
+      >
+        <div
+          className="el-form-control"
+          style={null}
+        >
+          <Button
+            disabled={false}
+            onClick={[Function]}
+            size="default"
+            type="success"
+          >
+            <button
+              className="el-btn el-success"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              提交
+            </button>
+          </Button>
+          <div
+            className="el-form-message"
+          />
+        </div>
+      </div>
+    </FormItem>
+  </form>
+</Form>
+`;
+
+exports[`FormItem create component 1`] = `
+<FormItem
+  requiredMark="*"
+  type="text"
+  validateType="error"
+>
+  <div
+    className="el-form-item clearfix"
+  >
+    <div
+      className="el-form-control"
+      style={null}
+    >
+      <Input
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="text"
+      >
+        <div
+          className="el-input"
+        >
+          <input
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+          />
+        </div>
+      </Input>
+      <div
+        className="el-form-message"
+      />
+    </div>
+  </div>
+</FormItem>
+`;
+
+exports[`FormItem define colon 1`] = `
+<FormItem
+  colon={true}
+  label="文字"
+  requiredMark="*"
+  type="text"
+  validateType="error"
+>
+  <div
+    className="el-form-item clearfix"
+  >
+    <label
+      className="el-form-label"
+      style={null}
+    >
+      文字
+      :
+    </label>
+    <div
+      className="el-form-control"
+      style={null}
+    >
+      <Input
+        label="文字"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="text"
+      >
+        <div
+          className="el-input"
+        >
+          <input
+            label="文字"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+          />
+        </div>
+      </Input>
+      <div
+        className="el-form-message"
+      />
+    </div>
+  </div>
+</FormItem>
+`;
+
+exports[`FormItem define labelWidth 1`] = `
+<FormItem
+  labelWidth={120}
+  requiredMark="*"
+  type="text"
+  validateType="error"
+>
+  <div
+    className="el-form-item clearfix"
+  >
+    <div
+      className="el-form-control"
+      style={
+        Object {
+          "display": "block",
+          "marginLeft": 120,
+        }
+      }
+    >
+      <Input
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="text"
+      >
+        <div
+          className="el-input"
+        >
+          <input
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+          />
+        </div>
+      </Input>
+      <div
+        className="el-form-message"
+      />
+    </div>
+  </div>
+</FormItem>
+`;
+
+exports[`FormItem define required 1`] = `
+<FormItem
+  required={true}
+  requiredMark="*"
+  type="text"
+  validateType="error"
+>
+  <div
+    className="el-form-item clearfix"
+  >
+    <span
+      className="el-required"
+    >
+      *
+    </span>
+    <div
+      className="el-form-control"
+      style={null}
+    >
+      <Input
+        onBlur={[Function]}
+        onChange={[Function]}
+        required={true}
+        type="text"
+      >
+        <div
+          className="el-input"
+        >
+          <input
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            required={true}
+            type="text"
+          />
+        </div>
+      </Input>
+      <div
+        className="el-form-message"
+      />
+    </div>
+  </div>
+</FormItem>
+`;
+
+exports[`FormItem define tips 1`] = `
+<FormItem
+  label="文字"
+  requiredMark="*"
+  tips="tips"
+  type="text"
+  validateType="error"
+>
+  <div
+    className="el-form-item clearfix"
+  >
+    <label
+      className="el-form-label"
+      style={null}
+    >
+      文字
+      <Wrap
+        hideTrigger="hover"
+        placement="top"
+        title="tips"
+        trigger="hover"
+      >
+        <span
+          className="el-form-tips fa fa-question-circle-o"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          style={
+            Object {
+              "paddingLeft": 4,
+              "paddingRight": null,
+            }
+          }
+        />
+      </Wrap>
+    </label>
+    <div
+      className="el-form-control"
+      style={null}
+    >
+      <Input
+        label="文字"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="text"
+      >
+        <div
+          className="el-input"
+        >
+          <input
+            label="文字"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyPress={[Function]}
+            type="text"
+          />
+        </div>
+      </Input>
+      <div
+        className="el-form-message"
+      />
+    </div>
+  </div>
+</FormItem>
+`;

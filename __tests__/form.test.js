@@ -1,111 +1,389 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import {Button} from '../src';
+import React, {Component} from 'react';
+import {mount} from 'enzyme';
+import {Form, FormItem} from '../src';
 
-describe('Button', () => {
+describe('Form', () => {
     it('create component', () => {
-        const component = shallow(<Button/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn').length).toEqual(1);
+        const component = mount(
+            <Form data={{}} name="jest" options={[{
+                type: "text",
+                name: "text",
+                label: "文字"
+            }]}/>);
+        expect(component).toMatchSnapshot();
     });
-    it('define type[default]', () => {
-        const component = shallow(<Button type="default"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn').length).toEqual(1);
+    it('define layout[inline]', () => {
+        const component = mount(
+            <Form data={{}}
+                  layout="inline"
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }]}/>);
+        expect(component.find('.el-inline').length).toEqual(1);
     });
-    it('define type[success]', () => {
-        const component = shallow(<Button type="success"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-success').length).toEqual(1);
-    });
-    it('define type[primary]', () => {
-        const component = shallow(<Button type="primary"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-primary').length).toEqual(1);
-    });
-    it('define type[danger]', () => {
-        const component = shallow(<Button type="danger"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-danger').length).toEqual(1);
-    });
-    it('define type[error]', () => {
-        const component = shallow(<Button type="error"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-danger').length).toEqual(1);
-    });
-    it('define type[secondary]', () => {
-        const component = shallow(<Button type="secondary"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-secondary').length).toEqual(1);
-    });
-    it('define type[warning]', () => {
-        const component = shallow(<Button type="warning"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-secondary').length).toEqual(1);
-    });
-    it('define type[text]', () => {
-        const component = shallow(<Button type="text"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-text').length).toEqual(1);
-    });
-    it('define disabled', () => {
-        const component = shallow(<Button disabled/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-disabled').length).toEqual(1);
-    });
-    it('define size[default]', () => {
-        const component = shallow(<Button size="default"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn').length).toEqual(1);
-    });
-    it('define size[small]', () => {
-        const component = shallow(<Button size="small"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-small').length).toEqual(1);
-    });
-    it('define size[large]', () => {
-        const component = shallow(<Button size="large"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-large').length).toEqual(1);
-    });
-    it('define size & type', () => {
-        const component = shallow(<Button size="large" type="error"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.el-large.el-danger').length).toEqual(1);
-    });
-    it('define submit', () => {
-        const component = shallow(<Button submit/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn[type="submit"]').length).toEqual(1);
-    });
-    it('define reset', () => {
-        const component = shallow(<Button reset/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn[type="reset"]').length).toEqual(1);
-    });
-    it('define href', () => {
-        const component = shallow(<Button href="/"/>);
-        expect(component).toBeDefined();
-        expect(component.find('a.el-btn').length).toEqual(1);
+    it('define layout[vertical]', () => {
+        const component = mount(
+            <Form data={{}}
+                  layout="vertical"
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }]}/>);
+        expect(component.find('.el-vertical').length).toEqual(1);
     });
     it('define className', () => {
-        const component = shallow(<Button className="jest"/>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn.jest').length).toEqual(1);
+        const component = mount(
+            <Form data={{}}
+                  className="jest"
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }]}/>);
+        expect(!!component.find('.jest')).toEqual(true);
     });
-    it('define style', () => {
-        const component = shallow(<Button style={{width: 100}}/>);
-        expect(component).toBeDefined();
-        expect(component.instance().props.style.width).toEqual(100);
+    it('define title', () => {
+        const component = mount(
+            <Form data={{}}
+                  title="jest"
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }]}/>);
+        expect(!!component.find('.el-form-title')).toEqual(true);
     });
-    it('define children', () => {
-        const component = shallow(<Button><b/></Button>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn > b').length).toEqual(1);
+    it('define colon', () => {
+        const component = mount(
+            <Form data={{}}
+                  colon={true}
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }, {
+                      type: "textarea",
+                      name: "textarea",
+                      label: "简介",
+                      colon: false
+                  }]}/>);
+        expect(component.find('.el-form-label').at(0).text()).toEqual("文字:");
+        expect(component.find('.el-form-label').at(1).text()).toEqual("简介");
     });
-    it('define others', () => {
-        const component = shallow(<Button name="jest"><b/></Button>);
-        expect(component).toBeDefined();
-        expect(component.find('button.el-btn[name="jest"] > b').length).toEqual(1);
-    })
+    it('define disabled', () => {
+        const component = mount(
+            <Form data={{}}
+                  disabled={true}
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }, {
+                      type: "textarea",
+                      name: "textarea",
+                      label: "简介",
+                  }]}/>);
+        expect(component.find('Button[disabled=true]').length).toEqual(1);
+        component.setProps({disabled: false});
+        expect(component.find('Button[disabled=false]').length).toEqual(1);
+        component.setProps({submitButtonProps: {disabled: false}});
+        expect(component.find('Button[disabled=false]').length).toEqual(1);
+        component.setProps({submitButtonProps: {disabled: true}});
+        expect(component.find('Button[disabled=true]').length).toEqual(1);
+    });
+    it('define error', () => {
+        const component = mount(
+            <Form data={{}}
+                  error={"error"}
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }, {
+                      type: "textarea",
+                      name: "textarea",
+                      label: "简介",
+                  }]}/>);
+        expect(component.find('.el-form-error').text()).toEqual("error");
+    });
+    it('define hideSubmitButton', () => {
+        const component = mount(
+            <Form data={{}}
+                  hideSubmitButton={true}
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }, {
+                      type: "textarea",
+                      name: "textarea",
+                      label: "简介",
+                  }]}/>);
+        expect(component.find('Button').length).toEqual(0);
+        component.setProps({hideSubmitButton: false});
+        expect(component.find('Button').length).toEqual(1);
+    });
+    it('define submitText', () => {
+        const component = mount(
+            <Form data={{}}
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }, {
+                      type: "textarea",
+                      name: "textarea",
+                      label: "简介",
+                  }]}/>);
+        expect(component.find('Button').text()).toEqual("提交");
+        component.setProps({submitText: "submit"});
+        expect(component.find('Button').text()).toEqual("submit");
+    });
+    it('define submitButtonProps', () => {
+        const component = mount(
+            <Form data={{}}
+                  submitButtonProps={{size: "small", type: "danger"}}
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }, {
+                      type: "textarea",
+                      name: "textarea",
+                      label: "简介",
+                  }]}/>);
+        expect(component.find('Button[size="small"][type="danger"]').length).toEqual(1);
+    });
+    it('create form by options', () => {
+        let data = {
+            text: "text",
+            color: "#fff",
+            password: "password",
+            datetime: 1512213506421,
+            number: 10,
+            'static': "static",
+            textarea: "textarea",
+            select: 1,
+            checkbox: 2,
+            radio: 3,
+            'switch': 4,
+            upload: "",
+            radiogroup: 5,
+            checkgroup: [6]
+        };
+        let options = Object.keys(data).map(p => {
+            let item = {type: p, name: p};
+            if (p === "select") {
+                item.options = [{label: 1, value: 1}];
+            }
+            if (p === "checkgroup") {
+                item.options = [{label: 1, value: 1}, {label: 6, value: 6}];
+            }
+            return item;
+        });
+        const handleChange = jest.fn();
+        const component = mount(<Form
+            data={data}
+            options={options}
+            onChange={handleChange}
+        />);
+        expect(component).toMatchSnapshot();
+        expect(component.find('FormItem[name="text"]').instance().props.data).toEqual("text");
+        expect(component.find('FormItem[name="color"]').instance().props.data).toEqual("#fff");
+        expect(component.find('FormItem[name="password"]').instance().props.data).toEqual("password");
+        expect(component.find('FormItem[name="datetime"]').instance().props.data).toEqual(1512213506421);
+        expect(component.find('FormItem[name="number"]').instance().props.data).toEqual(10);
+        expect(component.find('FormItem[name="static"]').instance().props.data).toEqual("static");
+        component.find('FormItem[name="text"] input').simulate('change', {target: {value: "123"}});
+        expect(handleChange).toBeCalled();
+    });
+    it('create form by form items', () => {
+        let data = {
+            text: "text",
+            color: "#fff",
+            password: "password",
+            datetime: 1512213506421,
+            number: 10,
+            'static': "static",
+            textarea: "textarea",
+            select: 1,
+            checkbox: 2,
+            radio: 3,
+            'switch': 4,
+            upload: "",
+            radiogroup: 5,
+            checkgroup: [6]
+        };
+        let children = Object.keys(data).map((p, i) => {
+            let item = {type: p, name: p};
+            if (p === "select") {
+                item.options = [{label: 1, value: 1}];
+            }
+            if (p === "checkgroup") {
+                item.options = [{label: 1, value: 1}, {label: 6, value: 6}];
+            }
+            return <FormItem key={i} {...item}/>;
+        });
+        const handleChange = jest.fn();
+        const component = mount(<Form
+            data={data}
+            onChange={handleChange}
+        >{children}</Form>);
+        expect(component).toMatchSnapshot();
+        expect(component.find('FormItem[name="text"]').instance().props.data).toEqual("text");
+        expect(component.find('FormItem[name="color"]').instance().props.data).toEqual("#fff");
+        expect(component.find('FormItem[name="password"]').instance().props.data).toEqual("password");
+        expect(component.find('FormItem[name="datetime"]').instance().props.data).toEqual(1512213506421);
+        expect(component.find('FormItem[name="number"]').instance().props.data).toEqual(10);
+        expect(component.find('FormItem[name="static"]').instance().props.data).toEqual("static");
+        component.find('FormItem[name="text"] input').simulate('change', {target: {value: "123"}});
+        expect(handleChange).toBeCalled();
+    });
+    it('validate', () => {
+        class Demo extends Component {
+            constructor() {
+                super();
+                this.state = {
+                    a: "1",
+                    b: "2"
+                }
+            }
+
+            handleChange({name, value}) {
+                this.setState(prev => {
+                    prev[name] = value;
+                    return prev;
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Form
+                            data={this.state}
+                            onChange={this.handleChange.bind(this)}
+                            options={[{
+                                name: "a",
+                                type: "text",
+                                validate: [{
+                                    maxLength: 2,
+                                    trigger: "change",
+                                    message: "message a"
+                                }]
+                            }, {
+                                name: "b",
+                                type: "text",
+                                validate: [{
+                                    min: 2,
+                                    max: 3,
+                                    trigger: "blur",
+                                    message: "message b"
+                                }]
+                            }]}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const wrapper = mount(<Demo/>);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("message a");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "ab"}});
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: 4}});
+        wrapper.find('input[name="b"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("message b");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: 3}});
+        wrapper.find('input[name="b"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: 1}});
+        wrapper.find('input[name="b"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("message b");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+    });
+});
+
+describe('FormItem', () => {
+    it("create component", () => {
+        const component = mount(<FormItem/>);
+        expect(component).toMatchSnapshot();
+    });
+    it("define required", () => {
+        const component = mount(<FormItem required/>);
+        expect(component).toMatchSnapshot();
+    });
+    it("define labelWidth", () => {
+        const component = mount(<FormItem labelWidth={120}/>);
+        expect(component).toMatchSnapshot();
+    });
+    it("define colon", () => {
+        const component = mount(<FormItem colon={true} label={"文字"}/>);
+        expect(component).toMatchSnapshot();
+    });
+    it("define tips", () => {
+        const component = mount(<FormItem tips={"tips"} label={"文字"}/>);
+        expect(component).toMatchSnapshot();
+    });
+    it("define type[color]", () => {
+        const component = mount(<FormItem type="color"/>);
+        expect(component.find('Input[type="color"]').length).toBe(1);
+    });
+    it("define type[editor]", () => {
+        const component = mount(<FormItem type="editor"/>);
+        expect(component.find('Editor').length).toBe(1);
+    });
+    it("define type[static]", () => {
+        const component = mount(<FormItem type="static" data="static" dataFormat={(value) => {
+            return "." + value
+        }}/>);
+        expect(component.find('.el-form-control-static').text()).toBe(".static");
+    });
+    it("define type[datetime]", () => {
+        const component = mount(<FormItem type="datetime"/>);
+        expect(component.find('DateTime').length).toBe(1);
+    });
+    it("define type[number]", () => {
+        const component = mount(<FormItem type="number"/>);
+        expect(component.find('NumberInput').length).toBe(1);
+    });
+    it("define type[password]", () => {
+        const component = mount(<FormItem type="password"/>);
+        expect(component.find('input[type="password"]').length).toBe(1);
+    });
+    it("define type[textarea]", () => {
+        const component = mount(<FormItem type="textarea"/>);
+        expect(component.find('textarea').length).toBe(1);
+    });
+    it("define type[select]", () => {
+        const component = mount(<FormItem type="select"/>);
+        expect(component.find('Select').length).toBe(1);
+    });
+    it("define type[checkbox]", () => {
+        const component = mount(<FormItem type="checkbox"/>);
+        expect(component.find('Checkbox').length).toBe(1);
+    });
+    it("define type[radio]", () => {
+        const component = mount(<FormItem type="radio"/>);
+        expect(component.find('Radio').length).toBe(1);
+    });
+    it("define type[upload]", () => {
+        const component = mount(<FormItem type="upload"/>);
+        expect(component.find('Upload').length).toBe(1);
+    });
+    it("define type[radiogroup]", () => {
+        const component = mount(<FormItem type="radiogroup"/>);
+        expect(component.find('RadioGroup').length).toBe(1);
+    });
+    it("define type[checkgroup]", () => {
+        const component = mount(<FormItem type="checkgroup"/>);
+        expect(component.find('CheckGroup').length).toBe(1);
+    });
 });
