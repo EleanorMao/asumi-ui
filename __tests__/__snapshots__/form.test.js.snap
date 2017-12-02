@@ -546,7 +546,7 @@ exports[`Form create form by form items 1`] = `
                               1
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_2"
                               onClick={[Function]}
                             >
@@ -557,7 +557,7 @@ exports[`Form create form by form items 1`] = `
                             key="13"
                           >
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_3"
                               onClick={[Function]}
                             >
@@ -2071,7 +2071,7 @@ exports[`Form create form by options 1`] = `
                               1
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_2"
                               onClick={[Function]}
                             >
@@ -2082,7 +2082,7 @@ exports[`Form create form by options 1`] = `
                             key="13"
                           >
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_3"
                               onClick={[Function]}
                             >

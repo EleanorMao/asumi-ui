@@ -10,7 +10,7 @@ import {noop, extend, isArr} from "../util";
 
 function isRequired({validate, required}) {
     return required || (validate && validate.some(item => {
-        return item.required;
+        return item.trigger !== "submit" && item.required;
     }));
 }
 
@@ -67,16 +67,17 @@ export default class Form extends Component {
         if (this.props.onChange) {
             if (type === "switch" && !e.checked) {
                 extend(e, {name, type, value: off, originName: e.name, originValue: e.value});
-                this.props.onChange(e);
             } else {
                 extend(e, {name, type, originName: e.name, originValue: e.value});
-                this.props.onChange(e);
             }
+            this.props.onChange(e);
         }
     }
 
     handleSubmit(_disabled) {
-        let {validator, onSubmit} = this.props;
+        let loading = this.state.loading;
+        let {validator, onSubmit, preventMultipleSubmit} = this.props;
+        if (preventMultipleSubmit && loading) return;
         this.setState({beforeSubmit: true}, () => {
             if (_disabled) {
             } else {
@@ -84,7 +85,10 @@ export default class Form extends Component {
                 if (disabled) {
                     this.setState({disabled: true})
                 } else {
-                    onSubmit && onSubmit();
+                    let cb = preventMultipleSubmit ? () => {
+                        this.setState({loading: false});
+                    } : noop();
+                    onSubmit && onSubmit(cb);
                 }
             }
             this.setState({beforeSubmit: false});
@@ -92,9 +96,14 @@ export default class Form extends Component {
     }
 
     render() {
-        let {data, options, colNum, error, colon, disabled, labelWidth, hideSubmitButton, layout, title, className, submitText, name, submitItems, submitButtonProps, children, style, encType, action, method, autoComplete, target, noValidate, acceptCharset} = this.props;
+        let {
+            data, options, colNum, error, requiredMark, colon, disabled, labelWidth,
+            hideSubmitButton, layout, title, className, submitText, name, submitItems,
+            submitButtonProps, children, style, encType, action, method, autoComplete,
+            target, noValidate, acceptCharset
+        } = this.props; //哎..这么写自己都看着烦啊，但是我就是控制不了我叽己啊
         let col = colNum ? Math.ceil(12 / colNum) : 0;
-        let _disabled = this.state.disabled || disabled;
+        let _disabled = this.state.disabled || disabled || submitButtonProps.disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
         let renderChildren = isArr(children) ? children : [children];
         return (
@@ -106,13 +115,13 @@ export default class Form extends Component {
                     return (
                         <FormItem
                             onChange={this.handleChange.bind(this, props)}
+                            requiredMark={requiredMark}
                             labelWidth={labelWidth}
                             colon={colon}
                             {...props}
                             col={col}
                             key={index}
                             data={data[props.name]}
-                            required={isRequired(props)}
                             beforeSubmit={this.state.beforeSubmit}
                             validator={this.handleDisabled.bind(this, props)}
                         />)
@@ -123,7 +132,6 @@ export default class Form extends Component {
                         let newProps = {
                             col: col,
                             data: data[props.name],
-                            required: isRequired(props),
                             beforeSubmit: this.state.beforeSubmit,
                             validator: this.handleDisabled.bind(this, props)
                         };
@@ -132,6 +140,9 @@ export default class Form extends Component {
                         }
                         if (typeof props.colon !== "boolean") {
                             newProps.colon = colon;
+                        }
+                        if (props.requiredMark == null) {
+                            newProps.requiredMark = requiredMark;
                         }
                         if (typeof props.labelWidth !== "number" && typeof props.labelWidth !== "string") {
                             newProps.labelWidth = labelWidth;
@@ -148,9 +159,7 @@ export default class Form extends Component {
                         disabled={_disabled}
                         onClick={this.handleSubmit.bind(this, _disabled)}
                         type={_disabled ? null : submitButtonProps.type || "success"}
-                    >
-                        {submitText}
-                    </Button>}{submitItems}
+                    >{submitText}</Button>}{submitItems}
                     {!!error && <div className="el-form-error">{error}</div>}
                 </FormItem>
             </form>
@@ -173,11 +182,13 @@ Form.propTypes = {
     validator: PropTypes.func,
     submitText: PropTypes.any,
     submitItems: PropTypes.any,
+    requiredMark: PropTypes.any,
     novalidate: PropTypes.string,
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     data: PropTypes.object.isRequired,
     submitButtonProps: PropTypes.object,
+    preventMultipleSubmit: PropTypes.bool,
     labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     options: PropTypes.arrayOf(PropTypes.shape({
         colon: PropTypes.bool,
@@ -210,7 +221,7 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline']),
 };
