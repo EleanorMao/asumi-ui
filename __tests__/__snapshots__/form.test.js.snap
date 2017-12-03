@@ -1422,9 +1422,16 @@ exports[`Form create form by form items 1`] = `
               >
                 <Checkbox
                   checked={false}
+                  checkedList={
+                    Array [
+                      6,
+                    ]
+                  }
                   disabled={false}
                   indeterminate={true}
                   label="全选"
+                  name="checkgroup"
+                  onBlur={[Function]}
                   onChange={[Function]}
                 >
                   <label
@@ -1437,6 +1444,8 @@ exports[`Form create form by form items 1`] = `
                         checked={false}
                         className="el-checkbox-input"
                         disabled={false}
+                        name="checkgroup"
+                        onBlur={[Function]}
                         onChange={[Function]}
                         type="checkbox"
                       />
@@ -1455,9 +1464,16 @@ exports[`Form create form by form items 1`] = `
               >
                 <Checkbox
                   checked={0}
+                  checkedList={
+                    Array [
+                      6,
+                    ]
+                  }
                   disabled={false}
                   key="0"
                   label={1}
+                  name="checkgroup"
+                  onBlur={[Function]}
                   onChange={[Function]}
                   value={1}
                 >
@@ -1471,6 +1487,8 @@ exports[`Form create form by form items 1`] = `
                         checked={0}
                         className="el-checkbox-input"
                         disabled={false}
+                        name="checkgroup"
+                        onBlur={[Function]}
                         onChange={[Function]}
                         type="checkbox"
                         value={1}
@@ -1486,9 +1504,16 @@ exports[`Form create form by form items 1`] = `
                 </Checkbox>
                 <Checkbox
                   checked={-1}
+                  checkedList={
+                    Array [
+                      6,
+                    ]
+                  }
                   disabled={false}
                   key="1"
                   label={6}
+                  name="checkgroup"
+                  onBlur={[Function]}
                   onChange={[Function]}
                   value={6}
                 >
@@ -1502,6 +1527,8 @@ exports[`Form create form by form items 1`] = `
                         checked={-1}
                         className="el-checkbox-input"
                         disabled={false}
+                        name="checkgroup"
+                        onBlur={[Function]}
                         onChange={[Function]}
                         type="checkbox"
                         value={6}
@@ -2947,9 +2974,16 @@ exports[`Form create form by options 1`] = `
               >
                 <Checkbox
                   checked={false}
+                  checkedList={
+                    Array [
+                      6,
+                    ]
+                  }
                   disabled={false}
                   indeterminate={true}
                   label="全选"
+                  name="checkgroup"
+                  onBlur={[Function]}
                   onChange={[Function]}
                 >
                   <label
@@ -2962,6 +2996,8 @@ exports[`Form create form by options 1`] = `
                         checked={false}
                         className="el-checkbox-input"
                         disabled={false}
+                        name="checkgroup"
+                        onBlur={[Function]}
                         onChange={[Function]}
                         type="checkbox"
                       />
@@ -2980,9 +3016,16 @@ exports[`Form create form by options 1`] = `
               >
                 <Checkbox
                   checked={0}
+                  checkedList={
+                    Array [
+                      6,
+                    ]
+                  }
                   disabled={false}
                   key="0"
                   label={1}
+                  name="checkgroup"
+                  onBlur={[Function]}
                   onChange={[Function]}
                   value={1}
                 >
@@ -2996,6 +3039,8 @@ exports[`Form create form by options 1`] = `
                         checked={0}
                         className="el-checkbox-input"
                         disabled={false}
+                        name="checkgroup"
+                        onBlur={[Function]}
                         onChange={[Function]}
                         type="checkbox"
                         value={1}
@@ -3011,9 +3056,16 @@ exports[`Form create form by options 1`] = `
                 </Checkbox>
                 <Checkbox
                   checked={-1}
+                  checkedList={
+                    Array [
+                      6,
+                    ]
+                  }
                   disabled={false}
                   key="1"
                   label={6}
+                  name="checkgroup"
+                  onBlur={[Function]}
                   onChange={[Function]}
                   value={6}
                 >
@@ -3027,6 +3079,8 @@ exports[`Form create form by options 1`] = `
                         checked={-1}
                         className="el-checkbox-input"
                         disabled={false}
+                        name="checkgroup"
+                        onBlur={[Function]}
                         onChange={[Function]}
                         type="checkbox"
                         value={6}

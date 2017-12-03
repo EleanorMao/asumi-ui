@@ -242,73 +242,6 @@ describe('Form', () => {
         component.find('FormItem[name="text"] input').simulate('change', {target: {value: "123"}});
         expect(handleChange).toBeCalled();
     });
-    it('validate', () => {
-        class Demo extends Component {
-            constructor() {
-                super();
-                this.state = {
-                    a: "1",
-                    b: "2"
-                }
-            }
-
-            handleChange({name, value}) {
-                this.setState(prev => {
-                    prev[name] = value;
-                    return prev;
-                })
-            }
-
-            render() {
-                return (
-                    <div>
-                        <Form
-                            data={this.state}
-                            onChange={this.handleChange.bind(this)}
-                            options={[{
-                                name: "a",
-                                type: "text",
-                                validate: [{
-                                    maxLength: 2,
-                                    trigger: "change",
-                                    message: "message a"
-                                }]
-                            }, {
-                                name: "b",
-                                type: "text",
-                                validate: [{
-                                    min: 2,
-                                    max: 3,
-                                    trigger: "blur",
-                                    message: "message b"
-                                }]
-                            }]}
-                        />
-                    </div>
-                )
-            }
-        }
-
-        const wrapper = mount(<Demo/>);
-        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
-        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("message a");
-        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
-        wrapper.find('input[name="a"]').simulate('change', {target: {value: "ab"}});
-        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");
-        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
-        wrapper.find('input[name="b"]').simulate('change', {target: {value: 4}});
-        wrapper.find('input[name="b"]').simulate('blur');
-        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("message b");
-        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
-        wrapper.find('input[name="b"]').simulate('change', {target: {value: 3}});
-        wrapper.find('input[name="b"]').simulate('blur');
-        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("");
-        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
-        wrapper.find('input[name="b"]').simulate('change', {target: {value: 1}});
-        wrapper.find('input[name="b"]').simulate('blur');
-        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("message b");
-        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
-    });
 });
 
 describe('FormItem', () => {
@@ -387,3 +320,365 @@ describe('FormItem', () => {
         expect(component.find('CheckGroup').length).toBe(1);
     });
 });
+
+describe('validate', () => {
+    beforeAll(() => {
+        jest.useFakeTimers();
+    });
+    afterAll(() => {
+        jest.useRealTimers();
+    });
+    it('validate[required]', () => {
+        class Demo extends Component {
+            constructor() {
+                super();
+                this.state = {
+                    a: "",
+                    b: "",
+                    c: "",
+                    d: ""
+                }
+            }
+
+            handleChange({name, value}) {
+                this.setState(prev => {
+                    prev[name] = value;
+                    return prev;
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Form
+                            data={this.state}
+                            onChange={this.handleChange.bind(this)}
+                            options={[{
+                                name: "a",
+                                type: "text",
+                                required: true
+                            }, {
+                                name: "b",
+                                type: "text",
+                                validate: [{
+                                    required: true,
+                                    trigger: "change",
+                                    message: "change"
+                                }]
+                            }, {
+                                name: "c",
+                                type: "text",
+                                validate: [{
+                                    required: true,
+                                    trigger: "blur",
+                                    message: "blur"
+                                }]
+                            }, {
+                                name: "d",
+                                type: "text",
+                                validate: [{
+                                    required: true,
+                                    trigger: "submit",
+                                    message: "submit"
+                                }]
+                            }]}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const wrapper = mount(<Demo/>);
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: "abc"}});
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: ""}});
+        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("change");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: "abc"}});
+        wrapper.find('input[name="c"]').simulate('focus');
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="c"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="c"] .el-form-message').text()).toEqual("blur");
+        wrapper.find('input[name="c"]').simulate('change', {target: {value: "1"}});
+        wrapper.find('input[name="c"]').simulate('blur');
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('Button').simulate('click');
+        expect(wrapper.find('FormItem[name="d"] .el-form-message').text()).toEqual("submit");
+        jest.runAllTimers();
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="d"]').simulate('change', {target: {value: "abc"}});
+        jest.runAllTimers();
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('Button').simulate('click');
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+    });
+    it('validate[required combo]', () => {
+        class Demo extends Component {
+            constructor() {
+                super();
+                this.state = {
+                    a: "",
+                }
+            }
+
+            handleChange({name, value}) {
+                this.setState(prev => {
+                    prev[name] = value;
+                    return prev;
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Form
+                            data={this.state}
+                            onChange={this.handleChange.bind(this)}
+                            options={[{
+                                name: "a",
+                                type: "text",
+                                validate: [{
+                                    required: true,
+                                    trigger: "change",
+                                    message: "change"
+                                }, {
+                                    required: true,
+                                    trigger: "blur",
+                                    message: "blur"
+                                }]
+                            }]}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const wrapper = mount(<Demo/>);
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: ""}});
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("change");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("blur");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+    });
+    it('validate[rule]', () => {
+        class Demo extends Component {
+            constructor() {
+                super();
+                this.state = {
+                    a: "",
+                }
+            }
+
+            handleChange({name, value}) {
+                this.setState(prev => {
+                    prev[name] = value;
+                    return prev;
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Form
+                            data={this.state}
+                            onChange={this.handleChange.bind(this)}
+                            options={[{
+                                name: "a",
+                                type: "text",
+                                validate: [{
+                                    rule: "color",
+                                    trigger: "blur",
+                                    message: "blur"
+                                }]
+                            }]}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const wrapper = mount(<Demo/>);
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("blur");
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "#"}});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "#fff"}});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");
+    });
+    it('validate[type]', () => {
+        class Demo extends Component {
+            constructor() {
+                super();
+                this.state = {
+                    a: "",
+                }
+            }
+
+            handleChange({name, value}) {
+                this.setState(prev => {
+                    prev[name] = value;
+                    return prev;
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Form
+                            data={this.state}
+                            onChange={this.handleChange.bind(this)}
+                            options={[{
+                                name: "a",
+                                type: "text",
+                                validate: [{
+                                    type: "number",
+                                    trigger: "blur",
+                                    message: "blur"
+                                }]
+                            }]}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const wrapper = mount(<Demo/>);
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("blur");
+        wrapper.setState({a: 1});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");
+    });
+    it('validate[length]', () => {
+        class Demo extends Component {
+            constructor() {
+                super();
+                this.state = {
+                    a: "",
+                }
+            }
+
+            handleChange({name, value}) {
+                this.setState(prev => {
+                    prev[name] = value;
+                    return prev;
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Form
+                            data={this.state}
+                            onChange={this.handleChange.bind(this)}
+                            options={[{
+                                name: "a",
+                                type: "text",
+                                validate: [{
+                                    length: 10,
+                                    trigger: "blur",
+                                    message: "blur"
+                                }]
+                            }]}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const wrapper = mount(<Demo/>);
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("blur");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "0123456789"}});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "01234567891"}});
+        wrapper.find('input[name="a"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("blur");
+    });
+    it('validate', () => {
+        class Demo extends Component {
+            constructor() {
+                super();
+                this.state = {
+                    a: "1",
+                    b: "2"
+                }
+            }
+
+            handleChange({name, value}) {
+                this.setState(prev => {
+                    prev[name] = value;
+                    return prev;
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Form
+                            data={this.state}
+                            onChange={this.handleChange.bind(this)}
+                            options={[{
+                                name: "a",
+                                type: "text",
+                                validate: [{
+                                    maxLength: 2,
+                                    trigger: "change",
+                                    message: "message a"
+                                }]
+                            }, {
+                                name: "b",
+                                type: "text",
+                                validate: [{
+                                    min: 2,
+                                    max: 3,
+                                    trigger: "blur",
+                                    message: "message b"
+                                }]
+                            }]}
+                        />
+                    </div>
+                )
+            }
+        }
+
+        const wrapper = mount(<Demo/>);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("message a");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="a"]').simulate('change', {target: {value: "ab"}});
+        expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: 4}});
+        wrapper.find('input[name="b"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("message b");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: 3}});
+        wrapper.find('input[name="b"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('input[name="b"]').simulate('change', {target: {value: 1}});
+        wrapper.find('input[name="b"]').simulate('blur');
+        expect(wrapper.find('FormItem[name="b"] .el-form-message').text()).toEqual("message b");
+        expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
+    });
+})
+;

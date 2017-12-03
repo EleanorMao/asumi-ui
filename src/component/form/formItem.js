@@ -268,6 +268,7 @@ export default class FormItem extends Component {
                     name={name}
                     value={data}
                     children={children}
+                    onBlur={this.handleBlur.bind(this)}
                 />;
                 break;
             case "static":

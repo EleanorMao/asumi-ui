@@ -44,6 +44,19 @@ describe('Checkbox', () => {
         const component = mount(<Checkbox type="switch"/>);
         expect(component).toMatchSnapshot();
     });
+    it('define onBlur', () => {
+        const handleBlur = jest.fn();
+        const component = mount(<Checkbox onBlur={handleBlur}/>);
+        component.find('input').simulate('focus');
+        component.find('input').simulate('blur');
+        expect(handleBlur).toBeCalled();
+    });
+    it('define onKeyPress', () => {
+        const handleKeyPress = jest.fn();
+        const component = mount(<Checkbox onKeyPress={handleKeyPress}/>);
+        component.find('input').simulate('keypress');
+        expect(handleKeyPress).toBeCalled();
+    });
     it('define onchange', () => {
         class Demo extends Component {
             constructor() {
@@ -128,6 +141,46 @@ describe("Checkbox Group", () => {
                     value: 3
                 }]}/>);
         expect(component.find('.el-checkbox-group.jest').length).toEqual(1);
+    });
+    it('define onBlur', () => {
+        const handleBlur = jest.fn();
+        const component = mount(<CheckboxGroup
+            onBlur={handleBlur}
+            options={[{
+                label: '选项1',
+                value: 1
+            }, {
+                label: '选项2',
+                value: 2
+            }, {
+                label: '选项3',
+                value: 3
+            }]}/>);
+        component.find('input').at(0).simulate('focus');
+        component.find('input').at(0).simulate('blur');
+        expect(handleBlur).toBeCalled();
+        component.find('input').at(2).simulate('focus');
+        component.find('input').at(2).simulate('blur');
+        expect(handleBlur).toBeCalled();
+    });
+    it('define onKeyPress', () => {
+        const handleKeyPress = jest.fn();
+        const component = mount(<CheckboxGroup
+            onKeyPress={handleKeyPress}
+            options={[{
+                label: '选项1',
+                value: 1
+            }, {
+                label: '选项2',
+                value: 2
+            }, {
+                label: '选项3',
+                value: 3
+            }]}/>);
+        component.find('input').at(0).simulate('keypress');
+        expect(handleKeyPress).toBeCalled();
+        component.find('input').at(2).simulate('keypress');
+        expect(handleKeyPress).toBeCalled();
     });
     it("define hasCheckAll", () => {
         const component = mount(

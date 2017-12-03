@@ -19,7 +19,7 @@ export default class Checkbox extends Component {
     }
 
     render() {
-        let {type, label, checked, className, indeterminate, onChange, disabled, children, ...other} = this.props;
+        let {type, label, checked, className, indeterminate, onChange, disabled, children, checkedList, ...other} = this.props;
         let _className = classnames('el-checkbox-wrapper', disabled ? 'el-disabled' : '', className);
         let _innerClassName = classnames('el-checkbox', type === "switch" ? 'el-switch' : '');
         return (

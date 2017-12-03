@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Radio from '../radio';
 import classnames from 'classnames';
-import {noop} from "../util";
+import {extend, noop} from "../util";
 
 export default class RadioGroup extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class RadioGroup extends Component {
     }
 
     render() {
-        let {disableAll, options, value, onChange, style, className} = this.props;
+        let {disableAll, options, value, onChange, style, className, ...others} = this.props;
         let _className = classnames('el-checkbox-group', className);
         return (
             <div className={_className} style={style}>
@@ -23,6 +23,7 @@ export default class RadioGroup extends Component {
                             if (typeof item === 'string' || typeof item === "number") {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }
+                            item = extend(others, item);
                             return (
                                 <Radio
                                     {...item}

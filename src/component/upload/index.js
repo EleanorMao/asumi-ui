@@ -57,7 +57,7 @@ export default class Upload extends Component {
     }
 
     render() {
-        let {name, accept, className, style, multiple, disabled, children} = this.props;
+        let {name, accept, className, style, multiple, disabled, onBlur, children} = this.props;
         let _className = classnames("el-uploader-wrapper", className);
         return (
             <div
@@ -72,6 +72,7 @@ export default class Upload extends Component {
                     className="el-uploader"
                     name={name}
                     accept={accept}
+                    onBlur={onBlur}
                     disabled={disabled}
                     multiple={multiple}
                     ref={(c) => this._uploader = c}
@@ -88,6 +89,7 @@ export default class Upload extends Component {
 Upload.propTypes = {
     name: PropTypes.string,
     style: PropTypes.object,
+    onBlur: PropTypes.func,
     accept: PropTypes.string,
     multiple: PropTypes.bool,
     disabled: PropTypes.bool,

@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 import classnames from 'classnames';
-import {noop} from "../util";
+import {extend, noop} from "../util";
 
 export default class CheckGroup extends Component {
     constructor(props) {
@@ -61,7 +61,10 @@ export default class CheckGroup extends Component {
     }
 
     render() {
-        let {disableAll, options, style, checkAllLabel, className} = this.props;
+        let {
+            disableAll, options, style, checkAllLabel, className,
+            min, max, value, hasCheckAll, onChange, ...others
+        } = this.props;
         let _className = classnames('el-checkbox-group', className);
         let isCheckedAll = this.isCheckedAll;
         let checkedList = this.getValue;
@@ -70,6 +73,7 @@ export default class CheckGroup extends Component {
                 <div className="el-checkbox-row el-check-all">
                     {this.hasCheckAll &&
                     <Checkbox
+                        {...others}
                         label={checkAllLabel}
                         disabled={disableAll}
                         onChange={this.handleToggle.bind(this)}
@@ -83,6 +87,7 @@ export default class CheckGroup extends Component {
                             if (typeof item === 'string' || typeof item === "number") {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }
+                            item = extend(others, item);
                             return (
                                 <Checkbox
                                     key={index}

@@ -66,7 +66,7 @@ export default class NumberInput extends Component {
         if (disabled) return;
         let newValue,
             value = this.state.value,
-            strValue = value.toString();
+            strValue = (value || 0).toString();
         let index = strValue.indexOf('.');
         if (~index) {
             let length = strValue.slice(index, -1).length;

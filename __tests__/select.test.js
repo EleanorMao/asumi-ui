@@ -204,12 +204,11 @@ describe('Select change', () => {
             const wrapper = mount(<Demo selectAll/>);
             wrapper.find('input').simulate('click');
             wrapper.instance()._c.el_select_ul.children[0].click();
-            setTimeout(() => {
-                expect(wrapper.instance().state.value).toEqual([1, 2]);
-                wrapper.find('input').simulate('click');
-                wrapper.instance()._c.el_select_ul.children[0].click();
-                expect(wrapper.instance().state.value).toEqual([]);
-            });
+            jest.runAllTimers();
+            expect(wrapper.instance().state.value).toEqual([1, 2]);
+            wrapper.find('input').simulate('click');
+            wrapper.instance()._c.el_select_ul.children[0].click();
+            expect(wrapper.instance().state.value).toEqual([]);
         });
         it('onSearch & onMatch', () => {
             const wrapper = mount(<Demo/>, {attachTo: container});
