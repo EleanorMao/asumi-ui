@@ -120,4 +120,9 @@ export const api = [{
     type: "bool",
     'default': "false",
     description: "whether full screen loading"
+}, {
+    property: "type",
+    type: "string",
+    'default': "stretch",
+    description: "Options: stretch, chase-dots"
 }];

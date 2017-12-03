@@ -51,6 +51,10 @@
     vertical-align: middle;
   }
   &.el-small {
+    .el-chase-dots {
+      width: 3.07692rem;
+      height: 3.07692rem;
+    }
     .el-stretch {
       width: 30px;
       height: 30px;
@@ -61,6 +65,10 @@
     }
   }
   &.el-large {
+    .el-chase-dots {
+      width: 5.30769rem;
+      height: 5.30769rem;
+    }
     .el-stretch {
       width: 8.30769rem;
       height: 66px;
@@ -105,6 +113,38 @@
         animation-delay: -0.5s;
         -webkit-animation-delay: -0.5s;
       }
+    }
+  }
+  .el-chase-dots {
+    width: 4.6153rem;
+    height: 4.6153rem;
+    position: relative;
+    text-align: center;
+    margin: 0 auto 5px auto;
+    -webkit-animation: rotate 2.0s infinite linear;
+    animation: rotate 2.0s infinite linear;
+    .el-chase-dot-1 {
+      top: 0;
+      width: 60%;
+      height: 60%;
+      position: absolute;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: @d_primary;
+      -webkit-animation: bounce 2.0s infinite ease-in-out;
+      animation: bounce 2.0s infinite ease-in-out;
+    }
+    .el-chase-dot-2 {
+      top: auto;
+      bottom: 0;
+      width: 60%;
+      height: 60%;
+      display: inline-block;
+      position: absolute;
+      background-color: @primary;
+      border-radius: 50%;
+      -webkit-animation: bounce -1.0s infinite ease-in-out;
+      animation: bounce -1.0s infinite ease-in-out;
     }
   }
 }
