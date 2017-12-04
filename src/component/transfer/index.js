@@ -19,22 +19,22 @@ export default class Transfer extends Component {
     }
 
     handleChange(isLeft, value) {
-        isLeft ? this.setState({ leftChecked: value }) : this.setState({ rightChecked: value });
+        isLeft ? this.setState({leftChecked: value}) : this.setState({rightChecked: value});
     }
 
     get sourceData() {
-        const { data, value, propsAlias } = this.props;
-        return data.filter(item => !value.includes(item[propsAlias.value]));
+        const {data, value, propsAlias} = this.props;
+        return data.filter(item => !~value.indexOf(item[propsAlias.value]));
     }
 
     get targetData() {
-        const { data, value, propsAlias } = this.props;
-        return data.filter(item => value.includes(item[propsAlias.value]));
+        const {data, value, propsAlias} = this.props;
+        return data.filter(item => ~value.indexOf(item[propsAlias.value]));
     }
 
     addToLeft() {
-        const { value } = this.props;
-        const { rightChecked } = this.state;
+        const {value} = this.props;
+        const {rightChecked} = this.state;
         let currentValue = value.slice();
         rightChecked.forEach(item => {
             const index = currentValue.indexOf(item);
@@ -42,32 +42,32 @@ export default class Transfer extends Component {
                 currentValue.splice(index, 1);
             }
         });
-        this.setState({ leftChecked: [], rightChecked: [] }, () =>
+        this.setState({leftChecked: [], rightChecked: []}, () =>
             this.props.onChange(currentValue))
     };
 
 
     addToRight() {
-        const { value } = this.props;
-        const { leftChecked } = this.state;
+        const {value} = this.props;
+        const {leftChecked} = this.state;
         let currentValue = value.slice();
         leftChecked.forEach(item => {
             if (!value.includes(item)) {
                 currentValue = currentValue.concat(item);
             }
         });
-        this.setState({ rightChecked: [], leftChecked: [] }, () =>
+        this.setState({rightChecked: [], leftChecked: []}, () =>
             this.props.onChange(currentValue))
     };
 
     render() {
-        const { data, titles, ...others } = this.props;
-        const { leftChecked, rightChecked } = this.state;
+        const {data, titles, ...others} = this.props;
+        const {leftChecked, rightChecked} = this.state;
 
         let isTopBtnDisabled = leftChecked.length === 0;
         let isBottomBtnDisabled = rightChecked.length === 0;
         return (
-            <div className="el-transfer" >
+            <div className="el-transfer">
                 <TransferPanel
                     data={this.sourceData}
                     checkedList={leftChecked}

@@ -10,17 +10,21 @@ module.exports = {
         filename: 'index.js',
         path: path.join(__dirname, './examples/lib')
     },
+    externals: {'react': 'React', 'react-dom': 'ReactDOM'},
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js?$/,
             exclude: /node_modules/,
-            loader: 'babel-loader'
+            use: 'babel-loader'
         }, {
-            test: /\.(less|css)?$/,
-            loader: 'style-loader!css-loader!less-loader'
+            test: /\.(less|css)$/,
+            use: ['style-loader', 'css-loader', 'less-loader']
         }, {
             test: /\.(svg|ttf|eot|svg|woff(\(?2\)?)?)(\?[a-zA-Z_0-9.=&]*)?(#[a-zA-Z_0-9.=&]*)?$/,
-            loader: "file-loader"
+            use: "file-loader"
         }]
     },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({ie8: true})
+    ]
 };
