@@ -18,7 +18,7 @@ export default class Main extends Component {
                     <code>npm install asumi -S</code>
                 </pre>
                 <h1>Environment Support</h1>
-                <p>Modern browsers and Internet Explorer 8+ (with classList & getBoundingClientRect polyfills)</p>
+                <p>Modern browsers and Internet Explorer 8+ (with classList & findIndex & getComputedStyle polyfills)</p>
                 <h1>Usage</h1>
                 <pre>
                     <code>import React from 'react';</code>
