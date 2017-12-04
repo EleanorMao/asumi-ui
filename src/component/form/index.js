@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
-import {noop, extend, isArr} from "../util";
+import {noop, extend, isArr, getType} from "../util";
 
 function isRequired({validate, required}) {
     return required || (validate && validate.some(item => {
@@ -42,7 +42,8 @@ export default class Form extends Component {
             if (!~_disabledIndex && state.disabled && state.disabledName && item.name === state.disabledName) {
                 _disabledIndex = index;
             }
-            if (isRequired(item) && (data[item.name] == null || data[item.name] === "")) {
+            let value = data[item.name];
+            if (isRequired(item) && (value == null || value === "" || (getType(value) === "array" && value.length === 0))) {
                 disabledIndex = index;
                 return true;
             }
@@ -221,7 +222,7 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline']),
 };

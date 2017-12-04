@@ -12,12 +12,13 @@ import Editor from '../editor';
 import Popover from '../popover';
 import Datetime from '../datetime';
 import Transfer from '../transfer';
+import TagInput from '../tagInput';
 import Option from '../select/option';
 import NumberInput from '../numberInput';
 import Checkbox from "../checkbox/index";
 import RadioGroup from '../radio/radioGroup';
 import CheckGroup from '../checkbox/checkGroup';
-import {rules} from "../util";
+import {rules, getType} from "../util";
 
 function isRequired(validate, required) {
     return required || (validate && validate.some(item => {
@@ -43,12 +44,13 @@ export default class FormItem extends Component {
         }
     }
 
+
     validator(item, value) {
         let {maxLength, length, isLocaleCompare, min, max, minLength, message, pattern, instance, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
-        let valueType = Object.prototype.toString.call(value).toLowerCase().slice(8, -1);
+        let valueType = getType(value);
         let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
-        if (!fail && required && (value == null || value === "")) {
+        if (!fail && required && (value == null || value === "" || (valueType === "array" && value.length === 0))) {
             fail = true
         }
         if (!fail && instance && !value instanceof instance) {
@@ -111,7 +113,7 @@ export default class FormItem extends Component {
             this._message.innerHTML = "";
             this.msg_str = ""
         }
-        if (!disabled && required && (value == null || value === "")) {
+        if (!disabled && required && (value == null || value === "" || (getType(value) === "array" && value.length === 0 ))) {
             disabled = true;
         }
         validator && validator(disabled);
@@ -281,6 +283,15 @@ export default class FormItem extends Component {
                     onChange={this.handleChange.bind(this)}
                 />;
                 break;
+            case "taginput":
+                output = <TagInput
+                    {...config}
+                    name={name}
+                    value={value}
+                    onBlur={this.handleBlur.bind(this)}
+                    onChange={this.handleChange.bind(this)}
+                />;
+                break;
             case "static":
                 output = <div
                     className="el-form-control-static">
@@ -376,7 +387,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer']),
+    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput']),
 };
 
 FormItem.defaultProps = {

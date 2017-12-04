@@ -42,6 +42,7 @@ export default class Main extends Component {
                 avatar: "",
                 checkbox: "",
                 transfer: [],
+                tags: [],
                 classes: [1],
                 markdown: "所有您定义在Form上的props都会传入FormItem, 当然您可以选择覆盖他",
                 description: "",
@@ -225,6 +226,7 @@ export default class Main extends Component {
                                 label: "选择课程",
                                 titles: ["待选课程", "已选课程"],
                                 filterable: true,
+                                required: true,
                                 data: [{
                                     value: 1,
                                     label: "语文"
@@ -238,6 +240,10 @@ export default class Main extends Component {
                                     value: 4,
                                     label: "音乐"
                                 }],
+                            }, {
+                                name: "tags",
+                                type: "taginput",
+                                label: "我的标签",
                             }, {
                                 name: "date",
                                 type: "datetime",
