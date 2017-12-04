@@ -266,9 +266,8 @@ export default class DateTime extends React.Component {
         let {selectedDate, inputValue} = this.state;
         this.setState({
             open: false
-        }, () => {
-            this.props.onBlur(selectedDate || inputValue);
         });
+        this.props.onBlur(selectedDate || inputValue);
     }
 
 
