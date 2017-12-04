@@ -31,9 +31,13 @@ export default class Main extends Component {
                     title="basic"
                     code={basic}
                 >
-                    <DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                    <div style={{float: 'left'}}><DateTime showWeeks={true} dateFormat='L' timeFormat={true}
                         onChange={this.handleChange.bind(this)}
-                        value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} />
+                        value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} /></div>
+
+                    <div style={{float: 'left'}}><DateTime showWeeks={true} dateFormat='L' timeFormat={true}
+                        onChange={this.handleChange.bind(this)}
+                        value={date} name="date"  isValidDate={this.handleValidDate.bind(this)} /></div>
                 </Panel>
 
                 <Panel

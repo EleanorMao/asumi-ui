@@ -14,10 +14,11 @@ export default class DateTime extends React.Component {
         this.componentProps = {
             fromState: ['viewDate', 'selectedDate', 'updateOn'],
             fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek', 'shortcuts'],
-            fromThis: ['setDate', 'setTime', 'updateTime', 'showView', 'updateSelectedDate', 'localMoment', 'handleClickOutside']
+            fromThis: ['setDate', 'setTime', 'updateTime', 'showView', 'updateSelectedDate', 'localMoment', 'uid']
         };
         let state = this.getStateFromProps(props);
         state.currentView = props.dateFormat ? props.viewMode || state.updateOn || 'days' : 'time';
+        this.uid = new Date().getTime() + Math.random();
         this.state = state;
 
     }
@@ -28,7 +29,7 @@ export default class DateTime extends React.Component {
             selectedDate, viewDate, updateOn, inputValue;
 
         if (date) {
-            selectedDate = this.localMoment(date, formats.datetime);
+            selectedDate = this.localMoment(date, date === 'string' ? formats.datetime : undefined);
         }
 
         if (selectedDate && !selectedDate.isValid()) {
@@ -148,21 +149,11 @@ export default class DateTime extends React.Component {
         let { input, onBlur } = this.props;
         let el = e.target, _isContains;
         while (el = el.parentNode) {
-            if (el.getAttribute && el.getAttribute('data-value') === updateOn) {
+            if (el.getAttribute && el.getAttribute('data-value') === updateOn+this.uid) {
                 _isContains = true;
             }
         }
         if (input && !_isContains) {
-            this.setState({ open: false }, () => {
-                onBlur(selectedDate || inputValue);
-            })
-        }
-    }
-
-    handleClickOutside() {
-        let { open, selectedDate, inputValue } = this.state;
-        let { openProps, input, onBlur } = this.props;
-        if (input && open && !openProps) {
             this.setState({ open: false }, () => {
                 onBlur(selectedDate || inputValue);
             })
@@ -349,7 +340,8 @@ export default class DateTime extends React.Component {
         }
         return (
             <div className={classnames('el-datetime', className, { 'el-static': input }, { 'el-datetime-open': open })}
-                data-value={updateOn}>
+                ref={c => this._el_datetime = c}
+                data-value={updateOn+this.uid}>
                 {children}
                 <div key='dt' className='el-datetime-picker'>
                     {!!shortcuts.length && <Shortcuts shortcuts={shortcuts} />}

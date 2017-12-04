@@ -17,12 +17,14 @@ export default class CalendarContainer extends React.Component{
             time: TimeView,
             weeks: WeekView
         }
+
     }
 
     
 
     render(){
         let {view, viewProps} = this.props;
+        viewProps.uid = viewProps.updateOn + viewProps.uid;
         return React.createElement(this.viewComponents[view], viewProps);
     }
 }

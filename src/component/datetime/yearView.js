@@ -61,10 +61,10 @@ class YearView extends React.Component {
 
     render() {
         let type = "years";
-        let {viewDate, showView, updateTime, updateOn} = this.props;
+        let {viewDate, showView, updateTime, uid} = this.props;
         let year = parseInt(viewDate.year() / 10, 10) * 10;
         return (
-            <div className="el-datetime-years" data-value={updateOn}>
+            <div className="el-datetime-years" data-value={uid}>
                 <table>
                     <thead>
                     <tr>

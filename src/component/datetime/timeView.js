@@ -202,9 +202,9 @@ class TimeView extends React.Component {
     }
 
     render() {
-        let { updateOn } = this.props;
+        let { uid } = this.props;
         return (
-            <div className="el-datetimeTime" data-value={updateOn}>
+            <div className="el-datetimeTime" data-value={uid}>
                 <table>
                     {this.renderHeader()}
                     <tbody key="b">

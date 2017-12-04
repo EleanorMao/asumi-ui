@@ -71,9 +71,9 @@ class MonthView extends React.Component{
     }
 
     render(){
-        let {updateTime, showView, updateOn} = this.props;
+        let {updateTime, showView, updateOn, uid} = this.props;
         let type = 'years';
-        return <div className='el-datetime-months' data-value={updateOn}>
+        return <div className='el-datetime-months' data-value={uid}>
                     <table key='a'>
                         <thead>
                             <tr>
