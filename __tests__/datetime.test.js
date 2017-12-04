@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import {mount} from 'enzyme';
 import {DateTime} from '../src/';
+import { setTimeout } from 'timers';
 
 describe('Datetime', () => {
     it('create component', () => {
@@ -18,6 +19,11 @@ describe('Datetime', () => {
         const component = mount(<DateTime dateFormat={true}/>);
         expect(component).toMatchSnapshot();
     });
+
+    it('define timeFormat', ()=>{
+        const component = moment(<DateTime timeFormat={true}/>);
+        expect(component).toMatchSnapshot();
+    })
 
     it('define viewMode', ()=>{
         const date = moment();
@@ -36,9 +42,44 @@ describe('Datetime', () => {
         expect(component.find('.el-datetime-switch').text()).toEqual( num + '-' + (num + 9));
     });
 
-    it('define open', ()=>{
+    it('define open[false]】', ()=>{
         const date = moment();
         const component = mount(<DateTime defaultValue={date} open={false}/>);
         expect(component.find('.el-datetime-open').length).toEqual(0);
+    })
+    
+    it('define open[true]】', ()=>{
+        const date = moment();
+        const component = mount(<DateTime defaultValue={date} open={true}/>);
+        expect(component.find('.el-datetime-open').length).toEqual(1);
+    })
+
+    it('define onChange', ()=>{
+        const date = moment();
+        const onChangeFn = jest.fn();
+        const component = mount(
+            <DateTime onChange={onChangeFn}/>);
+        
+        component.find('.el-datetime-day').at(1).simulate('click');
+        expect(onChangeFn).toHaveBeenCalled();
+    });
+
+    it('define className', ()=>{
+        const component = mount(
+            <DateTime className='haha'/>);
+        expect(!!component.find('.haha')).toEqual(true);
+    })
+    
+    it('define isValidDate', ()=>{
+        const isValidDate = (currentDate, selectedDate)=>{
+            return currentDate.isBefore(moment());
+        };
+        const onChangeFn = jest.fn();
+        const component = mount(
+            <DateTime isValidDate={isValidDate} onChange={onChangeFn}/>);
+        component.find('.el-datetime-disabled').at(0).simulate('click');
+        expect(onChangeFn).not.toHaveBeenCalled();
+        component.find('.el-datetime-day').not('.el-datetime-disabled').at(0).simulate('click');
+        expect(onChangeFn).toHaveBeenCalled();
     })
 });
