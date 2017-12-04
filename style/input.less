@@ -218,6 +218,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background: #fff;
     position: relative;
     .el-number-input-handler {
+      display: inline-block;
+      min-height: 31px;
       .el-number-input-up, .el-number-input-down {
         position: absolute;
         line-height: 1.2;
@@ -236,6 +238,16 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
         bottom: 0;
         top: 50%;
       }
+    }
+  }
+  &.el-large .el-input-append {
+    .el-number-input-handler {
+      min-height: 36px;
+    }
+  }
+  &.el-small .el-input-append {
+    .el-number-input-handler {
+      min-height: 26px;
     }
   }
   &.el-number-input-disabled {
