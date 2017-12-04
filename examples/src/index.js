@@ -1,5 +1,10 @@
 /**
  * Created by elly on 2017/4/5.
+ * @producer: EleanorMao<danningmao@outlook.com><https://github.com/EleanorMao>
+ * @ui-designer: EleanorMao<danningmao@outlook.com><https://github.com/EleanorMao>
+ * @contributor: EleanorMao<danningmao@outlook.com><https://github.com/EleanorMao>
+ * @contributor: BingZheng<https://github.com/beng07231>
+ * @contributor: YangZhao<zhaoy_1992@163.com><https://github.com/WoolYang>
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
