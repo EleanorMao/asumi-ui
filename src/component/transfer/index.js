@@ -52,7 +52,7 @@ export default class Transfer extends Component {
         const {leftChecked} = this.state;
         let currentValue = value.slice();
         leftChecked.forEach(item => {
-            if (!value.includes(item)) {
+            if (!~value.indexOf(item)) {
                 currentValue = currentValue.concat(item);
             }
         });

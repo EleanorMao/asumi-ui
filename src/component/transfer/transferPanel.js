@@ -31,7 +31,7 @@ export default class TransferPanel extends Component {
                 return filterMethod(this.state.query, item);
             } else {
                 const label = item[propsAlias.label] || item[propsAlias.value].toString();
-                return label.toLowerCase().includes(this.state.query.toLowerCase());
+                return ~label.toLowerCase().indexOf(this.state.query.toLowerCase());
             }
         });
     }
