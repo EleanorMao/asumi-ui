@@ -1,0 +1,17 @@
+exports[`Tabs create component 1`] = `
+<div className={"el-tabs"}>
+    <ul className={`el-tabs-nav$ clearfix`}>
+        <li
+            key={"1"}
+            onClick={[Function]}
+            className={"el-tabs-nav-active"}>
+            <a href="javascript:;">
+
+            </a>
+        </li>
+    </ul>
+    <div className={`el-tabs-content`}>
+        <TabPanel key="1" _active={true}>a</TabPanel>
+    </div>
+</div>
+`;
