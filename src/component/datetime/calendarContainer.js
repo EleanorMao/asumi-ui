@@ -6,8 +6,8 @@ import TimeView from './timeView';
 import WeekView from './weekView';
 
 
-export default class CalendarContainer extends React.Component{
-    constructor(props){
+export default class CalendarContainer extends React.Component {
+    constructor(props) {
         super(props);
 
         this.viewComponents = {
@@ -20,9 +20,7 @@ export default class CalendarContainer extends React.Component{
 
     }
 
-    
-
-    render(){
+    render() {
         let {view, viewProps} = this.props;
         viewProps.uid = viewProps.updateOn + viewProps.uid;
         return React.createElement(this.viewComponents[view], viewProps);

@@ -320,7 +320,7 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days"
+              data-value="days1512358978531.7158"
             >
               <Input
                 icon={
@@ -333,7 +333,7 @@ exports[`Form create form by form items 1`] = `
                 onFocus={[Function]}
                 onKeyDown={[Function]}
                 type="text"
-                value={1512213506421}
+                value="12/02/2017 7:18 PM"
               >
                 <div
                   className="el-input"
@@ -351,7 +351,7 @@ exports[`Form create form by form items 1`] = `
                     onKeyDown={[Function]}
                     onKeyPress={[Function]}
                     type="text"
-                    value={1512213506421}
+                    value="12/02/2017 7:18 PM"
                   />
                 </div>
               </Input>
@@ -364,14 +364,13 @@ exports[`Form create form by form items 1`] = `
                   viewProps={
                     Object {
                       "dateFormat": "MM/DD/YYYY",
-                      "handleClickOutside": [Function],
                       "isValidDate": undefined,
                       "isWeek": false,
                       "localMoment": [Function],
                       "renderDay": undefined,
                       "renderMonth": undefined,
                       "renderYear": undefined,
-                      "selectedDate": null,
+                      "selectedDate": "2017-12-02T11:18:26.421Z",
                       "setDate": [Function],
                       "setTime": [Function],
                       "shortcuts": Array [],
@@ -379,6 +378,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
+                      "uid": "days1512358978531.7158",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -389,13 +389,12 @@ exports[`Form create form by form items 1`] = `
                 >
                   <DayView
                     dateFormat="MM/DD/YYYY"
-                    handleClickOutside={[Function]}
                     isValidDate={[Function]}
                     isWeek={false}
                     localMoment={[Function]}
                     renderDay={[Function]}
                     renderWeeksTitle={[Function]}
-                    selectedDate={null}
+                    selectedDate={"2017-12-02T11:18:26.421Z"}
                     setDate={[Function]}
                     setTime={[Function]}
                     shortcuts={Array []}
@@ -403,6 +402,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
+                    uid="days1512358978531.7158"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -411,7 +411,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days"
+                      data-value="days1512358978531.7158"
                     >
                       <table>
                         <thead
@@ -546,7 +546,7 @@ exports[`Form create form by form items 1`] = `
                               1
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-active"
                               key="12_2"
                               onClick={[Function]}
                             >
@@ -557,14 +557,14 @@ exports[`Form create form by form items 1`] = `
                             key="13"
                           >
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_3"
                               onClick={[Function]}
                             >
                               3
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_4"
                               onClick={[Function]}
                             >
@@ -828,7 +828,7 @@ exports[`Form create form by form items 1`] = `
                               colSpan="7"
                               onClick={[Function]}
                             >
-                              12:00 AM
+                              7:18 PM
                             </td>
                           </tr>
                         </tfoot>
@@ -1290,6 +1290,7 @@ exports[`Form create form by form items 1`] = `
         >
           <Upload
             name="upload"
+            onBlur={[Function]}
             onUpload={[Function]}
             sizeValidatorError={[Function]}
             typeValidatorError={[Function]}
@@ -1303,6 +1304,7 @@ exports[`Form create form by form items 1`] = `
               <input
                 className="el-uploader"
                 name="upload"
+                onBlur={[Function]}
                 onChange={[Function]}
                 type="file"
               />
@@ -1872,7 +1874,7 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days"
+              data-value="days1512358978393.613"
             >
               <Input
                 icon={
@@ -1885,7 +1887,7 @@ exports[`Form create form by options 1`] = `
                 onFocus={[Function]}
                 onKeyDown={[Function]}
                 type="text"
-                value={1512213506421}
+                value="12/02/2017 7:18 PM"
               >
                 <div
                   className="el-input"
@@ -1903,7 +1905,7 @@ exports[`Form create form by options 1`] = `
                     onKeyDown={[Function]}
                     onKeyPress={[Function]}
                     type="text"
-                    value={1512213506421}
+                    value="12/02/2017 7:18 PM"
                   />
                 </div>
               </Input>
@@ -1916,14 +1918,13 @@ exports[`Form create form by options 1`] = `
                   viewProps={
                     Object {
                       "dateFormat": "MM/DD/YYYY",
-                      "handleClickOutside": [Function],
                       "isValidDate": undefined,
                       "isWeek": false,
                       "localMoment": [Function],
                       "renderDay": undefined,
                       "renderMonth": undefined,
                       "renderYear": undefined,
-                      "selectedDate": null,
+                      "selectedDate": "2017-12-02T11:18:26.421Z",
                       "setDate": [Function],
                       "setTime": [Function],
                       "shortcuts": Array [],
@@ -1931,6 +1932,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
+                      "uid": "days1512358978393.613",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1941,13 +1943,12 @@ exports[`Form create form by options 1`] = `
                 >
                   <DayView
                     dateFormat="MM/DD/YYYY"
-                    handleClickOutside={[Function]}
                     isValidDate={[Function]}
                     isWeek={false}
                     localMoment={[Function]}
                     renderDay={[Function]}
                     renderWeeksTitle={[Function]}
-                    selectedDate={null}
+                    selectedDate={"2017-12-02T11:18:26.421Z"}
                     setDate={[Function]}
                     setTime={[Function]}
                     shortcuts={Array []}
@@ -1955,6 +1956,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
+                    uid="days1512358978393.613"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1963,7 +1965,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days"
+                      data-value="days1512358978393.613"
                     >
                       <table>
                         <thead
@@ -2098,7 +2100,7 @@ exports[`Form create form by options 1`] = `
                               1
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-active"
                               key="12_2"
                               onClick={[Function]}
                             >
@@ -2109,14 +2111,14 @@ exports[`Form create form by options 1`] = `
                             key="13"
                           >
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_3"
                               onClick={[Function]}
                             >
                               3
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_4"
                               onClick={[Function]}
                             >
@@ -2380,7 +2382,7 @@ exports[`Form create form by options 1`] = `
                               colSpan="7"
                               onClick={[Function]}
                             >
-                              12:00 AM
+                              7:18 PM
                             </td>
                           </tr>
                         </tfoot>
@@ -2842,6 +2844,7 @@ exports[`Form create form by options 1`] = `
         >
           <Upload
             name="upload"
+            onBlur={[Function]}
             onUpload={[Function]}
             sizeValidatorError={[Function]}
             typeValidatorError={[Function]}
@@ -2855,6 +2858,7 @@ exports[`Form create form by options 1`] = `
               <input
                 className="el-uploader"
                 name="upload"
+                onBlur={[Function]}
                 onChange={[Function]}
                 type="file"
               />

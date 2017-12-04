@@ -5,16 +5,13 @@ export default class Shortcuts extends React.Component {
         super(props);
     }
 
-    handleClick() {
-    }
-
     render() {
-        let { shortcuts } = this.props;
+        let {shortcuts} = this.props;
         return (
             <div className='el-datetime-shortcuts'>
                 {
                     shortcuts.map((item, index) => {
-                        return (<a key={index} onClick={item.onClick || this.handleClick}>{item.text}</a>)
+                        return (<a key={index} onClick={item.onClick || null}>{item.text}</a>)
                     })
                 }
             </div>

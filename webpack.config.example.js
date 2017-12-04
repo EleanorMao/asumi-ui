@@ -17,7 +17,7 @@ module.exports = {
         contentBase: path.join(__dirname, "examples"),
         historyApiFallback: true,
         host: "0.0.0.0",
-        bonjour: true,
+        // bonjour: true,
         inline: true,
         port: 9010,
         hot: true

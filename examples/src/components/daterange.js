@@ -1,7 +1,7 @@
 import moment from 'moment';
 import Panel from "./panel";
 import React, { Component } from 'react';
-import { DateRange, Table, Col } from '../../../src';
+// import { DateRange, Table, Col } from '../../../src';
 import { basic, week, month, year, shortcuts, api, shortcut } from '../constants/datetime'
 
 moment.locale('zh-CN');
@@ -22,7 +22,7 @@ export default class Main extends Component {
                     title="basic"
                     code={basic}
                 >
-                    <DateRange value={date}/>
+                    {/*<DateRange value={date}/>*/}
                 </Panel>
             </div>
         )

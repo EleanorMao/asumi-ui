@@ -114,7 +114,8 @@ export let contains = function (root, el) {
 export let KeyCode = {
     ENTER: 13,
     DOWN: 40,
-    UP: 38
+    UP: 38,
+    TAB: 9
 };
 
 export let rules = {

@@ -3,9 +3,9 @@ import moment from 'moment';
 import Input from '../input';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import CalendarContainer from './calendarContainer';
 import Shortcuts from './shortcuts';
-import { contains, addEvent, removeEvent, noop } from '../util';
+import CalendarContainer from './calendarContainer';
+import {addEvent, removeEvent, noop, KeyCode} from '../util';
 
 const allowedSetTime = ['hours', 'minutes', 'seconds', 'milliseconds'];
 export default class DateTime extends React.Component {
@@ -13,8 +13,8 @@ export default class DateTime extends React.Component {
         super(props);
         this.componentProps = {
             fromState: ['viewDate', 'selectedDate', 'updateOn'],
-            fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek', 'shortcuts'],
-            fromThis: ['setDate', 'setTime', 'updateTime', 'showView', 'updateSelectedDate', 'localMoment', 'uid']
+            fromThis: ['setDate', 'setTime', 'updateTime', 'showView', 'updateSelectedDate', 'localMoment', 'uid'],
+            fromProps: ['value', 'isValidDate', 'renderDay', 'renderMonth', 'renderYear', 'timeConstraints', 'showWeeks', 'isWeek', 'shortcuts']
         };
         let state = this.getStateFromProps(props);
         state.currentView = props.dateFormat ? props.viewMode || state.updateOn || 'days' : 'time';
@@ -58,7 +58,6 @@ export default class DateTime extends React.Component {
 
     componentDidMount() {
         addEvent(window, 'click', this.clickToClose.bind(this));
-
     }
 
     componentWillUnmount() {
@@ -108,9 +107,9 @@ export default class DateTime extends React.Component {
 
     getFormats(props) {
         let formats = {
-            date: props.dateFormat || '',
-            time: props.timeFormat || ''
-        },
+                date: props.dateFormat || '',
+                time: props.timeFormat || ''
+            },
             locale = this.localMoment(props.date, null, props).localeData();
 
         if (formats.date === true) {
@@ -142,30 +141,28 @@ export default class DateTime extends React.Component {
         return 'days';
     }
 
-
-
     clickToClose(e) {
-        let { updateOn, selectedDate, inputValue } = this.state;
-        let { input, onBlur } = this.props;
+        let {updateOn, selectedDate, inputValue} = this.state;
+        let {input, onBlur} = this.props;
         let el = e.target, _isContains;
         while (el = el.parentNode) {
-            if (el.getAttribute && el.getAttribute('data-value') === updateOn+this.uid) {
+            if (el.getAttribute && el.getAttribute('data-value') === updateOn + this.uid) {
                 _isContains = true;
             }
         }
         if (input && !_isContains) {
-            this.setState({ open: false }, () => {
+            this.setState({open: false}, () => {
                 onBlur(selectedDate || inputValue);
             })
         }
     }
 
     setDate(type, item) {
-        let { updateOn, viewDate } = this.state;
+        let {updateOn, viewDate} = this.state;
         let nextView = {
             month: updateOn,
             year: 'months'
-        }
+        };
         this.setState({
             viewDate: viewDate.clone()[type](item.value).startOf(type),
             currentView: nextView[type]
@@ -188,11 +185,11 @@ export default class DateTime extends React.Component {
                 inputValue: date.format(state.inputFormat)
             });
         }
-        this.props.onChange({ name: this.props.name, value: date });
+        this.props.onChange({name: this.props.name, value: date});
     }
 
     showView(view) {
-        this.setState({ currentView: view });
+        this.setState({currentView: view});
     }
 
     updateTime(op, amount, type, toSelected) {
@@ -204,7 +201,7 @@ export default class DateTime extends React.Component {
     }
 
     updateSelectedDate(item, close) {
-        let { viewDate, selectedDate, updateOn, inputFormat } = this.state,
+        let {viewDate, selectedDate, updateOn, inputFormat} = this.state,
             modifier = 0,
             currentdate = selectedDate || viewDate,
             date;
@@ -212,23 +209,26 @@ export default class DateTime extends React.Component {
             item.new && (modifier = 1);
             item.old && (modifier = -1);
             date = viewDate.clone()
-                .set({ month: viewDate.month() + modifier, date: item.value.date() });
+                .set({month: viewDate.month() + modifier, date: item.value.date()});
         } else if (updateOn === 'weeks') {
             item.new && (modifier = 1);
             item.old && (modifier = -1);
             date = viewDate.clone()
-                .set({ month: viewDate.month() + modifier, date: item.value.date() });
+                .set({month: viewDate.month() + modifier, date: item.value.date()});
         }
         else if (updateOn === 'months') {
             date = viewDate.clone()
-                .set({ month: item.value, date: currentdate.date() });
+                .set({month: item.value, date: currentdate.date()});
         }
         else if (updateOn === 'years') {
             date = viewDate.clone()
-                .set({ year: item.value, month: currentdate.month(), date: currentdate.date() });
+                .set({year: item.value, month: currentdate.month(), date: currentdate.date()});
         }
         date.set({
-            hour: currentdate.hours(), minute: currentdate.minutes(), second: currentdate.seconds(), millisecond: currentdate.milliseconds()
+            hour: currentdate.hours(),
+            minute: currentdate.minutes(),
+            second: currentdate.seconds(),
+            millisecond: currentdate.milliseconds()
         });
         if (!this.props.value) {
             let open = !(this.props.closeOnSelect && close);
@@ -247,23 +247,23 @@ export default class DateTime extends React.Component {
             }
         }
         setTimeout(() => {
-            this.props.onChange({ name: this.props.name, value: date });
+            this.props.onChange({name: this.props.name, value: date});
         }, 0);
     }
 
-    openCalendar() {
-        let { open } = this.state;
+    openCalendar(e) {
+        let {open} = this.state;
         if (!open) {
             this.setState({
                 open: true
             }, () => {
-                this.props.onFocus();
+                this.props.onFocus(e);
             })
         }
     }
 
     closeCalendar() {
-        let { open, selectedDate, inputValue } = this.state;
+        let {selectedDate, inputValue} = this.state;
         this.setState({
             open: false
         }, () => {
@@ -283,7 +283,7 @@ export default class DateTime extends React.Component {
     getComponentProps() {
         let me = this,
             formats = this.getFormats(this.props),
-            props = { dateFormat: formats.date, timeFormat: formats.time };
+            props = {dateFormat: formats.date, timeFormat: formats.time};
 
         this.componentProps.fromProps.forEach(name => {
             props[name] = me.props[name];
@@ -298,15 +298,15 @@ export default class DateTime extends React.Component {
     }
 
     onInputKey(e) {
-        if (e.which === 9 && this.props.closeOnTab) {
+        if (e.which === KeyCode.TAB && this.props.closeOnTab) {
             this.closeCalendar();
         }
     }
 
     onInputChange(e) {
-        let value = e.target === null ? e : e.value,
+        let value = e.value,
             localMoment = this.localMoment(value, this.state.inputFormat),
-            update = { inputValue: value };
+            update = {inputValue: value};
 
         if (localMoment.isValid() && !this.props.value) {
             update.selectedDate = localMoment;
@@ -323,32 +323,23 @@ export default class DateTime extends React.Component {
     }
 
     renderInput(value) {
-        let { renderInput } = this.props;
+        let {renderInput} = this.props;
         return renderInput ? renderInput(this.state.selectedDate) : value;
     }
 
     render() {
-        let { className, input, shortcuts } = this.props,
-            { inputValue, open, currentView, updateOn } = this.state,
-            children = [];
-        if (input) {
-            children.push(
-                <Input key='i' icon={<i className="fa fa-calendar-minus-o" />}
-                    onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
-                    onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)} />
-            );
-        }
+        let {className, input, shortcuts} = this.props,
+            {inputValue, open, currentView, updateOn} = this.state;
         return (
-            <div className={classnames('el-datetime', className, { 'el-static': input }, { 'el-datetime-open': open })}
-                ref={c => this._el_datetime = c}
-                data-value={updateOn+this.uid}>
-                {children}
+            <div className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}
+                 data-value={updateOn + this.uid}>
+                {input &&
+                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
+                       onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
+                       onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)}/>}
                 <div key='dt' className='el-datetime-picker'>
-                    {!!shortcuts.length && <Shortcuts shortcuts={shortcuts} />}
-                    <CalendarContainer
-                        view={currentView}
-                        viewProps={this.getComponentProps()}
-                    />
+                    {!!shortcuts && !!shortcuts.length && <Shortcuts shortcuts={shortcuts}/>}
+                    <CalendarContainer view={currentView} viewProps={this.getComponentProps()}/>
                 </div>
             </div>
         )
@@ -356,7 +347,7 @@ export default class DateTime extends React.Component {
 }
 
 DateTime.propTypes = {
-    onFoucus: PropTypes.func,
+    onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     locale: PropTypes.string,

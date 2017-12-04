@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {noop} from "../util";
 
-
 export default class Checkbox extends Component {
     constructor(props) {
         super(props);
