@@ -112,6 +112,8 @@ export let contains = function (root, el) {
 };
 
 export let KeyCode = {
+    DELETE: 8,
+    SPACE: 32,
     ENTER: 13,
     DOWN: 40,
     UP: 38,

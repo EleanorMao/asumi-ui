@@ -10,7 +10,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 
-import '../../style/asumi-default-theme.css';
+import '../../style/index.less';
 import './assets/public.less';
 import {Menu, SubMenu, MenuItem} from '../../src';
 
@@ -37,9 +37,10 @@ import Tooltip from './components/tooltip';
 import Checkbox from './components/checkbox';
 import Dropdown from './components/dropdown';
 import DateTime from './components/datetime';
+import Transfer from './components/transfer';
 import Pagination from './components/pagination';
 import NumberInput from './components/numberInput';
-import Transfer from './components/transfer';
+import TagInput from './components/tagInput';
 
 const router = [
     <NavLink to={'/'} activeClassName="">HOME</NavLink>,
@@ -55,6 +56,7 @@ const router = [
         children: [
             <NavLink to={'/input'} activeClassName="active">Input</NavLink>,
             <NavLink to={'/numberinput'} activeClassName="active">Number Input</NavLink>,
+            <NavLink to={'/taginput'} activeClassName="active">Tag Input</NavLink>,
             <NavLink to={'/select'} activeClassName="active">Select</NavLink>,
             <NavLink to={'/radio'} activeClassName="active">Radio</NavLink>,
             <NavLink to={'/checkbox'} activeClassName="active">Checkbox</NavLink>,
@@ -158,6 +160,7 @@ ReactDOM.render(
                 <Route path="/pagination" component={Pagination}/>
                 <Route path="/datetime" component={DateTime}/>
                 <Route path="/transfer" component={Transfer}/>
+                <Route path="/taginput" component={TagInput}/>
             </div>
         </div>
     </Router>
