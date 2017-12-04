@@ -204,7 +204,7 @@ class TimeView extends React.Component {
     render() {
         let { uid } = this.props;
         return (
-            <div className="el-datetimeTime" data-value={uid}>
+            <div className="el-datetime-time" data-value={uid}>
                 <table>
                     {this.renderHeader()}
                     <tbody key="b">
