@@ -164,5 +164,4 @@ TagInput.defaultProps = {
     onSeparate: noop,
     placeholder: "",
     separator: 'enter',
-    maxLength: 10
 };
