@@ -566,9 +566,9 @@ export default class Editor extends Component {
                     onOk={this.handleGetImg.bind(this, true)}
                     onClose={this.handleGetImg.bind(this, false)}
                 >
-                    <Tabs defaultActiveKey={canUploadImg ? "1" : "2"}>
+                    <Tabs activeId={canUploadImg ? "1" : "2"}>
                         {canUploadImg &&
-                        <TabPanel label={uploadImgTitle} key="1">
+                        <TabPanel label={uploadImgTitle} id="1">
                             <Uploader
                                 {...uploadImgProps}
                                 onUpload={(fileList) => {
@@ -586,7 +586,7 @@ export default class Editor extends Component {
                                 </div>
                             </Uploader>
                         </TabPanel>}
-                        <TabPanel label={linkImgTitle} key="2">
+                        <TabPanel label={linkImgTitle} id="2">
                             <Input
                                 type="text"
                                 name="imgUrl"

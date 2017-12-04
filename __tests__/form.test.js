@@ -191,12 +191,12 @@ describe('Form', () => {
             onChange={handleChange}
         />);
         expect(component).toMatchSnapshot();
-        expect(component.find('FormItem[name="text"]').instance().props.data).toEqual("text");
-        expect(component.find('FormItem[name="color"]').instance().props.data).toEqual("#fff");
-        expect(component.find('FormItem[name="password"]').instance().props.data).toEqual("password");
-        expect(component.find('FormItem[name="datetime"]').instance().props.data).toEqual(1512213506421);
-        expect(component.find('FormItem[name="number"]').instance().props.data).toEqual(10);
-        expect(component.find('FormItem[name="static"]').instance().props.data).toEqual("static");
+        expect(component.find('FormItem[name="text"]').instance().props.value).toEqual("text");
+        expect(component.find('FormItem[name="color"]').instance().props.value).toEqual("#fff");
+        expect(component.find('FormItem[name="password"]').instance().props.value).toEqual("password");
+        expect(component.find('FormItem[name="datetime"]').instance().props.value).toEqual(1512213506421);
+        expect(component.find('FormItem[name="number"]').instance().props.value).toEqual(10);
+        expect(component.find('FormItem[name="static"]').instance().props.value).toEqual("static");
         component.find('FormItem[name="text"] input').simulate('change', {target: {value: "123"}});
         expect(handleChange).toBeCalled();
     });
@@ -233,12 +233,12 @@ describe('Form', () => {
             onChange={handleChange}
         >{children}</Form>);
         expect(component).toMatchSnapshot();
-        expect(component.find('FormItem[name="text"]').instance().props.data).toEqual("text");
-        expect(component.find('FormItem[name="color"]').instance().props.data).toEqual("#fff");
-        expect(component.find('FormItem[name="password"]').instance().props.data).toEqual("password");
-        expect(component.find('FormItem[name="datetime"]').instance().props.data).toEqual(1512213506421);
-        expect(component.find('FormItem[name="number"]').instance().props.data).toEqual(10);
-        expect(component.find('FormItem[name="static"]').instance().props.data).toEqual("static");
+        expect(component.find('FormItem[name="text"]').instance().props.value).toEqual("text");
+        expect(component.find('FormItem[name="color"]').instance().props.value).toEqual("#fff");
+        expect(component.find('FormItem[name="password"]').instance().props.value).toEqual("password");
+        expect(component.find('FormItem[name="datetime"]').instance().props.value).toEqual(1512213506421);
+        expect(component.find('FormItem[name="number"]').instance().props.value).toEqual(10);
+        expect(component.find('FormItem[name="static"]').instance().props.value).toEqual("static");
         component.find('FormItem[name="text"] input').simulate('change', {target: {value: "123"}});
         expect(handleChange).toBeCalled();
     });
@@ -274,7 +274,7 @@ describe('FormItem', () => {
         expect(component.find('Editor').length).toBe(1);
     });
     it("define type[static]", () => {
-        const component = mount(<FormItem type="static" data="static" dataFormat={(value) => {
+        const component = mount(<FormItem type="static" value="static" dataFormat={(value) => {
             return "." + value
         }}/>);
         expect(component.find('.el-form-control-static').text()).toBe(".static");

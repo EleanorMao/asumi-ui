@@ -485,15 +485,15 @@ export const apiOfFormItem = [{
     'default': "",
     description: "form item name"
 }, {
-    property: "data",
+    property: "value",
     type: "any",
     'default': "",
-    description: "form item data, form will define automatically according to the name"
+    description: "form item value, form will define automatically according to the name"
 }, {
     property: "required",
     type: "bool",
     'default': "",
-    description: "if data required"
+    description: "if value required"
 }, {
     property: "labelWidth",
     type: "number | string",
@@ -542,8 +542,8 @@ export const apiOfFormItem = [{
 }, {
     property: "dataFormat",
     type: "func",
-    'default': "(data)=>{}",
-    description: "format data, only effect when type is static"
+    'default': "(value)=>{}",
+    description: "format value, only effect when type is static"
 }, {
     property: "content | value",
     type: "any",

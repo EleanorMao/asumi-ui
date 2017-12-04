@@ -30,7 +30,7 @@ export default class Dropdown extends Component {
                 return old;
             })
         }
-        if (list.length !== this.props.list.length) {
+        if (this._dropdown && list.length !== this.props.list.length) {
             this.getClassName(list);
         }
     }

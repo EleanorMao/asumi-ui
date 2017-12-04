@@ -146,7 +146,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="text"
       key=".$0"
       name="text"
       onChange={[Function]}
@@ -154,6 +153,7 @@ exports[`Form create form by form items 1`] = `
       type="text"
       validateType="error"
       validator={[Function]}
+      value="text"
     >
       <div
         className="el-form-item clearfix"
@@ -191,7 +191,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="#fff"
       key=".$1"
       name="color"
       onChange={[Function]}
@@ -199,6 +198,7 @@ exports[`Form create form by form items 1`] = `
       type="color"
       validateType="error"
       validator={[Function]}
+      value="#fff"
     >
       <div
         className="el-form-item clearfix"
@@ -236,7 +236,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="password"
       key=".$2"
       name="password"
       onChange={[Function]}
@@ -244,6 +243,7 @@ exports[`Form create form by form items 1`] = `
       type="password"
       validateType="error"
       validator={[Function]}
+      value="password"
     >
       <div
         className="el-form-item clearfix"
@@ -281,7 +281,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={1512213506421}
       key=".$3"
       name="datetime"
       onChange={[Function]}
@@ -289,6 +288,7 @@ exports[`Form create form by form items 1`] = `
       type="datetime"
       validateType="error"
       validator={[Function]}
+      value={1512213506421}
     >
       <div
         className="el-form-item clearfix"
@@ -320,7 +320,7 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512369788285.965"
+              data-value="days1512380119676.4268"
             >
               <Input
                 icon={
@@ -378,7 +378,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512369788285.965",
+                      "uid": "days1512380119676.4268",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -402,7 +402,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512369788285.965"
+                    uid="days1512380119676.4268"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -411,7 +411,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512369788285.965"
+                      data-value="days1512380119676.4268"
                     >
                       <table>
                         <thead
@@ -848,7 +848,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={10}
       key=".$4"
       name="number"
       onChange={[Function]}
@@ -856,6 +855,7 @@ exports[`Form create form by form items 1`] = `
       type="number"
       validateType="error"
       validator={[Function]}
+      value={10}
     >
       <div
         className="el-form-item clearfix"
@@ -946,7 +946,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="static"
       key=".$5"
       name="static"
       onChange={[Function]}
@@ -954,6 +953,7 @@ exports[`Form create form by form items 1`] = `
       type="static"
       validateType="error"
       validator={[Function]}
+      value="static"
     >
       <div
         className="el-form-item clearfix"
@@ -976,7 +976,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="textarea"
       key=".$6"
       name="textarea"
       onChange={[Function]}
@@ -984,6 +983,7 @@ exports[`Form create form by form items 1`] = `
       type="textarea"
       validateType="error"
       validator={[Function]}
+      value="textarea"
     >
       <div
         className="el-form-item clearfix"
@@ -1020,7 +1020,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={1}
       key=".$7"
       name="select"
       onChange={[Function]}
@@ -1036,6 +1035,7 @@ exports[`Form create form by form items 1`] = `
       type="select"
       validateType="error"
       validator={[Function]}
+      value={1}
     >
       <div
         className="el-form-item clearfix"
@@ -1112,7 +1112,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={2}
       key=".$8"
       name="checkbox"
       onChange={[Function]}
@@ -1120,6 +1119,7 @@ exports[`Form create form by form items 1`] = `
       type="checkbox"
       validateType="error"
       validator={[Function]}
+      value={2}
     >
       <div
         className="el-form-item clearfix"
@@ -1166,7 +1166,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={3}
       key=".$9"
       name="radio"
       onChange={[Function]}
@@ -1174,6 +1173,7 @@ exports[`Form create form by form items 1`] = `
       type="radio"
       validateType="error"
       validator={[Function]}
+      value={3}
     >
       <div
         className="el-form-item clearfix"
@@ -1183,7 +1183,7 @@ exports[`Form create form by form items 1`] = `
           style={null}
         >
           <Radio
-            checked={false}
+            checked={true}
             name="radio"
             onBlur={[Function]}
             onChange={[Function]}
@@ -1196,7 +1196,7 @@ exports[`Form create form by form items 1`] = `
                 className="el-checkbox el-radio"
               >
                 <input
-                  checked={false}
+                  checked={true}
                   className="el-checkbox-input"
                   name="radio"
                   onBlur={[Function]}
@@ -1219,7 +1219,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={4}
       key=".$10"
       name="switch"
       onChange={[Function]}
@@ -1227,6 +1226,7 @@ exports[`Form create form by form items 1`] = `
       type="switch"
       validateType="error"
       validator={[Function]}
+      value={4}
     >
       <div
         className="el-form-item clearfix"
@@ -1272,7 +1272,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data=""
       key=".$11"
       name="upload"
       onChange={[Function]}
@@ -1280,6 +1279,7 @@ exports[`Form create form by form items 1`] = `
       type="upload"
       validateType="error"
       validator={[Function]}
+      value=""
     >
       <div
         className="el-form-item clearfix"
@@ -1319,7 +1319,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={5}
       key=".$12"
       name="radiogroup"
       onChange={[Function]}
@@ -1327,6 +1326,7 @@ exports[`Form create form by form items 1`] = `
       type="radiogroup"
       validateType="error"
       validator={[Function]}
+      value={5}
     >
       <div
         className="el-form-item clearfix"
@@ -1359,11 +1359,6 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={
-        Array [
-          6,
-        ]
-      }
       key=".$13"
       name="checkgroup"
       onChange={[Function]}
@@ -1383,6 +1378,11 @@ exports[`Form create form by form items 1`] = `
       type="checkgroup"
       validateType="error"
       validator={[Function]}
+      value={
+        Array [
+          6,
+        ]
+      }
     >
       <div
         className="el-form-item clearfix"
@@ -1700,7 +1700,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="text"
       key="0"
       name="text"
       onChange={[Function]}
@@ -1708,6 +1707,7 @@ exports[`Form create form by options 1`] = `
       type="text"
       validateType="error"
       validator={[Function]}
+      value="text"
     >
       <div
         className="el-form-item clearfix"
@@ -1745,7 +1745,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="#fff"
       key="1"
       name="color"
       onChange={[Function]}
@@ -1753,6 +1752,7 @@ exports[`Form create form by options 1`] = `
       type="color"
       validateType="error"
       validator={[Function]}
+      value="#fff"
     >
       <div
         className="el-form-item clearfix"
@@ -1790,7 +1790,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="password"
       key="2"
       name="password"
       onChange={[Function]}
@@ -1798,6 +1797,7 @@ exports[`Form create form by options 1`] = `
       type="password"
       validateType="error"
       validator={[Function]}
+      value="password"
     >
       <div
         className="el-form-item clearfix"
@@ -1835,7 +1835,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={1512213506421}
       key="3"
       name="datetime"
       onChange={[Function]}
@@ -1843,6 +1842,7 @@ exports[`Form create form by options 1`] = `
       type="datetime"
       validateType="error"
       validator={[Function]}
+      value={1512213506421}
     >
       <div
         className="el-form-item clearfix"
@@ -1874,7 +1874,7 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512369788046.66"
+              data-value="days1512380119539.0256"
             >
               <Input
                 icon={
@@ -1932,7 +1932,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512369788046.66",
+                      "uid": "days1512380119539.0256",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1956,7 +1956,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512369788046.66"
+                    uid="days1512380119539.0256"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1965,7 +1965,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512369788046.66"
+                      data-value="days1512380119539.0256"
                     >
                       <table>
                         <thead
@@ -2402,7 +2402,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={10}
       key="4"
       name="number"
       onChange={[Function]}
@@ -2410,6 +2409,7 @@ exports[`Form create form by options 1`] = `
       type="number"
       validateType="error"
       validator={[Function]}
+      value={10}
     >
       <div
         className="el-form-item clearfix"
@@ -2500,7 +2500,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="static"
       key="5"
       name="static"
       onChange={[Function]}
@@ -2508,6 +2507,7 @@ exports[`Form create form by options 1`] = `
       type="static"
       validateType="error"
       validator={[Function]}
+      value="static"
     >
       <div
         className="el-form-item clearfix"
@@ -2530,7 +2530,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data="textarea"
       key="6"
       name="textarea"
       onChange={[Function]}
@@ -2538,6 +2537,7 @@ exports[`Form create form by options 1`] = `
       type="textarea"
       validateType="error"
       validator={[Function]}
+      value="textarea"
     >
       <div
         className="el-form-item clearfix"
@@ -2574,7 +2574,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={1}
       key="7"
       name="select"
       onChange={[Function]}
@@ -2590,6 +2589,7 @@ exports[`Form create form by options 1`] = `
       type="select"
       validateType="error"
       validator={[Function]}
+      value={1}
     >
       <div
         className="el-form-item clearfix"
@@ -2666,7 +2666,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={2}
       key="8"
       name="checkbox"
       onChange={[Function]}
@@ -2674,6 +2673,7 @@ exports[`Form create form by options 1`] = `
       type="checkbox"
       validateType="error"
       validator={[Function]}
+      value={2}
     >
       <div
         className="el-form-item clearfix"
@@ -2720,7 +2720,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={3}
       key="9"
       name="radio"
       onChange={[Function]}
@@ -2728,6 +2727,7 @@ exports[`Form create form by options 1`] = `
       type="radio"
       validateType="error"
       validator={[Function]}
+      value={3}
     >
       <div
         className="el-form-item clearfix"
@@ -2737,7 +2737,7 @@ exports[`Form create form by options 1`] = `
           style={null}
         >
           <Radio
-            checked={false}
+            checked={true}
             name="radio"
             onBlur={[Function]}
             onChange={[Function]}
@@ -2750,7 +2750,7 @@ exports[`Form create form by options 1`] = `
                 className="el-checkbox el-radio"
               >
                 <input
-                  checked={false}
+                  checked={true}
                   className="el-checkbox-input"
                   name="radio"
                   onBlur={[Function]}
@@ -2773,7 +2773,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={4}
       key="10"
       name="switch"
       onChange={[Function]}
@@ -2781,6 +2780,7 @@ exports[`Form create form by options 1`] = `
       type="switch"
       validateType="error"
       validator={[Function]}
+      value={4}
     >
       <div
         className="el-form-item clearfix"
@@ -2826,7 +2826,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data=""
       key="11"
       name="upload"
       onChange={[Function]}
@@ -2834,6 +2833,7 @@ exports[`Form create form by options 1`] = `
       type="upload"
       validateType="error"
       validator={[Function]}
+      value=""
     >
       <div
         className="el-form-item clearfix"
@@ -2873,7 +2873,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={5}
       key="12"
       name="radiogroup"
       onChange={[Function]}
@@ -2881,6 +2880,7 @@ exports[`Form create form by options 1`] = `
       type="radiogroup"
       validateType="error"
       validator={[Function]}
+      value={5}
     >
       <div
         className="el-form-item clearfix"
@@ -2913,11 +2913,6 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      data={
-        Array [
-          6,
-        ]
-      }
       key="13"
       name="checkgroup"
       onChange={[Function]}
@@ -2937,6 +2932,11 @@ exports[`Form create form by options 1`] = `
       type="checkgroup"
       validateType="error"
       validator={[Function]}
+      value={
+        Array [
+          6,
+        ]
+      }
     >
       <div
         className="el-form-item clearfix"

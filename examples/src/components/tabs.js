@@ -8,10 +8,10 @@ import {
     Table,
     Col
 } from '../../../src';
-import {basic, card, api, apiOfTabPanel}from'../constants/tabs';
+import {basic, card, api, apiOfTabPanel} from '../constants/tabs';
 import Panel from './panel';
 
-export default  class Main extends Component {
+export default class Main extends Component {
     constructor(props) {
         super(props);
     }
@@ -24,18 +24,18 @@ export default  class Main extends Component {
                     title="Basic"
                     code={basic}
                 >
-                    <Tabs defaultActiveKey="1">
-                        <TabPanel label="Tab1" key="1">Tab1</TabPanel>
-                        <TabPanel label="Tab2" key="2">Tab2</TabPanel>
+                    <Tabs activeId="1">
+                        <TabPanel label="Tab1" id="1">Tab1</TabPanel>
+                        <TabPanel label="Tab2" id="2">Tab2</TabPanel>
                     </Tabs>
                 </Panel>
                 <Panel
                     title="Card Type"
                     code={card}
                 >
-                    <Tabs defaultActiveKey="1" type="card">
-                        <TabPanel label="Tab1" key="1">Tab1</TabPanel>
-                        <TabPanel label="Tab2" key="2">Tab2</TabPanel>
+                    <Tabs activeId="1" type="card">
+                        <TabPanel label="Tab1" id="1">Tab1</TabPanel>
+                        <TabPanel label="Tab2" id="2">Tab2</TabPanel>
                     </Tabs>
                 </Panel>
                 <h1>API of Tabs</h1>

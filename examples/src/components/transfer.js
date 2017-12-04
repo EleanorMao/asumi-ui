@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     Transfer
 } from '../../../src';
@@ -21,15 +21,15 @@ export default class Main extends Component {
                 label: `选项${i + 1}`
             })
         }
-        this.setState({ data: data })
+        this.setState({data: data})
     }
 
-    handleChange(value) {
-        this.setState({ value: value })
+    handleChange({value}) {
+        this.setState({value: value})
     }
 
     render() {
-        const { data, titles, value } = this.state;
+        const {data, titles, value} = this.state;
         return (
             <div className="content">
                 <Transfer

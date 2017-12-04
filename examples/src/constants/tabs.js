@@ -6,9 +6,9 @@ export const basic = `import {Tabs, TabPanel} from 'asumi';
 
 ReactDOM.render(
 <div>
-    <Tabs defaultActiveKey="1">
-        <TabPanel label="Tab1" key="1">Tab1</TabPanel>
-        <TabPanel label="Tab2" key="2">Tab2</TabPanel>
+    <Tabs activeId="1">
+        <TabPanel label="Tab1" id="1">Tab1</TabPanel>
+        <TabPanel label="Tab2" id="2">Tab2</TabPanel>
     </Tabs>
 </div>, div)`;
 
@@ -17,9 +17,9 @@ export const card = `import {Tabs, TabPanel} from 'asumi';
 
 ReactDOM.render(
 <div>
-     <Tabs defaultActiveKey="1"  type="card">
-        <TabPanel label="Tab1" key="1">Tab1</TabPanel>
-        <TabPanel label="Tab2" key="2">Tab2</TabPanel>
+     <Tabs activeId="1"  type="card">
+        <TabPanel label="Tab1" id="1">Tab1</TabPanel>
+        <TabPanel label="Tab2" id="2">Tab2</TabPanel>
     </Tabs>
 </div>, div)`;
 
@@ -29,13 +29,13 @@ export const api = [{
     'default': "null",
     description: "Style of tabs. Options: default(or line), card"
 }, {
-    property: "defaultActiveKey",
+    property: "activeId",
     type: "string | number",
-    'default': "first child's key",
-    description: "Default actived key of TabPanel"
+    'default': "first child's id",
+    description: "Default actived id of TabPanel"
 }, {
     property: "onClick",
-    type: "function(key)",
+    type: "function(id)",
     'default': "null",
     description: "Callback when click tab head"
 }];
@@ -46,8 +46,8 @@ export const apiOfTabPanel = [{
     'default': "null",
     description: "TabPanel's title"
 }, {
-    property: "key",
+    property: "id",
     type: "string | number",
     'default': "null",
-    description: "TabPanel's key"
+    description: "TabPanel's id"
 }];

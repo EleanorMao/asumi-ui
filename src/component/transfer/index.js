@@ -33,7 +33,7 @@ export default class Transfer extends Component {
     }
 
     addToLeft() {
-        const {value} = this.props;
+        const {value, name} = this.props;
         const {rightChecked} = this.state;
         let currentValue = value.slice();
         rightChecked.forEach(item => {
@@ -43,12 +43,12 @@ export default class Transfer extends Component {
             }
         });
         this.setState({leftChecked: [], rightChecked: []}, () =>
-            this.props.onChange(currentValue))
+            this.props.onChange({value: currentValue, name}))
     };
 
 
     addToRight() {
-        const {value} = this.props;
+        const {value, name} = this.props;
         const {leftChecked} = this.state;
         let currentValue = value.slice();
         leftChecked.forEach(item => {
@@ -57,7 +57,7 @@ export default class Transfer extends Component {
             }
         });
         this.setState({rightChecked: [], leftChecked: []}, () =>
-            this.props.onChange(currentValue))
+            this.props.onChange({value: currentValue, name}))
     };
 
     render() {

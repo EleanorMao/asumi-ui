@@ -3,43 +3,53 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {isArr} from '../util';
 
-export default  class Tabs extends Component {
+function toArr(v) {
+    if (isArr(v)) {
+        return v
+    } else {
+        return v ? [v] : [];
+    }
+}
+
+export default class Tabs extends Component {
     constructor(props) {
         super(props);
-        let activeKey = props.defaultActiveKey == null ? props.children[0].key : props.defaultActiveKey;
+        let child = toArr(props.children)[0];
+        let activeId = props.activeId == null ? child ? child.props.id : null : props.activeId;
         this.state = {
-            activeKey: activeKey
+            activeId: activeId
         }
     }
 
     componentWillReceiveProps(props) {
-        if (props.defaultActiveKey != this.props.defaultActiveKey) {
-            this.setState({activeKey: props.defaultActiveKey});
+        if (props.activeId != this.props.activeId) {
+            this.setState({activeId: props.activeId});
         }
     }
 
-    handleClick(key) {
-        this.setState({activeKey: key});
-        this.props.onClick && this.props.onClick(key);
+    handleClick(id) {
+        this.setState({activeId: id});
+        this.props.onClick && this.props.onClick(id);
     }
 
     render() {
         let {type, children} = this.props;
-        let {activeKey} = this.state;
+        let {activeId} = this.state;
         let isCard = type === "card" ? " el-card" : "";
+        let renderChildren = React.Children.toArray(children);
         return (
             <div className={"el-tabs"}>
                 <ul className={`el-tabs-nav${isCard} clearfix`}>
-                    {React.Children.map(children, (elm) => {
-                        if (!elm)return;
-                        let key = elm.key;
-                        let {label} = elm.props;
+                    {React.Children.map(renderChildren, (elm) => {
+                        if (!elm) return;
+                        let {label, id} = elm.props;
                         return (
                             <li
-                                key={key}
-                                onClick={this.handleClick.bind(this, key)}
-                                className={activeKey === key ? "el-tabs-nav-active" : ""}>
+                                key={id}
+                                onClick={this.handleClick.bind(this, id)}
+                                className={activeId === id ? "el-tabs-nav-active" : ""}>
                                 <a href="javascript:;">
                                     {label}
                                 </a>
@@ -48,10 +58,10 @@ export default  class Tabs extends Component {
                     })}
                 </ul>
                 <div className={`el-tabs-content${isCard}`}>
-                    {React.Children.map(children, (elm) => {
-                        if (!elm)return;
-                        let key = elm.key;
-                        return React.cloneElement(elm, {_active: activeKey === key})
+                    {React.Children.map(renderChildren, (elm) => {
+                        if (!elm) return;
+                        let {id} = elm.props;
+                        return React.cloneElement(elm, {_active: activeId === id})
                     })}
                 </div>
             </div>
@@ -62,7 +72,7 @@ export default  class Tabs extends Component {
 Tabs.propTypes = {
     onClick: PropTypes.func,
     type: PropTypes.oneOf(['default', 'line', 'card']),
-    defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    activeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 Tabs.defaultProps = {};

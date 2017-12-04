@@ -1,17 +1,112 @@
-exports[`Tabs create component 1`] = `
-<div className={"el-tabs"}>
-    <ul className={`el-tabs-nav$ clearfix`}>
-        <li
-            key={"1"}
-            onClick={[Function]}
-            className={"el-tabs-nav-active"}>
-            <a href="javascript:;">
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
-            </a>
-        </li>
+exports[`Tabs create component 1`] = `
+<Tabs>
+  <div
+    className="el-tabs"
+  >
+    <ul
+      className="el-tabs-nav clearfix"
+    >
+      <li
+        className="el-tabs-nav-active"
+        key="1/.$.0"
+        onClick={[Function]}
+      >
+        <a
+          href="javascript:;"
+        />
+      </li>
     </ul>
-    <div className={`el-tabs-content`}>
-        <TabPanel key="1" _active={true}>a</TabPanel>
+    <div
+      className="el-tabs-content"
+    >
+      <TabPanel
+        _active={true}
+        id="1"
+        key=".$.0"
+      >
+        <div
+          className="el-tabs-panel el-tabs-panel-active"
+        >
+          a
+        </div>
+      </TabPanel>
     </div>
-</div>
+  </div>
+</Tabs>
+`;
+
+exports[`Tabs create component[null] 1`] = `
+<Tabs>
+  <div
+    className="el-tabs"
+  >
+    <ul
+      className="el-tabs-nav clearfix"
+    />
+    <div
+      className="el-tabs-content"
+    />
+  </div>
+</Tabs>
+`;
+
+exports[`Tabs define activeId 1`] = `
+<Tabs
+  activeId="2"
+>
+  <div
+    className="el-tabs"
+  >
+    <ul
+      className="el-tabs-nav clearfix"
+    >
+      <li
+        className=""
+        key="1/.$.0"
+        onClick={[Function]}
+      >
+        <a
+          href="javascript:;"
+        />
+      </li>
+      <li
+        className="el-tabs-nav-active"
+        key="2/.$.1"
+        onClick={[Function]}
+      >
+        <a
+          href="javascript:;"
+        />
+      </li>
+    </ul>
+    <div
+      className="el-tabs-content"
+    >
+      <TabPanel
+        _active={false}
+        id="1"
+        key=".$.0"
+      >
+        <div
+          className="el-tabs-panel"
+        >
+          a
+        </div>
+      </TabPanel>
+      <TabPanel
+        _active={true}
+        id="2"
+        key=".$.1"
+      >
+        <div
+          className="el-tabs-panel el-tabs-panel-active"
+        >
+          b
+        </div>
+      </TabPanel>
+    </div>
+  </div>
+</Tabs>
 `;

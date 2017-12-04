@@ -142,6 +142,7 @@ export default class DateTime extends React.Component {
     }
 
     clickToClose(e) {
+        if (!this._el_datetime) return;
         let {updateOn, selectedDate, inputValue} = this.state;
         let {input, onBlur} = this.props;
         let el = e.target, _isContains;
@@ -151,9 +152,8 @@ export default class DateTime extends React.Component {
             }
         }
         if (input && !_isContains) {
-            this.setState({open: false}, () => {
-                onBlur(selectedDate || inputValue);
-            })
+            this.setState({open: false});
+            onBlur(selectedDate || inputValue);
         }
     }
 
@@ -329,6 +329,7 @@ export default class DateTime extends React.Component {
             {inputValue, open, currentView, updateOn} = this.state;
         return (
             <div className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}
+                 ref={c => this._el_datetime = c}
                  data-value={updateOn + this.uid}>
                 {input &&
                 <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}

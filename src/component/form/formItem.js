@@ -11,6 +11,7 @@ import Select from '../select';
 import Editor from '../editor';
 import Popover from '../popover';
 import Datetime from '../datetime';
+import Transfer from '../transfer';
 import Option from '../select/option';
 import NumberInput from '../numberInput';
 import Checkbox from "../checkbox/index";
@@ -30,53 +31,53 @@ export default class FormItem extends Component {
         this.msg_str = "";
     }
 
-    componentWillReceiveProps({beforeSubmit, data, validate, validator}) {
+    componentWillReceiveProps({beforeSubmit, value, validate, validator}) {
         if (beforeSubmit && validate && validate.length) {
             let disabled = false;
             validate.map(item => {
                 if (!disabled && item.trigger === "submit") {
-                    disabled = this.validator(item, data, "submit");
+                    disabled = this.validator(item, value, "submit");
                 }
             });
             validator && validator(disabled);
         }
     }
 
-    validator(item, data) {
+    validator(item, value) {
         let {maxLength, length, isLocaleCompare, min, max, minLength, message, pattern, instance, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
-        let valueType = Object.prototype.toString.call(data).toLowerCase().slice(8, -1);
+        let valueType = Object.prototype.toString.call(value).toLowerCase().slice(8, -1);
         let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
-        if (!fail && required && (data == null || data === "")) {
+        if (!fail && required && (value == null || value === "")) {
             fail = true
         }
-        if (!fail && instance && !data instanceof instance) {
+        if (!fail && instance && !value instanceof instance) {
             fail = true;
         }
         if (!fail && type && valueType !== type) {
             fail = true;
         }
         if (!fail && min != null) {
-            if (isLocaleCompare && valueType === "string" && data.localeCompare(min) < 0) {
+            if (isLocaleCompare && valueType === "string" && value.localeCompare(min) < 0) {
                 fail = true;
-            } else if (data < min) {
+            } else if (value < min) {
                 fail = true;
             }
         }
         if (!fail && max != null) {
-            if (isLocaleCompare && valueType === "string" && data.localeCompare(max) > 0) {
+            if (isLocaleCompare && valueType === "string" && value.localeCompare(max) > 0) {
                 fail = true;
-            } else if (data > max) {
+            } else if (value > max) {
                 fail = true;
             }
         }
-        if (!fail && length != null && hasLen && data.length !== length) {
+        if (!fail && length != null && hasLen && value.length !== length) {
             fail = true;
         }
-        if (!fail && minLength != null && hasLen && data.length < minLength) {
+        if (!fail && minLength != null && hasLen && value.length < minLength) {
             fail = true;
         }
-        if (!fail && maxLength != null && hasLen && data.length > maxLength) {
+        if (!fail && maxLength != null && hasLen && value.length > maxLength) {
             fail = true;
         }
         if (!fail && Object.prototype.toString.call(pattern) === '[object RegExp]') {
@@ -84,7 +85,7 @@ export default class FormItem extends Component {
         } else if (!fail && rule) {
             reg = rules[rule];
         }
-        if (!fail && reg && !reg.test(data)) {
+        if (!fail && reg && !reg.test(value)) {
             fail = true;
         }
         if (fail) {
@@ -96,12 +97,12 @@ export default class FormItem extends Component {
     }
 
     handleBlur() {
-        let {data, onBlur, validate, validator, required, validateType} = this.props;
+        let {value, onBlur, validate, validator, required, validateType} = this.props;
         let disabled = false;
         if (validate && validate.length) {
             validate.map(item => {
                 if (!disabled && item.trigger === "blur") {
-                    disabled = this.validator(item, data);
+                    disabled = this.validator(item, value);
                 }
             })
         }
@@ -110,7 +111,7 @@ export default class FormItem extends Component {
             this._message.innerHTML = "";
             this.msg_str = ""
         }
-        if (!disabled && required && (data == null || data === "")) {
+        if (!disabled && required && (value == null || value === "")) {
             disabled = true;
         }
         validator && validator(disabled);
@@ -118,10 +119,10 @@ export default class FormItem extends Component {
 
     }
 
-    handleChange({value}) {
-        let {data, onChange, validate, validator, validateType} = this.props;
+    handleChange(e) {
+        let {value, onChange, validate, validator, validateType} = this.props;
         let disabled = false;
-        let _value = value === undefined ? data : value;
+        let _value = e.value === undefined ? value : e.value;
         if (validate && validate.length) {
             validate.map(item => {
                 if (!disabled && item.trigger === "change") {
@@ -139,7 +140,7 @@ export default class FormItem extends Component {
     }
 
     itemRender() {
-        let {on, off, tips, col, requiredMark, name, data, colon, component, className, dataFormat, content, value, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, labelWidth, ...config} = this.props;
+        let {on, off, tips, col, requiredMark, name, value, colon, component, className, dataFormat, content, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, labelWidth, ...config} = this.props;
         if (type !== "upload" && children) return children;
         let output = null;
         switch (type) {
@@ -149,7 +150,7 @@ export default class FormItem extends Component {
                         {...config}
                         type="textarea"
                         name={name}
-                        value={data}
+                        value={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}/>;
                 break;
@@ -158,7 +159,7 @@ export default class FormItem extends Component {
                     <NumberInput
                         {...config}
                         name={name}
-                        value={data}
+                        value={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}/>;
                 break;
@@ -167,7 +168,7 @@ export default class FormItem extends Component {
                     <Select
                         {...config}
                         name={name}
-                        value={data}
+                        value={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}>
                         {!!options && options.map(item => {
@@ -187,7 +188,7 @@ export default class FormItem extends Component {
                         label={null}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
-                        checked={typeof data === "boolean" ? data : on === data}
+                        checked={typeof value === "boolean" ? value : on === value}
                     />;
                 break;
             case "radio":
@@ -195,10 +196,10 @@ export default class FormItem extends Component {
                     <Radio
                         {...config}
                         name={name}
-                        value={data}
+                        value={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
-                        checked={typeof data === "boolean" ? data : data === value}
+                        checked={typeof value === "boolean" ? value : value === value}
                     />;
                 break;
             case "radiogroup":
@@ -206,7 +207,7 @@ export default class FormItem extends Component {
                     <RadioGroup
                         {...config}
                         name={name}
-                        value={data}
+                        value={value}
                         options={options}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
@@ -217,7 +218,7 @@ export default class FormItem extends Component {
                     <Checkbox
                         {...config}
                         name={name}
-                        value={data}
+                        value={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />;
@@ -228,7 +229,7 @@ export default class FormItem extends Component {
                         {...config}
                         name={name}
                         options={options}
-                        checkedList={data}
+                        checkedList={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />;
@@ -239,7 +240,7 @@ export default class FormItem extends Component {
                         {...config}
                         name={name}
                         options={options}
-                        checkedList={data}
+                        checkedList={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />;
@@ -248,7 +249,7 @@ export default class FormItem extends Component {
                 output = <Datetime
                     {...config}
                     name={name}
-                    value={data}
+                    value={value}
                     onBlur={this.handleBlur.bind(this)}
                     onChange={this.handleChange.bind(this)}
                 />;
@@ -257,7 +258,7 @@ export default class FormItem extends Component {
                 output = <Editor
                     {...config}
                     name={name}
-                    value={data}
+                    value={value}
                     onBlur={this.handleBlur.bind(this)}
                     onChange={this.handleChange.bind(this)}
                 />;
@@ -266,22 +267,30 @@ export default class FormItem extends Component {
                 output = <Upload
                     {...config}
                     name={name}
-                    value={data}
+                    value={value}
                     children={children}
                     onBlur={this.handleBlur.bind(this)}
+                />;
+                break;
+            case "transfer":
+                output = <Transfer
+                    {...config}
+                    name={name}
+                    value={value}
+                    onBlur={this.handleBlur.bind(this)}
+                    onChange={this.handleChange.bind(this)}
                 />;
                 break;
             case "static":
                 output = <div
                     className="el-form-control-static">
-                    {dataFormat ? dataFormat(content || value || data) : (content || value || data)}
+                    {dataFormat ? dataFormat(content || value) : (content || value)}
                 </div>;
                 break;
             case "component":
                 output = React.cloneElement(component, {
                     name,
-                    data,
-                    value: data,
+                    value: value,
                     onBlur: this.handleBlur.bind(this),
                     onChange: this.handleChange.bind(this),
                     ...config
@@ -293,7 +302,7 @@ export default class FormItem extends Component {
                         {...config}
                         type={type}
                         name={name}
-                        value={data}
+                        value={value}
                         onBlur={this.handleBlur.bind(this)}
                         onChange={this.handleChange.bind(this)}
                     />;
@@ -336,7 +345,7 @@ export default class FormItem extends Component {
 }
 
 FormItem.propTypes = {
-    data: PropTypes.any,
+    value: PropTypes.any,
     colon: PropTypes.bool,
     name: PropTypes.string,
     label: PropTypes.string,
@@ -367,7 +376,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup']),
+    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer']),
 };
 
 FormItem.defaultProps = {

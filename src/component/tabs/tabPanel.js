@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-export default  class TablePanel extends Component {
+export default class TabPanel extends Component {
     constructor(props) {
         super(props);
     }
@@ -21,6 +21,8 @@ export default  class TablePanel extends Component {
     }
 }
 
-TablePanel.propTypes = {};
+TabPanel.propTypes = {
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+};
 
-TablePanel.defaultProps = {};
+TabPanel.defaultProps = {};

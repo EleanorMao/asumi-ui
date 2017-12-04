@@ -121,7 +121,7 @@ export default class Form extends Component {
                             {...props}
                             col={col}
                             key={index}
-                            data={data[props.name]}
+                            value={data[props.name]}
                             beforeSubmit={this.state.beforeSubmit}
                             validator={this.handleDisabled.bind(this, props)}
                         />)
@@ -131,7 +131,7 @@ export default class Form extends Component {
                         let props = elm.props;
                         let newProps = {
                             col: col,
-                            data: data[props.name],
+                            value: data[props.name],
                             beforeSubmit: this.state.beforeSubmit,
                             validator: this.handleDisabled.bind(this, props)
                         };
@@ -221,7 +221,7 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline']),
 };
