@@ -246,9 +246,7 @@ export default class DateTime extends React.Component {
                 this.closeCalendar();
             }
         }
-        setTimeout(() => {
-            this.props.onChange({name: this.props.name, value: date});
-        }, 0);
+        this.props.onChange({name: this.props.name, value: date});
     }
 
     openCalendar(e) {
