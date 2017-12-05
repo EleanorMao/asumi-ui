@@ -5,7 +5,8 @@
     import React from 'react';
     import ReactDOM from 'react-dom';
     import { Button } from 'asumi';
-    mport 'asumi/style/index.less';
+    import 'asumi/style/index.less';
+    //import 'asumi/style/asumi-default-theme.css';
 ```
 ```html
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"/>
@@ -21,6 +22,7 @@ asumi icons use <a href="http://fontawesome.io/">Font Awesome</a>
 * <input type="checkbox" checked/> Tab
 * <input type="checkbox" checked/> Input
 * <input type="checkbox" checked/> NumberInput
+* <input type="checkbox" checked/> TagInput
 * <input type="checkbox" checked/> Select
 * <input type="checkbox" checked/> Radio
 * <input type="checkbox" checked/> Checkbox
@@ -41,6 +43,7 @@ asumi icons use <a href="http://fontawesome.io/">Font Awesome</a>
 * <input type="checkbox" checked/> Dropdown
 * <input type="checkbox" checked/> Menu
 * <input type="checkbox" checked/> MenuItem
+* <input type="checkbox" checked/> MenuItemGroup
 * <input type="checkbox" checked/> SubMenu
 * <input type="checkbox" checked/> Animate
 * <input type="checkbox" checked/> Loading

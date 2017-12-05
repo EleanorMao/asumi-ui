@@ -4,7 +4,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const Nyan = require('nyan-progress-webpack-plugin');
-const openBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
     entry: './examples/src/index.js',
@@ -13,6 +12,7 @@ module.exports = {
         publicPath: "http://0.0.0.0:9010/lib/",
         path: path.join(__dirname, './examples/lib')
     },
+    externals: {'react': 'React', 'react-dom': 'ReactDOM'},
     devServer: {
         contentBase: path.join(__dirname, "examples"),
         historyApiFallback: true,
@@ -25,7 +25,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.js?$/,
-            exclude: /node_modules/,
+            exclude: /(node_modules|lib)/,
             loader: 'babel-loader'
         }, {
             test: /\.(less|css)?$/,
@@ -38,7 +38,6 @@ module.exports = {
     devtool: "#inline-source-map",
     plugins: [
         new Nyan(),
-        new webpack.HotModuleReplacementPlugin(),
-        // new openBrowserPlugin({url: 'http://localhost:9010'})
+        new webpack.HotModuleReplacementPlugin()
     ]
 };

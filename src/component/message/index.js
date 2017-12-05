@@ -99,7 +99,7 @@ function confirm(props) {
         document.body.appendChild(div);
         _el_message_content = ReactDOM.render(<MessageGroup/>, div);
     }
-    _el_message_content.setState(prev => {
+    _el_message_content && _el_message_content.setState(prev => {
         prev.list = prev.list.concat(props);
         return prev;
     });
