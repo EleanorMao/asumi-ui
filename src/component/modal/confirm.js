@@ -30,7 +30,8 @@ export default function confirm(props) {
         onClose && onClose();
     }
 
-    ReactDOM.render(
+    const renderToDom = ReactDOM.hydrate || ReactDOM.render;
+    renderToDom(
         <Modal {...props}>
             {props.content}
         </Modal>, div)

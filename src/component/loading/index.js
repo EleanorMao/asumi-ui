@@ -45,7 +45,8 @@ Loading.loading = (props = {}) => {
         _el_loading_content = document.createElement('div');
         document.body.appendChild(_el_loading_content);
     }
-    ReactDOM.render(<Loading {...props}/>, _el_loading_content);
+    const renderToDom = ReactDOM.hydrate || ReactDOM.render;
+    renderToDom(<Loading {...props}/>, _el_loading_content);
 };
 
 Loading.close = () => {

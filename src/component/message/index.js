@@ -55,6 +55,10 @@ class MessageGroup extends Component {
         };
     }
 
+    componentDidMount() {
+        this.props.getRef(this)
+    }
+
     removeMessage(key) {
         let index = -1, list = this.state.list;
         for (let i = 0, len = list.length; i < len; i++) {
@@ -92,14 +96,23 @@ class MessageGroup extends Component {
     }
 }
 
-
 function confirm(props) {
     if (!_el_message_content) {
         const div = document.createElement('div');
         document.body.appendChild(div);
-        _el_message_content = ReactDOM.render(<MessageGroup/>, div);
+        const renderToDom = ReactDOM.hydrate || ReactDOM.render;
+        renderToDom(<MessageGroup getRef={c => {
+            _el_message_content = c;
+            pushMessage(props);
+        }}/>, div);
+    } else {
+        pushMessage(props);
     }
-    _el_message_content && _el_message_content.setState(prev => {
+}
+
+function pushMessage(props) {
+    if (!_el_message_content) return;
+    _el_message_content.setState(prev => {
         prev.list = prev.list.concat(props);
         return prev;
     });
