@@ -2,11 +2,10 @@ import React, {
     Component
 } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 
 import Button from '../button';
 import TransferPanel from './transferPanel';
-import {noop} from "../util";
+import { noop } from "../util";
 
 export default class Transfer extends Component {
     constructor(props) {
@@ -19,22 +18,22 @@ export default class Transfer extends Component {
     }
 
     handleChange(isLeft, value) {
-        isLeft ? this.setState({leftChecked: value}) : this.setState({rightChecked: value});
+        isLeft ? this.setState({ leftChecked: value }) : this.setState({ rightChecked: value });
     }
 
     get sourceData() {
-        const {data, value, propsAlias} = this.props;
+        const { data, value, propsAlias } = this.props;
         return data.filter(item => !~value.indexOf(item[propsAlias.value]));
     }
 
     get targetData() {
-        const {data, value, propsAlias} = this.props;
+        const { data, value, propsAlias } = this.props;
         return data.filter(item => ~value.indexOf(item[propsAlias.value]));
     }
 
     addToLeft() {
-        const {value, name} = this.props;
-        const {rightChecked} = this.state;
+        const { value, name } = this.props;
+        const { rightChecked } = this.state;
         let currentValue = value.slice();
         rightChecked.forEach(item => {
             const index = currentValue.indexOf(item);
@@ -42,27 +41,27 @@ export default class Transfer extends Component {
                 currentValue.splice(index, 1);
             }
         });
-        this.setState({leftChecked: [], rightChecked: []}, () =>
-            this.props.onChange({value: currentValue, name}))
+        this.setState({ leftChecked: [], rightChecked: [] }, () =>
+            this.props.onChange({ value: currentValue, name }))
     };
 
 
     addToRight() {
-        const {value, name} = this.props;
-        const {leftChecked} = this.state;
+        const { value, name } = this.props;
+        const { leftChecked } = this.state;
         let currentValue = value.slice();
         leftChecked.forEach(item => {
             if (!~value.indexOf(item)) {
                 currentValue = currentValue.concat(item);
             }
         });
-        this.setState({rightChecked: [], leftChecked: []}, () =>
-            this.props.onChange({value: currentValue, name}))
+        this.setState({ rightChecked: [], leftChecked: [] }, () =>
+            this.props.onChange({ value: currentValue, name }))
     };
 
     render() {
-        const {data, titles, ...others} = this.props;
-        const {leftChecked, rightChecked} = this.state;
+        const { data, titles, ...others } = this.props;
+        const { leftChecked, rightChecked } = this.state;
 
         let isTopBtnDisabled = leftChecked.length === 0;
         let isBottomBtnDisabled = rightChecked.length === 0;
@@ -82,7 +81,7 @@ export default class Transfer extends Component {
                         disabled={isTopBtnDisabled}
                         onClick={this.addToRight.bind(this)}
                     >
-                        <i className="fa fa-chevron-right"/>
+                        <i className="fa fa-chevron-right" />
                     </Button>
                     <Button
                         type="primary"
@@ -90,7 +89,7 @@ export default class Transfer extends Component {
                         disabled={isBottomBtnDisabled}
                         onClick={this.addToLeft.bind(this)}
                     >
-                        <i className="fa fa-chevron-left"/>
+                        <i className="fa fa-chevron-left" />
                     </Button>
                 </div>
                 <TransferPanel
@@ -111,17 +110,16 @@ Transfer.propTypes = {
     filterPlaceholder: PropTypes.string,
     filterMethod: PropTypes.func,
     titles: PropTypes.array,
-    props: PropTypes.object,
     onChange: PropTypes.func,
     propsAlias: PropTypes.object,
     value: PropTypes.array
 };
 
 Transfer.defaultProps = {
+    data: [],
     filterable: false,
     filterPlaceholder: '请输入搜索内容',
     titles: ['', ''],
-    props: {},
     onChange: noop,
     propsAlias: {
         label: 'label',

@@ -2,10 +2,10 @@ import React, {
     Component
 } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 
 import Checkbox from '../checkbox';
 import Input from '../input';
+import { noop } from "../util";
 
 export default class TransferPanel extends Component {
     constructor(props) {
@@ -16,17 +16,17 @@ export default class TransferPanel extends Component {
         }
     }
 
-    handleChange({value}) {
+    handleChange({ value }) {
         this.props.changeChecked(value)
     }
 
     handleInputChange(e) {
-        this.setState({query: e.value});
+        this.setState({ query: e.value });
     };
 
     get filterData() {
-        const {data, propsAlias, filterMethod} = this.props;
-        return data.filter(item => {
+        const { data, propsAlias, filterMethod } = this.props;
+        let filterData = data.filter(item => {
             if (typeof filterMethod === 'function') {
                 return filterMethod(this.state.query, item);
             } else {
@@ -34,10 +34,14 @@ export default class TransferPanel extends Component {
                 return ~label.toLowerCase().indexOf(this.state.query.toLowerCase());
             }
         });
+
+        return filterData.map(item => {
+            return { label: item[propsAlias.label], value: item[propsAlias.value] }
+        })
     }
 
     render() {
-        const {data, title, checkedList, filterable, filterPlaceholder} = this.props;
+        const { data, title, checkedList, filterable, filterPlaceholder } = this.props;
         return (
             <div className="el-transfer-panel">
                 <p className="el-transfer-panel-header">
@@ -45,11 +49,11 @@ export default class TransferPanel extends Component {
                     <span>{checkedList.length}/{data.length}</span>
                 </p>
                 {filterable &&
-                <Input
-                    size="small"
-                    placeholder={filterPlaceholder}
-                    onChange={this.handleInputChange.bind(this)}
-                />}
+                    <Input
+                        size="small"
+                        placeholder={filterPlaceholder}
+                        onChange={this.handleInputChange.bind(this)}
+                    />}
                 <div>
                     {data.length === 0
                         ? <span className="el-transfer-no-data">无数据</span>
@@ -88,6 +92,5 @@ TransferPanel.defaultProps = {
     title: '',
     props: {},
     checkedList: [],
-    onChange: () => {
-    }
+    onChange: noop
 };
