@@ -79,7 +79,7 @@ TransferPanel.propTypes = {
     filterPlaceholder: PropTypes.string,
     filterMethod: PropTypes.func,
     title: PropTypes.string,
-    props: PropTypes.object,
+    propsAlias: PropTypes.object,
     checkedList: PropTypes.array,
     onChange: PropTypes.func,
     changeChecked: PropTypes.func
@@ -90,7 +90,6 @@ TransferPanel.defaultProps = {
     filterable: false,
     filterPlaceholder: '请输入搜索内容',
     title: '',
-    props: {},
     checkedList: [],
     onChange: noop
 };
