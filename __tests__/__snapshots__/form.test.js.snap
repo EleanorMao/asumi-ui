@@ -26,6 +26,7 @@ exports[`Form create component 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="0"
       label="文字"
       name="text"
@@ -33,7 +34,6 @@ exports[`Form create component 1`] = `
       requiredMark="*"
       type="text"
       validateType="error"
-      validator={[Function]}
     >
       <div
         className="el-form-item clearfix"
@@ -146,13 +146,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$0"
+      formValidator={[Function]}
+      key=".$.$0"
       name="text"
       onChange={[Function]}
       requiredMark="*"
       type="text"
       validateType="error"
-      validator={[Function]}
       value="text"
     >
       <div
@@ -191,13 +191,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$1"
+      formValidator={[Function]}
+      key=".$.$1"
       name="color"
       onChange={[Function]}
       requiredMark="*"
       type="color"
       validateType="error"
-      validator={[Function]}
       value="#fff"
     >
       <div
@@ -236,13 +236,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$2"
+      formValidator={[Function]}
+      key=".$.$2"
       name="password"
       onChange={[Function]}
       requiredMark="*"
       type="password"
       validateType="error"
-      validator={[Function]}
       value="password"
     >
       <div
@@ -281,13 +281,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$3"
+      formValidator={[Function]}
+      key=".$.$3"
       name="datetime"
       onChange={[Function]}
       requiredMark="*"
       type="datetime"
       validateType="error"
-      validator={[Function]}
       value={1512213506421}
     >
       <div
@@ -320,7 +320,7 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512485207204.2446"
+              data-value="days1512541076640.7332"
             >
               <Input
                 icon={
@@ -378,7 +378,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512485207204.2446",
+                      "uid": "days1512541076640.7332",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -402,7 +402,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512485207204.2446"
+                    uid="days1512541076640.7332"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -411,7 +411,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512485207204.2446"
+                      data-value="days1512541076640.7332"
                     >
                       <table>
                         <thead
@@ -571,14 +571,14 @@ exports[`Form create form by form items 1`] = `
                               4
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_5"
                               onClick={[Function]}
                             >
                               5
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_6"
                               onClick={[Function]}
                             >
@@ -848,13 +848,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$4"
+      formValidator={[Function]}
+      key=".$.$4"
       name="number"
       onChange={[Function]}
       requiredMark="*"
       type="number"
       validateType="error"
-      validator={[Function]}
       value={10}
     >
       <div
@@ -946,13 +946,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$5"
+      formValidator={[Function]}
+      key=".$.$5"
       name="static"
       onChange={[Function]}
       requiredMark="*"
       type="static"
       validateType="error"
-      validator={[Function]}
       value="static"
     >
       <div
@@ -976,13 +976,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$6"
+      formValidator={[Function]}
+      key=".$.$6"
       name="textarea"
       onChange={[Function]}
       requiredMark="*"
       type="textarea"
       validateType="error"
-      validator={[Function]}
       value="textarea"
     >
       <div
@@ -1020,7 +1020,8 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$7"
+      formValidator={[Function]}
+      key=".$.$7"
       name="select"
       onChange={[Function]}
       options={
@@ -1034,7 +1035,6 @@ exports[`Form create form by form items 1`] = `
       requiredMark="*"
       type="select"
       validateType="error"
-      validator={[Function]}
       value={1}
     >
       <div
@@ -1112,13 +1112,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$8"
+      formValidator={[Function]}
+      key=".$.$8"
       name="checkbox"
       onChange={[Function]}
       requiredMark="*"
       type="checkbox"
       validateType="error"
-      validator={[Function]}
       value={2}
     >
       <div
@@ -1166,13 +1166,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$9"
+      formValidator={[Function]}
+      key=".$.$9"
       name="radio"
       onChange={[Function]}
       requiredMark="*"
       type="radio"
       validateType="error"
-      validator={[Function]}
       value={3}
     >
       <div
@@ -1219,13 +1219,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$10"
+      formValidator={[Function]}
+      key=".$.$10"
       name="switch"
       onChange={[Function]}
       requiredMark="*"
       type="switch"
       validateType="error"
-      validator={[Function]}
       value={4}
     >
       <div
@@ -1272,13 +1272,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$11"
+      formValidator={[Function]}
+      key=".$.$11"
       name="upload"
       onChange={[Function]}
       requiredMark="*"
       type="upload"
       validateType="error"
-      validator={[Function]}
       value=""
     >
       <div
@@ -1319,13 +1319,13 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$12"
+      formValidator={[Function]}
+      key=".$.$12"
       name="radiogroup"
       onChange={[Function]}
       requiredMark="*"
       type="radiogroup"
       validateType="error"
-      validator={[Function]}
       value={5}
     >
       <div
@@ -1359,7 +1359,8 @@ exports[`Form create form by form items 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
-      key=".$13"
+      formValidator={[Function]}
+      key=".$.$13"
       name="checkgroup"
       onChange={[Function]}
       options={
@@ -1377,7 +1378,6 @@ exports[`Form create form by form items 1`] = `
       requiredMark="*"
       type="checkgroup"
       validateType="error"
-      validator={[Function]}
       value={
         Array [
           6,
@@ -1700,13 +1700,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="0"
       name="text"
       onChange={[Function]}
       requiredMark="*"
       type="text"
       validateType="error"
-      validator={[Function]}
       value="text"
     >
       <div
@@ -1745,13 +1745,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="1"
       name="color"
       onChange={[Function]}
       requiredMark="*"
       type="color"
       validateType="error"
-      validator={[Function]}
       value="#fff"
     >
       <div
@@ -1790,13 +1790,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="2"
       name="password"
       onChange={[Function]}
       requiredMark="*"
       type="password"
       validateType="error"
-      validator={[Function]}
       value="password"
     >
       <div
@@ -1835,13 +1835,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="3"
       name="datetime"
       onChange={[Function]}
       requiredMark="*"
       type="datetime"
       validateType="error"
-      validator={[Function]}
       value={1512213506421}
     >
       <div
@@ -1874,7 +1874,7 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512485207071.421"
+              data-value="days1512541076391.601"
             >
               <Input
                 icon={
@@ -1932,7 +1932,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512485207071.421",
+                      "uid": "days1512541076391.601",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1956,7 +1956,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512485207071.421"
+                    uid="days1512541076391.601"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1965,7 +1965,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512485207071.421"
+                      data-value="days1512541076391.601"
                     >
                       <table>
                         <thead
@@ -2125,14 +2125,14 @@ exports[`Form create form by options 1`] = `
                               4
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_5"
                               onClick={[Function]}
                             >
                               5
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_6"
                               onClick={[Function]}
                             >
@@ -2402,13 +2402,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="4"
       name="number"
       onChange={[Function]}
       requiredMark="*"
       type="number"
       validateType="error"
-      validator={[Function]}
       value={10}
     >
       <div
@@ -2500,13 +2500,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="5"
       name="static"
       onChange={[Function]}
       requiredMark="*"
       type="static"
       validateType="error"
-      validator={[Function]}
       value="static"
     >
       <div
@@ -2530,13 +2530,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="6"
       name="textarea"
       onChange={[Function]}
       requiredMark="*"
       type="textarea"
       validateType="error"
-      validator={[Function]}
       value="textarea"
     >
       <div
@@ -2574,6 +2574,7 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="7"
       name="select"
       onChange={[Function]}
@@ -2588,7 +2589,6 @@ exports[`Form create form by options 1`] = `
       requiredMark="*"
       type="select"
       validateType="error"
-      validator={[Function]}
       value={1}
     >
       <div
@@ -2666,13 +2666,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="8"
       name="checkbox"
       onChange={[Function]}
       requiredMark="*"
       type="checkbox"
       validateType="error"
-      validator={[Function]}
       value={2}
     >
       <div
@@ -2720,13 +2720,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="9"
       name="radio"
       onChange={[Function]}
       requiredMark="*"
       type="radio"
       validateType="error"
-      validator={[Function]}
       value={3}
     >
       <div
@@ -2773,13 +2773,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="10"
       name="switch"
       onChange={[Function]}
       requiredMark="*"
       type="switch"
       validateType="error"
-      validator={[Function]}
       value={4}
     >
       <div
@@ -2826,13 +2826,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="11"
       name="upload"
       onChange={[Function]}
       requiredMark="*"
       type="upload"
       validateType="error"
-      validator={[Function]}
       value=""
     >
       <div
@@ -2873,13 +2873,13 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="12"
       name="radiogroup"
       onChange={[Function]}
       requiredMark="*"
       type="radiogroup"
       validateType="error"
-      validator={[Function]}
       value={5}
     >
       <div
@@ -2913,6 +2913,7 @@ exports[`Form create form by options 1`] = `
     <FormItem
       beforeSubmit={false}
       col={0}
+      formValidator={[Function]}
       key="13"
       name="checkgroup"
       onChange={[Function]}
@@ -2931,7 +2932,6 @@ exports[`Form create form by options 1`] = `
       requiredMark="*"
       type="checkgroup"
       validateType="error"
-      validator={[Function]}
       value={
         Array [
           6,

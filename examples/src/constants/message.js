@@ -17,11 +17,14 @@ ReactDOM.render(<div>
         Message.danger({content: 'danger'})
     }}>danger</Button>
     <Button type="error" onClick={() => {
-        Message.error({content: 'error. and duration is 2000', duration: 2000})
+        Message.error({content: 'error. and duration is 2000', duration: 2000, onClose: () => {console.log('closed')}})
     }}>danger</Button>
     <Button type="success" onClick={() => {
         Message.success({content: 'success'})
     }}>success</Button>
+    <Button type="warning" onClick={() => {
+        Message.loading({content: 'loading'})
+    }}><i className="fa fa-circle-o-notch fa-spin"/></Button>
 </div>, div)
 `;
 
@@ -46,4 +49,9 @@ export const api = [{
     type: "number",
     'default': "3000",
     description: "disappear duration"
+}, {
+    property: "onClose",
+    type: "func",
+    'default': "()=>{}",
+    description: "invoke when disappear"
 }];

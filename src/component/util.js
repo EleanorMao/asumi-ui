@@ -132,3 +132,12 @@ export const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 export function getType(value) {
     return Object.prototype.toString.call(value).toLowerCase().slice(8, -1);
 }
+
+export function getValues(obj) {
+    if (!obj) return [];
+    let output = [];
+    for (let key in obj) {
+        output.push(obj[key])
+    }
+    return output;
+}

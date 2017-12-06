@@ -69,6 +69,7 @@ exports[`Select define closeAfterSelect 1`] = `
         className="el-caret"
       />
     }
+    onBlur={null}
     onChange={[Function]}
     onClick={[Function]}
     onFocus={[Function]}

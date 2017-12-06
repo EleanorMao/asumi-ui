@@ -166,15 +166,15 @@ export default class Select extends Component {
         if (this.state.visible && this.el_select && !contains(this.el_select, e.target)) {
             let closeAfterSelect = this.props.closeAfterSelect;
             if (closeAfterSelect || (!closeAfterSelect && !contains(this.el_select_ul, e.target))) {
-                this.hideComponent();
+                this.hideComponent(e);
             }
         }
     }
 
-    handleToggle() {
+    handleToggle(e) {
         if (this.props.disabled) return;
         if (this.state.visible) {
-            this.hideComponent()
+            this.hideComponent(e)
         } else {
             renderComponent(this);
             this.showComponent();
@@ -224,7 +224,7 @@ export default class Select extends Component {
                 this.el_select_ul.children[this.index].click();
             }
         } else if (keyCode === KeyCode.ENTER) {
-            this.handleToggle();
+            this.handleToggle(e);
         }
         if (onKeyDown) onKeyDown(e)
     }
@@ -257,8 +257,6 @@ export default class Select extends Component {
         });
         if (focus) {
             this.props.onFocus && this.props.onFocus(e);
-        } else {
-            this.props.onBlur && this.props.onBlur(e);
         }
     }
 
@@ -298,12 +296,13 @@ export default class Select extends Component {
             this.addStyle.bind(this))
     }
 
-    hideComponent() {
+    hideComponent(e) {
         if (this.container) {
             this.container.style.display = 'none';
         }
         this.handleRemoveClass();
         this.setState({visible: false});
+        this.props.onBlur && this.props.onBlur({e});
     }
 
     addStyle() {
@@ -361,7 +360,7 @@ export default class Select extends Component {
         let {renderValue, visible} = this.state;
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
-            size, style, value, noMatchText, matchCase, onMatch, onSearch, readOnly, onBlur,
+            size, style, value, noMatchText, matchCase, onMatch, onSearch, readOnly,
             searchable, selectAll, defaultValue, selectAllText, dropdownClassName, dropdownStyle,
             multiple, onChange, className, children, closeAfterSelect, ...other
         } = this.props;
@@ -381,7 +380,7 @@ export default class Select extends Component {
                     onChange={this.handleChange.bind(this)}
                     onKeyDown={this.handleKeyDown.bind(this)}
                     onFocus={this.handleToggleInput.bind(this, true)}
-                    onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : onBlur}
+                    onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : null}
                 />
             </div>
         )

@@ -26,21 +26,45 @@ function isRequired(validate, required) {
     }));
 }
 
+const validateMap = {
+    "null": () => {
+        return true;
+    },
+    "undefined": () => {
+        return true;
+    },
+    "array": (v) => {
+        return !v.length;
+    },
+    "string": (v) => {
+        return !v.length;
+    }
+};
+
 export default class FormItem extends Component {
     constructor(props) {
         super(props);
+        this.blurDisabled = false;
+        this.changeDisabled = false;
+        this.submitDisabled = false;
         this.msg_str = "";
     }
 
-    componentWillReceiveProps({beforeSubmit, value, validate, validator}) {
+    get isDisabled() {
+        return this.changeDisabled || this.blurDisabled || this.submitDisabled
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let {beforeSubmit, value, validate, formValidator} = nextProps;
         if (beforeSubmit && validate && validate.length) {
             let disabled = false;
             validate.map(item => {
                 if (!disabled && item.trigger === "submit") {
-                    disabled = this.validator(item, value, "submit");
+                    disabled = this.validator(item, value);
                 }
             });
-            validator && validator(disabled);
+            this.submitDisabled = disabled;
+            formValidator && formValidator(nextProps, this.isDisabled);
         }
     }
 
@@ -49,8 +73,9 @@ export default class FormItem extends Component {
         let {maxLength, length, isLocaleCompare, min, max, minLength, message, pattern, instance, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
         let valueType = getType(value);
+        let func = validateMap[valueType];
         let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
-        if (!fail && required && (value == null || value === "" || (valueType === "array" && value.length === 0))) {
+        if (!fail && required && func && func(value)) {
             fail = true
         }
         if (!fail && instance && !value instanceof instance) {
@@ -98,31 +123,36 @@ export default class FormItem extends Component {
         return fail;
     }
 
-    handleBlur() {
-        let {value, onBlur, validate, validator, required, validateType} = this.props;
+    handleBlur(e) {
+        let {value, onBlur, validate, formValidator, required, validateType} = this.props;
         let disabled = false;
+        let _value = e.value === undefined ? value : e.value;
         if (validate && validate.length) {
             validate.map(item => {
                 if (!disabled && item.trigger === "blur") {
-                    disabled = this.validator(item, value);
+                    disabled = this.validator(item, _value);
                 }
             })
         }
-        if (!disabled && this.msg_str) {
+        this.blurDisabled = disabled;
+        if (!this.isDisabled && this.msg_str) {
             this._form_item.classList.remove(`el-form-item-${validateType}`);
             this._message.innerHTML = "";
             this.msg_str = ""
         }
-        if (!disabled && required && (value == null || value === "" || (getType(value) === "array" && value.length === 0 ))) {
+        let valueType = getType(_value);
+        let func = validateMap[valueType];
+        if (!this.isDisabled && required && func && func(_value)) {
             disabled = true;
+            this.blurDisabled = disabled;
         }
-        validator && validator(disabled);
+        formValidator && formValidator(this.props, this.isDisabled);
         onBlur && onBlur.apply(null, arguments);
 
     }
 
     handleChange(e) {
-        let {value, onChange, validate, validator, validateType} = this.props;
+        let {value, onChange, validate, formValidator, validateType} = this.props;
         let disabled = false;
         let _value = e.value === undefined ? value : e.value;
         if (validate && validate.length) {
@@ -132,17 +162,24 @@ export default class FormItem extends Component {
                 }
             })
         }
-        if (!disabled && this.msg_str) {
+        this.submitDisabled = false;
+        this.changeDisabled = disabled;
+        if (!this.isDisabled && this.msg_str) {
             this._form_item.classList.remove(`el-form-item-${validateType}`);
             this._message.innerHTML = "";
             this.msg_str = "";
         }
-        validator && validator(disabled);
+        formValidator && formValidator(this.props, this.isDisabled);
         onChange && onChange.apply(null, arguments);
     }
 
     itemRender() {
-        let {on, off, tips, col, requiredMark, name, value, colon, component, className, dataFormat, content, type, onBlur, beforeSubmit, onChange, children, options, validate, validateType, validator, labelWidth, ...config} = this.props;
+        let {
+            on, off, tips, col, requiredMark, name, value, colon,
+            component, className, dataFormat, content, type, onBlur,
+            beforeSubmit, onChange, children, options, validate, validateType,
+            formValidator, labelWidth, ...config
+        } = this.props;
         if (type !== "upload" && children) return children;
         let output = null;
         switch (type) {
@@ -283,7 +320,7 @@ export default class FormItem extends Component {
                     onChange={this.handleChange.bind(this)}
                 />;
                 break;
-            case "taginput":
+            case "taginput": //没有onBlur
                 output = <TagInput
                     {...config}
                     name={name}

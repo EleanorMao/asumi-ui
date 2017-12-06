@@ -62,7 +62,7 @@ export default class NumberInput extends Component {
     }
 
     handleClick(plus, e) {
-        let {onChange, name, disabled, dataFormat, step} = this.props;
+        let {onChange, name, disabled, dataFormat, onBlur, step} = this.props;
         if (disabled) return;
         let newValue,
             value = this.state.value,
@@ -80,6 +80,7 @@ export default class NumberInput extends Component {
         }
         this.setState({value: newValue, renderValue: dataFormat(newValue)});
         onChange && onChange({e, name, value: newValue});
+        onBlur && onBlur({e, name, value: newValue});
     }
 
 

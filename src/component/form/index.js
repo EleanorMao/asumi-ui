@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
-import {noop, extend, isArr, getType} from "../util";
+import {noop, extend, isArr, getType, getValues} from "../util";
 
 function isRequired({validate, required}) {
     return required || (validate && validate.some(item => {
@@ -14,13 +14,30 @@ function isRequired({validate, required}) {
     }));
 }
 
+const validateMap = {
+    "null": () => {
+        return true;
+    },
+    "undefined": () => {
+        return true;
+    },
+    "array": (v) => {
+        return !v.length;
+    },
+    "string": (v) => {
+        return !v.length;
+    }
+};
 export default class Form extends Component {
     constructor(props) {
         super(props);
+        this.names = [];
+        this.requiredMap = {};
+        this.disabledMap = {};
         this.state = {
             disabled: false,
             disabledName: "",
-            beforeSubmit: false
+            beforeSubmit: false,
         }
     }
 
@@ -35,33 +52,41 @@ export default class Form extends Component {
 
     validator(data, options) {
         if (!options) return;
-        let disabledIndex = -1;
-        let _disabledIndex = -1;
-        let state = this.state;
-        let disabled = options.some((item, index) => {
-            if (!~_disabledIndex && state.disabled && state.disabledName && item.name === state.disabledName) {
-                _disabledIndex = index;
-            }
+        let names = [];
+        let disabled = false;
+        options.forEach(item => {
             let value = data[item.name];
-            if (isRequired(item) && (value == null || value === "" || (getType(value) === "array" && value.length === 0))) {
-                disabledIndex = index;
-                return true;
+            let valueType = getType(value);
+            if (isRequired(item)) {
+                let func = validateMap[valueType];
+                let validateValue = func ? func(value) : false;
+                this.requiredMap[item.name] = validateValue;
+                if (!disabled) disabled = validateValue;
+            } else {
+                this.requiredMap[item.name] = false;
+            }
+            names.push(item.name);
+        });
+        this.names.forEach(name => {
+            if (!~names.indexOf(name)) {
+                delete this.disabledMap[name];
+                delete this.requiredMap[name];
             }
         });
-        if (disabled) {
-            this.handleDisabled(options[disabledIndex], true);
-        } else if (~_disabledIndex) {
-            this.handleDisabled(options[_disabledIndex], false);
-        }
+        this.names = names;
+        disabled = disabled || !!(~getValues(this.disabledMap).indexOf(true) || ~getValues(this.requiredMap).indexOf(true));
+        this.setState({disabled});
     }
 
     handleDisabled(props, _disabled) {
-        let {disabled, disabledName} = this.state;
-        if (props.name === disabledName && _disabled != disabled) {
-            this.setState({disabled: _disabled});
-        } else if (_disabled && props.name !== disabledName) {
-            this.setState({disabled: _disabled, disabledName: props.name});
+        this.disabledMap[props.name] = !!_disabled;
+        if (isRequired(props)) {
+            let valueType = getType(props.value);
+            let func = validateMap[valueType];
+            this.requiredMap[props.name] = func ? func(props.value) : false;
         }
+        let disabled = !!_disabled || !!(~getValues(this.disabledMap).indexOf(true) || ~getValues(this.requiredMap).indexOf(true));
+        this.setState({disabled});
     }
 
     handleChange({name, type, off}, e) {
@@ -106,7 +131,7 @@ export default class Form extends Component {
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         let _disabled = this.state.disabled || disabled || submitButtonProps.disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
-        let renderChildren = isArr(children) ? children : [children];
+        let renderChildren = React.Children.toArray(children);
         return (
             <form className={_className} style={style} encType={encType}
                   action={action} method={method} autoComplete={autoComplete}
@@ -124,7 +149,7 @@ export default class Form extends Component {
                             key={index}
                             value={data[props.name]}
                             beforeSubmit={this.state.beforeSubmit}
-                            validator={this.handleDisabled.bind(this, props)}
+                            formValidator={this.handleDisabled.bind(this)}
                         />)
                 })}
                 {React.Children.map(renderChildren, (elm, index) => {
@@ -134,7 +159,7 @@ export default class Form extends Component {
                             col: col,
                             value: data[props.name],
                             beforeSubmit: this.state.beforeSubmit,
-                            validator: this.handleDisabled.bind(this, props)
+                            formValidator: this.handleDisabled.bind(this)
                         };
                         if (!props.onChange) {
                             newProps.onChange = this.handleChange.bind(this, props)
