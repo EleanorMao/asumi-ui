@@ -37,7 +37,6 @@ export default class Form extends Component {
         this._disabledMap = {};
         this.state = {
             disabled: false,
-            disabledName: "",
             beforeSubmit: false,
         }
     }
@@ -87,6 +86,7 @@ export default class Form extends Component {
                 this.handleSubmit();
             } else {
                 this._pending = false;
+                this.setState({beforeSubmit: false});
             }
         }
     }
