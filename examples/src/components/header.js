@@ -17,7 +17,8 @@ export default class Header extends Component {
                 <div className="copyright">
                     <span className="author">©
                         <a href="https://github.com/EleanorMao" style={{color: "#fff", marginLeft: 5}}>EleanorMao</a>,
-                        <a href="https://github.com/EleanorMao" style={{color: "#fff", marginLeft: 2}}>嘣嘣</a>
+                        <a href="https://github.com/EleanorMao" style={{color: "#fff", marginLeft: 2}}>嘣嘣</a>,
+                        <a href="https://github.com/WoolYang" style={{color: "#fff", marginLeft: 2}}>WoolYang</a>
                     </span>
                     <a className="github-button" href="https://github.com/EleanorMao/asumi-ui"
                        data-show-count="true" aria-label="Star EleanorMao/asumi-ui on GitHub"/>

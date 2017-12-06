@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FormItem from './formItem';
 import Button from '../button';
-import {noop, extend, isArr, getType, getValues} from "../util";
+import {noop, extend, getType, getValues} from "../util";
 
 function isRequired({validate, required}) {
     return required || (validate && validate.some(item => {
@@ -41,13 +41,25 @@ export default class Form extends Component {
         }
     }
 
-    componentDidMount() {
-        let {data, options} = this.props;
-        this.validator(data, options)
+    getOptions(options, children) {
+        let output = options ? options.slice() : [];
+        if (children) {
+            React.Children.forEach(children, (elm) => {
+                if (elm && elm.type && elm.type._component_name === "FormItem") {
+                    output.push(elm.props);
+                }
+            });
+        }
+        return output;
     }
 
-    componentWillReceiveProps({data, options}) {
-        this.validator(data, options)
+    componentDidMount() {
+        let {data, options, children} = this.props;
+        this.validator(data, this.getOptions(options, children))
+    }
+
+    componentWillReceiveProps({data, options, children}) {
+        this.validator(data, this.getOptions(options, children))
     }
 
     validator(data, options) {
@@ -148,7 +160,6 @@ export default class Form extends Component {
         let col = colNum ? Math.ceil(12 / colNum) : 0;
         let _disabled = this.state.disabled || disabled || submitButtonProps.disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
-        let renderChildren = React.Children.toArray(children);
         return (
             <form className={_className} style={style} encType={encType}
                   action={action} method={method} autoComplete={autoComplete}
@@ -169,7 +180,7 @@ export default class Form extends Component {
                             formValidator={this.handleDisabled.bind(this)}
                         />)
                 })}
-                {React.Children.map(renderChildren, (elm, index) => {
+                {children && React.Children.map(children, (elm) => {
                     if (elm && elm.type && elm.type._component_name === "FormItem") {
                         let props = elm.props;
                         let newProps = {
@@ -194,7 +205,7 @@ export default class Form extends Component {
                         }
                         return React.cloneElement(elm, newProps)
                     } else if (elm) {
-                        return React.cloneElement(elm, {key: index});
+                        return elm;
                     }
                 })}
                 <FormItem labelWidth={labelWidth}>

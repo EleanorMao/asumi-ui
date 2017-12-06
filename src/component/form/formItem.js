@@ -57,14 +57,16 @@ export default class FormItem extends Component {
 
     componentWillReceiveProps(nextProps) {
         let {beforeSubmit, value, validate, formValidator} = nextProps;
-        if (!this._pending && beforeSubmit && validate && validate.length) {
+        if (!this._pending && beforeSubmit) {
             let disabled = false;
             this._pending = true;
-            validate.map(item => {
-                if (!disabled && item.trigger === "submit") {
-                    disabled = this.validator(item, value);
-                }
-            });
+            if (validate && validate.length) {
+                validate.map(item => {
+                    if (!disabled && item.trigger === "submit") {
+                        disabled = this.validator(item, value);
+                    }
+                });
+            }
             this._submitDisabled = disabled;
             formValidator && formValidator(nextProps, this.isDisabled, () => {
                 this._pending = false;

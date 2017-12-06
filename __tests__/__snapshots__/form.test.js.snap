@@ -147,7 +147,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$0"
+      key=".$0"
       name="text"
       onChange={[Function]}
       requiredMark="*"
@@ -192,7 +192,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$1"
+      key=".$1"
       name="color"
       onChange={[Function]}
       requiredMark="*"
@@ -237,7 +237,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$2"
+      key=".$2"
       name="password"
       onChange={[Function]}
       requiredMark="*"
@@ -282,7 +282,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$3"
+      key=".$3"
       name="datetime"
       onChange={[Function]}
       requiredMark="*"
@@ -320,7 +320,7 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512552771136.527"
+              data-value="days1512572912938.8206"
             >
               <Input
                 icon={
@@ -378,7 +378,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512552771136.527",
+                      "uid": "days1512572912938.8206",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -402,7 +402,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512552771136.527"
+                    uid="days1512572912938.8206"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -411,7 +411,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512552771136.527"
+                      data-value="days1512572912938.8206"
                     >
                       <table>
                         <thead
@@ -849,7 +849,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$4"
+      key=".$4"
       name="number"
       onChange={[Function]}
       requiredMark="*"
@@ -947,7 +947,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$5"
+      key=".$5"
       name="static"
       onChange={[Function]}
       requiredMark="*"
@@ -977,7 +977,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$6"
+      key=".$6"
       name="textarea"
       onChange={[Function]}
       requiredMark="*"
@@ -1021,7 +1021,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$7"
+      key=".$7"
       name="select"
       onChange={[Function]}
       options={
@@ -1113,7 +1113,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$8"
+      key=".$8"
       name="checkbox"
       onChange={[Function]}
       requiredMark="*"
@@ -1167,7 +1167,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$9"
+      key=".$9"
       name="radio"
       onChange={[Function]}
       requiredMark="*"
@@ -1220,7 +1220,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$10"
+      key=".$10"
       name="switch"
       onChange={[Function]}
       requiredMark="*"
@@ -1273,7 +1273,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$11"
+      key=".$11"
       name="upload"
       onChange={[Function]}
       requiredMark="*"
@@ -1320,7 +1320,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$12"
+      key=".$12"
       name="radiogroup"
       onChange={[Function]}
       requiredMark="*"
@@ -1360,7 +1360,7 @@ exports[`Form create form by form items 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key=".$.$13"
+      key=".$13"
       name="checkgroup"
       onChange={[Function]}
       options={
@@ -1874,7 +1874,7 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512552770995.4045"
+              data-value="days1512572912666.0457"
             >
               <Input
                 icon={
@@ -1932,7 +1932,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512552770995.4045",
+                      "uid": "days1512572912666.0457",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1956,7 +1956,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512552770995.4045"
+                    uid="days1512572912666.0457"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1965,7 +1965,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512552770995.4045"
+                      data-value="days1512572912666.0457"
                     >
                       <table>
                         <thead
