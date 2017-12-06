@@ -78,7 +78,7 @@ export default class Form extends Component {
         if (disabled !== this.state.disabled) this.setState({disabled});
     }
 
-    handleDisabled(props, _disabled, cb) {
+    handleDisabled(props, _disabled, cancelSubmitPending) {
         this.disabledMap[props.name] = !!_disabled;
         if (isRequired(props)) {
             let valueType = getType(props.value);
@@ -87,7 +87,12 @@ export default class Form extends Component {
         }
         let disabled = !!_disabled || !!(~getValues(this.disabledMap).indexOf(true) || ~getValues(this.requiredMap).indexOf(true));
         if (disabled !== this.state.disabled) this.setState({disabled});
-        cb && cb();
+        if (cancelSubmitPending) {
+            cancelSubmitPending();
+            if (!disabled) {
+                this.handleSubmit();
+            }
+        }
     }
 
     handleChange({name, type, off}, e) {
@@ -101,25 +106,26 @@ export default class Form extends Component {
         }
     }
 
-    handleSubmit(_disabled) {
+    handleBeforeSubmit(_disabled) {
+        let loading = this.state.loading;
+        let {preventMultipleSubmit} = this.props;
+        if (_disabled && preventMultipleSubmit && loading) return;
+        this.setState({beforeSubmit: true})
+    }
+
+    handleSubmit() {
         let loading = this.state.loading;
         let {validator, onSubmit, preventMultipleSubmit} = this.props;
         if (preventMultipleSubmit && loading) return;
-        this.setState({beforeSubmit: true}, () => {
-            if (_disabled) {
-            } else {
-                let disabled = validator && validator();
-                if (disabled) {
-                    this.setState({disabled: true})
-                } else {
-                    let cb = preventMultipleSubmit ? () => {
-                        this.setState({loading: false});
-                    } : noop();
-                    onSubmit && onSubmit(cb);
-                }
-            }
-            this.setState({beforeSubmit: false});
-        })
+        if (validator && validator()) {
+            this.setState({disabled: true, beforeSubmit: false})
+        } else {
+            this.setState({beforeSubmit: false, loading: !!preventMultipleSubmit});
+            let cb = preventMultipleSubmit ? () => {
+                this.setState({loading: false});
+            } : noop;
+            onSubmit && onSubmit(cb);
+        }
     }
 
     render() {
@@ -184,7 +190,7 @@ export default class Form extends Component {
                     <Button
                         {...submitButtonProps}
                         disabled={_disabled}
-                        onClick={this.handleSubmit.bind(this, _disabled)}
+                        onClick={this.handleBeforeSubmit.bind(this, _disabled)}
                         type={_disabled ? null : submitButtonProps.type || "success"}
                     >{submitText}</Button>}{submitItems}
                     {!!error && <div className="el-form-error">{error}</div>}
