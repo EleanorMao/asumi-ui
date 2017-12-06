@@ -44,30 +44,30 @@ const validateMap = {
 export default class FormItem extends Component {
     constructor(props) {
         super(props);
-        this.pending = false;
-        this.blurDisabled = false;
-        this.changeDisabled = false;
-        this.submitDisabled = false;
-        this.msg_str = "";
+        this._pending = false;
+        this._msgSetted = false;
+        this._blurDisabled = false;
+        this._changeDisabled = false;
+        this._submitDisabled = false;
     }
 
     get isDisabled() {
-        return this.changeDisabled || this.blurDisabled || this.submitDisabled
+        return this._changeDisabled || this._blurDisabled || this._submitDisabled
     }
 
     componentWillReceiveProps(nextProps) {
         let {beforeSubmit, value, validate, formValidator} = nextProps;
-        if (!this.pending && beforeSubmit && validate && validate.length) {
+        if (!this._pending && beforeSubmit && validate && validate.length) {
             let disabled = false;
-            this.pending = true;
+            this._pending = true;
             validate.map(item => {
                 if (!disabled && item.trigger === "submit") {
                     disabled = this.validator(item, value);
                 }
             });
-            this.submitDisabled = disabled;
+            this._submitDisabled = disabled;
             formValidator && formValidator(nextProps, this.isDisabled, () => {
-                this.pending = false;
+                this._pending = false;
             });
         }
     }
@@ -120,8 +120,8 @@ export default class FormItem extends Component {
             fail = true;
         }
         if (fail) {
-            this.msg_str = message;
-            this._message.innerHTML = message;
+            this._msgSetted = true;
+            this._message.innerHTML = message || "";
             this._form_item.classList.add(`el-form-item-${this.props.validateType}`);
         }
         return fail;
@@ -138,17 +138,17 @@ export default class FormItem extends Component {
                 }
             })
         }
-        this.blurDisabled = disabled;
-        if (!this.isDisabled && this.msg_str) {
+        this._blurDisabled = disabled;
+        if (!this.isDisabled && this._msgSetted) {
             this._form_item.classList.remove(`el-form-item-${validateType}`);
             this._message.innerHTML = "";
-            this.msg_str = ""
+            this._msgSetted = false
         }
         let valueType = getType(_value);
         let func = validateMap[valueType];
         if (!this.isDisabled && required && func && func(_value)) {
             disabled = true;
-            this.blurDisabled = disabled;
+            this._blurDisabled = disabled;
         }
         formValidator && formValidator(this.props, this.isDisabled);
         onBlur && onBlur.apply(null, arguments);
@@ -166,12 +166,12 @@ export default class FormItem extends Component {
                 }
             })
         }
-        this.submitDisabled = false;
-        this.changeDisabled = disabled;
-        if (!this.isDisabled && this.msg_str) {
+        this._submitDisabled = false;
+        this._changeDisabled = disabled;
+        if (!this.isDisabled && this._msgSetted) {
             this._form_item.classList.remove(`el-form-item-${validateType}`);
             this._message.innerHTML = "";
-            this.msg_str = "";
+            this._msgSetted = false
         }
         formValidator && formValidator(this.props, this.isDisabled);
         onChange && onChange.apply(null, arguments);

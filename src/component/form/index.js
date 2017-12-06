@@ -32,8 +32,9 @@ export default class Form extends Component {
     constructor(props) {
         super(props);
         this.names = [];
-        this.requiredMap = {};
-        this.disabledMap = {};
+        this._pending = false;
+        this._requiredMap = {};
+        this._disabledMap = {};
         this.state = {
             disabled: false,
             disabledName: "",
@@ -55,44 +56,51 @@ export default class Form extends Component {
         let names = [];
         let disabled = false;
         options.forEach(item => {
-            let value = data[item.name];
+            let value = typeof item.value === "undefined" ? data[item.name] : item.value;
             let valueType = getType(value);
             if (isRequired(item)) {
                 let func = validateMap[valueType];
                 let validateValue = func ? func(value) : false;
-                this.requiredMap[item.name] = validateValue;
+                this._requiredMap[item.name] = validateValue;
                 if (!disabled) disabled = validateValue;
             } else {
-                this.requiredMap[item.name] = false;
+                this._requiredMap[item.name] = false;
             }
             names.push(item.name);
         });
         this.names.forEach(name => {
             if (!~names.indexOf(name)) {
-                delete this.disabledMap[name];
-                delete this.requiredMap[name];
+                delete this._disabledMap[name];
+                delete this._requiredMap[name];
             }
         });
         this.names = names;
-        disabled = disabled || !!(~getValues(this.disabledMap).indexOf(true) || ~getValues(this.requiredMap).indexOf(true));
+        disabled = disabled || !!(~getValues(this._disabledMap).indexOf(true) || ~getValues(this._requiredMap).indexOf(true));
         if (disabled !== this.state.disabled) this.setState({disabled});
     }
 
-    handleDisabled(props, _disabled, cancelSubmitPending) {
-        this.disabledMap[props.name] = !!_disabled;
+    cancelSubmitPending(disabled, cb) {
+        if (typeof cb === "function") {
+            cb();
+            if (!disabled && this._pending) {
+                this._pending = false;
+                this.handleSubmit();
+            } else {
+                this._pending = false;
+            }
+        }
+    }
+
+    handleDisabled(props, _disabled, cb) {
+        this._disabledMap[props.name] = !!_disabled;
         if (isRequired(props)) {
             let valueType = getType(props.value);
             let func = validateMap[valueType];
-            this.requiredMap[props.name] = func ? func(props.value) : false;
+            this._requiredMap[props.name] = func ? func(props.value) : false;
         }
-        let disabled = !!_disabled || !!(~getValues(this.disabledMap).indexOf(true) || ~getValues(this.requiredMap).indexOf(true));
+        let disabled = !!_disabled || !!(~getValues(this._disabledMap).indexOf(true) || ~getValues(this._requiredMap).indexOf(true));
         if (disabled !== this.state.disabled) this.setState({disabled});
-        if (cancelSubmitPending) {
-            cancelSubmitPending();
-            if (!disabled && this.state.beforeSubmit) {
-                this.handleSubmit();
-            }
-        }
+        this.cancelSubmitPending(disabled, cb)
     }
 
     handleChange({name, type, off}, e) {
@@ -107,23 +115,25 @@ export default class Form extends Component {
     }
 
     handleBeforeSubmit(_disabled) {
-        let loading = this.state.loading;
-        let {preventMultipleSubmit} = this.props;
-        if (_disabled && preventMultipleSubmit && loading) return;
+        if (_disabled || this._pending) return;
+        this._pending = true;
         this.setState({beforeSubmit: true})
     }
 
     handleSubmit() {
-        let loading = this.state.loading;
         let {validator, onSubmit, preventMultipleSubmit} = this.props;
-        if (preventMultipleSubmit && loading) return;
+        if (preventMultipleSubmit && this._pending) return;
+        this.setState({beforeSubmit: false});
         if (validator && validator()) {
-            this.setState({disabled: true, beforeSubmit: false})
+            this.setState({disabled: true})
         } else {
-            this.setState({beforeSubmit: false, loading: !!preventMultipleSubmit});
-            let cb = preventMultipleSubmit ? () => {
-                this.setState({loading: false});
-            } : noop;
+            let cb = noop;
+            if (preventMultipleSubmit) {
+                this._pending = true;
+                cb = () => {
+                    this._pending = false;
+                }
+            }
             onSubmit && onSubmit(cb);
         }
     }
@@ -149,12 +159,12 @@ export default class Form extends Component {
                         <FormItem
                             onChange={this.handleChange.bind(this, props)}
                             requiredMark={requiredMark}
+                            value={data[props.name]}
                             labelWidth={labelWidth}
                             colon={colon}
                             {...props}
                             col={col}
                             key={index}
-                            value={data[props.name]}
                             beforeSubmit={this.state.beforeSubmit}
                             formValidator={this.handleDisabled.bind(this)}
                         />)
@@ -164,7 +174,6 @@ export default class Form extends Component {
                         let props = elm.props;
                         let newProps = {
                             col: col,
-                            value: data[props.name],
                             beforeSubmit: this.state.beforeSubmit,
                             formValidator: this.handleDisabled.bind(this)
                         };
@@ -173,6 +182,9 @@ export default class Form extends Component {
                         }
                         if (typeof props.colon !== "boolean") {
                             newProps.colon = colon;
+                        }
+                        if (typeof props.value === "undefined") {
+                            newProps.value = data[props.name];
                         }
                         if (props.requiredMark == null) {
                             newProps.requiredMark = requiredMark;
