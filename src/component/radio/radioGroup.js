@@ -23,9 +23,9 @@ export default class RadioGroup extends Component {
                             if (typeof item === 'string' || typeof item === "number") {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }
-                            item = extend(others, item);
                             return (
                                 <Radio
+                                    {...others}
                                     {...item}
                                     key={index}
                                     onChange={onChange}

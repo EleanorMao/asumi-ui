@@ -12,8 +12,18 @@ export default class CheckGroup extends Component {
         super(props);
     }
 
+    get getValueFromOptions() {
+        let output = [];
+        this.props.options && this.props.options.forEach(c => {
+            if (c.checked) {
+                output.push(c.value)
+            }
+        });
+        return output;
+    }
+
     get getValue() {
-        return this.props.value || this.props.checkedList;
+        return this.props.value || this.props.checkedList || this.getValueFromOptions;
     }
 
     get isCheckedAll() {
@@ -87,9 +97,9 @@ export default class CheckGroup extends Component {
                             if (typeof item === 'string' || typeof item === "number") {
                                 item = {label: item, name: item, value: item, disabled: disableAll}
                             }
-                            item = extend(others, item);
                             return (
                                 <Checkbox
+                                    {...others}
                                     key={index}
                                     disabled={disableAll}
                                     checked={~checkedList.indexOf(item.value)}
