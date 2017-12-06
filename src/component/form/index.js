@@ -89,7 +89,7 @@ export default class Form extends Component {
         if (disabled !== this.state.disabled) this.setState({disabled});
         if (cancelSubmitPending) {
             cancelSubmitPending();
-            if (!disabled) {
+            if (!disabled && this.state.beforeSubmit) {
                 this.handleSubmit();
             }
         }
