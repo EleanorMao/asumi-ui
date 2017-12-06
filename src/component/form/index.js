@@ -78,7 +78,7 @@ export default class Form extends Component {
         if (disabled !== this.state.disabled) this.setState({disabled});
     }
 
-    handleDisabled(props, _disabled) {
+    handleDisabled(props, _disabled, cb) {
         this.disabledMap[props.name] = !!_disabled;
         if (isRequired(props)) {
             let valueType = getType(props.value);
@@ -87,6 +87,7 @@ export default class Form extends Component {
         }
         let disabled = !!_disabled || !!(~getValues(this.disabledMap).indexOf(true) || ~getValues(this.requiredMap).indexOf(true));
         if (disabled !== this.state.disabled) this.setState({disabled});
+        cb && cb();
     }
 
     handleChange({name, type, off}, e) {

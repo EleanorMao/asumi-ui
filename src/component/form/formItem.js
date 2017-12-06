@@ -44,6 +44,7 @@ const validateMap = {
 export default class FormItem extends Component {
     constructor(props) {
         super(props);
+        this.pending = false;
         this.blurDisabled = false;
         this.changeDisabled = false;
         this.submitDisabled = false;
@@ -56,15 +57,18 @@ export default class FormItem extends Component {
 
     componentWillReceiveProps(nextProps) {
         let {beforeSubmit, value, validate, formValidator} = nextProps;
-        if (beforeSubmit && validate && validate.length) {
+        if (!this.pending && beforeSubmit && validate && validate.length) {
             let disabled = false;
+            this.pending = true;
             validate.map(item => {
                 if (!disabled && item.trigger === "submit") {
                     disabled = this.validator(item, value);
                 }
             });
             this.submitDisabled = disabled;
-            formValidator && formValidator(nextProps, this.isDisabled);
+            formValidator && formValidator(nextProps, this.isDisabled, () => {
+                this.pending = false;
+            });
         }
     }
 
