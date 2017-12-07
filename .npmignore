@@ -14,3 +14,4 @@ db.json
 jest.config.json
 __tests__
 node_modules
+*.log
