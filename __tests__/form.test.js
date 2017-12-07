@@ -4,13 +4,18 @@ import {Form, FormItem} from '../src';
 
 describe('Form', () => {
     it('create component', () => {
+        const handleSubmit = jest.fn();
         const component = mount(
-            <Form data={{}} name="jest" options={[{
-                type: "text",
-                name: "text",
-                label: "文字"
-            }]}/>);
+            <Form data={{}} name="jest"
+                  onSubmit={handleSubmit}
+                  options={[{
+                      type: "text",
+                      name: "text",
+                      label: "文字"
+                  }]}/>);
         expect(component).toMatchSnapshot();
+        component.find('Button').simulate('click');
+        expect(handleSubmit).toBeCalled();
     });
     it('define layout[inline]', () => {
         const component = mount(
@@ -74,9 +79,11 @@ describe('Form', () => {
         expect(component.find('.el-form-label').at(1).text()).toEqual("简介");
     });
     it('define disabled', () => {
+        const handleSubmit = jest.fn();
         const component = mount(
             <Form data={{}}
                   disabled={true}
+                  onSubmit={handleSubmit}
                   options={[{
                       type: "text",
                       name: "text",
@@ -93,6 +100,8 @@ describe('Form', () => {
         expect(component.find('Button[disabled=false]').length).toEqual(1);
         component.setProps({submitButtonProps: {disabled: true}});
         expect(component.find('Button[disabled=true]').length).toEqual(1);
+        component.find('Button').simulate('click');
+        expect(handleSubmit).not.toBeCalled();
     });
     it('define error', () => {
         const component = mount(
@@ -185,9 +194,11 @@ describe('Form', () => {
             return item;
         });
         const handleChange = jest.fn();
+        const handleSubmit = jest.fn();
         const component = mount(<Form
             data={data}
             options={options}
+            onSubmit={handleSubmit}
             onChange={handleChange}
         />);
         expect(component).toMatchSnapshot();
@@ -199,6 +210,8 @@ describe('Form', () => {
         expect(component.find('FormItem[name="static"]').instance().props.value).toEqual("static");
         component.find('FormItem[name="text"] input').simulate('change', {target: {value: "123"}});
         expect(handleChange).toBeCalled();
+        component.find('Button').simulate('click');
+        expect(handleSubmit).toBeCalled();
     });
     it('create form by form items', () => {
         let data = {
@@ -228,9 +241,11 @@ describe('Form', () => {
             return <FormItem key={i} {...item}/>;
         });
         const handleChange = jest.fn();
+        const handleSubmit = jest.fn();
         const component = mount(<Form
             data={data}
             onChange={handleChange}
+            onSubmit={handleSubmit}
         >{children}</Form>);
         expect(component).toMatchSnapshot();
         expect(component.find('FormItem[name="text"]').instance().props.value).toEqual("text");
@@ -241,6 +256,8 @@ describe('Form', () => {
         expect(component.find('FormItem[name="static"]').instance().props.value).toEqual("static");
         component.find('FormItem[name="text"] input').simulate('change', {target: {value: "123"}});
         expect(handleChange).toBeCalled();
+        component.find('Button').simulate('click');
+        expect(handleSubmit).toBeCalled();
     });
 });
 
@@ -353,6 +370,7 @@ describe('validate', () => {
                         <Form
                             data={this.state}
                             onChange={this.handleChange.bind(this)}
+                            onSubmit={this.props.onSubmit}
                             options={[{
                                 name: "a",
                                 type: "text",
@@ -388,7 +406,8 @@ describe('validate', () => {
             }
         }
 
-        const wrapper = mount(<Demo/>);
+        const handleSubmit = jest.fn();
+        const wrapper = mount(<Demo onSubmit={handleSubmit}/>);
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
         wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
@@ -407,6 +426,7 @@ describe('validate', () => {
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
         wrapper.find('Button').simulate('click');
         expect(wrapper.find('FormItem[name="d"] .el-form-message').text()).toEqual("submit");
+        expect(handleSubmit).not.toBeCalled();
         jest.runAllTimers();
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
         wrapper.find('input[name="d"]').simulate('change', {target: {value: "abc"}});
@@ -414,6 +434,8 @@ describe('validate', () => {
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
         wrapper.find('Button').simulate('click');
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        expect(handleSubmit).toBeCalled();
+
     });
     it('validate[required formitem]', () => {
         class Demo extends Component {
@@ -439,6 +461,7 @@ describe('validate', () => {
                     <div>
                         <Form
                             data={this.state}
+                            onSubmit={this.props.onSubmit}
                             onChange={this.handleChange.bind(this)}
                         >
                             {[{
@@ -478,7 +501,8 @@ describe('validate', () => {
             }
         }
 
-        const wrapper = mount(<Demo/>);
+        const handleSubmit = jest.fn();
+        const wrapper = mount(<Demo onSubmit={handleSubmit}/>);
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
         wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
@@ -497,12 +521,14 @@ describe('validate', () => {
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
         wrapper.find('Button').simulate('click');
         expect(wrapper.find('FormItem[name="d"] .el-form-message').text()).toEqual("submit");
+        expect(handleSubmit).not.toBeCalled();
         jest.runAllTimers();
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
         wrapper.find('input[name="d"]').simulate('change', {target: {value: "abc"}});
         jest.runAllTimers();
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
         wrapper.find('Button').simulate('click');
+        expect(handleSubmit).toBeCalled();
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
     });
     it('validate[required combo]', () => {
@@ -526,6 +552,7 @@ describe('validate', () => {
                     <div>
                         <Form
                             data={this.state}
+                            onSubmit={this.props.onSubmit}
                             onChange={this.handleChange.bind(this)}
                             options={[{
                                 name: "a",
@@ -546,10 +573,13 @@ describe('validate', () => {
             }
         }
 
-        const wrapper = mount(<Demo/>);
+        const handleSubmit = jest.fn();
+        const wrapper = mount(<Demo onSubmit={handleSubmit}/>);
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
         wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
+        wrapper.find('Button').simulate('click');
+        expect(handleSubmit).toBeCalled();
         wrapper.find('input[name="a"]').simulate('change', {target: {value: ""}});
         expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("change");
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(true);
@@ -579,6 +609,7 @@ describe('validate', () => {
                         <Form
                             data={this.state}
                             onChange={this.handleChange.bind(this)}
+                            onSubmit={this.props.onSubmit}
                             options={[{
                                 name: "a",
                                 type: "text",
@@ -594,11 +625,14 @@ describe('validate', () => {
             }
         }
 
-        const wrapper = mount(<Demo/>);
+        const handleSubmit = jest.fn();
+        const wrapper = mount(<Demo onSubmit={handleSubmit}/>);
         expect(!!wrapper.find('Form').instance().state.disabled).toEqual(false);
         wrapper.find('input[name="a"]').simulate('change', {target: {value: "abc"}});
         wrapper.find('input[name="a"]').simulate('blur');
         expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("blur");
+        wrapper.find('Button').simulate('click');
+        expect(handleSubmit).not.toBeCalled();
         wrapper.find('input[name="a"]').simulate('change', {target: {value: "#"}});
         wrapper.find('input[name="a"]').simulate('blur');
         expect(wrapper.find('FormItem[name="a"] .el-form-message').text()).toEqual("");

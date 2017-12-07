@@ -33,6 +33,8 @@ export default class Form extends Component {
         super(props);
         this.names = [];
         this._pending = false;
+        this._submitted = [];
+        this._submitMap = {};
         this._requiredMap = {};
         this._disabledMap = {};
         this.state = {
@@ -90,15 +92,20 @@ export default class Form extends Component {
         if (disabled !== this.state.disabled) this.setState({disabled});
     }
 
-    cancelSubmitPending(disabled, cb) {
+    cancelSubmitPending(disabled, props, cb) {
         if (typeof cb === "function") {
             cb();
-            if (!disabled && this._pending) {
-                this._pending = false;
-                this.handleSubmit();
-            } else {
-                this._pending = false;
-                this.setState({beforeSubmit: false});
+            this._submitted.push(props.name);
+            if (this._submitted.sort().toString() === this.names.sort().toString()) {
+                if (!disabled && this._pending) {
+                    this._pending = false;
+                    this._submitted = [];
+                    this.handleSubmit();
+                } else {
+                    this._pending = false;
+                    this._submitted = [];
+                    this.setState({beforeSubmit: false});
+                }
             }
         }
     }
@@ -111,8 +118,10 @@ export default class Form extends Component {
             this._requiredMap[props.name] = func ? func(props.value) : false;
         }
         let disabled = !!_disabled || !!(~getValues(this._disabledMap).indexOf(true) || ~getValues(this._requiredMap).indexOf(true));
-        if (disabled !== this.state.disabled) this.setState({disabled});
-        this.cancelSubmitPending(disabled, cb)
+        if (disabled !== this.state.disabled) {
+            this.setState({disabled})
+        }
+        this.cancelSubmitPending(disabled, props, cb);
     }
 
     handleChange({name, type, off}, e) {

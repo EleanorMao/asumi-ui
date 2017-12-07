@@ -22,7 +22,7 @@ exports[`Datetime create component 1`] = `
 >
   <div
     className="el-datetime el-static"
-    data-value="days1512572912083.301"
+    data-value="days1512613629478.3203"
   >
     <Input
       icon={
@@ -80,7 +80,7 @@ exports[`Datetime create component 1`] = `
             "showWeeks": false,
             "timeConstraints": Object {},
             "timeFormat": "h:mm A",
-            "uid": "days1512572912083.301",
+            "uid": "days1512613629478.3203",
             "updateOn": "days",
             "updateSelectedDate": [Function],
             "updateTime": [Function],
@@ -103,7 +103,7 @@ exports[`Datetime create component 1`] = `
           showWeeks={false}
           timeConstraints={Object {}}
           timeFormat="h:mm A"
-          uid="days1512572912083.301"
+          uid="days1512613629478.3203"
           updateOn="days"
           updateSelectedDate={[Function]}
           updateTime={[Function]}
@@ -111,7 +111,7 @@ exports[`Datetime create component 1`] = `
         >
           <div
             className="el-datetime-days"
-            data-value="days1512572912083.301"
+            data-value="days1512613629478.3203"
           >
             <table>
               <thead
@@ -278,14 +278,14 @@ exports[`Datetime create component 1`] = `
                     5
                   </td>
                   <td
-                    className="el-datetime-day el-datetime-today"
+                    className="el-datetime-day"
                     key="12_6"
                     onClick={[Function]}
                   >
                     6
                   </td>
                   <td
-                    className="el-datetime-day"
+                    className="el-datetime-day el-datetime-today"
                     key="12_7"
                     onClick={[Function]}
                   >
@@ -563,7 +563,7 @@ exports[`Datetime define dateFormat 1`] = `
 >
   <div
     className="el-datetime el-static"
-    data-value="days1512572912325.994"
+    data-value="days1512613629779.9739"
   >
     <Input
       icon={
@@ -621,7 +621,7 @@ exports[`Datetime define dateFormat 1`] = `
             "showWeeks": false,
             "timeConstraints": Object {},
             "timeFormat": "h:mm A",
-            "uid": "days1512572912325.994",
+            "uid": "days1512613629779.9739",
             "updateOn": "days",
             "updateSelectedDate": [Function],
             "updateTime": [Function],
@@ -644,7 +644,7 @@ exports[`Datetime define dateFormat 1`] = `
           showWeeks={false}
           timeConstraints={Object {}}
           timeFormat="h:mm A"
-          uid="days1512572912325.994"
+          uid="days1512613629779.9739"
           updateOn="days"
           updateSelectedDate={[Function]}
           updateTime={[Function]}
@@ -652,7 +652,7 @@ exports[`Datetime define dateFormat 1`] = `
         >
           <div
             className="el-datetime-days"
-            data-value="days1512572912325.994"
+            data-value="days1512613629779.9739"
           >
             <table>
               <thead
@@ -819,14 +819,14 @@ exports[`Datetime define dateFormat 1`] = `
                     5
                   </td>
                   <td
-                    className="el-datetime-day el-datetime-today"
+                    className="el-datetime-day"
                     key="12_6"
                     onClick={[Function]}
                   >
                     6
                   </td>
                   <td
-                    className="el-datetime-day"
+                    className="el-datetime-day el-datetime-today"
                     key="12_7"
                     onClick={[Function]}
                   >
@@ -1088,7 +1088,7 @@ exports[`Datetime define defaultValue 1`] = `
   closeOnSelect={false}
   closeOnTab={true}
   dateFormat={true}
-  defaultValue={"2017-12-06T15:08:32.212Z"}
+  defaultValue={"2017-12-07T02:27:09.624Z"}
   input={true}
   inputProps={Object {}}
   isWeek={false}
@@ -1104,7 +1104,7 @@ exports[`Datetime define defaultValue 1`] = `
 >
   <div
     className="el-datetime el-static"
-    data-value="days1512572912215.0364"
+    data-value="days1512613629630.7834"
   >
     <Input
       icon={
@@ -1117,7 +1117,7 @@ exports[`Datetime define defaultValue 1`] = `
       onFocus={[Function]}
       onKeyDown={[Function]}
       type="text"
-      value="12/06/2017 11:08 PM"
+      value="12/07/2017 10:27 AM"
     >
       <div
         className="el-input"
@@ -1135,7 +1135,7 @@ exports[`Datetime define defaultValue 1`] = `
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           type="text"
-          value="12/06/2017 11:08 PM"
+          value="12/07/2017 10:27 AM"
         />
       </div>
     </Input>
@@ -1154,7 +1154,7 @@ exports[`Datetime define defaultValue 1`] = `
             "renderDay": undefined,
             "renderMonth": undefined,
             "renderYear": undefined,
-            "selectedDate": "2017-12-06T15:08:32.212Z",
+            "selectedDate": "2017-12-07T02:27:09.624Z",
             "setDate": [Function],
             "setTime": [Function],
             "shortcuts": Array [],
@@ -1162,7 +1162,7 @@ exports[`Datetime define defaultValue 1`] = `
             "showWeeks": false,
             "timeConstraints": Object {},
             "timeFormat": "h:mm A",
-            "uid": "days1512572912215.0364",
+            "uid": "days1512613629630.7834",
             "updateOn": "days",
             "updateSelectedDate": [Function],
             "updateTime": [Function],
@@ -1178,7 +1178,7 @@ exports[`Datetime define defaultValue 1`] = `
           localMoment={[Function]}
           renderDay={[Function]}
           renderWeeksTitle={[Function]}
-          selectedDate={"2017-12-06T15:08:32.212Z"}
+          selectedDate={"2017-12-07T02:27:09.624Z"}
           setDate={[Function]}
           setTime={[Function]}
           shortcuts={Array []}
@@ -1186,7 +1186,7 @@ exports[`Datetime define defaultValue 1`] = `
           showWeeks={false}
           timeConstraints={Object {}}
           timeFormat="h:mm A"
-          uid="days1512572912215.0364"
+          uid="days1512613629630.7834"
           updateOn="days"
           updateSelectedDate={[Function]}
           updateTime={[Function]}
@@ -1194,7 +1194,7 @@ exports[`Datetime define defaultValue 1`] = `
         >
           <div
             className="el-datetime-days"
-            data-value="days1512572912215.0364"
+            data-value="days1512613629630.7834"
           >
             <table>
               <thead
@@ -1361,14 +1361,14 @@ exports[`Datetime define defaultValue 1`] = `
                     5
                   </td>
                   <td
-                    className="el-datetime-day el-datetime-active el-datetime-today"
+                    className="el-datetime-day"
                     key="12_6"
                     onClick={[Function]}
                   >
                     6
                   </td>
                   <td
-                    className="el-datetime-day"
+                    className="el-datetime-day el-datetime-active el-datetime-today"
                     key="12_7"
                     onClick={[Function]}
                   >
@@ -1611,7 +1611,7 @@ exports[`Datetime define defaultValue 1`] = `
                     colSpan="7"
                     onClick={[Function]}
                   >
-                    11:08 PM
+                    10:27 AM
                   </td>
                 </tr>
               </tfoot>
@@ -1624,4 +1624,4 @@ exports[`Datetime define defaultValue 1`] = `
 </DateTime>
 `;
 
-exports[`Datetime define timeFormat 1`] = `"2017-12-05T16:00:00.000Z"`;
+exports[`Datetime define timeFormat 1`] = `"2017-12-06T16:00:00.000Z"`;

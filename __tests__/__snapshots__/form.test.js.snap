@@ -7,6 +7,7 @@ exports[`Form create component 1`] = `
   layout="horizontal"
   name="jest"
   onChange={[Function]}
+  onSubmit={[Function]}
   options={
     Array [
       Object {
@@ -136,6 +137,7 @@ exports[`Form create form by form items 1`] = `
   id="id"
   layout="horizontal"
   onChange={[Function]}
+  onSubmit={[Function]}
   options={Array []}
   submitButtonProps={Object {}}
   submitText="提交"
@@ -320,7 +322,7 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512572912938.8206"
+              data-value="days1512613630716.4727"
             >
               <Input
                 icon={
@@ -378,7 +380,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512572912938.8206",
+                      "uid": "days1512613630716.4727",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -402,7 +404,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512572912938.8206"
+                    uid="days1512613630716.4727"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -411,7 +413,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512572912938.8206"
+                      data-value="days1512613630716.4727"
                     >
                       <table>
                         <thead
@@ -578,14 +580,14 @@ exports[`Form create form by form items 1`] = `
                               5
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_6"
                               onClick={[Function]}
                             >
                               6
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_7"
                               onClick={[Function]}
                             >
@@ -1615,6 +1617,7 @@ exports[`Form create form by options 1`] = `
   id="id"
   layout="horizontal"
   onChange={[Function]}
+  onSubmit={[Function]}
   options={
     Array [
       Object {
@@ -1874,7 +1877,7 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512572912666.0457"
+              data-value="days1512613630184.457"
             >
               <Input
                 icon={
@@ -1932,7 +1935,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512572912666.0457",
+                      "uid": "days1512613630184.457",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1956,7 +1959,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512572912666.0457"
+                    uid="days1512613630184.457"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1965,7 +1968,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512572912666.0457"
+                      data-value="days1512613630184.457"
                     >
                       <table>
                         <thead
@@ -2132,14 +2135,14 @@ exports[`Form create form by options 1`] = `
                               5
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_6"
                               onClick={[Function]}
                             >
                               6
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_7"
                               onClick={[Function]}
                             >
