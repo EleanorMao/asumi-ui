@@ -34,7 +34,6 @@ export default class Form extends Component {
         this.names = [];
         this._pending = false;
         this._submitted = [];
-        this._submitMap = {};
         this._requiredMap = {};
         this._disabledMap = {};
         this.state = {
