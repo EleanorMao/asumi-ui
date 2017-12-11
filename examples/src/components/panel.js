@@ -2,9 +2,12 @@
  * Created by elly on 2017/4/18.
  */
 import React, {Component, PropTypes} from 'react';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import github from 'react-syntax-highlighter/styles/hljs/github'
 import {
     Tooltip
 } from '../../../src';
+
 
 export default class Panel extends Component {
     constructor(props) {
@@ -21,9 +24,6 @@ export default class Panel extends Component {
     render() {
         let {toggle} = this.state;
         let {title, code, children} = this.props;
-        let lines = code.split('\n');
-        let reg = new RegExp('^(\\s{' + (lines[0] ? /^(\s*)/.exec(lines[0])[1].length : 0) + '})');
-        lines = lines.map(line => line.replace(reg, ''));
         return (
             <div className="el-panel">
                 <div className="el-panel-title">
@@ -37,11 +37,7 @@ export default class Panel extends Component {
                         {children}
                     </div>
                     <div className="el-panel-demo" style={{display: (toggle ? 'block' : 'none')}}>
-                        <pre>
-                            <code>
-                                 {lines.join('\n')}
-                            </code>
-                        </pre>
+                        <SyntaxHighlighter style={github}>{code}</SyntaxHighlighter>
                     </div>
                 </div>
             </div>
