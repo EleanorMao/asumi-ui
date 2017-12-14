@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 
-import {noop, sort, isArr} from '../util';
+import {noop, sort} from '../util';
 
 export default class Header extends Component {
     constructor(props) {
@@ -65,7 +65,7 @@ export default class Header extends Component {
             onSelectAll
         } = this.props;
         let i = 0, colSpan, target;
-        let renderChildren = isArr(children) ? children : [children];
+        let renderChildren = React.Children.toArray(children);
         renderChildren = sort(renderChildren).sorted;
         return (
             <div className="el-table-container el-table-header-container" ref={(c) => {
