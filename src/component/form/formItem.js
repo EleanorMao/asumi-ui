@@ -74,7 +74,6 @@ export default class FormItem extends Component {
         }
     }
 
-
     validator(item, value) {
         let {maxLength, length, isLocaleCompare, min, max, minLength, message, pattern, instance, rule, required, validator, type} = item;
         let reg, fail = validator && validator(this.props);
@@ -367,7 +366,8 @@ export default class FormItem extends Component {
 
     render() {
         let props = this.props;
-        let {tips, label, colon, className, required, validate, requiredMark, labelWidth, col, colSpan} = props;
+        let {tips, label, colon, hidden, type, className, required, validate, requiredMark, labelWidth, col, colSpan} = props;
+        if (hidden || type === 'hidden') return null;
         let _className = classnames('el-form-item clearfix', col ? `el-col-${col * (colSpan || 1)} el-col-inline` : null, className);
         if (tips && typeof tips === "string") {
             tips = {title: tips};
@@ -402,6 +402,7 @@ FormItem.propTypes = {
     value: PropTypes.any,
     colon: PropTypes.bool,
     name: PropTypes.string,
+    hidden: PropTypes.bool,
     label: PropTypes.string,
     required: PropTypes.bool,
     onChange: PropTypes.func,
@@ -430,7 +431,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput']),
+    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput', 'hidden']),
 };
 
 FormItem.defaultProps = {

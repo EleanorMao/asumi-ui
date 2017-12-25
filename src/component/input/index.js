@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {KeyCode, rules} from "../util";
+import {KeyCode, noop, rules} from "../util";
 
 export default class Input extends Component {
     constructor(props) {
@@ -13,49 +13,22 @@ export default class Input extends Component {
 
     handleChange(e) {
         const {name, value} = e.target;
-        const {rule, pattern, maxLength} = this.props;
-        if (rule === 'price') { //金额相关 8+2
-            let reg = rules.price;
-            if (!reg.test(value)) {
-                return;
-            }
-        } else if (rule === 'positiveInt') { //正整数 8
-            let reg = rules.positiveInt;
-            if (!reg.test(value)) {
-                return;
-            }
-        } else if (rule === 'nature') { //自然数 非负整数
-            let reg = rules.nature;
-            if (!reg.test(value)) {
-                return;
-            }
-        } else if (rule === 'color') { //颜色
-            let reg = rules.color;
-            if (value && !reg.test(value)) {
-                return;
-            }
-        }
-
-        if (Object.prototype.toString.call(pattern) === '[object RegExp]') {
-            if (!pattern.test(value)) {
-                return;
-            }
-        }
-        if (value.length > maxLength) {
-            return;
-        }
-        this.props.onChange && this.props.onChange({e, name, value});
+        const {rule, pattern, maxLength, onChange} = this.props;
+        if (rule && rules[rule] && !rules[rule].test(value)) return;
+        if (pattern && !pattern.test(value)) return;
+        if (value.length > maxLength) return;
+        onChange({e, name, value});
     }
 
     handleKeyPress(e) {
         if (e.which === KeyCode.ENTER) {
-            this.props.onPressEnter && this.props.onPressEnter(e);
+            this.props.onPressEnter(e);
         }
-        this.props.onKeyPress && this.props.onKeyPress(e);
+        this.props.onKeyPress(e);
     }
 
     render() {
-        let {type, size, rule, icon, style, inputStyle, append, prepend, className, ...other} = this.props;
+        let {type, size, rule, icon, style, inputStyle, append, prepend, onPressEnter, className, ...other} = this.props;
         let {onClick} = {...other};
         let _className = classnames('el-input', className, size ? `el-${size}` : '');
         if (type === 'textarea') {
@@ -114,4 +87,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
     type: 'text',
+    onChange: noop,
+    onKeyPress: noop,
+    onPressEnter: noop,
 };

@@ -14,6 +14,8 @@ function isRequired({validate, required}) {
     }));
 }
 
+//TODO: 多个Form打字很卡
+//TODO: shallowequal is not ok， 因为func和data不一样
 const validateMap = {
     "null": () => {
         return true;
@@ -54,7 +56,7 @@ export default class Form extends Component {
         return output;
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let {data, options, children} = this.props;
         this.validator(data, this.getOptions(options, children))
     }
@@ -68,7 +70,8 @@ export default class Form extends Component {
         let names = [];
         let disabled = false;
         options.forEach(item => {
-            let value = typeof item.value === "undefined" ? data[item.name] : item.value;
+            if (item.hidden || (item.type && item.type === 'hidden')) return;
+            let value = typeof item.value === "undefined" && data ? data[item.name] : item.value;
             let valueType = getType(value);
             if (isRequired(item)) {
                 let func = validateMap[valueType];
@@ -173,17 +176,17 @@ export default class Form extends Component {
                   action={action} method={method} autoComplete={autoComplete}
                   name={name} target={target} noValidate={noValidate} acceptCharset={acceptCharset}>
                 {!!title && <div className="el-form-title">{title}</div>}
-                {options.map((props, index) => {
+                {options && options.map((props, index) => {
                     return (
                         <FormItem
                             onChange={this.handleChange.bind(this, props)}
+                            value={data && data[props.name]}
+                            key={props.name + '.' + index}
                             requiredMark={requiredMark}
-                            value={data[props.name]}
                             labelWidth={labelWidth}
                             colon={colon}
                             {...props}
                             col={col}
-                            key={index}
                             beforeSubmit={this.state.beforeSubmit}
                             formValidator={this.handleDisabled.bind(this)}
                         />)
@@ -202,7 +205,7 @@ export default class Form extends Component {
                         if (typeof props.colon !== "boolean") {
                             newProps.colon = colon;
                         }
-                        if (typeof props.value === "undefined") {
+                        if (typeof props.value === "undefined" && data) {
                             newProps.value = data[props.name];
                         }
                         if (props.requiredMark == null) {
@@ -234,6 +237,7 @@ export default class Form extends Component {
 Form.propTypes = {
     colon: PropTypes.bool,
     name: PropTypes.string,
+    data: PropTypes.object,
     error: PropTypes.string,
     action: PropTypes.string,
     method: PropTypes.string,
@@ -250,12 +254,12 @@ Form.propTypes = {
     novalidate: PropTypes.string,
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
-    data: PropTypes.object.isRequired,
     submitButtonProps: PropTypes.object,
     preventMultipleSubmit: PropTypes.bool,
     labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     options: PropTypes.arrayOf(PropTypes.shape({
         colon: PropTypes.bool,
+        hidden: PropTypes.bool,
         label: PropTypes.string,
         required: PropTypes.bool,
         onChange: PropTypes.func,
@@ -285,7 +289,7 @@ Form.propTypes = {
             rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
             type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
         })),
-        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput']),
+        type: PropTypes.oneOf(['text', 'color', 'password', 'datetime', 'number', 'static', 'component', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput', 'hidden']),
     })),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'inline']),
 };
