@@ -334,7 +334,7 @@ export default class DateTime extends React.Component {
                  ref={c => this._el_datetime = c}
                  data-value={updateOn + this.uid}>
                 {input &&
-                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
+                <Input key='i' icon={<i onClick={this.openCalendar.bind(this)} className="fa fa-calendar-minus-o"/>}
                        onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
                        onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)}/>}
                 <div key='dt' className='el-datetime-picker'>
