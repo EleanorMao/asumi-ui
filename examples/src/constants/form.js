@@ -453,6 +453,11 @@ export const api = [{
     'default': "",
     description: "submit button props"
 }, {
+    property: "preventDefault",
+    type: "bool",
+    'default': "",
+    description: "prevent default event when submit"
+}, {
     property: "validator",
     type: "func",
     'default': "()=>{ return disabled}",
