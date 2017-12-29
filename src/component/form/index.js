@@ -1,11 +1,11 @@
 /**
  * Created by elly on 2017/4/13.
  */
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import FormItem from './formItem';
-import Button from '../button';
+import React, {Component}                 from 'react';
+import PropTypes                          from 'prop-types';
+import classnames                         from 'classnames';
+import FormItem                           from './formItem';
+import Button                             from '../button';
 import {noop, extend, getType, getValues} from "../util";
 
 function isRequired({validate, required}) {
@@ -41,7 +41,7 @@ export default class Form extends Component {
         this.state = {
             disabled: false,
             beforeSubmit: false,
-        }
+        };
     }
 
     getOptions(options, children) {
@@ -58,11 +58,11 @@ export default class Form extends Component {
 
     componentWillMount() {
         let {data, options, children} = this.props;
-        this.validator(data, this.getOptions(options, children))
+        this.validator(data, this.getOptions(options, children));
     }
 
     componentWillReceiveProps({data, options, children}) {
-        this.validator(data, this.getOptions(options, children))
+        this.validator(data, this.getOptions(options, children));
     }
 
     validator(data, options) {
@@ -121,7 +121,7 @@ export default class Form extends Component {
         }
         let disabled = !!_disabled || !!(~getValues(this._disabledMap).indexOf(true) || ~getValues(this._requiredMap).indexOf(true));
         if (disabled !== this.state.disabled) {
-            this.setState({disabled})
+            this.setState({disabled});
         }
         this.cancelSubmitPending(disabled, props, cb);
     }
@@ -140,22 +140,25 @@ export default class Form extends Component {
     handleBeforeSubmit(_disabled) {
         if (_disabled || this._pending) return;
         this._pending = true;
-        this.setState({beforeSubmit: true})
+        this.setState({beforeSubmit: true});
     }
 
-    handleSubmit() {
-        let {validator, onSubmit, preventMultipleSubmit} = this.props;
+    handleSubmit(e) {
+        let {validator, onSubmit, preventMultipleSubmit, preventDefault} = this.props;
+        if (preventDefault) {
+            e.preventDefault();
+        }
         if (preventMultipleSubmit && this._pending) return;
         this.setState({beforeSubmit: false});
         if (validator && validator()) {
-            this.setState({disabled: true})
+            this.setState({disabled: true});
         } else {
             let cb = noop;
             if (preventMultipleSubmit) {
                 this._pending = true;
                 cb = () => {
                     this._pending = false;
-                }
+                };
             }
             onSubmit && onSubmit(cb);
         }
@@ -189,7 +192,7 @@ export default class Form extends Component {
                             col={col}
                             beforeSubmit={this.state.beforeSubmit}
                             formValidator={this.handleDisabled.bind(this)}
-                        />)
+                        />);
                 })}
                 {children && React.Children.map(children, (elm) => {
                     if (elm && elm.type && elm.type._component_name === "FormItem") {
@@ -200,7 +203,7 @@ export default class Form extends Component {
                             formValidator: this.handleDisabled.bind(this)
                         };
                         if (!props.onChange) {
-                            newProps.onChange = this.handleChange.bind(this, props)
+                            newProps.onChange = this.handleChange.bind(this, props);
                         }
                         if (typeof props.colon !== "boolean") {
                             newProps.colon = colon;
@@ -214,7 +217,7 @@ export default class Form extends Component {
                         if (typeof props.labelWidth !== "number" && typeof props.labelWidth !== "string") {
                             newProps.labelWidth = labelWidth;
                         }
-                        return React.cloneElement(elm, newProps)
+                        return React.cloneElement(elm, newProps);
                     } else if (elm) {
                         return elm;
                     }
@@ -230,7 +233,7 @@ export default class Form extends Component {
                     {!!error && <div className="el-form-error">{error}</div>}
                 </FormItem>
             </form>
-        )
+        );
     }
 }
 
@@ -255,6 +258,7 @@ Form.propTypes = {
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     submitButtonProps: PropTypes.object,
+    preventDefault: PropTypes.bool,
     preventMultipleSubmit: PropTypes.bool,
     labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     options: PropTypes.arrayOf(PropTypes.shape({
