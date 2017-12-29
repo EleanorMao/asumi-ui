@@ -137,17 +137,17 @@ export default class Form extends Component {
         }
     }
 
-    handleBeforeSubmit(_disabled) {
+    handleBeforeSubmit(_disabled, e) {
+        if (this.props.preventDefault) {
+            e.preventDefault();
+        }
         if (_disabled || this._pending) return;
         this._pending = true;
         this.setState({beforeSubmit: true});
     }
 
     handleSubmit(e) {
-        let {validator, onSubmit, preventMultipleSubmit, preventDefault} = this.props;
-        if (preventDefault) {
-            e.preventDefault();
-        }
+        let {validator, onSubmit, preventMultipleSubmit} = this.props;
         if (preventMultipleSubmit && this._pending) return;
         this.setState({beforeSubmit: false});
         if (validator && validator()) {
