@@ -1,19 +1,19 @@
 /**
  * Created by elly on 2017/4/8.
  */
-import ReactDOM from 'react-dom';
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Input from '../input';
-import Option from './option';
+import ReactDOM                                                        from 'react-dom';
+import React, {Component}                                              from 'react';
+import PropTypes                                                       from 'prop-types';
+import classnames                                                      from 'classnames';
+import Input                                                           from '../input';
+import Option                                                          from './option';
 import {isArr, extend, contains, addEvent, removeEvent, KeyCode, noop} from '../util';
 
 function renderComponent(instance) {
     if (!instance.container) {
         instance.container = instance.getContainer();
     }
-    ReactDOM.unstable_renderSubtreeIntoContainer(instance, instance.optionsRender(), instance.container)
+    ReactDOM.unstable_renderSubtreeIntoContainer(instance, instance.optionsRender(), instance.container);
 }
 
 export default class Select extends Component {
@@ -28,7 +28,7 @@ export default class Select extends Component {
             renderValue: '',
             selectedValue: [],
             selectedLabel: []
-        }
+        };
     }
 
     componentWillMount() {
@@ -61,12 +61,12 @@ export default class Select extends Component {
         length = this.hasSelectAll() ? length + 1 : length;
         if (minus) {
             if (this.index === 0) {
-                this.index = length
+                this.index = length;
             }
             this.index--;
         } else {
             if (this.index === length - 1) {
-                this.index = -1
+                this.index = -1;
             }
             this.index++;
         }
@@ -75,21 +75,21 @@ export default class Select extends Component {
     hasSelectAll() {
         let {data, renderData} = this.state;
         let {multiple, selectAll} = this.props;
-        return !!(multiple && selectAll && renderData.length === data.length)
+        return !!(multiple && selectAll && renderData.length === data.length);
     }
 
     isSelectAll(selectedAll) {
         let allValue = this.allValue;
         return !allValue.filter(v => {
-            return !~selectedAll.indexOf(v)
+            return !~selectedAll.indexOf(v);
         }).length;
     };
 
     getData(props) {
         let data = [], renderData = [], allValue = [], selectedLabel = [], selectedValue = [];
         let {value, defaultValue, children} = props;
-        value = isArr(value) ? value : ( !value && value != '0' ? [] : [value]);
-        defaultValue = isArr(defaultValue) ? defaultValue : ( !defaultValue && defaultValue != '0' ? [] : [defaultValue]);
+        value = isArr(value) ? value : (value == null ? [] : [value]);
+        defaultValue = isArr(defaultValue) ? defaultValue : (defaultValue == null ? [] : [defaultValue]);
         selectedValue = value.length ? value : defaultValue;
         if (children) {
             React.Children.map(children, (elm) => {
@@ -124,7 +124,7 @@ export default class Select extends Component {
                 output.push(extend({}, item));
             }
         }
-        return output
+        return output;
     }
 
     getPosition() {
@@ -174,7 +174,7 @@ export default class Select extends Component {
     handleToggle(e) {
         if (this.props.disabled) return;
         if (this.state.visible) {
-            this.hideComponent(e)
+            this.hideComponent(e);
         } else {
             renderComponent(this);
             this.showComponent();
@@ -226,7 +226,7 @@ export default class Select extends Component {
         } else if (keyCode === KeyCode.ENTER) {
             this.handleToggle(e);
         }
-        if (onKeyDown) onKeyDown(e)
+        if (onKeyDown) onKeyDown(e);
     }
 
     handleChange(e) {
@@ -253,7 +253,7 @@ export default class Select extends Component {
                 prev.renderData = [].concat(prev.data);
                 prev.renderValue = prev.selectedLabel.join(", ");
             }
-            return prev
+            return prev;
         });
         if (focus) {
             this.props.onFocus && this.props.onFocus(e);
@@ -293,7 +293,7 @@ export default class Select extends Component {
 
     showComponent() {
         this.setState({visible: true},
-            this.addStyle.bind(this))
+            this.addStyle.bind(this));
     }
 
     hideComponent(e) {
@@ -322,10 +322,10 @@ export default class Select extends Component {
         let className = classnames("el-select-dropdown", dropdownClassName || "");
         return (
             <div className={className} style={dropdownStyle} ref={c => {
-                this.el_select_menu = c
+                this.el_select_menu = c;
             }}>
                 <ul ref={c => {
-                    this.el_select_ul = c
+                    this.el_select_ul = c;
                 }}>
                     {(searchable && !renderData.length) &&
                     <li key="no-data" className="el-select-no-data">{noMatchText}</li>}
@@ -353,7 +353,7 @@ export default class Select extends Component {
                     })}
                 </ul>
             </div>
-        )
+        );
     }
 
     render() {
@@ -367,7 +367,7 @@ export default class Select extends Component {
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
         return (
             <div className={_className} style={style} ref={(c) => {
-                this.el_select = c
+                this.el_select = c;
             }}>
                 <Input
                     {...other}
@@ -383,7 +383,7 @@ export default class Select extends Component {
                     onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : null}
                 />
             </div>
-        )
+        );
     }
 }
 
