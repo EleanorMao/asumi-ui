@@ -22,41 +22,42 @@
  *
  */
 
-import Menu from './component/menu';
-import SubMenu from './component/menu/subMenu';
-import MenuItem from './component/menu/menuItem';
-import MenuItemGroup from './component/menu/menuItemGroup';
-import Tag from './component/tag';
-import Grid from './component/grid';
-import Form from './component/form';
-import Tabs from './component/tabs';
-import Radio from './component/radio';
-import Group from './component/group';
-import Input from './component/input';
-import Modal from './component/modal';
-import Table from './component/table';
-import Editor from './component/editor';
-import Col from './component/table/col';
-import Button from './component/button';
-import Select from './component/select';
-import Upload from './component/upload';
-import Loading from './component/loading';
-import Popover from './component/popover';
-import Message from './component/message';
-import Animate from './component/animate';
-import Checkbox from './component/checkbox';
-import Dropdown from './component/dropdown';
-import Option from './component/select/option';
-import Pagination from './component/pagination';
-import FormItem from './component/form/formItem';
-import TabPanel from './component/tabs/tabPanel';
-import NumberInput from './component/numberInput';
-import RadioGroup from './component/radio/radioGroup';
-import CheckboxGroup from './component/checkbox/checkGroup';
+import Menu             from './component/menu';
+import SubMenu          from './component/menu/subMenu';
+import MenuItem         from './component/menu/menuItem';
+import MenuItemGroup    from './component/menu/menuItemGroup';
+import Tag              from './component/tag';
+import Grid             from './component/grid';
+import Form             from './component/form';
+import Tabs             from './component/tabs';
+import Radio            from './component/radio';
+import Group            from './component/group';
+import Input            from './component/input';
+import Modal            from './component/modal';
+import Table            from './component/table';
+import Col              from './component/table/col';
+import Editor           from './component/editor';
+import Button           from './component/button';
+import Select           from './component/select';
+import Upload           from './component/upload';
+import Loading          from './component/loading';
+import Popover          from './component/popover';
+import Message          from './component/message';
+import Animate          from './component/animate';
+import Checkbox         from './component/checkbox';
+import Dropdown         from './component/dropdown';
+import Option           from './component/select/option';
+import Pagination       from './component/pagination';
+import FormItem         from './component/form/formItem';
+import TabPanel         from './component/tabs/tabPanel';
+import NumberInput      from './component/numberInput';
+import RadioGroup       from './component/radio/radioGroup';
+import CheckboxGroup    from './component/checkbox/checkGroup';
 import SimplePagination from './component/pagination/simplePagination';
-import DateTime from './component/datetime';
-import Transfer from './component/transfer';
-import TagInput from './component/tagInput';
+import DateTime         from './component/datetime';
+import Transfer         from './component/transfer';
+import TagInput         from './component/tagInput';
+import Icon             from './component/icon';
 
 const Tooltip = Popover;
 
@@ -78,6 +79,7 @@ Pagination.Simple = SimplePagination;
 export {
     Col,
     Tag,
+    Icon,
     Tabs,
     Menu,
     Form,
