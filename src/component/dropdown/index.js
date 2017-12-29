@@ -1,21 +1,24 @@
 /**
  * Created by elly on 16/9/19.
  */
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React, {Component}                      from 'react';
+import PropTypes                               from 'prop-types';
+import classnames                              from 'classnames';
 import {contains, addEvent, removeEvent, noop} from '../util';
 
 export default class Dropdown extends Component {
     constructor(props) {
         super(props);
-        this.state = {toggle: false, className: ''}
+        this.state = {toggle: false, className: props.placement === 'top' ? 'el-dropdown-menu-bottom' : ''};
     }
 
     componentDidMount() {
-        this.getClassName();
+        let placement = this.props.placement;
+        if (!placement || placement === 'auto') {
+            this.getClassName();
+            addEvent(window, 'resize', this.getClassName.bind(this));
+        }
         addEvent(window, 'click', this.clickToClose.bind(this));
-        addEvent(window, 'resize', this.getClassName.bind(this));
     }
 
     componentWillUnmount() {
@@ -23,15 +26,17 @@ export default class Dropdown extends Component {
         removeEvent(window, 'resize', this.getClassName.bind(this));
     }
 
-    componentWillReceiveProps({list}) {
+    componentWillReceiveProps({list, placement}) {
         if (this.state.toggle) {
             this.setState(old => {
                 old.toggle = false;
                 return old;
-            })
+            });
         }
-        if (this._dropdown && list.length !== this.props.list.length) {
+        if ((!placement || placement === 'auto') && this._dropdown && list.length !== this.props.list.length) {
             this.getClassName(list);
+        } else if (placement !== this.props.placement) {
+            this.setState({className: placement === 'top' ? 'el-dropdown-menu-bottom' : ''});
         }
     }
 
@@ -53,7 +58,7 @@ export default class Dropdown extends Component {
         this.setState(old => {
             old.toggle = !old.toggle;
             return old;
-        })
+        });
     }
 
     clickToClose(e) {
@@ -62,7 +67,7 @@ export default class Dropdown extends Component {
             this.setState(old => {
                 old.toggle = false;
                 return old;
-            })
+            });
         }
     }
 
@@ -79,7 +84,7 @@ export default class Dropdown extends Component {
         });
         return (
             <div className="el-dropdown" style={style} ref={(c) => {
-                this._dropdown = c
+                this._dropdown = c;
             }}>
                 <button
                     type="button"
@@ -91,7 +96,7 @@ export default class Dropdown extends Component {
                         style={this.state.toggle ? {borderTop: 0, borderBottom: '4px solid'} : null}/>
                 </button>
                 <ul className={"el-dropdown-menu " + this.state.className} ref={(c) => {
-                    this._dropdown_menu = c
+                    this._dropdown_menu = c;
                 }} style={{display: this.state.toggle && 'block' || null}}>
                     {
                         list.map((item, index) => {
@@ -102,14 +107,14 @@ export default class Dropdown extends Component {
                                            if (!item.href) {
                                                e.preventDefault();
                                            }
-                                           onClick(item)
+                                           onClick(item);
                                        }}>{item.label || item}</a>
                                 </li>);
                         })
                     }
                 </ul>
             </div>
-        )
+        );
     }
 }
 
@@ -117,6 +122,7 @@ Dropdown.propTypes = {
     style: PropTypes.object,
     onClick: PropTypes.func,
     className: PropTypes.string,
+    placement: PropTypes.oneOf(['auto', 'top', 'bottom']),
     type: PropTypes.oneOf(['default', 'danger', 'success', 'primary', 'secondary', 'warning', 'error']),
     list: PropTypes.oneOfType([PropTypes.array, PropTypes.shape({
         href: PropTypes.string,
@@ -125,6 +131,7 @@ Dropdown.propTypes = {
 
 };
 Dropdown.defaultProps = {
+    placement: 'auto',
     type: 'default',
     onClick: noop
 };

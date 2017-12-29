@@ -28,7 +28,7 @@ exports[`Form create component 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="0"
+      key="text.0"
       label="文字"
       name="text"
       onChange={[Function]}
@@ -54,6 +54,8 @@ exports[`Form create component 1`] = `
             name="text"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="text"
           >
             <div
@@ -168,6 +170,8 @@ exports[`Form create form by form items 1`] = `
             name="text"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="text"
             value="text"
           >
@@ -213,6 +217,8 @@ exports[`Form create form by form items 1`] = `
             name="color"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="color"
             value="#fff"
           >
@@ -258,6 +264,8 @@ exports[`Form create form by form items 1`] = `
             name="password"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="password"
             value="password"
           >
@@ -322,18 +330,21 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512615491617.7456"
+              data-value="days1514526838036.465"
             >
               <Input
                 icon={
                   <i
                     className="fa fa-calendar-minus-o"
+                    onClick={[Function]}
                   />
                 }
                 key="i"
                 onChange={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                onPressEnter={[Function]}
                 type="text"
                 value="12/02/2017 7:18 PM"
               >
@@ -345,6 +356,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <i
                       className="fa fa-calendar-minus-o"
+                      onClick={[Function]}
                     />
                   </span>
                   <input
@@ -380,7 +392,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512615491617.7456",
+                      "uid": "days1514526838036.465",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -404,7 +416,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512615491617.7456"
+                    uid="days1514526838036.465"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -413,7 +425,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512615491617.7456"
+                      data-value="days1514526838036.465"
                     >
                       <table>
                         <thead
@@ -587,7 +599,7 @@ exports[`Form create form by form items 1`] = `
                               6
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_7"
                               onClick={[Function]}
                             >
@@ -753,7 +765,7 @@ exports[`Form create form by form items 1`] = `
                               28
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_29"
                               onClick={[Function]}
                             >
@@ -899,6 +911,8 @@ exports[`Form create form by form items 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
+              onKeyPress={[Function]}
+              onPressEnter={[Function]}
               type="text"
               value={10}
             >
@@ -998,6 +1012,8 @@ exports[`Form create form by form items 1`] = `
             name="textarea"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="textarea"
             value="textarea"
           >
@@ -1009,6 +1025,7 @@ exports[`Form create form by form items 1`] = `
                 name="textarea"
                 onBlur={[Function]}
                 onChange={[Function]}
+                onKeyPress={[Function]}
                 value="textarea"
               />
             </div>
@@ -1073,6 +1090,8 @@ exports[`Form create form by form items 1`] = `
                 onClick={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                onPressEnter={[Function]}
                 readOnly={true}
                 type="text"
                 value="1"
@@ -1704,7 +1723,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="0"
+      key="text.0"
       name="text"
       onChange={[Function]}
       requiredMark="*"
@@ -1723,6 +1742,8 @@ exports[`Form create form by options 1`] = `
             name="text"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="text"
             value="text"
           >
@@ -1749,7 +1770,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="1"
+      key="color.1"
       name="color"
       onChange={[Function]}
       requiredMark="*"
@@ -1768,6 +1789,8 @@ exports[`Form create form by options 1`] = `
             name="color"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="color"
             value="#fff"
           >
@@ -1794,7 +1817,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="2"
+      key="password.2"
       name="password"
       onChange={[Function]}
       requiredMark="*"
@@ -1813,6 +1836,8 @@ exports[`Form create form by options 1`] = `
             name="password"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="password"
             value="password"
           >
@@ -1839,7 +1864,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="3"
+      key="datetime.3"
       name="datetime"
       onChange={[Function]}
       requiredMark="*"
@@ -1877,18 +1902,21 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1512615491251.6646"
+              data-value="days1514526837664.485"
             >
               <Input
                 icon={
                   <i
                     className="fa fa-calendar-minus-o"
+                    onClick={[Function]}
                   />
                 }
                 key="i"
                 onChange={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                onPressEnter={[Function]}
                 type="text"
                 value="12/02/2017 7:18 PM"
               >
@@ -1900,6 +1928,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <i
                       className="fa fa-calendar-minus-o"
+                      onClick={[Function]}
                     />
                   </span>
                   <input
@@ -1935,7 +1964,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1512615491251.6646",
+                      "uid": "days1514526837664.485",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1959,7 +1988,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1512615491251.6646"
+                    uid="days1514526837664.485"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1968,7 +1997,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1512615491251.6646"
+                      data-value="days1514526837664.485"
                     >
                       <table>
                         <thead
@@ -2142,7 +2171,7 @@ exports[`Form create form by options 1`] = `
                               6
                             </td>
                             <td
-                              className="el-datetime-day el-datetime-today"
+                              className="el-datetime-day"
                               key="12_7"
                               onClick={[Function]}
                             >
@@ -2308,7 +2337,7 @@ exports[`Form create form by options 1`] = `
                               28
                             </td>
                             <td
-                              className="el-datetime-day"
+                              className="el-datetime-day el-datetime-today"
                               key="12_29"
                               onClick={[Function]}
                             >
@@ -2406,7 +2435,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="4"
+      key="number.4"
       name="number"
       onChange={[Function]}
       requiredMark="*"
@@ -2454,6 +2483,8 @@ exports[`Form create form by options 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
+              onKeyPress={[Function]}
+              onPressEnter={[Function]}
               type="text"
               value={10}
             >
@@ -2504,7 +2535,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="5"
+      key="static.5"
       name="static"
       onChange={[Function]}
       requiredMark="*"
@@ -2534,7 +2565,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="6"
+      key="textarea.6"
       name="textarea"
       onChange={[Function]}
       requiredMark="*"
@@ -2553,6 +2584,8 @@ exports[`Form create form by options 1`] = `
             name="textarea"
             onBlur={[Function]}
             onChange={[Function]}
+            onKeyPress={[Function]}
+            onPressEnter={[Function]}
             type="textarea"
             value="textarea"
           >
@@ -2564,6 +2597,7 @@ exports[`Form create form by options 1`] = `
                 name="textarea"
                 onBlur={[Function]}
                 onChange={[Function]}
+                onKeyPress={[Function]}
                 value="textarea"
               />
             </div>
@@ -2578,7 +2612,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="7"
+      key="select.7"
       name="select"
       onChange={[Function]}
       options={
@@ -2628,6 +2662,8 @@ exports[`Form create form by options 1`] = `
                 onClick={[Function]}
                 onFocus={[Function]}
                 onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                onPressEnter={[Function]}
                 readOnly={true}
                 type="text"
                 value="1"
@@ -2670,7 +2706,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="8"
+      key="checkbox.8"
       name="checkbox"
       onChange={[Function]}
       requiredMark="*"
@@ -2724,7 +2760,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="9"
+      key="radio.9"
       name="radio"
       onChange={[Function]}
       requiredMark="*"
@@ -2777,7 +2813,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="10"
+      key="switch.10"
       name="switch"
       onChange={[Function]}
       requiredMark="*"
@@ -2830,7 +2866,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="11"
+      key="upload.11"
       name="upload"
       onChange={[Function]}
       requiredMark="*"
@@ -2877,7 +2913,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="12"
+      key="radiogroup.12"
       name="radiogroup"
       onChange={[Function]}
       requiredMark="*"
@@ -2917,7 +2953,7 @@ exports[`Form create form by options 1`] = `
       beforeSubmit={false}
       col={0}
       formValidator={[Function]}
-      key="13"
+      key="checkgroup.13"
       name="checkgroup"
       onChange={[Function]}
       options={
@@ -3163,6 +3199,8 @@ exports[`FormItem create component 1`] = `
       <Input
         onBlur={[Function]}
         onChange={[Function]}
+        onKeyPress={[Function]}
+        onPressEnter={[Function]}
         type="text"
       >
         <div
@@ -3210,6 +3248,8 @@ exports[`FormItem define colon 1`] = `
         label="文字"
         onBlur={[Function]}
         onChange={[Function]}
+        onKeyPress={[Function]}
+        onPressEnter={[Function]}
         type="text"
       >
         <div
@@ -3254,6 +3294,8 @@ exports[`FormItem define labelWidth 1`] = `
       <Input
         onBlur={[Function]}
         onChange={[Function]}
+        onKeyPress={[Function]}
+        onPressEnter={[Function]}
         type="text"
       >
         <div
@@ -3297,6 +3339,8 @@ exports[`FormItem define required 1`] = `
       <Input
         onBlur={[Function]}
         onChange={[Function]}
+        onKeyPress={[Function]}
+        onPressEnter={[Function]}
         required={true}
         type="text"
       >
@@ -3363,6 +3407,8 @@ exports[`FormItem define tips 1`] = `
         label="文字"
         onBlur={[Function]}
         onChange={[Function]}
+        onKeyPress={[Function]}
+        onPressEnter={[Function]}
         type="text"
       >
         <div

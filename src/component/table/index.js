@@ -4,14 +4,14 @@
  * Author: Eleanor Mao
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Row from './row';
-import Header from './header';
-import classnames from 'classnames';
-import Dropdown from '../dropdown';
-import Paging from '../pagination';
-import NestedHeader from './nestedHeader';
-import SimplePaging from '../pagination/simplePagination';
+import PropTypes          from 'prop-types';
+import Row                from './row';
+import Header             from './header';
+import classnames         from 'classnames';
+import Dropdown           from '../dropdown';
+import Paging             from '../pagination';
+import NestedHeader       from './nestedHeader';
+import SimplePaging       from '../pagination/simplePagination';
 import {
     diff,
     sort,
@@ -20,73 +20,95 @@ import {
     addEvent,
     removeEvent,
     getScrollBarWidth
-} from '../util';
+}                         from '../util';
 
-export default class Table extends Component {
-    constructor(props) {
-        super(props);
-        this._instance = {};
-        let data = this._initDictionary(props);
-        this.state = {
-            isHover: null,
-            columnData: [],
-            order: undefined,
-            leftColumnData: [],
-            rightColumnData: [],
-            sortField: undefined,
-            renderedList: data.data,
-            dictionary: data.dictionary,
-            currentPage: (props.pagination || props.topPagination) && props.options.page || 1,
-            length: (props.pagination || props.topPagination) && props.options.sizePerPage || data.data.length
+function sliceData(data, page, length) {
+    return data.slice((page - 1) * length, page * length);
+}
+
+function getAllValue(data, isKey) {
+    if (data && data.length) {
+        return data.map(row => {
+            return row[isKey];
+        });
+    }
+    return [];
+}
+
+function getAllKey(data, hashKey, keyName, childrenPropertyName) {
+    let output = [];
+    for (let i = 0; i < data.length; i++) {
+        let item = data[i];
+        if (hashKey && !item[keyName]) item[keyName] = uniqueID(); //引用大法好
+        if (item[childrenPropertyName] && item[childrenPropertyName].length) {
+            output.push(item[keyName]);
+            data = data.concat(item[childrenPropertyName]);
         }
     }
+    return output;
+}
 
-    _initDictionary(props) {
-        let dictionary = [], data = props.data.slice();
+function initDictionary(props) {
+    let dictionary = [], data = props.data.slice();
+    if (props.isTree) {
         const {
             uid,
             isKey,
-            isTree,
             hashKey,
             expandAll,
             expandRowKeys,
             childrenPropertyName
         } = props;
         let keyName = hashKey ? uid : isKey;
-        if (isTree) {
-            if (expandAll) {
-                dictionary = this._recursion(data, hashKey, keyName, childrenPropertyName);
-            } else if (expandRowKeys && expandRowKeys.length) {
-                dictionary = expandRowKeys.slice();
-            }
+        if (expandAll) {
+            dictionary = getAllKey(data, hashKey, keyName, childrenPropertyName);
+        } else if (expandRowKeys && expandRowKeys.length) {
+            dictionary = expandRowKeys.slice();
         }
-        return {data, dictionary};
+    }
+    return {data, dictionary};
+}
+
+function getLastChild(data) {
+    let invalid = [],
+        list = [];
+    for (let i = 0, len = data.length; i < len; i++) {
+        if (data[i].hidden) {
+            invalid.push(i);
+        }
+        list.push(i);
+    }
+    let diffList = diff(list, invalid);
+    return diffList[diffList.length - 1];
+}
+
+export default class Table extends Component {
+    constructor(props) {
+        super(props);
+        this._instance = {};
+        let {data, dictionary} = initDictionary(props);
+        this.state = {
+            dictionary,
+            isHover: null,
+            columnData: [],
+            order: undefined,
+            renderedList: data,
+            leftColumnData: [],
+            rightColumnData: [],
+            sortField: undefined,
+            allChecked: this._isAllChecked(data, props.selectRow),
+            currentPage: (props.pagination || props.topPagination) && props.options.page || 1,
+            length: (props.pagination || props.topPagination) && props.options.sizePerPage || data.length
+        };
     }
 
-    _recursion(data, hashKey, keyName, childrenPropertyName) {
-        let dictionary = [];
-        for (let i = 0; i < data.length; i++) {
-            let item = data[i];
-            if (hashKey && !item[keyName]) item[keyName] = uniqueID(); //引用大法好
-            if (item[childrenPropertyName] && item[childrenPropertyName].length) {
-                dictionary.push(item[keyName]);
-                data = data.concat(item[childrenPropertyName]);
-            }
+    _isAllChecked(list, selectRow) {
+        if (list && list.length && selectRow && selectRow.mode && selectRow.mode !== 'node' && selectRow.selected && selectRow.selected.length) {
+            return !getAllValue(list.slice(), this._getKeyName()).filter(v => {
+                return !~selectRow.selected.indexOf(v);
+            }).length;
         }
-        return dictionary;
-    }
-
-    _flatten(data, childrenPropertyName, hashKey, keyName) {
-        let output = [];
-        for (let i = 0; i < data.length; i++) {
-            let item = data[i];
-            if (hashKey && !item[keyName]) item[keyName] = uniqueID();
-            if (item[childrenPropertyName]) {
-                output.push(item[keyName]);
-                data = data.concat(item[childrenPropertyName]);
-            }
-        }
-        return output;
+        return false;
     }
 
     _initColumnData(props) {
@@ -114,31 +136,6 @@ export default class Table extends Component {
         });
     }
 
-    _getAllValue(data, isKey) {
-        let output = [];
-        for (let i = 0, len = data.length; i < len; i++) {
-            output.push(data[i][isKey]);
-        }
-        return output;
-    }
-
-    _getLastChild(data) {
-        let invalid = [],
-            list = [];
-        for (let i = 0, len = data.length; i < len; i++) {
-            if (data[i].hidden) {
-                invalid.push(i);
-            }
-            list.push(i);
-        }
-        let diffList = diff(list, invalid);
-        return diffList[diffList.length - 1];
-    }
-
-    _sliceData(data, page, length) {
-        return data.slice((page - 1) * length, page * length);
-    }
-
     _getKeyName() {
         const {hashKey, isKey, uid} = this.props;
         return hashKey ? uid : isKey;
@@ -163,7 +160,7 @@ export default class Table extends Component {
         const scrollBarWidth = getScrollBarWidth();
         const haveScrollBar = refs.body.offsetWidth !== refs.thead._header.offsetWidth;
 
-        let lastChild = this._getLastChild(this.state.columnData), fixedRightWidth = 0;
+        let lastChild = getLastChild(this.state.columnData), fixedRightWidth = 0;
         lastChild = this.props.selectRow.mode && this.props.selectRow.mode !== 'none' ? lastChild + 1 : lastChild;
 
         for (let i = 0; i < length; i++) {
@@ -317,11 +314,12 @@ export default class Table extends Component {
 
     componentWillReceiveProps(nextProps) {
         this._initColumnData(nextProps);
-        let data = this._initDictionary(nextProps);
+        let {data, dictionary} = initDictionary(nextProps);
         this.setState(prevState => {
-            prevState.renderedList = data.data;
-            prevState.dictionary = data.dictionary;
-            prevState.length = (nextProps.pagination || nextProps.topPagination) && nextProps.options.sizePerPage || data.data.length;
+            prevState.renderedList = data;
+            prevState.dictionary = dictionary;
+            prevState.allChecked = this._isAllChecked(data, nextProps.selectRow);
+            prevState.length = (nextProps.pagination || nextProps.topPagination) && nextProps.options.sizePerPage || data.length;
             prevState.currentPage = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
             return prevState;
         });
@@ -339,14 +337,14 @@ export default class Table extends Component {
         let callback = (data) => {
             let childList = data && data[childrenPropertyName] || [];
             if (clickToCloseAll) {
-                childList = this._flatten(childList, childrenPropertyName, hashKey, keyName);
+                childList = getAllKey(childList, hashKey, keyName, childrenPropertyName);
             }
             if (!open) {
                 that.setState(old => {
                     if (hashKey && !data[keyName]) data[keyName] = uniqueID();
                     old.dictionary.push(data[keyName]);
                     return old;
-                })
+                });
             } else {
                 that.setState(old => {
                     old.dictionary.splice(old.dictionary.indexOf(data[keyName]), 1);
@@ -357,7 +355,7 @@ export default class Table extends Component {
                         }
                     });
                     return old;
-                })
+                });
             }
         };
         this.props.onArrowClick(open, data, callback, parent);
@@ -365,9 +363,9 @@ export default class Table extends Component {
 
     handleSelectAll(checked) {
         if (checked) {
-            this.props.selectRow.onSelectAll(checked, this.state.renderedList.slice())
+            this.props.selectRow.onSelectAll(checked, this.state.renderedList.slice());
         } else {
-            this.props.selectRow.onSelectAll(checked, [])
+            this.props.selectRow.onSelectAll(checked, []);
         }
     }
 
@@ -377,7 +375,7 @@ export default class Table extends Component {
             onSortChange
         } = this.props;
         if (remote) {
-            onSortChange(sortField, order)
+            onSortChange(sortField, order);
         } else {
             let data = this.state.renderedList.slice();
 
@@ -442,13 +440,13 @@ export default class Table extends Component {
         this.setState(prevState => {
             prevState.isHover = hover;
             return prevState;
-        })
+        });
     }
 
     colgroupRender(data, mode) {
         let output = [];
         if (mode && mode !== 'none') {
-            output.push(<col key="select" style={{textAlign: 'center', width: 46}}/>)
+            output.push(<col key="select" style={{textAlign: 'center', width: 46}}/>);
         }
         data.map((item, index) => {
             let style = {
@@ -459,7 +457,7 @@ export default class Table extends Component {
             };
             output.push(
                 <col style={style} key={index}/>
-            )
+            );
         });
         return output;
     }
@@ -541,25 +539,25 @@ export default class Table extends Component {
         return (
             <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
                  ref={(c) => {
-                     this._instance.container = c
+                     this._instance.container = c;
                  }}>
                 <table className={className} ref={(c) => {
-                    this._instance.body = c
+                    this._instance.body = c;
                 }}>
                     <colgroup ref={(c) => {
-                        this._instance.colgroup = c
+                        this._instance.colgroup = c;
                     }}>
                         {this.colgroupRender(columnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
                     </colgroup>
                     <tbody ref={(c) => {
-                        this._instance.tbody = c
+                        this._instance.tbody = c;
                     }}>
                     {this.blankRender(data, columnData.length, true)}
                     {this.rowsRender(data, columnData, 0, null, selectRow.hideSelectColumn)}
                     </tbody>
                 </table>
             </div>
-        )
+        );
     }
 
     leftBodyRender(data, className, selectRow) {
@@ -568,18 +566,18 @@ export default class Table extends Component {
             return (
                 <table className={className}>
                     <colgroup ref={(c) => {
-                        this._instance.left = c
+                        this._instance.left = c;
                     }}>
                         {this.colgroupRender(leftColumnData, selectRow.hideSelectColumn ? 'none' : selectRow.mode)}
                     </colgroup>
                     <tbody ref={(c) => {
-                        this._instance.ltbody = c
+                        this._instance.ltbody = c;
                     }}>
                     {this.blankRender(data, leftColumnData.length)}
                     {this.rowsRender(data, leftColumnData, 0, null, selectRow.hideSelectColumn)}
                     </tbody>
                 </table>
-            )
+            );
         }
     }
 
@@ -589,21 +587,21 @@ export default class Table extends Component {
         if (rightColumnData.length) {
             return (
                 <table className={className} ref={(c) => {
-                    this._instance.rightBody = c
+                    this._instance.rightBody = c;
                 }}>
                     <colgroup ref={(c) => {
-                        this._instance.right = c
+                        this._instance.right = c;
                     }}>
                         {this.colgroupRender(rightColumnData, 'none')}
                     </colgroup>
                     <tbody ref={(c) => {
-                        this._instance.rtbody = c
+                        this._instance.rtbody = c;
                     }}>
                     {this.blankRender(data, rightColumnData.length)}
                     {this.rowsRender(data, rightColumnData, 0, null, true, true)}
                     </tbody>
                 </table>
-            )
+            );
         }
     }
 
@@ -628,7 +626,7 @@ export default class Table extends Component {
                             options.paginationShowsTotal(start, to, dataSize)
                     }
                 </div>
-            )
+            );
         }
     }
 
@@ -697,7 +695,7 @@ export default class Table extends Component {
                     />
                 }
             </div>
-        )
+        );
     }
 
     topPagingRender() {
@@ -730,7 +728,7 @@ export default class Table extends Component {
                     />
                 }
             </div>
-        )
+        );
     }
 
     pagingRowRender() {
@@ -745,7 +743,7 @@ export default class Table extends Component {
                     {this.pagingRender()}
                 </div>
             </div>
-        )
+        );
     }
 
     topPagingRowRender() {
@@ -754,7 +752,7 @@ export default class Table extends Component {
             <div className="el-row">
                 {this.topPagingRender()}
             </div>
-        )
+        );
     }
 
     titleRender() {
@@ -799,30 +797,25 @@ export default class Table extends Component {
             length,
             sortField,
             columnData,
+            allChecked,
             currentPage,
             renderedList,
             leftColumnData,
             rightColumnData,
         } = this.state;
 
-        let checked = false;
         let className = classnames({
             'el-table-bordered': true,
             'el-table-striped': striped
         });
-        let renderList = (topPagination || pagination) && !remote ? this._sliceData(renderedList, currentPage, length) : renderedList.slice();
-        if (selectRow.mode && selectRow.mode !== 'none') {
-            checked = !this._getAllValue(renderList.slice(), this._getKeyName()).filter(v => {
-                return !~selectRow.selected.indexOf(v);
-            }).length;
-        }
+        let renderList = (topPagination || pagination) && !remote ? sliceData(renderedList, currentPage, length) : renderedList;
         let paddingBottom = 0;
         let container = this._instance.container;
         if (container && typeof parseFloat(height) === "number" && container.scrollWidth > container.clientWidth) {
             paddingBottom = parseFloat(height) - container.clientHeight;
-        }
-        if (isNaN(paddingBottom)) {
-            paddingBottom = 0;
+            if (isNaN(paddingBottom)) {
+                paddingBottom = 0;
+            }
         }
         return (
             <div className={"el-table-group el-" + lineWrap} style={style}>
@@ -832,7 +825,7 @@ export default class Table extends Component {
                     !!nestedHead.length &&
                     <NestedHeader
                         ref={(c) => {
-                            this._instance.nested = c
+                            this._instance.nested = c;
                         }} nestedHead={nestedHead} isTree={isTree}
                         selectRow={selectRow} lineWrap={lineWrap}
                         cols={columnData}
@@ -842,10 +835,10 @@ export default class Table extends Component {
                     <div className="el-table">
                         <Header
                             ref={(c) => {
-                                this._instance.thead = c
+                                this._instance.thead = c;
                             }} isTree={isTree}
                             onSelectAll={this.handleSelectAll.bind(this)}
-                            selectRow={selectRow} checked={checked}
+                            selectRow={selectRow} checked={allChecked}
                             sortOrder={remote ? sortOrder : order}
                             sortName={remote ? sortName : sortField}
                             onSort={this.handleSort.bind(this)}
@@ -860,10 +853,10 @@ export default class Table extends Component {
                             !!leftColumnData.length &&
                             <Header
                                 ref={(c) => {
-                                    this._instance.lthead = c
+                                    this._instance.lthead = c;
                                 }} left={leftColumnData.length} isTree={isTree}
                                 onSelectAll={this.handleSelectAll.bind(this)}
-                                selectRow={selectRow} checked={checked}
+                                selectRow={selectRow} checked={allChecked}
                                 sortName={remote ? sortName : sortField}
                                 sortOrder={remote ? sortOrder : order}
                                 onSort={this.handleSort.bind(this)}
@@ -874,7 +867,7 @@ export default class Table extends Component {
                         }
                         <div
                             ref={(c) => {
-                                this._instance.leftContainer = c
+                                this._instance.leftContainer = c;
                             }} className="el-table-container el-table-body-container"
                             style={{height: height || 'auto', paddingBottom: paddingBottom}}
                         >
@@ -886,7 +879,7 @@ export default class Table extends Component {
                             !!rightColumnData.length &&
                             <Header
                                 ref={(c) => {
-                                    this._instance.rthead = c
+                                    this._instance.rthead = c;
                                 }} right={rightColumnData.length} isTree={isTree}
                                 sortName={remote ? sortName : sortField}
                                 sortOrd er={remote ? sortOrder : order}
@@ -898,7 +891,7 @@ export default class Table extends Component {
                         }
                         <div
                             ref={(c) => {
-                                this._instance.rightContainer = c
+                                this._instance.rightContainer = c;
                             }} className="el-table-container el-table-body-container"
                             style={{height: height || 'auto', paddingBottom: paddingBottom}}
                         >
@@ -909,7 +902,7 @@ export default class Table extends Component {
                 </div>
                 {this.pagingRowRender()}
             </div>
-        )
+        );
 
     }
 }
@@ -959,8 +952,8 @@ Table.defaultProps = {
 
 Table.propTypes = {
     data: PropTypes.array,
-    remote: PropTypes.bool,
     hover: PropTypes.bool,
+    remote: PropTypes.bool,
     striped: PropTypes.bool,
     dataSize: PropTypes.number,
     pagination: PropTypes.bool,
