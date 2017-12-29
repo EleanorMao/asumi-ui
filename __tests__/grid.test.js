@@ -29,7 +29,7 @@ describe('Grid Col', () => {
     it('create component', () => {
         const component = shallow(<Grid.Col/>);
         expect(component).toBeDefined();
-        expect(component.find('.el-col-12').length).toEqual(1);
+        expect(component.find('.el-col-24').length).toEqual(1);
     });
     it('define col[number]', () => {
         const component = shallow(<Grid.Col col={6}/>);

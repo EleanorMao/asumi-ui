@@ -168,7 +168,7 @@ export default class Form extends Component {
             submitButtonProps, children, style, encType, action, method, autoComplete,
             target, noValidate, acceptCharset
         } = this.props; //哎..这么写自己都看着烦啊，但是我就是控制不了我叽己啊
-        let col = colNum ? Math.ceil(12 / colNum) : 0;
+        let col = colNum ? Math.ceil(24 / colNum) : 0;
         let _disabled = this.state.disabled || disabled || submitButtonProps.disabled;
         let _className = classnames('el-form', layout ? `el-${layout}` : null, col ? 'el-grid-row' : null, className);
         return (

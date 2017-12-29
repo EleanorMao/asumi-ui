@@ -25,5 +25,5 @@ GridCol.propTypes = {
 };
 
 GridCol.defaultProps = {
-    col: 12
+    col: 24
 };

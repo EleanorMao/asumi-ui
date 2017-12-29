@@ -1,5 +1,5 @@
 .el-grid-row {
-  margin-right: -1.1538rem;
+  margin-left: -1.1538rem;
   &:before, &:after {
     content: " ";
     display: table;
@@ -9,10 +9,33 @@
   }
 }
 
-.el-col-1, .el-col-10, .el-col-11, .el-col-12, .el-col-2, .el-col-3, .el-col-4, .el-col-5, .el-col-6, .el-col-7, .el-col-8, .el-col-9 {
+.el-col-1,
+.el-col-10,
+.el-col-11,
+.el-col-12,
+.el-col-13,
+.el-col-14,
+.el-col-15,
+.el-col-16,
+.el-col-17,
+.el-col-18,
+.el-col-19,
+.el-col-20,
+.el-col-21,
+.el-col-22,
+.el-col-23,
+.el-col-24,
+.el-col-2,
+.el-col-3,
+.el-col-4,
+.el-col-5,
+.el-col-6,
+.el-col-7,
+.el-col-8,
+.el-col-9 {
   float: left;
   min-height: 1px;
-  padding-right: 1.1538rem;
+  padding-left: 1.1538rem;
   position: relative;
   &.el-col-inline {
     float: none;
@@ -20,105 +43,75 @@
   }
 }
 
-.el-col-12 {
+.el-col-24 {
   float: none
 }
 
-.el-col-1 {
-  width: 8.33333%
+.make-col(@i) when (@i>=1) {
+  .el-col-@{i} {
+    width: (@i*(100%/24));
+  }
+  .make-col((@i - 1))
 }
 
-.el-col-2 {
-  width: 16.6667%
+.make-col(23);
+
+.make-offset(@j) when (@j>=1) {
+  .el-col-offset-@{j} {
+    margin-left: (@j*(100%/24));
+  }
+  .make-offset((@j - 1))
 }
 
-.el-col-3 {
-  width: 25%
-}
+.make-offset(24);
 
-.el-col-4 {
-  width: 33.3333%
-}
-
-.el-col-5 {
-  width: 41.6667%
-}
-
-.el-col-6 {
-  width: 50%
-}
-
-.el-col-7 {
-  width: 58.3333%
-}
-
-.el-col-8 {
-  width: 66.6667%
-}
-
-.el-col-9 {
-  width: 75%
-}
-
-.el-col-10 {
-  width: 83.3333%
-}
-
-.el-col-11 {
-  width: 91.6667%
-}
-
-.el-col-12 {
-  width: 100%
-}
-
-.el-col-offset-12 {
-  margin-left: 100%
-}
-
-.el-col-offset-11 {
-  margin-left: 91.6667%
-}
-
-.el-col-offset-10 {
-  margin-left: 83.3333%
-}
-
-.el-col-offset-9 {
-  margin-left: 75%
-}
-
-.el-col-offset-8 {
-  margin-left: 66.6667%
-}
-
-.el-col-offset-7 {
-  margin-left: 58.3333%
-}
-
-.el-col-offset-6 {
-  margin-left: 50%
-}
-
-.el-col-offset-5 {
-  margin-left: 41.6667%
-}
-
-.el-col-offset-4 {
-  margin-left: 33.3333%
-}
-
-.el-col-offset-3 {
-  margin-left: 25%
-}
-
-.el-col-offset-2 {
-  margin-left: 16.6667%
-}
-
-.el-col-offset-1 {
-  margin-left: 8.33333%
-}
+//.el-col-offset-12 {
+//  margin-left: 100%
+//}
+//
+//.el-col-offset-11 {
+//  margin-left: 91.6667%
+//}
+//
+//.el-col-offset-10 {
+//  margin-left: 83.3333%
+//}
+//
+//.el-col-offset-9 {
+//  margin-left: 75%
+//}
+//
+//.el-col-offset-8 {
+//  margin-left: 66.6667%
+//}
+//
+//.el-col-offset-7 {
+//  margin-left: 58.3333%
+//}
+//
+//.el-col-offset-6 {
+//  margin-left: 50%
+//}
+//
+//.el-col-offset-5 {
+//  margin-left: 41.6667%
+//}
+//
+//.el-col-offset-4 {
+//  margin-left: 33.3333%
+//}
+//
+//.el-col-offset-3 {
+//  margin-left: 25%
+//}
+//
+//.el-col-offset-2 {
+//  margin-left: 16.6667%
+//}
+//
+//.el-col-offset-1 {
+//  margin-left: 8.33333%
+//}
 
 .el-col-offset-0 {
   margin-left: 0

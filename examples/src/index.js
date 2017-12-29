@@ -10,7 +10,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 
-import '../../style/asumi-default-theme.css';
+import '../../style/index.less';
 import './assets/public.less';
 import {Menu, SubMenu, MenuItem} from '../../src';
 

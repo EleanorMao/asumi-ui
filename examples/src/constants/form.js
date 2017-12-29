@@ -421,7 +421,7 @@ export const api = [{
     property: "colNum",
     type: "number",
     'default': "",
-    description: "col number of form item in one row, max is 12"
+    description: "col number of form item in one row, max is 24"
 }, {
     property: "disabled",
     type: "bool",

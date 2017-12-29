@@ -1,9 +1,9 @@
 /**
  * Created by elly on 2017/4/5.
  */
-import React, {Component} from 'react';
-import {Grid, Table, Col} from '../../../src';
-import Panel from './panel';
+import React, {Component}                  from 'react';
+import {Grid, Table, Col}                  from '../../../src';
+import Panel                               from './panel';
 import {basic, offset, apiofrow, apiofcol} from '../constants/grid';
 
 export default class Main extends Component {
@@ -12,14 +12,14 @@ export default class Main extends Component {
     }
 
     colRender(col) {
-        let arr = new Array(12 / col).fill(col);
+        let arr = new Array(24 / col).fill(col);
         return arr.map((item, index) => {
             return (
                 <Grid.Col col={item} key={item + '-' + index}>
                     <div className="grid-content">col-{item}</div>
                 </Grid.Col>
-            )
-        })
+            );
+        });
     }
 
     render() {
@@ -31,10 +31,18 @@ export default class Main extends Component {
                     code={basic}
                 >
                     <Grid.Row>
-                        <Grid.Col col="12">
-                            <div className="grid-content">col-12</div>
+                        <Grid.Col col="24">
+                            <div className="grid-content">col-24</div>
                         </Grid.Col>
+                        {this.colRender(12)}
+                        {this.colRender(8)}
                         {this.colRender(6)}
+                        <Grid.Col col="5">
+                            <div className="grid-content">col-5</div>
+                        </Grid.Col>
+                        <Grid.Col col="7">
+                            <div className="grid-content">col-7</div>
+                        </Grid.Col>
                         <Grid.Col col="5">
                             <div className="grid-content">col-5</div>
                         </Grid.Col>
@@ -52,16 +60,16 @@ export default class Main extends Component {
                     code={offset}
                 >
                     <Grid.Row>
-                        <Grid.Col col="4">
-                            <div className="grid-content">col-4</div>
+                        <Grid.Col col="8">
+                            <div className="grid-content">col-8</div>
                         </Grid.Col>
-                        <Grid.Col col="4" offset="4">
-                            <div className="grid-content">col-4 offset-4</div>
+                        <Grid.Col col="8" offset="8">
+                            <div className="grid-content">col-8 offset-8</div>
                         </Grid.Col>
                     </Grid.Row>
                     <Grid.Row>
-                        <Grid.Col col="6" offset="3">
-                            <div className="grid-content">col-6 offset-3</div>
+                        <Grid.Col col="12" offset="6">
+                            <div className="grid-content">col-12 offset-6</div>
                         </Grid.Col>
                     </Grid.Row>
                 </Panel>
@@ -80,6 +88,6 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

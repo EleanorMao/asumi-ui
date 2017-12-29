@@ -3,100 +3,43 @@
  */
 export const basic = `import {Grid} from 'asumi';
 
+colRender(col) {
+    let arr = new Array(24 / col).fill(col);
+    return arr.map((item, index) => {
+        return (
+            <Grid.Col col={item} key={item + '-' + index}>
+                <div className="grid-content">col-{item}</div>
+            </Grid.Col>
+        );
+    });
+}
+    
 ReactDOM.render(
 <div>
     <Grid.Row>
-        <Grid.Col col="12">
-            <div className="grid-content">col-12</div>
-        </Grid.Col>
-        <Grid.Col col="6">
-            <div className="grid-content">col-6</div>
-        </Grid.Col>
-        <Grid.Col col="6">
-            <div className="grid-content">col-6</div>
-        </Grid.Col>
-        <Grid.Col col="5">
-            <div className="grid-content">col-5</div>
-        </Grid.Col>
-        <Grid.Col col="7">
-            <div className="grid-content">col-7</div>
-        </Grid.Col>
-        <Grid.Col col="4">
-            <div className="grid-content">col-4</div>
-        </Grid.Col>
-        <Grid.Col col="4">
-            <div className="grid-content">col-4</div>
-        </Grid.Col>
-        <Grid.Col col="4">
-            <div className="grid-content">col-4</div>
-        </Grid.Col>
-        <Grid.Col col="3">
-            <div className="grid-content">col-3</div>
-        </Grid.Col>
-        <Grid.Col col="3">
-            <div className="grid-content">col-3</div>
-        </Grid.Col>
-        <Grid.Col col="3">
-            <div className="grid-content">col-3</div>
-        </Grid.Col>
-        <Grid.Col col="3">
-            <div className="grid-content">col-3</div>
-        </Grid.Col>
-        <Grid.Col col="2">
-            <div className="grid-content">col-2</div>
-        </Grid.Col>
-        <Grid.Col col="2">
-            <div className="grid-content">col-2</div>
-        </Grid.Col>
-        <Grid.Col col="2">
-            <div className="grid-content">col-2</div>
-        </Grid.Col>
-        <Grid.Col col="2">
-            <div className="grid-content">col-2</div>
-        </Grid.Col>
-        <Grid.Col col="2">
-            <div className="grid-content">col-2</div>
-        </Grid.Col>
-        <Grid.Col col="2">
-            <div className="grid-content">col-2</div>
-        </Grid.Col>
-        <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-         <Grid.Col col="1">
-            <div className="grid-content">col-1</div>
-        </Grid.Col>
-    </Grid.Row>
+                        <Grid.Col col="24">
+                            <div className="grid-content">col-24</div>
+                        </Grid.Col>
+                        {this.colRender(12)}
+                        {this.colRender(8)}
+                        {this.colRender(6)}
+                        <Grid.Col col="5">
+                            <div className="grid-content">col-5</div>
+                        </Grid.Col>
+                        <Grid.Col col="7">
+                            <div className="grid-content">col-7</div>
+                        </Grid.Col>
+                        <Grid.Col col="5">
+                            <div className="grid-content">col-5</div>
+                        </Grid.Col>
+                        <Grid.Col col="7">
+                            <div className="grid-content">col-7</div>
+                        </Grid.Col>
+                        {this.colRender(4)}
+                        {this.colRender(3)}
+                        {this.colRender(2)}
+                        {this.colRender(1)}
+                    </Grid.Row>
 </div>, div)`;
 
 export const offset = `import {Grid} from 'asumi';
@@ -104,16 +47,16 @@ export const offset = `import {Grid} from 'asumi';
 ReactDOM.render(
 <div>
     <Grid.Row>
-        <Grid.Col col="4">
-            <div className="grid-content">col-4</div>
+        <Grid.Col col="8">
+            <div className="grid-content">col-8</div>
         </Grid.Col>
-        <Grid.Col col="4" offset="4">
-            <div className="grid-content">col-4 offset-4</div>
+        <Grid.Col col="8" offset="8">
+            <div className="grid-content">col-8 offset-8</div>
         </Grid.Col>
     </Grid.Row>
     <Grid.Row>
-        <Grid.Col col="6" offset="3">
-            <div className="grid-content">col-6 offset-3</div>
+        <Grid.Col col="12" offset="6">
+            <div className="grid-content">col-12 offset-6</div>
         </Grid.Col>
     </Grid.Row>
 </div>, div)`;
@@ -139,7 +82,7 @@ export const apiofrow = [{
 export const apiofcol = [{
     property: "col",
     type: "string|number",
-    'default': "12",
+    'default': "24",
     description: "Number of column the grid spans"
 }, {
     property: "offset",
