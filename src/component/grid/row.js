@@ -12,8 +12,11 @@ export default class Row extends Component {
     }
 
     render() {
-        let {className, gutter, children, style} = this.props;
-        let _className = classnames('el-grid-row', className);
+        let {className, gutter, type, align, justify, children, style} = this.props;
+        let _className = classnames(type === 'flex' ? 'el-grid-flex' : 'el-grid-row',
+            align != null ? `el-grid-align-${align}` : '',
+            justify != null ? `el-grid-justify-${justify}` : '',
+            className);
         let noGutter = gutter == null;
         let _style = noGutter ? style : extend({marginLeft: -gutter / 2, marginRight: -gutter / 2}, style);
         return (
@@ -36,8 +39,13 @@ export default class Row extends Component {
     }
 }
 
+Row.displayName = 'GridRow';
+
 Row.propTypes = {
-    gutter: PropTypes.number
+    gutter: PropTypes.number,
+    type: PropTypes.oneOf(['flex', 'grid']),
+    align: PropTypes.oneOf(['flex-start', 'flex-end', 'center', 'baseline', 'stretch']),
+    justify: PropTypes.oneOf(['flex-start', 'flex-end', 'center', 'space-between', 'space-around'])
 };
 
 Row.defaultProps = {

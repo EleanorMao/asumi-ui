@@ -1,3 +1,6 @@
+@align: flex-start, flex-end, center, baseline, stretch;
+@justify: flex-start, flex-end, center, space-between, space-around;
+
 .el-grid-row {
   margin-right: -1.1538rem;
   &:before, &:after {
@@ -8,6 +11,35 @@
     clear: both;
   }
 }
+
+.el-grid-flex {
+  display: flex;
+  flex-flow: row wrap;
+  &:before,
+  &:after {
+    display: flex;
+  }
+}
+
+.make-grid-align(@l, @i) when (@i <= @l) {
+  @name: extract(@align, @i);
+  .el-grid-align-@{name} {
+    align-items: @name;
+  }
+  .make-grid-align(@l, @i+1)
+}
+
+.make-grid-align(length(@align), 1);
+
+.make-grid-justify(@l, @i) when (@i <= @l) {
+  @name: extract(@justify, @i);
+  .el-grid-justify-@{name} {
+    justify-content: @name;
+  }
+  .make-grid-justify(@l, @i+1)
+}
+
+.make-grid-justify(length(@justify), 1);
 
 .el-col-1,
 .el-col-10,
@@ -37,6 +69,7 @@
   min-height: 1px;
   padding-right: 1.1538rem;
   position: relative;
+  flex: 0 0 auto;
   &.el-col-inline {
     float: none;
     display: inline-block;
@@ -68,3 +101,13 @@
 .el-col-offset-0 {
   margin-left: 0
 }
+
+.make-col-order(@i) when (@i>=0) {
+  .el-col-order-@{i} {
+    order: @i;
+  }
+  .make-col-order((@i - 1))
+}
+
+.make-col-order(24);
+

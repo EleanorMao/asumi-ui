@@ -61,6 +61,25 @@ ReactDOM.render(
     </Grid.Row>
 </div>, div)`;
 
+export const flex = `import {Grid} from 'asumi';
+
+ReactDOM.render(
+<div>
+    <Grid.Row type="flex" justify="center" align="center" style={{height: 100}}>
+        <Grid.Col col="4" order={2}>
+            <div className="grid-content">1 col-4</div>
+        </Grid.Col>
+        <Grid.Col col="4" order={1}>
+            <div className="grid-content">2 col-4</div>
+        </Grid.Col>
+        <Grid.Col col="4" order={0}>
+            <div className="grid-content">3 col-4</div>
+        </Grid.Col>
+        <Grid.Col col="4" order={3}>
+            <div className="grid-content">4 col-4</div>
+        </Grid.Col>
+    </Grid.Row>
+</div>, div)`;
 
 export const apiofrow = [{
     property: "className",
@@ -72,6 +91,21 @@ export const apiofrow = [{
     type: "object",
     'default': "",
     description: "Style of row"
+}, {
+    property: "type",
+    type: "string",
+    'default': "",
+    description: "Options: flex, grid. flex only support modern browser"
+}, {
+    property: "align",
+    type: "string",
+    'default': "",
+    description: "flex layout.Options: flex-start, flex-end, center, baseline, stretch"
+}, {
+    property: "justify",
+    type: "string",
+    'default': "",
+    description: "flex layout.Options: flex-start, flex-end, center, space-between, space-around"
 }, {
     property: "children",
     type: "any",
@@ -89,6 +123,11 @@ export const apiofcol = [{
     type: "string|number",
     'default': "",
     description: "Number of cells to the left of the grid spacing"
+}, {
+    property: "order",
+    type: "number",
+    'default': "",
+    description: "raster order, used in flex"
 }, {
     property: "inline",
     type: "bool",

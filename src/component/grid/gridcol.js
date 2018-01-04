@@ -11,10 +11,13 @@ export default class GridCol extends Component {
         super(props);
     }
 
-    //TODO: flex布局
     render() {
-        let {offset, col, className, style, inline, children} = this.props;
-        let _className = classnames(`el-col-${col}`, inline ? 'el-col-inline' : '', offset != undefined ? `el-col-offset-${offset}` : '', className);
+        let {offset, col, className, order, style, inline, children} = this.props;
+        let _className = classnames(`el-col-${col}`,
+            inline ? 'el-col-inline' : '',
+            order != undefined ? `el-col-order-${order}` : '',
+            offset != undefined ? `el-col-offset-${offset}` : '',
+            className);
         return (
             <div className={_className} style={style}>{children}</div>
         );
@@ -23,6 +26,7 @@ export default class GridCol extends Component {
 GridCol.displayName = 'GridCol';
 
 GridCol.propTypes = {
+    order: PropTypes.number,
     col: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     offset: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };

@@ -4,7 +4,7 @@
 import React, {Component}                  from 'react';
 import {Grid, Table, Col}                  from '../../../src';
 import Panel                               from './panel';
-import {basic, offset, apiofrow, apiofcol} from '../constants/grid';
+import {basic, offset, flex,apiofrow, apiofcol} from '../constants/grid';
 
 export default class Main extends Component {
     constructor(props) {
@@ -70,6 +70,25 @@ export default class Main extends Component {
                     <Grid.Row>
                         <Grid.Col col="12" offset="6">
                             <div className="grid-content">col-12 offset-6</div>
+                        </Grid.Col>
+                    </Grid.Row>
+                </Panel>
+                <Panel
+                    title="Flex"
+                    code={flex}
+                >
+                    <Grid.Row type="flex" justify="center" align="center" style={{height: 100}}>
+                        <Grid.Col col="4" order={2}>
+                            <div className="grid-content">1 col-4</div>
+                        </Grid.Col>
+                        <Grid.Col col="4" order={1}>
+                            <div className="grid-content">2 col-4</div>
+                        </Grid.Col>
+                        <Grid.Col col="4" order={0}>
+                            <div className="grid-content">3 col-4</div>
+                        </Grid.Col>
+                        <Grid.Col col="4" order={3}>
+                            <div className="grid-content">4 col-4</div>
                         </Grid.Col>
                     </Grid.Row>
                 </Panel>
