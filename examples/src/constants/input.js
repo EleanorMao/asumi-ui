@@ -133,6 +133,11 @@ export const api = [{
     'default': "null",
     description: "Regexp pattern"
 }, {
+    property: "autoSize",
+    type: "boolean || {minRows: number, maxRows: number}",
+    'default': "null",
+    description: "used in textarea"
+}, {
     property: "icon",
     type: "any",
     'default': "null",

@@ -1,14 +1,14 @@
 /**
  * Created by elly on 2017/4/6.
  */
-import React, {Component} from 'react';
+import React, {Component}                        from 'react';
 import {
     Input,
     Group,
     Table,
     Col
-} from '../../../src';
-import Panel from './panel';
+}                                                from '../../../src';
+import Panel                                     from './panel';
 import {basic, icon, size, prefix, pattern, api} from '../constants/input';
 
 export default class Main extends Component {
@@ -16,18 +16,19 @@ export default class Main extends Component {
         super(props);
         this.state = {
             demo: "",
+            lala: "",
             color: "",
             price: "",
             nature: "",
             positiveInt: ""
-        }
+        };
     }
 
     handleChange({name, value}) {
         this.setState(prev => {
             prev[name] = value;
             return prev;
-        })
+        });
     }
 
     render() {
@@ -104,6 +105,6 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

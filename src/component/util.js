@@ -20,7 +20,7 @@ export let isArr = function (input) {
 
 export let diff = function (a, b) {
     return a.filter(x => {
-        return b.indexOf(x) === -1
+        return b.indexOf(x) === -1;
     });
 };
 
@@ -50,7 +50,7 @@ export let getScrollBarWidth = function () {
     return w1 - w2;
 };
 
-export let extend = function (target) {
+export let extend = function (target = {}) {
     for (let i = 1; i < arguments.length; i++) {
         let source = arguments[i];
         for (let key in source) {
@@ -77,7 +77,7 @@ export let sort = function (arr) {
         }
     }
     let sorted = left.concat(auto).concat(right);
-    return {sorted, left, right}
+    return {sorted, left, right};
 };
 
 export let addEvent = function (el, event, listener) {
@@ -137,7 +137,7 @@ export function getValues(obj) {
     if (!obj) return [];
     let output = [];
     for (let key in obj) {
-        output.push(obj[key])
+        output.push(obj[key]);
     }
     return output;
 }
