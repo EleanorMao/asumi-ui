@@ -107,6 +107,19 @@ ReactDOM.render(
     </Group>
 </div>, div)`;
 
+export const autoSize = `import {Input} from 'asumi';
+
+let style = {
+    width: 300,
+    marginBottom: 10,
+    verticalAlign: 'top'
+}
+
+ReactDOM.render(
+<div>
+  <Input style={style} type="textarea" autoSize={{minRows: 2}}/>
+</div>, div)`;
+
 export const api = [{
     property: "type",
     type: "string",

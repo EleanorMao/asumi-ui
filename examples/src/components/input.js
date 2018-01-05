@@ -88,6 +88,12 @@ export default class Main extends Component {
                     </Group>
                 </Panel>
                 <Panel
+                    title="autoSize"
+                    code={pattern}
+                >
+                    <Input style={style} type="textarea" autoSize={{minRows: 2}}/>
+                </Panel>
+                <Panel
                     title="prefix&suffix"
                     code={prefix}
                 >
