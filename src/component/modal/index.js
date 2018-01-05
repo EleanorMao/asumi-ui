@@ -2,19 +2,20 @@
  * Created by elly on 2017/4/7.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import {extend} from '../util';
-import Modal from './modal';
-import confirm from './confirm';
+import PropTypes          from 'prop-types';
+import ReactDOM           from 'react-dom';
+import {extend}           from '../util';
+import Modal              from './modal';
+import confirm            from './confirm';
 
 function renderComponent(instance) {
     if (instance.props.visible) {
+        document.body.style.overflow = 'hidden';
         if (!instance.container) {
             instance.container = instance.getContainer();
         }
         ReactDOM.unstable_renderSubtreeIntoContainer(instance,
-            <Modal{...instance.props} key="el-modal"/>, instance.container)
+            <Modal{...instance.props} key="el-modal"/>, instance.container);
     }
 }
 
@@ -52,6 +53,7 @@ export default class Wrap extends Component {
     }
 
     removeComponent() {
+        document.body.style.overflow = "";
         if (this.container) {
             ReactDOM.unmountComponentAtNode(this.container);
             document.body.removeChild(this.container);
@@ -71,7 +73,7 @@ Wrap.confirm = (props) => {
         content: '',
         size: 'default'
     }, props);
-    return confirm(props)
+    return confirm(props);
 };
 
 Wrap.propTypes = {

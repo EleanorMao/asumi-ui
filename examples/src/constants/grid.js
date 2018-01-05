@@ -92,6 +92,11 @@ export const apiofrow = [{
     'default': "",
     description: "Style of row"
 }, {
+    property: "gutter",
+    type: "number",
+    'default': "",
+    description: "space between grids"
+}, {
     property: "type",
     type: "string",
     'default': "",

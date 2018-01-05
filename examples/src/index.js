@@ -38,12 +38,14 @@ import Checkbox from './components/checkbox';
 import Dropdown from './components/dropdown';
 import DateTime from './components/datetime';
 import Transfer from './components/transfer';
+import ChangeLog from './components/changelog';
 import Pagination from './components/pagination';
 import NumberInput from './components/numberInput';
 import TagInput from './components/tagInput';
 
 const router = [
     <NavLink to={'/'} activeClassName="">HOME</NavLink>,
+    <NavLink to={'/changelog'} activeClassName="active">Change Log</NavLink>,
     {
         title: 'BASIC',
         children: [
@@ -155,6 +157,7 @@ ReactDOM.render(
                 <Route path="/upload" component={Upload}/>
                 <Route path="/menu" component={MenuPage}/>
                 <Route path="/checkbox" component={Checkbox}/>
+                <Route path="/changelog" component={ChangeLog}/>
                 <Route path="/dropdown" component={Dropdown}/>
                 <Route path="/numberinput" component={NumberInput}/>
                 <Route path="/pagination" component={Pagination}/>

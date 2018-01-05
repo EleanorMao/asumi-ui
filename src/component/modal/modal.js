@@ -2,10 +2,10 @@
  * Created by elly on 2017/4/7.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Button from '../button';
-import classnames from 'classnames';
-import {noop} from "../util";
+import PropTypes          from 'prop-types';
+import Button             from '../button';
+import classnames         from 'classnames';
+import {noop}             from "../util";
 
 export default class Modal extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class Modal extends Component {
     }
 
     render() {
-        let {size, mask, title, style, okText, closeText, maskClosable, className, footer, children, close, ok, onOk, onClose} = this.props;
+        let {size, mask, title, style, okText, closeText, className, footer, children, close, ok, onOk, onClose} = this.props;
         let obj = {
             'el-modal-content': true,
             'el-small': size === "small",
@@ -51,7 +51,7 @@ export default class Modal extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 

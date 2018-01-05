@@ -1,9 +1,9 @@
 /**
  * Created by elly on 2017/4/10.
  */
-import React from 'react';
+import React    from 'react';
 import ReactDOM from 'react-dom';
-import Modal from './modal';
+import Modal    from './modal';
 
 export default function confirm(props) {
     let div = document.createElement('div');
@@ -15,6 +15,7 @@ export default function confirm(props) {
     props.onOk = ok;
 
     function remove() {
+        document.body.style.overflow = "";
         if (ReactDOM.unmountComponentAtNode(div) && div) {
             document.body.removeChild(div);
         }
@@ -31,9 +32,10 @@ export default function confirm(props) {
     }
 
     const renderToDom = ReactDOM.render || ReactDOM.hydrate;
+    document.body.style.overflow = 'hidden';
     renderToDom(
         <Modal {...props}>
             {props.content}
-        </Modal>, div)
+        </Modal>, div);
 }
 
