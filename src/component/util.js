@@ -53,6 +53,7 @@ export let getScrollBarWidth = function () {
 export let extend = function (target = {}) {
     for (let i = 1; i < arguments.length; i++) {
         let source = arguments[i];
+        if (typeof source !== "object") continue;
         for (let key in source) {
             if (Object.prototype.hasOwnProperty.call(source, key)) {
                 target[key] = source[key];

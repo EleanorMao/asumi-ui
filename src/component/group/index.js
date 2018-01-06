@@ -2,7 +2,7 @@
  * Created by elly on 2017/4/5.
  */
 import React, {Component} from 'react';
-import {extend} from '../util';
+import {extend}           from '../util';
 
 export default class Group extends Component {
     constructor(props) {
@@ -15,10 +15,10 @@ export default class Group extends Component {
             <div className="el-group">
                 {React.Children.map(children, (elm) => {
                     if (!elm) return;
-                    return React.cloneElement(elm, {style: extend({}, defaultStyle, style), ...other});
+                    return React.cloneElement(elm, {style: extend({}, defaultStyle, style, elm.props.style), ...other});
                 })}
             </div>
-        )
+        );
     }
 }
 

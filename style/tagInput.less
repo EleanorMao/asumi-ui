@@ -2,7 +2,7 @@
   width: 100%;
   cursor: text;
   font-size: 1rem;
-  min-height: 35px;
+  min-height: 34px;
   line-height: 1.5;
   color: @normalText;
   position: relative;
@@ -12,6 +12,16 @@
   border: 1px solid @border;
   border-radius: @borderRadio;
   padding: 0.3846rem 0.6153rem;
+  &.el-small {
+    min-height: 29px;
+    font-size: 0.9230rem;
+    padding: 2px 0.6153rem;
+  }
+  &.el-large {
+    min-height: 39px;
+    font-size: 1.0769rem;
+    padding: 0.4615rem 0.6153rem;
+  }
   &.el-taginput-active {
     border-color: @primary;
   }
@@ -30,17 +40,18 @@
   }
   .el-taginput-placeholder {
     top: 50%;
-    height: 25px;
+    height: 24px;
     max-width: 100%;
     left: 0.6153rem;
     text-align: left;
+    text-indent: 1px;
     right: 0.6153rem;
     overflow: hidden;
-    line-height: 25px;
+    line-height: 24px;
     color: @lightText;
     user-select: none;
     position: absolute;
-    margin-top: -12.5px;
+    margin-top: -12px;
     white-space: nowrap;
     pointer-events: none;
     text-overflow: ellipsis;
@@ -48,9 +59,9 @@
   .el-taginput-list {
     cursor: text;
     > li {
-      line-height: 25px;
+      line-height: 24px;
       position: static;
-      height: 25px;
+      height: 24px;
       float: left;
     }
     .el-taginput-input-wrapper {

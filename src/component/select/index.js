@@ -1,30 +1,36 @@
 /**
  * Created by elly on 2017/4/8.
  */
-import ReactDOM                                                        from 'react-dom';
 import React, {Component}                                              from 'react';
 import PropTypes                                                       from 'prop-types';
 import classnames                                                      from 'classnames';
+import TagInput                                                        from '../tagInput';
 import Input                                                           from '../input';
 import Option                                                          from './option';
 import {isArr, extend, contains, addEvent, removeEvent, KeyCode, noop} from '../util';
 
-function renderComponent(instance) {
-    if (!instance.container) {
-        instance.container = instance.getContainer();
+function getMatchData(value, matchCase, data) {
+    let output = [];
+    value = matchCase ? value : `${value}`.toLowerCase();
+    for (let i = 0; i < data.length; i++) {
+        let item = data[i];
+        let label = matchCase ? item.label : `${item.label}`.toLowerCase();
+        if (~label.indexOf(value)) {
+            output.push(extend({}, item));
+        }
     }
-    ReactDOM.unstable_renderSubtreeIntoContainer(instance, instance.optionsRender(), instance.container);
+    return output;
 }
 
 export default class Select extends Component {
     constructor(props) {
         super(props);
-        this.index = -1;
         this.allValue = [];
+        this.isOverDropDown = false;
         this.state = {
             data: [],
-            focus: false,
             visible: false,
+            preSelected: -1,
             renderValue: '',
             selectedValue: [],
             selectedLabel: []
@@ -32,25 +38,17 @@ export default class Select extends Component {
     }
 
     componentWillMount() {
-        this.getData(this.props);
+        this.getData(this.props, true);
     }
 
     componentDidMount() {
-        addEvent(window, 'resize', this.addStyle.bind(this));
         addEvent(document, 'click', this.handleClose.bind(this));
-    }
-
-    componentDidUpdate() {
-        if (this.state.visible && !this.props.closeAfterSelect) renderComponent(this);
+        addEvent(document, 'keydown', this.handleGlobalKeyDown.bind(this));
     }
 
     componentWillUnmount() {
-        if (this.container) {
-            document.body.removeChild(this.container);
-            this.container = null;
-        }
-        removeEvent(window, 'resize', this.addStyle.bind(this));
         removeEvent(document, 'click', this.handleClose.bind(this));
+        removeEvent(document, 'keydown', this.handleGlobalKeyDown.bind(this));
     }
 
     componentWillReceiveProps(nextProps) {
@@ -58,24 +56,26 @@ export default class Select extends Component {
     }
 
     setPreSelect(length, minus) {
+        let preSelected = this.state.preSelected;
         length = this.hasSelectAll() ? length + 1 : length;
         if (minus) {
-            if (this.index === 0) {
-                this.index = length;
+            if (preSelected === 0) {
+                preSelected = length;
             }
-            this.index--;
+            preSelected--;
         } else {
-            if (this.index === length - 1) {
-                this.index = -1;
+            if (preSelected === length - 1) {
+                preSelected = -1;
             }
-            this.index++;
+            preSelected++;
         }
+        this.handleAddPreSelect(preSelected);
     }
 
     hasSelectAll() {
         let {data, renderData} = this.state;
         let {multiple, selectAll} = this.props;
-        return !!(multiple && selectAll && renderData.length === data.length);
+        return !!(multiple && selectAll && data.length && renderData.length === data.length);
     }
 
     isSelectAll(selectedAll) {
@@ -83,9 +83,9 @@ export default class Select extends Component {
         return !allValue.filter(v => {
             return !~selectedAll.indexOf(v);
         }).length;
-    };
+    }
 
-    getData(props) {
+    getData(props, init) {
         let data = [], renderData = [], allValue = [], selectedLabel = [], selectedValue = [];
         let {value, defaultValue, children} = props;
         value = isArr(value) ? value : (value == null ? [] : [value]);
@@ -105,61 +105,16 @@ export default class Select extends Component {
             });
         }
         this.allValue = allValue;
-        this.setState({
-            data,
-            renderData,
-            selectedValue,
-            selectedLabel,
-            renderValue: selectedLabel.join(", ")
-        });
-    }
-
-    getMatchData(value, matchCase, data) {
-        let output = [];
-        value = matchCase ? value : `${value}`.toLowerCase();
-        for (let i = 0; i < data.length; i++) {
-            let item = data[i];
-            let label = matchCase ? item.label : `${item.label}`.toLowerCase();
-            if (~label.indexOf(value)) {
-                output.push(extend({}, item));
+        this.setState(prev => {
+            prev.data = data;
+            prev.selectedValue = selectedValue;
+            prev.selectedLabel = selectedLabel;
+            prev.renderValue = selectedLabel.join(", ");
+            if (init) {
+                prev.renderData = renderData;
             }
-        }
-        return output;
-    }
-
-    getPosition() {
-        if (!this.container) return;
-        let {clientHeight} = this.container;
-        let {top, left, bottom, width} = this.el_select.getBoundingClientRect();
-        let scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft;
-        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-        top += scrollTop;
-        left += scrollLeft;
-        bottom += scrollTop;
-        let leftHeight = Math.max(window.innerHeight, document.body.clientHeight);
-        let leftTopHeight = leftHeight - top;
-        let leftBottomHeight = leftHeight - bottom;
-        this.style = {
-            width: width + 'px',
-            top: bottom + 'px',
-            left: left + 'px'
-        };
-        if (clientHeight > leftTopHeight && clientHeight > leftBottomHeight && leftBottomHeight < leftTopHeight) {
-            this.style.top = top - clientHeight + 'px';
-        }
-        if (document.querySelector('.el-modal-wrapper')) {
-            this.style.zIndex = 99999;
-        }
-    }
-
-    getContainer() {
-        this.container = document.createElement('div');
-        this.container.style.position = 'absolute';
-        this.container.style.left = '-9999px';
-        this.container.style.top = '-9999px';
-        this.container.style.width = 0;
-        document.body.appendChild(this.container);
-        return this.container;
+            return prev;
+        });
     }
 
     handleClose(e) {
@@ -176,21 +131,17 @@ export default class Select extends Component {
         if (this.state.visible) {
             this.hideComponent(e);
         } else {
-            renderComponent(this);
             this.showComponent();
         }
     }
 
-    handleRemoveClass() {
-        let child = this.el_select_ul && this.el_select_ul.children && this.el_select_ul.children[this.index];
-        if (this.index >= 0 && child) {
-            child.classList.remove('el-select-selected');
-        }
+    handleRemovePreSelect() {
+        this.setState({preSelected: -1});
     }
 
-    handleAddClass() {
-        let child = this.el_select_ul && this.el_select_ul.children && this.el_select_ul.children[this.index];
-        if (this.index >= 0 && child) {
+    handleAddPreSelect(preSelected) {
+        let child = this.el_select_ul && this.el_select_ul.children && this.el_select_ul.children[preSelected];
+        if (preSelected >= 0 && child) {
             let offsetTop = child.offsetTop;
             let height = child.offsetHeight;
             let parentHeight = this.el_select_menu.offsetHeight;
@@ -200,28 +151,30 @@ export default class Select extends Component {
             } else if (offsetTop + height / 2 <= parentScrollTop) {
                 this.el_select_menu.scrollTop = offsetTop < height ? 0 : offsetTop;
             }
-            child.classList.add('el-select-selected');
+            this.setState({preSelected});
+        }
+    }
+
+    handleGlobalKeyDown(e) {
+        if (this.isOverDropDown) {
+            this.handleKeyDown(e);
         }
     }
 
     handleKeyDown(e) {
         let {onKeyDown, disabled} = this.props;
-        let renderData = this.state.renderData;
+        let {renderData, visible, preSelected} = this.state;
         let length = renderData.length;
         let keyCode = e.keyCode;
-        if (this.state.visible && !disabled && length) {
+        if (visible && !disabled && length) {
             if (keyCode === KeyCode.DOWN) {
                 e.preventDefault();
-                this.handleRemoveClass();
                 this.setPreSelect(length);
-                this.handleAddClass();
             } else if (keyCode === KeyCode.UP) {
                 e.preventDefault();
-                this.handleRemoveClass();
                 this.setPreSelect(length, true);
-                this.handleAddClass();
-            } else if (keyCode === KeyCode.ENTER && this.index >= 0) {
-                this.el_select_ul.children[this.index].click();
+            } else if (keyCode === KeyCode.ENTER && preSelected >= 0) {
+                this.el_select_ul.children[preSelected].click();
             }
         } else if (keyCode === KeyCode.ENTER) {
             this.handleToggle(e);
@@ -234,35 +187,20 @@ export default class Select extends Component {
         let {onMatch, matchCase, onSearch} = this.props;
         onSearch(value);
         this.setState(prev => {
+            prev.preSelected = -1;
+            prev.visible = true;
             prev.renderValue = value;
             let renderData = onMatch ? onMatch(value) :
-                this.getMatchData(value, matchCase, [].concat(prev.data));
+                getMatchData(value, matchCase, [].concat(prev.data));
             prev.renderData = renderData || [];
             return prev;
-        }, () => {
-            renderComponent(this);
-            if (!this.state.visible) this.showComponent();
         });
-    }
-
-
-    handleToggleInput(focus, e) {
-        this.setState(prev => {
-            prev.focus = focus;
-            if (!focus) {
-                prev.renderData = [].concat(prev.data);
-                prev.renderValue = prev.selectedLabel.join(", ");
-            }
-            return prev;
-        });
-        if (focus) {
-            this.props.onFocus && this.props.onFocus(e);
-        }
     }
 
     handleSelect(e, value, selected) {
-        let {name, multiple, onChange, readOnly} = this.props;
+        let {name, multiple, onChange, readOnly, closeAfterSelect} = this.props;
         if (readOnly) return;
+        closeAfterSelect && this.hideComponent(e);
         if (multiple) {
             let _value = this.props.value.slice();
             if (selected) {
@@ -277,59 +215,59 @@ export default class Select extends Component {
     }
 
     handleSelectAll(e, allValue, selected) {
-        let {name, onChange, onSelectAll, readOnly} = this.props;
+        let {name, onChange, onSelectAll, readOnly, closeAfterSelect} = this.props;
         if (readOnly) return;
         if (!selected) allValue = [];
+        closeAfterSelect && this.hideComponent(e);
         onChange({e, name, value: allValue.slice(), selectedValue: allValue.slice(), selected});
         if (onSelectAll) {
             onSelectAll({e, name, value: allValue.slice(), selectedValue: allValue.slice(), selected});
         }
     }
 
+    handleToggleOver(flag) {
+        this.isOverDropDown = flag;
+    }
+
     handleDisableSelect() {
-        this.handleRemoveClass();
-        this.index = -1;
+        this.handleRemovePreSelect();
     }
 
     showComponent() {
-        this.setState({visible: true},
-            this.addStyle.bind(this));
+        this.setState({visible: true});
     }
 
     hideComponent(e) {
-        if (this.container) {
-            this.container.style.display = 'none';
-        }
-        this.handleRemoveClass();
-        this.setState({visible: false});
+        this.handleRemovePreSelect();
+        this.isOverDropDown = false;
+        this.setState(prev => {
+            prev.visible = false;
+            prev.renderData = [].concat(prev.data);
+            prev.renderValue = prev.selectedLabel.join(", ");
+            return prev;
+        });
         this.props.onBlur && this.props.onBlur({e});
-    }
-
-    addStyle() {
-        if (!this.state.visible || !this.container) return;
-        this.getPosition();
-        for (let style in this.style) {
-            this.container.style[style] = this.style[style];
-        }
-        this.container.style.display = 'block';
-
     }
 
     optionsRender() {
         let allValue = this.allValue;
-        let {renderData, selectedValue} = this.state;
+        let hasSelectAll = this.hasSelectAll();
+        let {renderData, selectedValue, preSelected, data} = this.state;
         let {multiple, searchable, selectAllText, dropdownClassName, dropdownStyle, noMatchText} = this.props;
         let className = classnames("el-select-dropdown", dropdownClassName || "");
         return (
-            <div className={className} style={dropdownStyle} ref={c => {
-                this.el_select_menu = c;
-            }}>
+            <div className={className} style={dropdownStyle}
+                 onMouseOver={this.handleToggleOver.bind(this, true)}
+                 onMouseLeave={this.handleToggleOver.bind(this, false)}
+                 ref={c => {
+                     this.el_select_menu = c;
+                 }}>
                 <ul ref={c => {
                     this.el_select_ul = c;
                 }}>
-                    {(searchable && !renderData.length) &&
+                    {(searchable && data.length && !renderData.length) &&
                     <li key="no-data" className="el-select-no-data">{noMatchText}</li>}
-                    {this.hasSelectAll() &&
+                    {hasSelectAll &&
                     <Option
                         key="all"
                         multiple={multiple}
@@ -337,17 +275,18 @@ export default class Select extends Component {
                         value={allValue.slice()}
                         onChange={this.handleSelectAll.bind(this)}
                         selected={this.isSelectAll(selectedValue)}
-                    />
-                    }
-                    {renderData.map((props) => {
+                        className={preSelected === 0 ? 'el-select-selected' : ''}
+                    />}
+                    {renderData.map((props, index) => {
                         return (
                             <Option
                                 {...props}
                                 key={props.value}
                                 multiple={multiple}
                                 onChange={this.handleSelect.bind(this)}
-                                onDisableChange={this.handleDisableSelect.bind(this)}
                                 selected={!!~selectedValue.indexOf(props.value)}
+                                onDisableChange={this.handleDisableSelect.bind(this)}
+                                className={preSelected === (hasSelectAll ? index + 1 : index) ? 'el-select-selected' : ''}
                             />
                         );
                     })}
@@ -357,31 +296,45 @@ export default class Select extends Component {
     }
 
     render() {
-        let {renderValue, visible} = this.state;
+        let {renderValue, selectedLabel, selectedValue, visible} = this.state;
         let icon = visible ? <i className="el-caret el-select-open"/> : <i className="el-caret"/>;
         let {
-            size, style, value, noMatchText, matchCase, onMatch, onSearch, readOnly,
-            searchable, selectAll, defaultValue, selectAllText, dropdownClassName, dropdownStyle,
-            multiple, onChange, className, children, closeAfterSelect, ...other
+            searchable, readOnly, className, closeAfterSelect, size, style,
+            selectAll, defaultValue, selectAllText, dropdownClassName, tagProps,
+            value, noMatchText, matchCase, onMatch, onSearch, type,
+            dropdownStyle, multiple, onChange, children, ...other
         } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
+        let _tagProps = multiple ? tagProps : extend(tagProps || {}, {closeable: false});
         return (
             <div className={_className} style={style} ref={(c) => {
                 this.el_select = c;
             }}>
-                <Input
-                    {...other}
-                    size={size}
-                    icon={icon}
-                    autoComplete="off"
-                    value={renderValue}
-                    readOnly={readOnly || !searchable}
-                    onClick={this.handleToggle.bind(this)}
-                    onChange={this.handleChange.bind(this)}
-                    onKeyDown={this.handleKeyDown.bind(this)}
-                    onFocus={this.handleToggleInput.bind(this, true)}
-                    onBlur={closeAfterSelect ? this.handleToggleInput.bind(this, false) : null}
-                />
+                {type === "tag" ?
+                    <TagInput
+                        {...other}
+                        size={size}
+                        tagProps={_tagProps}
+                        value={selectedLabel}
+                        remainTagValue={false}
+                        onInput={this.handleChange.bind(this)}
+                        onClick={this.handleToggle.bind(this)}
+                        disabledInput={readOnly || !searchable}
+                        onKeyDown={this.handleKeyDown.bind(this)}
+                        onRemove={({e, index}) => this.handleSelect(e, selectedValue[index], false)}
+                    /> :
+                    <Input
+                        {...other}
+                        size={size}
+                        icon={icon}
+                        autoComplete="off"
+                        value={renderValue}
+                        readOnly={readOnly || !searchable}
+                        onClick={this.handleToggle.bind(this)}
+                        onChange={this.handleChange.bind(this)}
+                        onKeyDown={this.handleKeyDown.bind(this)}
+                    />}
+                {visible && this.optionsRender()}
             </div>
         );
     }
@@ -398,6 +351,7 @@ Select.propTypes = {
     searchable: PropTypes.bool,
     onSelectAll: PropTypes.func,
     noMatchText: PropTypes.string,
+    type: PropTypes.oneOf(['tag']),
     dropdownStyle: PropTypes.object,
     selectAllText: PropTypes.string,
     closeAfterSelect: PropTypes.bool,

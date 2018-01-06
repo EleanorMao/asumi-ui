@@ -211,11 +211,60 @@ class Foo extends Component {
     }
 }`;
 
+export const tag = `import {Select, Option} from 'asumi';
+//const Option = Select.Option;
+
+class Foo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            animal: [],
+        }
+    }
+    
+    handleChange({name, value}) {
+        this.setState(prev => {
+            prev[name] = value;
+            return prev;
+        })
+    }
+    
+    render(){
+        let {animal} = this.state;
+        return (
+            <Select 
+                type="tag"
+                searchable
+                placeholder="请输入搜索"
+                name="animal" value={animal}
+                onChange={this.handleChange.bind(this)}
+                multiple selectAll closeAfterSelect={false}
+            >
+                <Option value="monkey">猴子</Option>
+                <Option value="lion">狮子</Option>
+                <Option value="elephant">大象</Option>
+                <Option value="chicken">小鸡仔</Option>
+                <Option value="chicken1">小母鸡</Option>
+                <Option value="chicken2">小公鸡</Option>
+                <Option value="chicken3">烤鸡</Option>
+                <Option value="chicken4">炸鸡</Option>
+                <Option value="chicken5">清炖鸡</Option>
+                <Option value="chicken6">炒鸡</Option>
+            </Select>
+        ) 
+    }
+}`;
+
 export const api = [{
     property: "size",
     type: "string",
     'default': "default",
     description: "Size of Input. Options: small, default, large"
+}, {
+    property: "type",
+    type: "string",
+    'default': "",
+    description: "Type of Select. Options: tag"
 }, {
     property: "disabled",
     type: "boolean",

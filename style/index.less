@@ -46,6 +46,14 @@ a {
   }
 }
 
+::-webkit-input-placeholder, ::-moz-placeholder, :-moz-placeholder, :-ms-input-placeholder {
+  color: @lightText;
+}
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+  background-color: transparent;
+}
+
 .el-shadow {
   box-shadow: 0 0.4615rem 0.9230rem @shadow;
   -webkit-box-shadow: 0 0.4615rem 0.9230rem @shadow;

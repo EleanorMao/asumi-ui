@@ -1,11 +1,3 @@
-::-webkit-input-placeholder, ::-moz-placeholder, :-moz-placeholder, :-ms-input-placeholder {
-  color: @lightText;
-}
-
-input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
-  background-color: transparent;
-}
-
 .el-input-wrapper {
   width: 100%;
   display: table;
@@ -91,6 +83,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     line-height: 1.8;
     position: absolute;
     text-align: center;
+    pointer-events: none;
     padding: 0.3846rem 0.6153rem;
     + input, + textarea {
       padding-right: 35px;
@@ -129,6 +122,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .el-select-wrapper {
   position: relative;
   display: inline-block;
+  .el-taginput-wrapper {
+    min-width: 162/13rem;
+    vertical-align: text-top;
+  }
   .el-input {
     cursor: default;
   }
@@ -152,7 +149,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   background: #fff;
   max-height: 250px;
   margin-bottom: 0.3846rem;
-  position: relative;
+  position: absolute;
+  left: 0;
   border-radius: @borderRadio;
   border: 1px solid @border;
   box-shadow: 0 0 0.3846rem @shadow;
@@ -163,6 +161,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
       .overflow();
       height: 35px;
       line-height: 2;
+      user-select: none;
       position: relative;
       padding: 0.3846rem 23px 0.3846rem 0.6153rem;
       &.el-select-no-data {

@@ -2,10 +2,10 @@
  * Created by elly on 2017/12/4.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Tag from '../tag';
-import {noop, KeyCode} from "../util";
+import PropTypes          from 'prop-types';
+import classnames         from 'classnames';
+import Tag                from '../tag';
+import {noop, KeyCode}    from "../util";
 
 export default class TagInput extends Component {
     constructor(props) {
@@ -18,16 +18,15 @@ export default class TagInput extends Component {
     }
 
     handleRemove(index, remain, e) {
-        e.stopPropagation();
         e.preventDefault();
-        let {value, name, onChange, disabled, readOnly} = this.props;
+        e.stopPropagation();
+        let {value, name, onChange, disabled, readOnly, onRemove} = this.props;
         if (disabled || readOnly) return;
         let _value = value.slice();
-        let input = _value.splice(index, 1);
+        let input = _value.splice(index, 1)[0];
+        onRemove({e, value: input, index});
         onChange({name, value: _value});
-        if (remain) {
-            this.setState({input: input[0] || ""});
-        }
+        remain && this.handleInput(input);
     }
 
     handleAdd(input) {
@@ -37,37 +36,41 @@ export default class TagInput extends Component {
         _value.push(input);
         onSeparate(input);
         onChange({name, value: _value});
-        this.setState({input: ""});
+        this.handleInput("");
     }
 
     handleChange(e) {
         let value = e.target.value;
-        let {maxLength, disabled, readOnly} = this.props;
-        if (disabled || readOnly || (maxLength && value.length > maxLength)) return;
-        this.setState(prev => {
-            prev.input = value;
-            prev.hidePlaceholder = !!value;
-            return prev;
-        })
+        let {maxLength, disabled, disabledInput, readOnly} = this.props;
+        if (disabledInput || disabled || readOnly || (maxLength && value.length > maxLength)) return;
+        this.handleInput(value);
+    }
+
+    handleInput(input) {
+        let {name, onInput} = this.props;
+        onInput && onInput({value: input, name});
+        this.setState({input, hidePlaceholder: !!input});
     }
 
     handleKeyDown(e) {
         let input = this.state.input;
-        let {value, separator, onKeyDown} = this.props;
+        let {value, separator, onKeyDown, remainTagValue} = this.props;
         let isStr = typeof separator === "string";
-        let isSeparate = e.which === ( isStr ? KeyCode[separator.toUpperCase()] : separator );
+        let isSeparate = e.which === (isStr ? KeyCode[separator.toUpperCase()] : separator);
         if (input && isSeparate) {
             this.handleAdd(input);
         }
         if (!input && e.which === KeyCode.DELETE && value && value.length) {
-            this.handleRemove(value.length - 1, true, e);
+            this.handleRemove(value.length - 1, remainTagValue == null ? true : remainTagValue, e);
         }
         onKeyDown(e);
     }
 
-    handleClick() {
-        if (this.props.disabled || this.props.readOnly) return;
-        this._el_separate_input.focus();
+    handleClick(e) {
+        if (!this.props.disabled && !this.props.readOnly) {
+            this._el_separate_input.focus();
+        }
+        this.props.onClick && this.props.onClick(e);
     }
 
     handleFocus(e) {
@@ -83,49 +86,51 @@ export default class TagInput extends Component {
             prev.active = false;
             return prev;
         });
-        this.props.onBlur(e);
+        this.props.onBlur && this.props.onBlur(e);
     }
 
     render() {
         let {active, hidePlaceholder, input} = this.state;
-        let {value, placeholder, tagProps, className, style, readOnly, disabled} = this.props;
+        let {value, placeholder, tagProps, size, remainTagValue, className, style, readOnly, disabled} = this.props;
         if (disabled) {
             if (tagProps) {
                 tagProps.type = "default";
             } else {
-                tagProps = {type: "default"}
+                tagProps = {type: "default"};
             }
         }
+        let _className = classnames({
+            "el-taginput-wrapper": true,
+            "el-taginput-active": active,
+            "el-taginput-readonly": readOnly,
+            "el-taginput-disabled": disabled,
+            [`el-${size}`]: !!size,
+            [className]: !!className
+        });
         return (
-            <div className={classnames("el-taginput-wrapper",
-                active ? "el-taginput-active" : "",
-                readOnly ? "el-taginput-readonly" : "",
-                disabled ? "el-taginput-disabled" : "",
-                className)}
-                 onClick={this.handleClick.bind(this)}
-                 style={style}>
+            <div className={_className} style={style}
+                 onClick={this.handleClick.bind(this)}>
                 {!!placeholder && !hidePlaceholder && (!value || !value.length) && !input &&
                 <div unselectable="unselectable" className="el-taginput-placeholder">{placeholder}</div>}
                 <ul className="el-taginput-list clearfix">
                     {value.map((item, index) => {
                         return (
                             <li key={index}>
-                                <Tag
-                                    closeable={true}
-                                    type="primary"
-                                    {...tagProps}
-                                    onClose={this.handleRemove.bind(this, index, false)}
+                                <Tag closeable={true}
+                                     type="primary"
+                                     {...tagProps}
+                                     onClose={this.handleRemove.bind(this, index, remainTagValue)}
                                 >{item}</Tag>
                             </li>
-                        )
+                        );
                     })}
                     <li className="el-taginput-input-wrapper">
                         <input
                             type="text"
                             value={input}
+                            autoComplete="off"
                             disabled={disabled}
                             readOnly={readOnly}
-                            autoComplete="false"
                             ref={c => this._el_separate_input = c}
                             onBlur={this.handleBlur.bind(this)}
                             onFocus={this.handleFocus.bind(this)}
@@ -136,7 +141,7 @@ export default class TagInput extends Component {
                     </li>
                 </ul>
             </div>
-        )
+        );
     }
 }
 
@@ -146,19 +151,26 @@ TagInput.propTypes = {
     name: PropTypes.string,
     disabled: PropTypes.bool,
     readOnly: PropTypes.bool,
+    onInput: PropTypes.func,
+    onRemove: PropTypes.func,
     onChange: PropTypes.func,
     onKeyDown: PropTypes.func,
     tagProps: PropTypes.object,
     onSeparate: PropTypes.func,
     maxLength: PropTypes.number,
     placeholder: PropTypes.string,
-    separator: PropTypes.oneOfType([PropTypes.oneOf(['enter', 'space']), PropTypes.number]),
+    disabledInput: PropTypes.bool,
+    remainTagValue: PropTypes.bool,
+    size: PropTypes.oneOf(['default', 'large', 'small']),
+    separator: PropTypes.oneOfType([PropTypes.oneOf(['enter', 'space']), PropTypes.number])
 };
 
 TagInput.defaultProps = {
     value: [],
     onBlur: noop,
     onFocus: noop,
+    onInput: noop,
+    onRemove: noop,
     onChange: noop,
     onKeyDown: noop,
     onSeparate: noop,

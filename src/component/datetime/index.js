@@ -1,10 +1,10 @@
-import React from 'react';
-import moment from 'moment';
-import Input from '../input';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Shortcuts from './shortcuts';
-import CalendarContainer from './calendarContainer';
+import React                                  from 'react';
+import moment                                 from 'moment';
+import Input                                  from '../input';
+import PropTypes                              from 'prop-types';
+import classnames                             from 'classnames';
+import Shortcuts                              from './shortcuts';
+import CalendarContainer                      from './calendarContainer';
 import {addEvent, removeEvent, noop, KeyCode} from '../util';
 
 const allowedSetTime = ['hours', 'minutes', 'seconds', 'milliseconds'];
@@ -166,7 +166,7 @@ export default class DateTime extends React.Component {
         this.setState({
             viewDate: viewDate.clone()[type](item.value).startOf(type),
             currentView: nextView[type]
-        })
+        });
     }
 
     setTime(type, value) {
@@ -197,7 +197,7 @@ export default class DateTime extends React.Component {
         this.setState(old => {
             old[date] = old[date].clone()[op](amount, type);
             return old;
-        })
+        });
     }
 
     updateSelectedDate(item, close) {
@@ -240,13 +240,13 @@ export default class DateTime extends React.Component {
                 viewDate: date.clone().startOf('month'),
                 inputValue: date.format(inputFormat),
                 open: open
-            })
+            });
         } else {
             if (this.props.closeOnSelect && close) {
                 this.closeCalendar();
             }
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             this.props.onChange({name: this.props.name, value: date});
         }, 0);
     }
@@ -258,7 +258,7 @@ export default class DateTime extends React.Component {
                 open: true
             }, () => {
                 this.props.onFocus(e);
-            })
+            });
         }
     }
 
@@ -318,7 +318,7 @@ export default class DateTime extends React.Component {
                 value: localMoment.isValid() ? localMoment : this.state.inputValue,
                 name: this.props.name
             });
-        })
+        });
     }
 
     renderInput(value) {
@@ -334,7 +334,7 @@ export default class DateTime extends React.Component {
                  ref={c => this._el_datetime = c}
                  data-value={updateOn + this.uid}>
                 {input &&
-                <Input key='i' icon={<i onClick={this.openCalendar.bind(this)} className="fa fa-calendar-minus-o"/>}
+                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
                        onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
                        onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)}/>}
                 <div key='dt' className='el-datetime-picker'>
@@ -342,7 +342,7 @@ export default class DateTime extends React.Component {
                     <CalendarContainer view={currentView} viewProps={this.getComponentProps()}/>
                 </div>
             </div>
-        )
+        );
     }
 }
 

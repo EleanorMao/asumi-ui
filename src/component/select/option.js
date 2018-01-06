@@ -2,8 +2,8 @@
  * Created by elly on 2017/4/8.
  */
 import React, {Component} from 'react';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import classnames         from 'classnames';
+import PropTypes          from 'prop-types';
 
 export default class Option extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ export default class Option extends Component {
         if (disabled) {
             if (onDisableChange) onDisableChange(e, value);
         } else {
-            onChange(e, value, !selected)
+            onChange(e, value, !selected);
         }
     }
 
@@ -32,9 +32,10 @@ export default class Option extends Component {
     }
 
     render() {
-        let {label, disabled, multiple, selected} = this.props;
+        let {label, disabled, multiple, className, selected} = this.props;
         let _className = classnames({
-            'el-disabled': disabled
+            'el-disabled': disabled,
+            [className]: !!className
         });
         return (
             <li className={_className}
@@ -44,7 +45,7 @@ export default class Option extends Component {
                 {label}
                 {this.selectRender(selected, multiple)}
             </li>
-        )
+        );
     }
 }
 

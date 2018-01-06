@@ -1,9 +1,9 @@
 /**
  * Created by elly on 2017/4/7.
  */
-import React, {Component} from 'react';
-import {TagInput, Table, Col} from '../../../src';
-import Panel from './panel';
+import React, {Component}              from 'react';
+import {TagInput, Table, Col}          from '../../../src';
+import Panel                           from './panel';
 import {basic, disabled_readOnly, api} from "../constants/taginput";
 
 export default class Main extends Component {
@@ -11,11 +11,11 @@ export default class Main extends Component {
         super(props);
         this.state = {
             value: ['二次元', '三次元']
-        }
+        };
     }
 
     handleChange({value, name}) {
-        this.setState({value})
+        this.setState({value});
     }
 
     render() {
@@ -57,6 +57,6 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

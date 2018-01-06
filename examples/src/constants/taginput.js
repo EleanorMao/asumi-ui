@@ -63,6 +63,11 @@ class Foo extends Component {
 }`;
 
 export const api = [{
+    property: "size",
+    type: "string",
+    'default': "default",
+    description: "Size of TagInput. Options: small, default, large"
+}, {
     property: "value",
     type: "array",
     'default': "[]",

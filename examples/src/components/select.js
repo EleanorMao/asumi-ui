@@ -1,17 +1,16 @@
 /**
  * Created by elly on 2017/4/6.
  */
-import React, {Component} from 'react';
+import React, {Component}                            from 'react';
 import {
     Select,
     Option,
     Group,
     Table,
     Col
-} from '../../../src';
-import Panel from './panel';
-import {basic, size, searchable, multiple, api} from '../constants/select';
-
+}                                                    from '../../../src';
+import Panel                                         from './panel';
+import {basic, size, searchable, multiple, tag, api} from '../constants/select';
 
 export default class Main extends Component {
     constructor(props) {
@@ -26,14 +25,14 @@ export default class Main extends Component {
             animal1: [],
             animal2: [],
             animal3: [],
-        }
+        };
     }
 
     handleChange({name, value}) {
         this.setState(prev => {
             prev[name] = value;
             return prev;
-        })
+        });
     }
 
     render() {
@@ -104,7 +103,8 @@ export default class Main extends Component {
                 >
                     <Group style={style}
                            multiple onChange={this.handleChange.bind(this)}>
-                        <Select placeholder="请选择" name="animal1" value={animal1} closeAfterSelect={false}>
+                        <Select placeholder="请选择" name="animal1"
+                                value={animal1} closeAfterSelect={false}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
                             <Option value="elephant">Elephant</Option>
@@ -127,15 +127,15 @@ export default class Main extends Component {
                         style={style}
                         placeholder="请输入搜索"
                     >
-                        <Select name="flower4" value={flower4} onChange={this.handleChange.bind(this)}>
+                        <Select name="flower4" value={flower4}
+                                onChange={this.handleChange.bind(this)}>
                             <Option value="iris">Iris</Option>
                             <Option value="jasmine">Jasmine</Option>
                             <Option value="poppy">Peach</Option>
                             <Option value="rose">Rose</Option>
                         </Select>
                         <Select
-                            name="animal3"
-                            value={animal3}
+                            name="animal3" value={animal3}
                             multiple selectAll closeAfterSelect={false}
                             onChange={this.handleChange.bind(this)}>
                             <Option value="monkey">Monkey</Option>
@@ -152,6 +152,33 @@ export default class Main extends Component {
                         </Select>
                     </Group>
                 </Panel>
+                <Panel
+                    title="tag"
+                    code={tag}
+                >
+                    <Group
+                        type="tag"
+                        searchable
+                        style={style}
+                        placeholder="请输入搜索"
+                        multiple selectAll closeAfterSelect={false}
+                    >
+                        <Select
+                            name="animal3" value={animal3}
+                            onChange={this.handleChange.bind(this)}>
+                            <Option value="monkey">猴子</Option>
+                            <Option value="lion">狮子</Option>
+                            <Option value="elephant">大象</Option>
+                            <Option value="chicken">小鸡仔</Option>
+                            <Option value="chicken1">小母鸡</Option>
+                            <Option value="chicken2">小公鸡</Option>
+                            <Option value="chicken3">烤鸡</Option>
+                            <Option value="chicken4">炸鸡</Option>
+                            <Option value="chicken5">清炖鸡</Option>
+                            <Option value="chicken6">炒鸡</Option>
+                        </Select>
+                    </Group>
+                </Panel>
                 <h1>API of Select</h1>
                 <Table isKey="property" data={api} lineWrap="break">
                     <Col dataField="property">Property</Col>
@@ -160,6 +187,6 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

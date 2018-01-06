@@ -21,6 +21,7 @@ export default class Main extends Component {
                     <li><Icon type="check" li/>Grid.Col增加order参数，在flex模式下可控制排序</li>
                     <li><Icon type="check" li/>Input增加autoSize参数，在textarea模式下可随输入调整高度</li>
                     <li><Icon type="check" li/>Select修复当Option的value为空时，选不中的问题</li>
+                    <li><Icon type="check" li/>Select增加标签类型</li>
                     <li><Icon type="check" li/>Datetime修复点击图标打不开日历问题</li>
                     <li><Icon type="check" li/>Dropdown增加placement参数，可控制下拉菜单出现位置</li>
                     <li><Icon type="check" li/>Table优化算法</li>

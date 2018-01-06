@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {shallow, mount} from 'enzyme';
-import {Select, Option} from '../src';
+import React, {Component}       from 'react';
+import {shallow, mount, render} from 'enzyme';
+import {Select, Option}         from '../src';
 
 describe('Select', () => {
     it('create component', () => {
@@ -102,10 +102,8 @@ describe('Select change', () => {
 
         it('options rendered', () => {
             const component = mount(<Select/>, {attachTo: container});
-            expect(component.instance().container).toBeUndefined();
             component.instance().handleToggle(true);
             expect(component.instance().state.visible).toBe(true);
-            expect(component.instance().container).toBeDefined();
             expect(component.instance().el_select_menu).toBeDefined();
             expect(component.instance().el_select_ul).toBeDefined();
         });
@@ -137,7 +135,7 @@ describe('Select change', () => {
             class Demo extends Component {
                 constructor() {
                     super();
-                    this.state = {value: ""}
+                    this.state = {value: ""};
                 }
 
                 handleChange({value}) {
@@ -152,7 +150,7 @@ describe('Select change', () => {
                         >
                             <Option value={1}>1</Option>
                         </Select>
-                    )
+                    );
                 }
             }
 
@@ -165,7 +163,7 @@ describe('Select change', () => {
         class Demo extends Component {
             constructor() {
                 super();
-                this.state = {value: []}
+                this.state = {value: []};
             }
 
             handleChange({value}) {
@@ -184,7 +182,7 @@ describe('Select change', () => {
                         <Option value={1}>1</Option>
                         <Option value={2}>2</Option>
                     </Select>
-                )
+                );
             }
         }
 
@@ -203,11 +201,12 @@ describe('Select change', () => {
         it('selectAll', () => {
             const wrapper = mount(<Demo selectAll/>);
             wrapper.find('input').simulate('click');
-            wrapper.instance()._c.el_select_ul.children[0].click();
+            wrapper.find('Select Option').at(0).instance().handleClick();
             jest.runAllTimers();
             expect(wrapper.instance().state.value).toEqual([1, 2]);
             wrapper.find('input').simulate('click');
-            wrapper.instance()._c.el_select_ul.children[0].click();
+            wrapper.find('Select Option').at(0).instance().handleClick();
+            jest.runAllTimers();
             expect(wrapper.instance().state.value).toEqual([]);
         });
         it('onSearch & onMatch', () => {
