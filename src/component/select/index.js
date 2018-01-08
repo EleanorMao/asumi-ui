@@ -9,13 +9,15 @@ import Input                                                           from '../
 import Option                                                          from './option';
 import {isArr, extend, contains, addEvent, removeEvent, KeyCode, noop} from '../util';
 
-function getMatchData(value, matchCase, data) {
+function getMatchData(value, matchCase, data, strict) {
     let output = [];
     value = matchCase ? value : `${value}`.toLowerCase();
     for (let i = 0; i < data.length; i++) {
         let item = data[i];
         let label = matchCase ? item.label : `${item.label}`.toLowerCase();
-        if (~label.indexOf(value)) {
+        if (!strict && ~label.indexOf(value)) {
+            output.push(extend({}, item));
+        } else if (strict && label === value) {
             output.push(extend({}, item));
         }
     }
@@ -182,6 +184,14 @@ export default class Select extends Component {
         if (onKeyDown) onKeyDown(e);
     }
 
+    handleSeparate(value, e) {
+        let {onMatch, matchCase} = this.props;
+        let selectedValue = onMatch ? onMatch(value) : getMatchData(value, matchCase, this.state.data, true);
+        if (selectedValue.length) {
+            this.handleSelect(e, selectedValue[0].value, true);
+        }
+    }
+
     handleChange(e) {
         let {value} = e;
         let {onMatch, matchCase, onSearch} = this.props;
@@ -191,7 +201,7 @@ export default class Select extends Component {
             prev.visible = true;
             prev.renderValue = value;
             let renderData = onMatch ? onMatch(value) :
-                getMatchData(value, matchCase, [].concat(prev.data));
+                getMatchData(value, matchCase, prev.data);
             prev.renderData = renderData || [];
             return prev;
         });
@@ -312,6 +322,7 @@ export default class Select extends Component {
             }}>
                 {type === "tag" ?
                     <TagInput
+                        onSeparate={this.handleSeparate.bind(this)}
                         {...other}
                         size={size}
                         tagProps={_tagProps}

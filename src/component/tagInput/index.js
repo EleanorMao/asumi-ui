@@ -25,17 +25,17 @@ export default class TagInput extends Component {
         let _value = value.slice();
         let input = _value.splice(index, 1)[0];
         onRemove({e, value: input, index});
-        onChange({name, value: _value});
+        onChange({name, value: _value, e});
         remain && this.handleInput(input);
     }
 
-    handleAdd(input) {
+    handleAdd(input, e) {
         let {name, value, onChange, disabled, readOnly, onSeparate} = this.props;
         if (disabled || readOnly) return;
         let _value = value.slice();
         _value.push(input);
-        onSeparate(input);
-        onChange({name, value: _value});
+        onSeparate(input, e);
+        onChange({name, value: _value, e});
         this.handleInput("");
     }
 
@@ -58,7 +58,7 @@ export default class TagInput extends Component {
         let isStr = typeof separator === "string";
         let isSeparate = e.which === (isStr ? KeyCode[separator.toUpperCase()] : separator);
         if (input && isSeparate) {
-            this.handleAdd(input);
+            this.handleAdd(input, e);
         }
         if (!input && e.which === KeyCode.DELETE && value && value.length) {
             this.handleRemove(value.length - 1, remainTagValue == null ? true : remainTagValue, e);

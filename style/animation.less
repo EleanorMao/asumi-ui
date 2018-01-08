@@ -8,6 +8,11 @@
   -webkit-animation: moveUp 1 .3s ease-in-out;
 }
 
+.el-shrink {
+  animation: shrink 1 90ms ease-in-out;
+  -webkit-animation: shrink 1 90ms ease-in-out;
+}
+
 @keyframes moveDown {
   0% {
     opacity: 0;
@@ -110,6 +115,7 @@
     -webkit-transform: rotate(360deg)
   }
 }
+
 @-webkit-keyframes bounce {
   0%, 100% {
     -webkit-transform: scale(0)
@@ -127,6 +133,29 @@
   }
 
   50% {
+    transform: scale(1);
+    -webkit-transform: scale(1)
+  }
+}
+
+@-webkit-keyframes shrink {
+  100% {
+    -webkit-transform: scale(0)
+  }
+
+  0% {
+    -webkit-transform: scale(1)
+  }
+}
+
+@keyframes shrink {
+  100% {
+    opacity: 0;
+    transform: scale(0);
+    -webkit-transform: scale(0)
+  }
+
+  0% {
     transform: scale(1);
     -webkit-transform: scale(1)
   }
