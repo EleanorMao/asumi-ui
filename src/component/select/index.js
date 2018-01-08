@@ -32,7 +32,7 @@ export default class Select extends Component {
         this.state = {
             data: [],
             visible: false,
-            preSelected: -1,
+            preSelected: 0,
             renderValue: '',
             selectedValue: [],
             selectedLabel: []
@@ -137,10 +137,6 @@ export default class Select extends Component {
         }
     }
 
-    handleRemovePreSelect() {
-        this.setState({preSelected: -1});
-    }
-
     handleAddPreSelect(preSelected) {
         let child = this.el_select_ul && this.el_select_ul.children && this.el_select_ul.children[preSelected];
         if (preSelected >= 0 && child) {
@@ -240,15 +236,22 @@ export default class Select extends Component {
     }
 
     handleDisableSelect() {
-        this.handleRemovePreSelect();
+        this.setState({preSelected: -1});
     }
 
     showComponent() {
-        this.setState({visible: true});
+        let {readOnly, searchable} = this.props;
+        this.setState(prev => {
+            prev.visible = true;
+            prev.preSelected = prev.renderData.length ? 0 : 1;
+            if (!readOnly && searchable) {
+                prev.renderValue = '';
+            }
+            return prev;
+        });
     }
 
     hideComponent(e) {
-        this.handleRemovePreSelect();
         this.isOverDropDown = false;
         this.setState(prev => {
             prev.visible = false;
@@ -329,7 +332,7 @@ export default class Select extends Component {
                         value={selectedLabel}
                         remainTagValue={false}
                         onInput={this.handleChange.bind(this)}
-                        onClick={this.handleToggle.bind(this)}
+                        onFocus={this.handleToggle.bind(this)}
                         disabledInput={readOnly || !searchable}
                         onKeyDown={this.handleKeyDown.bind(this)}
                         onRemove={({e, index}) => this.handleSelect(e, selectedValue[index], false)}
@@ -341,7 +344,7 @@ export default class Select extends Component {
                         autoComplete="off"
                         value={renderValue}
                         readOnly={readOnly || !searchable}
-                        onClick={this.handleToggle.bind(this)}
+                        onFocus={this.handleToggle.bind(this)}
                         onChange={this.handleChange.bind(this)}
                         onKeyDown={this.handleKeyDown.bind(this)}
                     />}
