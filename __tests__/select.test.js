@@ -51,6 +51,10 @@ describe('Select', () => {
         expect(component).toBeDefined();
         expect(component.find('.el-input input[readOnly]').length).toEqual(1);
     });
+    it('define mode[tag]', () => {
+        const component = mount(<Select mode="tag"/>);
+        expect(component.find('TagInput').length).toEqual(1);
+    });
     it('define options', () => {
         const component = mount(
             <Select>
@@ -155,7 +159,7 @@ describe('Select change', () => {
             }
 
             const component = mount(<Demo/>, {attachTo: container});
-            component.find('input').simulate('click');
+            component.find('input').simulate('focus');
             component.instance()._c.el_select_ul.children[0].click();
             expect(component.instance().state.value).toBe(1);
         });
@@ -188,26 +192,26 @@ describe('Select change', () => {
 
         it('multiple', () => {
             const wrapper = mount(<Demo/>, {attachTo: container});
-            wrapper.find('input').simulate('click');
+            wrapper.find('input').simulate('focus');
             wrapper.instance()._c.el_select_ul.children[0].click();
             expect(wrapper.instance().state.value).toEqual([1]);
-            wrapper.find('input').simulate('click');
+            wrapper.find('input').simulate('focus');
             wrapper.instance()._c.el_select_ul.children[1].click();
             expect(wrapper.instance().state.value).toEqual([1, 2]);
-            wrapper.find('input').simulate('click');
+            wrapper.find('input').simulate('focus');
             wrapper.instance()._c.el_select_ul.children[1].click();
             expect(wrapper.instance().state.value).toEqual([1]);
         });
         it('selectAll', () => {
             const wrapper = mount(<Demo selectAll/>);
-            wrapper.find('input').simulate('click');
+            wrapper.find('input').simulate('focus');
             wrapper.find('Select Option').at(0).instance().handleClick();
             jest.runAllTimers();
-            expect(wrapper.instance().state.value).toEqual([1, 2]);
-            wrapper.find('input').simulate('click');
+            expect(wrapper.state().value).toEqual([1, 2]);
+            wrapper.find('input').simulate('focus');
             wrapper.find('Select Option').at(0).instance().handleClick();
             jest.runAllTimers();
-            expect(wrapper.instance().state.value).toEqual([]);
+            expect(wrapper.state().value).toEqual([]);
         });
         it('onSearch & onMatch', () => {
             const wrapper = mount(<Demo/>, {attachTo: container});
