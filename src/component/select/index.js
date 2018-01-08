@@ -197,12 +197,12 @@ export default class Select extends Component {
         let {onMatch, matchCase, onSearch} = this.props;
         onSearch(value);
         this.setState(prev => {
-            prev.preSelected = -1;
             prev.visible = true;
             prev.renderValue = value;
             let renderData = onMatch ? onMatch(value) :
                 getMatchData(value, matchCase, prev.data);
             prev.renderData = renderData || [];
+            prev.preSelected = prev.renderData.length ? 0 : -1;
             return prev;
         });
     }
