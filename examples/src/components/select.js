@@ -157,7 +157,7 @@ export default class Main extends Component {
                     code={tag}
                 >
                     <Group
-                        type="tag"
+                        mode="tag"
                         searchable
                         style={style}
                         placeholder="请输入搜索"

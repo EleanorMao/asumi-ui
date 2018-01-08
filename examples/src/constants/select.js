@@ -261,10 +261,10 @@ export const api = [{
     'default': "default",
     description: "Size of Input. Options: small, default, large"
 }, {
-    property: "type",
+    property: "mode",
     type: "string",
     'default': "",
-    description: "Type of Select. Options: tag"
+    description: "Mode of Select. Options: tag"
 }, {
     property: "disabled",
     type: "boolean",

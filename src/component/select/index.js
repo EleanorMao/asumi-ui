@@ -311,7 +311,7 @@ export default class Select extends Component {
         let {
             searchable, readOnly, className, closeAfterSelect, size, style,
             selectAll, defaultValue, selectAllText, dropdownClassName, tagProps,
-            value, noMatchText, matchCase, onMatch, onSearch, type,
+            value, noMatchText, matchCase, onMatch, onSearch, mode,
             dropdownStyle, multiple, onChange, children, ...other
         } = this.props;
         let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
@@ -320,7 +320,7 @@ export default class Select extends Component {
             <div className={_className} style={style} ref={(c) => {
                 this.el_select = c;
             }}>
-                {type === "tag" ?
+                {mode === "tag" ?
                     <TagInput
                         onSeparate={this.handleSeparate.bind(this)}
                         {...other}
@@ -362,7 +362,7 @@ Select.propTypes = {
     searchable: PropTypes.bool,
     onSelectAll: PropTypes.func,
     noMatchText: PropTypes.string,
-    type: PropTypes.oneOf(['tag']),
+    mode: PropTypes.oneOf(['tag']),
     dropdownStyle: PropTypes.object,
     selectAllText: PropTypes.string,
     closeAfterSelect: PropTypes.bool,
