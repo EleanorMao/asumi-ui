@@ -112,9 +112,7 @@ export default class Select extends Component {
             prev.selectedValue = selectedValue;
             prev.selectedLabel = selectedLabel;
             prev.renderValue = selectedLabel.join(", ");
-            if (init) {
-                prev.renderData = renderData;
-            }
+            prev.renderData = renderData;
             return prev;
         });
     }
