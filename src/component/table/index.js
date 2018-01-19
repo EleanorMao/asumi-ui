@@ -392,7 +392,7 @@ export default class Table extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.stretchable && !this.props.stretchable) {
             this._removeStretchWidth();
-        } else if (!prevProps.stretchable && this.props.stretchable) {
+        } else if (this.props.stretchable && (!prevProps.stretchable || prevProps.data.length < this.props.data.length)) {
             this._stretchWidth();
         }
         setTimeout(this._adjustWidth.bind(this));

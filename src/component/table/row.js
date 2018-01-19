@@ -2,9 +2,9 @@
  * Created by elly on 2016/9/19.
  */
 import React, {Component} from 'react';
-import Radio from '../radio';
-import Checkbox from '../checkbox';
-import {extend, noop} from "../util";
+import Radio              from '../radio';
+import Checkbox           from '../checkbox';
+import {extend, noop}     from "../util";
 
 export default class Row extends Component {
     constructor(props) {
@@ -51,7 +51,7 @@ export default class Row extends Component {
                     {selectRow.mode === "radio" && <Radio checked={checked} readOnly={true}/>}
                     {selectRow.mode === "checkbox" && <Checkbox checked={checked} readOnly={true}/>}
                 </td>
-            )
+            );
         }
 
         cols.map((key, i, col) => {
@@ -66,7 +66,7 @@ export default class Row extends Component {
             };
 
             if (dataFormat) {
-                cell = dataFormat(data[key.id], data, level, colIndex, i, col)
+                cell = dataFormat(data[key.id], data, level, colIndex, i, col);
             }
             if (colSpan && colTarget < i && i < colSpan) return;
             if (key.render) {
@@ -108,7 +108,7 @@ export default class Row extends Component {
                           }
                     </span>
                 </td>
-            )
+            );
         });
         return output;
     }
@@ -137,7 +137,7 @@ export default class Row extends Component {
                 }}>
                 {this.cellRender()}
             </tr>
-        )
+        );
     }
 }
 
@@ -158,6 +158,6 @@ Row.defaultProps = {
                 className="fa fa-chevron-down"
                 style={open ? {transform: 'rotate(-90deg)'} : {}}
             > </i>
-        )
+        );
     }
 };
