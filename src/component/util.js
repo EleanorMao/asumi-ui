@@ -18,6 +18,11 @@ export let isArr = function (input) {
     return Object.prototype.toString.call(input) === '[object Array]';
 };
 
+export let toArray = function (input) {
+    if (!input) return [];
+    return [].slice.call(input);
+};
+
 export let diff = function (a, b) {
     return a.filter(x => {
         return b.indexOf(x) === -1;

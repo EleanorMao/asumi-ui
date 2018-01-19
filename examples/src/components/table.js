@@ -1,14 +1,7 @@
-import React, {Component} from "react";
-import {
-    Table,
-    Col
-} from "../../../src";
-import {
-    data,
-    list,
-    noKeyData,
-} from "../mock/data";
-import Panel from "./panel";
+import React, {Component}                                                      from "react";
+import {Table, Col}                                                            from "../../../src";
+import {data, list, noKeyData,}                                                from "../mock/data";
+import Panel                                                                   from "./panel";
 import {basic, sort, fixed, tree, pagination, colspan_rowspan, checkbox_radio} from "../constants/table";
 
 export default class Main extends Component {
@@ -22,7 +15,7 @@ export default class Main extends Component {
             selected: [],
             radioSelected: [],
             hideSelectColumn: []
-        }
+        };
     }
 
     timeRender(cell) {
@@ -35,7 +28,7 @@ export default class Main extends Component {
 
     controlRender(cell, row, level, colIndex, i, col) {
         console.log(cell, row, level);
-        return <a href="#">启用</a>
+        return <a href="#">启用</a>;
     }
 
     render() {
@@ -58,25 +51,25 @@ export default class Main extends Component {
                     this.setState(old => {
                         old.selected = checkedList;
                         return old;
-                    })
+                    });
                 } else {
                     this.setState(old => {
                         old.selected = [];
                         return old;
-                    })
+                    });
                 }
             },
             onSelect: (checked, row) => {
                 if (checked) {
                     this.setState(old => {
                         old.selected.push(row.id);
-                        return old
-                    })
+                        return old;
+                    });
                 } else {
                     this.setState(old => {
                         old.selected.splice(old.selected.indexOf(row.id), 1);
                         return old;
-                    })
+                    });
                 }
             }
         };
@@ -177,17 +170,17 @@ export default class Main extends Component {
                         <Col dataAlign="center" dataField="region"
                              render={(index) => {
                                  if (index === 3) {
-                                     return {colSpan: 2, rowSpan: 2}
+                                     return {colSpan: 2, rowSpan: 2};
                                  }
                                  if (index === 4) {
-                                     return {rowSpan: 0}
+                                     return {rowSpan: 0};
                                  }
                              }}>区域</Col>
                         <Col dataAlign="center" dataField="createTime"
                              dataFormat={this.timeRender.bind(this)}
                              render={(index) => {
                                  if (index === 4) {
-                                     return {rowSpan: 0}
+                                     return {rowSpan: 0};
                                  }
                              }}>创建时间</Col>
                         <Col dataAlign="center" dataField="description">描述</Col>
@@ -292,11 +285,12 @@ export default class Main extends Component {
                 </Panel>
                 <h1>API</h1>
                 <div>
-                    Almost same as <a href="https://github.com/EleanorMao/React-TreeTable/blob/master/README.md">React-TreeTable</a>.
+                    Almost same as <a
+                    href="https://github.com/EleanorMao/React-TreeTable/blob/master/README.md">React-TreeTable</a>.
                     But, 'isTree' default value is false.
                 </div>
             </div>
-        )
+        );
     }
 }
 

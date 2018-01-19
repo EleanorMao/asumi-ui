@@ -16,6 +16,7 @@ import {
     diff,
     sort,
     noop,
+    toArray,
     uniqueID,
     addEvent,
     removeEvent,
@@ -69,9 +70,10 @@ function initDictionary(props) {
     return {data, dictionary};
 }
 
-function getLastChild(data) {
+function getLastChild(data, selectRow) {
     let invalid = [],
-        list = [];
+        list = [],
+        cellIndex = 0;
     for (let i = 0, len = data.length; i < len; i++) {
         if (data[i].hidden) {
             invalid.push(i);
@@ -79,13 +81,19 @@ function getLastChild(data) {
         list.push(i);
     }
     let diffList = diff(list, invalid);
-    return diffList[diffList.length - 1];
+    cellIndex = diffList[diffList.length - 1];
+    if (selectRow && selectRow.mode && selectRow.mode !== 'none' && !selectRow.hideSelectColumn) {
+        cellIndex++;
+    }
+    return cellIndex;
 }
 
 export default class Table extends Component {
     constructor(props) {
         super(props);
         this._instance = {};
+        this.lastChild = 0;
+        this.currentCell = null;
         let {data, dictionary} = initDictionary(props);
         this.state = {
             dictionary,
@@ -141,6 +149,80 @@ export default class Table extends Component {
         return hashKey ? uid : isKey;
     }
 
+    _removeStretchWidth() {
+        const refs = this._instance;
+        if (!refs.colgroup || !refs.table_wrapper) return;
+        const rows = toArray(refs.table_wrapper.querySelectorAll('tr'));
+        if (!rows.length) return;
+        for (let j = 0; j <= rows.length; j++) {
+            if (!rows[j]) continue;
+            let bodyCells = rows[j].cells;
+            for (let k = 0; k < bodyCells.length; k++) {
+                let bodyCell = bodyCells[k];
+                removeEvent(bodyCell, 'mousedown', this._handleMouseDown.bind(this, bodyCell));
+                removeEvent(bodyCell, 'mousemove', this._handleMouseMove.bind(this, bodyCell));
+                removeEvent(bodyCell, 'mouseup', this._handleMouseUp.bind(this, bodyCell));
+            }
+        }
+    }
+
+    _stretchWidth() {
+        const refs = this._instance;
+        if (!refs.colgroup || !refs.table_wrapper) return;
+        const rows = toArray(refs.table_wrapper.querySelectorAll('tr'));
+        if (!rows.length) return;
+        for (let j = 0; j <= rows.length; j++) {
+            if (!rows[j]) continue;
+            let bodyCells = rows[j].cells;
+            for (let k = 0; k < bodyCells.length; k++) {
+                let bodyCell = bodyCells[k];
+                if (k < this.lastChild) {
+                    addEvent(bodyCell, 'mousedown', this._handleMouseDown.bind(this, bodyCell));
+                }
+                addEvent(bodyCell, 'mousemove', this._handleMouseMove.bind(this, bodyCell));
+                addEvent(bodyCell, 'mouseup', this._handleMouseUp.bind(this, bodyCell));
+            }
+        }
+    }
+
+    _handleMouseDown(cell, e) {
+        this.currentCell = cell;
+        let clientX = e.clientX;
+        let offsetWidth = this.currentCell.offsetWidth;
+        if (e.offsetX > offsetWidth - 10) {
+            this.currentCell._mouse_down = true;
+            this.currentCell._old_clientX = clientX;
+            this.currentCell._old_offsetWidth = offsetWidth;
+        }
+    }
+
+    _handleMouseUp(cell) {
+        if (this.currentCell == null) {
+            this.currentCell = cell;
+        }
+        this.currentCell._mouse_down = false;
+        this.currentCell.style.cursor = '';
+    }
+
+    _handleMouseMove(cell, e) {
+        let clientX = e.clientX;
+        let currentCell = this.currentCell;
+        let offsetWidth = cell.offsetWidth;
+        const colgroup = this._instance.thead._colgroup.childNodes;
+        cell.style.cursor = cell.cellIndex < this.lastChild && e.offsetX > offsetWidth - 10 ? 'col-resize' : '';
+        if (currentCell == null) {
+            currentCell = cell;
+        }
+        if (currentCell._mouse_down) {
+            let width = currentCell._old_offsetWidth + clientX - currentCell._old_clientX;
+            if (width > 0) {
+                colgroup[currentCell.cellIndex].style.width = width + 'px';
+                colgroup[currentCell.cellIndex].style.maxWidth = width + 'px';
+                this._adjustWidth();
+            }
+        }
+    }
+
     _adjustWidth() {
         const refs = this._instance;
         if (!refs.colgroup) return;
@@ -160,9 +242,7 @@ export default class Table extends Component {
         const scrollBarWidth = getScrollBarWidth();
         const haveScrollBar = refs.body.offsetWidth !== refs.thead._header.offsetWidth;
 
-        let lastChild = getLastChild(this.state.columnData), fixedRightWidth = 0;
-        lastChild = this.props.selectRow.mode && this.props.selectRow.mode !== 'none' ? lastChild + 1 : lastChild;
-
+        let lastChild = this.lastChild = getLastChild(this.state.columnData, this.props.selectRow), fixedRightWidth = 0;
         for (let i = 0; i < length; i++) {
             const cell = cells[i];
             const rightIndex = i - rightFixedLength;
@@ -292,6 +372,7 @@ export default class Table extends Component {
 
     componentDidMount() {
         this._adjustWidth();
+        if (this.props.stretchable) this._stretchWidth();
         addEvent(window, 'resize', this._adjustWidth.bind(this));
         let {rightContainer, container} = this._instance;
         addEvent(container, 'scroll', this._scrollHeader.bind(this));
@@ -300,6 +381,7 @@ export default class Table extends Component {
     }
 
     componentWillUnmount() {
+        this._removeStretchWidth();
         removeEvent(window, 'resize', this._adjustWidth.bind(this));
         let {rightContainer, container} = this._instance;
         removeEvent(container, 'scroll', this._scrollHeader.bind(this));
@@ -307,9 +389,13 @@ export default class Table extends Component {
         removeEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
     }
 
-    componentDidUpdate() {
-        this._adjustWidth();
-        this._adjustWidth();
+    componentDidUpdate(prevProps) {
+        if (prevProps.stretchable && !this.props.stretchable) {
+            this._removeStretchWidth();
+        } else if (!prevProps.stretchable && this.props.stretchable) {
+            this._stretchWidth();
+        }
+        setTimeout(this._adjustWidth.bind(this));
     }
 
     componentWillReceiveProps(nextProps) {
@@ -831,7 +917,9 @@ export default class Table extends Component {
                         cols={columnData}
                     />
                 }
-                <div className="el-table-wrapper" style={{width: width || '100%'}}>
+                <div className="el-table-wrapper" style={{width: width || '100%'}}
+                     ref={c => this._instance.table_wrapper = c}
+                >
                     <div className="el-table">
                         <Header
                             ref={(c) => {
@@ -966,6 +1054,7 @@ Table.propTypes = {
     expandAll: PropTypes.bool,
     arrowRender: PropTypes.func,
     onArrowClick: PropTypes.func,
+    stretchable: PropTypes.bool,
     isKey: PropTypes.string,
     nestedHead: PropTypes.arrayOf(PropTypes.array),
     expandRowKeys: PropTypes.array,

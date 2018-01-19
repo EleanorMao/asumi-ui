@@ -2,8 +2,8 @@
  * Created by elly on 2016/9/19.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Checkbox from '../checkbox';
+import PropTypes          from 'prop-types';
+import Checkbox           from '../checkbox';
 
 import {noop, sort} from '../util';
 
@@ -18,9 +18,9 @@ export default class Header extends Component {
                 <th onClick={() => onSelectAll(!checked)} style={{textAlign: 'center', width: 46}} data-input={mode}>
                     <Checkbox checked={checked} readOnly={true}/>
                 </th>
-            )
+            );
         } else if (mode === 'radio') {
-            return <th data-input={mode}/>
+            return <th data-input={mode}/>;
         } else {
             return false;
         }
@@ -30,7 +30,7 @@ export default class Header extends Component {
         let i = 0;
         return (
             <colgroup ref={(c) => {
-                this._colgroup = c
+                this._colgroup = c;
             }}>
                 {selectRow.mode && selectRow.mode !== 'none' && !selectRow.hideSelectColumn && !isTree &&
                 <col key="select" style={{textAlign: 'center', width: 46}}/>}
@@ -44,10 +44,10 @@ export default class Header extends Component {
                         textAlign: elm.props.dataAlign,
                         display: elm.props.hidden && 'none'
                     };
-                    return <col key={i} style={style}/>
+                    return <col key={i} style={style}/>;
                 })}
             </colgroup>
-        )
+        );
     }
 
     render() {
@@ -69,13 +69,15 @@ export default class Header extends Component {
         renderChildren = sort(renderChildren).sorted;
         return (
             <div className="el-table-container el-table-header-container" ref={(c) => {
-                this._header = c
+                this._header = c;
             }}>
-                <table className="el-table-bordered">
+                <table className="el-table-bordered" ref={(c) => {
+                    this._table = c;
+                }}>
                     {this.colgroupRender(renderChildren, selectRow, isTree, left, right)}
                     <thead>
                     <tr ref={(c) => {
-                        this._thead = c
+                        this._thead = c;
                     }}>
                         {!isTree && !selectRow.hideSelectColumn && this.selectRender(selectRow.mode, onSelectAll, dataLength && checked)}
                         {React.Children.map(renderChildren, (elm) => {
@@ -96,7 +98,7 @@ export default class Header extends Component {
                     </thead>
                 </table>
             </div>
-        )
+        );
     }
 }
 
