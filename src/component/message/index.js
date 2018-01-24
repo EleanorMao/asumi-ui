@@ -29,7 +29,7 @@ export default class Message extends Component {
         return (
             <div className={_className}>
                 {!!icon && <span className="el-message-icon">{icon}</span>}
-                <span className="el-message-content">{content}</span>
+                <span className="el-message-content" dangerouslySetInnerHTML={{__html: content}} />
             </div>
         )
     }
