@@ -202,6 +202,8 @@ export default class Table extends Component {
         }
         this.currentCell._mouse_down = false;
         this.currentCell.style.cursor = '';
+        this.currentCell._old_clientX = '';
+        this.currentCell._old_offsetWidth = '';
     }
 
     _handleMouseMove(cell, e) {
@@ -215,7 +217,8 @@ export default class Table extends Component {
         }
         if (currentCell._mouse_down) {
             let width = currentCell._old_offsetWidth + clientX - currentCell._old_clientX;
-            if (width > 0) {
+            if (width > 10) {
+                cell.style.cursor = 'col-resize';
                 colgroup[currentCell.cellIndex].style.width = width + 'px';
                 colgroup[currentCell.cellIndex].style.maxWidth = width + 'px';
                 this._adjustWidth();
@@ -226,13 +229,13 @@ export default class Table extends Component {
     _adjustWidth() {
         const refs = this._instance;
         if (!refs.colgroup) return;
-        const firstRow = refs.colgroup.childNodes;
-        const cells = refs.thead._thead.childNodes;
-        const fixedLeftRow = refs.left && refs.left.childNodes;
-        const fixedRightRow = refs.right && refs.right.childNodes;
-        const nestedRow = refs.nested && refs.nested._colgroup.childNodes;
-        const fixedLeftHeadRow = refs.lthead && refs.lthead._colgroup.childNodes;
-        const fixedRightHeadRow = refs.rthead && refs.rthead._colgroup.childNodes;
+        const firstRow = toArray(refs.colgroup.childNodes);
+        const cells = toArray(refs.thead._thead.childNodes);
+        const fixedLeftRow = refs.left && toArray(refs.left.childNodes);
+        const fixedRightRow = refs.right && toArray(refs.right.childNodes);
+        const nestedRow = refs.nested && toArray(refs.nested._colgroup.childNodes);
+        const fixedLeftHeadRow = refs.lthead && toArray(refs.lthead._colgroup.childNodes);
+        const fixedRightHeadRow = refs.rthead && toArray(refs.rthead._colgroup.childNodes);
         const isNoData = refs.tbody.firstChild.childElementCount === 1;
         const length = cells.length;
         const rightFixedLength = fixedRightRow ? length - fixedRightRow.length : 0;
@@ -240,9 +243,11 @@ export default class Table extends Component {
         if (firstRow.length !== length) return;
 
         const scrollBarWidth = getScrollBarWidth();
-        const haveScrollBar = refs.body.offsetWidth !== refs.thead._header.offsetWidth;
+        const haveScrollBar = refs.container.offsetHeight !==  refs.container.scrollHeight;
 
-        let lastChild = this.lastChild = getLastChild(this.state.columnData, this.props.selectRow), fixedRightWidth = 0;
+        const lastChild = this.lastChild = getLastChild(this.state.columnData, this.props.selectRow);
+        let fixedRightWidth = 0;
+
         for (let i = 0; i < length; i++) {
             const cell = cells[i];
             const rightIndex = i - rightFixedLength;
@@ -257,7 +262,6 @@ export default class Table extends Component {
             }
 
             const lastPaddingWidth = -(lastChild === i && haveScrollBar ? scrollBarWidth : 0);
-
             if (!width) {
                 width = 120;
                 cell.width = width + lastPaddingWidth + 'px';
@@ -390,12 +394,13 @@ export default class Table extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        this._adjustWidth();
         if (prevProps.stretchable && !this.props.stretchable) {
             this._removeStretchWidth();
         } else if (this.props.stretchable && (!prevProps.stretchable || prevProps.data.length < this.props.data.length)) {
             this._stretchWidth();
         }
-        setTimeout(this._adjustWidth.bind(this));
+        // setTimeout(this._adjustWidth.bind(this));
     }
 
     componentWillReceiveProps(nextProps) {
