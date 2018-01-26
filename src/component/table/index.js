@@ -243,7 +243,7 @@ export default class Table extends Component {
         if (firstRow.length !== length) return;
 
         const scrollBarWidth = getScrollBarWidth();
-        const haveScrollBar = refs.container.offsetHeight !==  refs.container.scrollHeight;
+        const haveScrollBar = refs.container.offsetHeight < refs.container.scrollHeight;
 
         const lastChild = this.lastChild = getLastChild(this.state.columnData, this.props.selectRow);
         let fixedRightWidth = 0;
@@ -262,6 +262,7 @@ export default class Table extends Component {
             }
 
             const lastPaddingWidth = -(lastChild === i && haveScrollBar ? scrollBarWidth : 0);
+
             if (!width) {
                 width = 120;
                 cell.width = width + lastPaddingWidth + 'px';
