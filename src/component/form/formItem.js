@@ -2,23 +2,23 @@
  * Created by elly on 2017/4/13.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import Input from '../input';
-import Radio from '../radio';
-import Upload from '../upload';
-import Select from '../select';
-import Editor from '../editor';
-import Popover from '../popover';
-import Datetime from '../datetime';
-import Transfer from '../transfer';
-import TagInput from '../tagInput';
-import Option from '../select/option';
-import NumberInput from '../numberInput';
-import Checkbox from "../checkbox/index";
-import RadioGroup from '../radio/radioGroup';
-import CheckGroup from '../checkbox/checkGroup';
-import {rules, getType} from "../util";
+import PropTypes          from 'prop-types';
+import classnames         from 'classnames';
+import Input              from '../input';
+import Radio              from '../radio';
+import Upload             from '../upload';
+import Select             from '../select';
+import Editor             from '../editor';
+import Popover            from '../popover';
+import Datetime           from '../datetime';
+import Transfer           from '../transfer';
+import TagInput           from '../tagInput';
+import Option             from '../select/option';
+import NumberInput        from '../numberInput';
+import Checkbox           from "../checkbox/index";
+import RadioGroup         from '../radio/radioGroup';
+import CheckGroup         from '../checkbox/checkGroup';
+import {rules, getType}   from "../util";
 
 function isRequired(validate, required) {
     return required || (validate && validate.some(item => {
@@ -52,7 +52,7 @@ export default class FormItem extends Component {
     }
 
     get isDisabled() {
-        return this._changeDisabled || this._blurDisabled || this._submitDisabled
+        return this._changeDisabled || this._blurDisabled || this._submitDisabled;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -70,7 +70,7 @@ export default class FormItem extends Component {
             this._submitDisabled = disabled;
             formValidator && formValidator(nextProps, this.isDisabled, () => {
                 this._pending = false;
-            });
+            }, nextProps.value);
         }
     }
 
@@ -81,7 +81,7 @@ export default class FormItem extends Component {
         let func = validateMap[valueType];
         let hasLen = (valueType === "array" && (!type || type === "array")) || (valueType === "string" && (!type || type === "string"));
         if (!fail && required && func && func(value)) {
-            fail = true
+            fail = true;
         }
         if (!fail && instance && !value instanceof instance) {
             fail = true;
@@ -137,21 +137,21 @@ export default class FormItem extends Component {
                 if (!disabled && item.trigger === "blur") {
                     disabled = this.validator(item, _value);
                 }
-            })
+            });
         }
         this._blurDisabled = disabled;
         if (!this.isDisabled && this._msgSetted) {
             this._form_item.classList.remove(`el-form-item-${validateType}`);
             this._message.innerHTML = "";
-            this._msgSetted = false
+            this._msgSetted = false;
         }
-        let valueType = getType(_value);
-        let func = validateMap[valueType];
-        if (!this.isDisabled && required && func && func(_value)) {
-            disabled = true;
-            this._blurDisabled = disabled;
-        }
-        formValidator && formValidator(this.props, this.isDisabled);
+        // let valueType = getType(_value);
+        // let func = validateMap[valueType];
+        // if (!this.isDisabled && required && func && func(_value)) {
+        //     disabled = true;
+        //     this._blurDisabled = disabled;
+        // }
+        formValidator && formValidator(this.props, this.isDisabled, void 0, _value);
         onBlur && onBlur.apply(null, arguments);
 
     }
@@ -165,16 +165,16 @@ export default class FormItem extends Component {
                 if (!disabled && item.trigger === "change") {
                     disabled = this.validator(item, _value);
                 }
-            })
+            });
         }
         this._submitDisabled = false;
         this._changeDisabled = disabled;
         if (!this.isDisabled && this._msgSetted) {
             this._form_item.classList.remove(`el-form-item-${validateType}`);
             this._message.innerHTML = "";
-            this._msgSetted = false
+            this._msgSetted = false;
         }
-        formValidator && formValidator(this.props, this.isDisabled);
+        formValidator && formValidator(this.props, this.isDisabled, void 0, _value);
         onChange && onChange.apply(null, arguments);
     }
 
@@ -218,7 +218,7 @@ export default class FormItem extends Component {
                         {!!options && options.map(item => {
                             return (
                                 <Option key={item.value} {...item}/>
-                            )
+                            );
                         })}
                     </Select>;
                 break;
@@ -394,7 +394,7 @@ export default class FormItem extends Component {
                     <div className="el-form-message" ref={c => this._message = c}/>
                 </div>
             </div>
-        )
+        );
     }
 }
 

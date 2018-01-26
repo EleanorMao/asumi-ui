@@ -27,6 +27,7 @@ function getMatchData(value, matchCase, data, strict) {
 export default class Select extends Component {
     constructor(props) {
         super(props);
+        this.value = void 0;
         this.allValue = [];
         this.isOverDropDown = false;
         this.state = {
@@ -204,7 +205,6 @@ export default class Select extends Component {
     handleSelect(e, value, selected) {
         let {name, multiple, onChange, readOnly, closeAfterSelect} = this.props;
         if (readOnly) return;
-        closeAfterSelect && this.hideComponent(e);
         if (multiple) {
             let _value = this.props.value.slice();
             if (selected) {
@@ -212,10 +212,13 @@ export default class Select extends Component {
             } else {
                 _value.splice(_value.indexOf(value), 1);
             }
+            this.value = _value;
             onChange({e, name, value: _value, selectedValue: value, selected});
         } else {
+            this.value = value;
             onChange({e, name, value, selectedValue: value, selected});
         }
+        closeAfterSelect && this.hideComponent(e);
     }
 
     handleSelectAll(e, allValue, selected) {
