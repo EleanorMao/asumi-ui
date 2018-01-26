@@ -91,8 +91,9 @@ function getLastChild(data, selectRow) {
 export default class Table extends Component {
     constructor(props) {
         super(props);
-        this._instance = {};
+        this.isIE = !-[1,];
         this.lastChild = 0;
+        this._instance = {};
         this.currentCell = null;
         let {data, dictionary} = initDictionary(props);
         this.state = {
@@ -253,11 +254,12 @@ export default class Table extends Component {
             const rightIndex = i - rightFixedLength;
             const computedStyle = getComputedStyle(cell);
             let width = parseFloat(computedStyle.width.replace('px', ''));
-            if (!-[1,]) {
+
+            if (this.isIE) { //IE
                 const paddingLeftWidth = parseFloat(computedStyle.paddingLeft.replace('px', ''));
                 const paddingRightWidth = parseFloat(computedStyle.paddingRight.replace('px', ''));
-                const borderRightWidth = parseFloat(computedStyle.borderRightWidth.replace('px', ''));
                 const borderLeftWidth = parseFloat(computedStyle.borderLeftWidth.replace('px', ''));
+                const borderRightWidth = parseFloat(computedStyle.borderRightWidth.replace('px', ''));
                 width = width + paddingLeftWidth + paddingRightWidth + borderRightWidth + borderLeftWidth;
             }
 
@@ -296,17 +298,22 @@ export default class Table extends Component {
                 fixedRightHeadRow[rightIndex].style.width = width.toFixed(2) + 'px';
                 fixedRightHeadRow[rightIndex].style.maxWidth = width.toFixed(2) + 'px';
             }
-
         }
 
         if (fixedRightWidth) {
-            refs.rightBody.style.width = fixedRightWidth + 'px';
+            refs.rightContainer.style.width = fixedRightWidth + 'px';
         }
 
         if (fixedLeftRow || fixedRightRow) {
-            const tbody = refs.tbody.childNodes;
-            const ltbody = refs.ltbody && refs.ltbody.childNodes;
-            const rtbody = refs.rtbody && refs.rtbody.childNodes;
+            const getBoundingClientRect = refs.container.getBoundingClientRect;
+            const height = getBoundingClientRect ? getBoundingClientRect().height : refs.container.offsetHeight;
+            const haveVerticalScrollBar = refs.container.offsetWidth < refs.container.scrollWidth;
+            const fixedTableHeight = height - (haveVerticalScrollBar ? scrollBarWidth : 0);
+            refs.leftContainer.style.height = fixedTableHeight + 'px';
+            refs.rightContainer.style.height = fixedTableHeight + 'px';
+            const tbody = toArray(refs.tbody.childNodes);
+            const ltbody = refs.ltbody && toArray(refs.ltbody.childNodes);
+            const rtbody = refs.rtbody && toArray(refs.rtbody.childNodes);
             const headHeight = getComputedStyle(refs.thead._thead).height;
             if (refs.lthead) refs.lthead._thead.style.height = headHeight;
             if (refs.rthead) refs.rthead._thead.style.height = headHeight;
@@ -401,7 +408,6 @@ export default class Table extends Component {
         } else if (this.props.stretchable && (!prevProps.stretchable || prevProps.data.length < this.props.data.length)) {
             this._stretchWidth();
         }
-        // setTimeout(this._adjustWidth.bind(this));
     }
 
     componentWillReceiveProps(nextProps) {
@@ -901,31 +907,20 @@ export default class Table extends Component {
             'el-table-striped': striped
         });
         let renderList = (topPagination || pagination) && !remote ? sliceData(renderedList, currentPage, length) : renderedList;
-        let paddingBottom = 0;
-        let container = this._instance.container;
-        if (container && typeof parseFloat(height) === "number" && container.scrollWidth > container.clientWidth) {
-            paddingBottom = parseFloat(height) - container.clientHeight;
-            if (isNaN(paddingBottom)) {
-                paddingBottom = 0;
-            }
-        }
         return (
             <div className={"el-table-group el-" + lineWrap} style={style}>
                 {this.titleRender()}
                 {this.topPagingRowRender()}
-                {
-                    !!nestedHead.length &&
-                    <NestedHeader
-                        ref={(c) => {
-                            this._instance.nested = c;
-                        }} nestedHead={nestedHead} isTree={isTree}
-                        selectRow={selectRow} lineWrap={lineWrap}
-                        cols={columnData}
-                    />
-                }
+                {!!nestedHead.length &&
+                <NestedHeader
+                    ref={(c) => {
+                        this._instance.nested = c;
+                    }} nestedHead={nestedHead} isTree={isTree}
+                    selectRow={selectRow} lineWrap={lineWrap}
+                    cols={columnData}
+                />}
                 <div className="el-table-wrapper" style={{width: width || '100%'}}
-                     ref={c => this._instance.table_wrapper = c}
-                >
+                     ref={c => this._instance.table_wrapper = c}>
                     <div className="el-table">
                         <Header
                             ref={(c) => {
@@ -943,52 +938,43 @@ export default class Table extends Component {
                         {this.bodyRender(renderList, className, height, selectRow)}
                     </div>
                     <div className="el-table el-table-fixed el-table-left-fixed">
-                        {
-                            !!leftColumnData.length &&
-                            <Header
-                                ref={(c) => {
-                                    this._instance.lthead = c;
-                                }} left={leftColumnData.length} isTree={isTree}
-                                onSelectAll={this.handleSelectAll.bind(this)}
-                                selectRow={selectRow} checked={allChecked}
-                                sortName={remote ? sortName : sortField}
-                                sortOrder={remote ? sortOrder : order}
-                                onSort={this.handleSort.bind(this)}
-                                dataLength={renderList.length}
-                            >
-                                {children}
-                            </Header>
-                        }
+                        {!!leftColumnData.length &&
+                        <Header
+                            ref={(c) => {
+                                this._instance.lthead = c;
+                            }} left={leftColumnData.length} isTree={isTree}
+                            onSelectAll={this.handleSelectAll.bind(this)}
+                            selectRow={selectRow} checked={allChecked}
+                            sortName={remote ? sortName : sortField}
+                            sortOrder={remote ? sortOrder : order}
+                            onSort={this.handleSort.bind(this)}
+                            dataLength={renderList.length}>
+                            {children}
+                        </Header>}
                         <div
                             ref={(c) => {
                                 this._instance.leftContainer = c;
                             }} className="el-table-container el-table-body-container"
-                            style={{height: height || 'auto', paddingBottom: paddingBottom}}
-                        >
+                            style={{height: height || 'auto'}}>
                             {this.leftBodyRender(renderList, className, selectRow)}
                         </div>
                     </div>
                     <div className="el-table el-table-fixed el-table-right-fixed">
-                        {
-                            !!rightColumnData.length &&
-                            <Header
-                                ref={(c) => {
-                                    this._instance.rthead = c;
-                                }} right={rightColumnData.length} isTree={isTree}
-                                sortName={remote ? sortName : sortField}
-                                sortOrd er={remote ? sortOrder : order}
-                                onSort={this.handleSort.bind(this)}
-                                dataLength={renderList.length}
-                            >
-                                {children}
-                            </Header>
-                        }
-                        <div
+                        {!!rightColumnData.length &&
+                        <Header
                             ref={(c) => {
-                                this._instance.rightContainer = c;
-                            }} className="el-table-container el-table-body-container"
-                            style={{height: height || 'auto', paddingBottom: paddingBottom}}
-                        >
+                                this._instance.rthead = c;
+                            }} right={rightColumnData.length} isTree={isTree}
+                            sortName={remote ? sortName : sortField}
+                            sortOrd er={remote ? sortOrder : order}
+                            onSort={this.handleSort.bind(this)}
+                            dataLength={renderList.length}>
+                            {children}
+                        </Header>}
+                        <div ref={(c) => {
+                            this._instance.rightContainer = c;
+                        }} className="el-table-container el-table-body-container"
+                             style={{height: height || 'auto'}}>
                             {this.rightBodyRender(renderList, className)}
                         </div>
                     </div>
