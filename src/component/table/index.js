@@ -229,7 +229,7 @@ export default class Table extends Component {
 
     _adjustWidth() {
         const refs = this._instance;
-        if (!refs.colgroup) return;
+        if (!refs.colgroup || !refs.container) return;
         const firstRow = toArray(refs.colgroup.childNodes);
         const cells = toArray(refs.thead._thead.childNodes);
         const fixedLeftRow = refs.left && toArray(refs.left.childNodes);
@@ -237,7 +237,7 @@ export default class Table extends Component {
         const nestedRow = refs.nested && toArray(refs.nested._colgroup.childNodes);
         const fixedLeftHeadRow = refs.lthead && toArray(refs.lthead._colgroup.childNodes);
         const fixedRightHeadRow = refs.rthead && toArray(refs.rthead._colgroup.childNodes);
-        const isNoData = refs.tbody.firstChild.childElementCount === 1;
+        const isNoData = !refs.tbody || refs.tbody.firstChild.childElementCount === 1;
         const length = cells.length;
         const rightFixedLength = fixedRightRow ? length - fixedRightRow.length : 0;
 
@@ -306,7 +306,7 @@ export default class Table extends Component {
 
         if (fixedLeftRow || fixedRightRow) {
             const getBoundingClientRect = refs.container.getBoundingClientRect;
-            const height = getBoundingClientRect ? getBoundingClientRect().height : refs.container.offsetHeight;
+            const height = getBoundingClientRect ? refs.container.getBoundingClientRect().height : refs.container.offsetHeight;
             const haveVerticalScrollBar = refs.container.offsetWidth < refs.container.scrollWidth;
             const fixedTableHeight = height - (haveVerticalScrollBar ? scrollBarWidth : 0);
             refs.leftContainer.style.height = fixedTableHeight + 'px';
@@ -739,13 +739,18 @@ export default class Table extends Component {
         if (pagination && (length > 1 || length === 1 && sizePageList[0] !== options.sizePerPage)) {
             if (remote) {
                 return (
-                    <Dropdown list={sizePageList}
-                              onClick={this.handleFlip.bind(this)}>
+                    <Dropdown
+                        list={sizePageList}
+                        dropdownPlacement={options.dropdownPlacement}
+                        onClick={this.handleFlip.bind(this)}>
                         {options.sizePerPage}
                     </Dropdown>);
             } else {
                 return (
-                    <Dropdown list={sizePageList} onClick={this.handleFlip.bind(this)}>
+                    <Dropdown
+                        list={sizePageList}
+                        onClick={this.handleFlip.bind(this)}
+                        dropdownPlacement={options.dropdownPlacement}>
                         {this.state.length}
                     </Dropdown>
                 );
@@ -1023,7 +1028,8 @@ Table.defaultProps = {
         paginationSize: 6,
         sizePageList: [10],
         onPageChange: noop,
-        onSizePageChange: noop
+        onSizePageChange: noop,
+        dropdownPlacement: 'auto'
     },
     onArrowClick: (opened, data, callback) => {
         callback(data);
@@ -1078,6 +1084,7 @@ Table.propTypes = {
         sizePageList: PropTypes.array,
         onSizePageChange: PropTypes.func,
         paginationSize: PropTypes.number,
+        dropdownPlacement: PropTypes.oneOf(['auto', 'top', 'bottom']),
         paginationShowsTotal: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])
     })
 };

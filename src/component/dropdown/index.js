@@ -41,17 +41,17 @@ export default class Dropdown extends Component {
     }
 
     getClassName(list = this.props.list) {
-        let className = '';
         if (this._dropdown && this._dropdown_menu && this._dropdown.getBoundingClientRect) {
             let {bottom, top} = this._dropdown.getBoundingClientRect();
             let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
             let bodyHeight = document.body.offsetHeight || document.documentElement.offsetHeight;
             let offsetBottom = bodyHeight - bottom - scrollTop;
             if (top + scrollTop > offsetBottom && offsetBottom < list.length * 40) {
-                className = 'el-dropdown-menu-bottom';
+                this._dropdown_menu.classList.add('el-dropdown-menu-bottom');
+            } else {
+                this._dropdown_menu.classList.remove('el-dropdown-menu-bottom');
             }
         }
-        this.setState({className});
     }
 
     handleToggle() {

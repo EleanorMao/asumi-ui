@@ -202,9 +202,10 @@ export default class Select extends Component {
         });
     }
 
-    handleSelect(e, value, selected) {
+    handleSelect(preSelected, e, value, selected) {
         let {name, multiple, onChange, readOnly, closeAfterSelect} = this.props;
         if (readOnly) return;
+        this.setState({preSelected});
         if (multiple) {
             let _value = this.props.value.slice();
             if (selected) {
@@ -244,7 +245,9 @@ export default class Select extends Component {
         let {readOnly, searchable} = this.props;
         this.setState(prev => {
             prev.visible = true;
-            prev.preSelected = prev.renderData.length ? 0 : 1;
+            if (!prev.renderData.length) {
+                prev.preSelected = -1;
+            }
             if (!readOnly && searchable) {
                 prev.renderValue = '';
             }
@@ -292,15 +295,16 @@ export default class Select extends Component {
                         className={preSelected === 0 ? 'el-select-selected' : ''}
                     />}
                     {renderData.map((props, index) => {
+                        let _index = hasSelectAll ? index + 1 : index;
                         return (
                             <Option
                                 {...props}
                                 key={props.value}
                                 multiple={multiple}
-                                onChange={this.handleSelect.bind(this)}
+                                onChange={this.handleSelect.bind(this, _index)}
                                 selected={!!~selectedValue.indexOf(props.value)}
                                 onDisableChange={this.handleDisableSelect.bind(this)}
-                                className={preSelected === (hasSelectAll ? index + 1 : index) ? 'el-select-selected' : ''}
+                                className={preSelected === _index ? 'el-select-selected' : ''}
                             />
                         );
                     })}
