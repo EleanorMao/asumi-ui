@@ -88,6 +88,16 @@ function getLastChild(data, selectRow) {
     return cellIndex;
 }
 
+function getDefLength(props) {
+    if (props.pagination || props.topPagination) {
+        if (props.options) {
+            let {sizePerPage, sizePageList} = props.options;
+            return sizePerPage || (sizePageList && sizePageList.length ? sizePageList[0] : 0);
+        }
+    }
+    return 0;
+}
+
 export default class Table extends Component {
     constructor(props) {
         super(props);
@@ -107,7 +117,7 @@ export default class Table extends Component {
             sortField: undefined,
             allChecked: this._isAllChecked(data, props.selectRow),
             currentPage: (props.pagination || props.topPagination) && props.options.page || 1,
-            length: (props.pagination || props.topPagination) && props.options.sizePerPage || data.length
+            length: getDefLength(props)
         };
     }
 
@@ -416,8 +426,8 @@ export default class Table extends Component {
         this.setState(prevState => {
             prevState.renderedList = data;
             prevState.dictionary = dictionary;
+            prevState.length = getDefLength(nextProps);
             prevState.allChecked = this._isAllChecked(data, nextProps.selectRow);
-            prevState.length = (nextProps.pagination || nextProps.topPagination) && nextProps.options.sizePerPage || data.length;
             prevState.currentPage = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
             return prevState;
         });
