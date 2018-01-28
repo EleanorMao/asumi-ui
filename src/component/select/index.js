@@ -226,11 +226,12 @@ export default class Select extends Component {
         let {name, onChange, onSelectAll, readOnly, closeAfterSelect} = this.props;
         if (readOnly) return;
         if (!selected) allValue = [];
-        closeAfterSelect && this.hideComponent(e);
+        this.setState({preSelected: 0});
         onChange({e, name, value: allValue.slice(), selectedValue: allValue.slice(), selected});
         if (onSelectAll) {
             onSelectAll({e, name, value: allValue.slice(), selectedValue: allValue.slice(), selected});
         }
+        closeAfterSelect && this.hideComponent(e);
     }
 
     handleToggleOver(flag) {

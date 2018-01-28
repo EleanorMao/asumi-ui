@@ -62,9 +62,22 @@
           position: absolute;
           display: inline-block;
           border-left: 7px solid transparent;
-          border-bottom: 7px solid rgba(255, 255, 255, .8);
+          border-bottom: 7px solid @d_primary;
           border-top-color: @shadow;
         }
+        &.el-datetime-active {
+          &:after {
+            right: 4px;
+            bottom: 4px;
+            content: " ";
+            position: absolute;
+            display: inline-block;
+            border-left: 7px solid transparent;
+            border-bottom: 7px solid rgba(255, 255, 255, .8);
+            border-top-color: @shadow;
+          }
+        }
+
       }
       &.el-datetime-old,
       &.el-datetime-new {
@@ -119,7 +132,7 @@
       }
     }
   }
-  .el-datetime-time{
+  .el-datetime-time {
     width: 250px;
   }
   .el-datetime-shortcuts {

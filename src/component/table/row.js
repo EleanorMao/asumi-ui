@@ -46,7 +46,7 @@ export default class Row extends Component {
 
         if (isSelect && !hideSelectColumn) {
             output.push(
-                <td key={_key}
+                <td key={_key} data-input={selectRow.mode}
                     style={{backgroundColor: checked && (selectRow.bgColor || "#E1F5FE"), textAlign: 'center'}}>
                     {selectRow.mode === "radio" && <Radio checked={checked} readOnly={true}/>}
                     {selectRow.mode === "checkbox" && <Checkbox checked={checked} readOnly={true}/>}

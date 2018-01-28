@@ -92,10 +92,10 @@ function getDefLength(props) {
     if (props.pagination || props.topPagination) {
         if (props.options) {
             let {sizePerPage, sizePageList} = props.options;
-            return sizePerPage || (sizePageList && sizePageList.length ? sizePageList[0] : 0);
+            return sizePerPage || (sizePageList && sizePageList.length ? sizePageList[0] : 10);
         }
     }
-    return 0;
+    return 10;
 }
 
 export default class Table extends Component {
@@ -187,6 +187,7 @@ export default class Table extends Component {
             let bodyCells = rows[j].cells;
             for (let k = 0; k < bodyCells.length; k++) {
                 let bodyCell = bodyCells[k];
+                if (bodyCell.getAttribute('data-input')) continue;
                 if (k < this.lastChild) {
                     addEvent(bodyCell, 'mousedown', this._handleMouseDown.bind(this, bodyCell));
                 }

@@ -327,14 +327,14 @@ export default class DateTime extends React.Component {
     }
 
     render() {
-        let {className, input, shortcuts} = this.props,
+        let {className, input, shortcuts, style} = this.props,
             {inputValue, open, currentView, updateOn} = this.state;
         return (
             <div className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}
-                 ref={c => this._el_datetime = c}
+                 ref={c => this._el_datetime = c} style={style}
                  data-value={updateOn + this.uid}>
                 {input &&
-                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>}
+                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>} autoComplete="off"
                        onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
                        onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)}/>}
                 <div key='dt' className='el-datetime-picker'>
@@ -354,6 +354,7 @@ DateTime.propTypes = {
     utc: PropTypes.bool,
     name: PropTypes.string,
     input: PropTypes.bool,
+    style: PropTypes.bool,
     inputProps: PropTypes.object,
     timeConstraints: PropTypes.object,
     viewMode: PropTypes.oneOf(['years', 'months', 'days', 'time', 'weeks']),
