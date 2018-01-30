@@ -65,6 +65,10 @@ export default class DateTime extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if(JSON.stringify(nextProps) === JSON.stringify(this.props)){
+            return;
+        }
+        console.log(nextProps, this.props)
         let formats = this.getFormats(nextProps),
             updatedState = {}, tag = '';
         if (nextProps.value !== this.props.value || formats.datetime !== this.getFormats(this.props).datetime) {
