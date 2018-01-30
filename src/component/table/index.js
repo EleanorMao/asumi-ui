@@ -622,8 +622,8 @@ export default class Table extends Component {
                         }}
                         onMouseOver={hover ? this.handleHover.bind(this, key) : () => {
                         }}
-                        checked={selectRow.selected && selectRow.mode === 'checkbox' ?
-                            !!~selectRow.selected.indexOf(key) : selectRow.selected[0] === key}
+                        checked={selectRow.selected && (selectRow.mode === 'checkbox' ?
+                            !!~selectRow.selected.indexOf(key) : selectRow.selected[0] === key)}
                     />
                 );
                 if (opened) {
