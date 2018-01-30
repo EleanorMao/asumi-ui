@@ -142,7 +142,7 @@ export default class Form extends Component {
         if (this.props.preventDefault) {
             e.preventDefault();
         }
-        if (this.props.formValidator) {
+        if (this.props.stopValidate) {
             this.handleSubmit();
         } else {
             if (_disabled || this._pending) return;
@@ -185,15 +185,17 @@ export default class Form extends Component {
                   name={name} target={target} noValidate={noValidate} acceptCharset={acceptCharset}>
                 {!!title && <div className="el-form-title">{title}</div>}
                 {options && options.map((props, index) => {
+                    let {onChange, value, name, ...others} = props;
                     return (
                         <FormItem
-                            onChange={this.handleChange.bind(this, props)}
-                            value={data && data[props.name]}
-                            key={props.name + '.' + index}
+                            value={value in props ? value : data && data[name]}
+                            onChange={onChange || this.handleChange.bind(this, props)}
+                            key={name + '.' + index}
                             requiredMark={requiredMark}
                             labelWidth={labelWidth}
                             colon={colon}
-                            {...props}
+                            name={name}
+                            {...others}
                             col={col}
                             beforeSubmit={this.state.beforeSubmit}
                             formValidator={stopValidate ? null : this.handleDisabled.bind(this)}
