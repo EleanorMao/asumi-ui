@@ -378,7 +378,7 @@ export default class Table extends Component {
             if (isTree) {
                 console.warn('%c!Warning: You need set prop `isTree` to `false`, if not `Table` will not render select rows', warning);
             }
-            if (selectRow.mode === 'radio' && selectRow.selected.length > 1) {
+            if (selectRow.mode === 'radio' && selectRow.selected && selectRow.selected.length > 1) {
                 console.warn(
                     '%c!Warning: Since you set `selectRow.mode` to `radio`,' +
                     '`selectRow.selected` should only have one child, if not `Table` will use the first child of `selectRow.selected`',
@@ -622,8 +622,8 @@ export default class Table extends Component {
                         }}
                         onMouseOver={hover ? this.handleHover.bind(this, key) : () => {
                         }}
-                        checked={selectRow.mode === 'checkbox' ?
-                            !!~selectRow.selected.indexOf(key) : selectRow.selected && selectRow.selected[0] === key}
+                        checked={selectRow.selected && selectRow.mode === 'checkbox' ?
+                            !!~selectRow.selected.indexOf(key) : selectRow.selected[0] === key}
                     />
                 );
                 if (opened) {

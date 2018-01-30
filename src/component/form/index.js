@@ -15,7 +15,6 @@ function isRequired({validate, required}) {
 }
 
 //TODO: 多个Form打字很卡
-//TODO: shallowequal is not ok， 因为func和data不一样
 const validateMap = {
     "null": () => {
         return true;
@@ -57,12 +56,12 @@ export default class Form extends Component {
     }
 
     componentWillMount() {
-        let {data, options, children} = this.props;
-        this.validator(data, this.getOptions(options, children));
+        let {data, options, stopValidate, children} = this.props;
+        !stopValidate && this.validator(data, this.getOptions(options, children));
     }
 
-    componentWillReceiveProps({data, options, children}) {
-        this.validator(data, this.getOptions(options, children));
+    componentWillReceiveProps({data, options, stopValidate, children}) {
+        !stopValidate && this.validator(data, this.getOptions(options, children));
     }
 
     validator(data, options) {
@@ -169,7 +168,7 @@ export default class Form extends Component {
             data, options, colNum, error, requiredMark, colon, disabled, labelWidth,
             hideSubmitButton, layout, title, className, submitText, name, submitItems,
             submitButtonProps, children, style, encType, action, method, autoComplete,
-            target, noValidate, acceptCharset
+            target, noValidate, acceptCharset, stopValidate
         } = this.props; //哎..这么写自己都看着烦啊，但是我就是控制不了我叽己啊
         let col = colNum ? Math.ceil(24 / colNum) : 0;
         let _disabled = this.state.disabled || disabled || submitButtonProps.disabled;
@@ -191,7 +190,7 @@ export default class Form extends Component {
                             {...props}
                             col={col}
                             beforeSubmit={this.state.beforeSubmit}
-                            formValidator={this.handleDisabled.bind(this)}
+                            formValidator={stopValidate ? null : this.handleDisabled.bind(this)}
                         />);
                 })}
                 {children && React.Children.map(children, (elm) => {
@@ -200,7 +199,7 @@ export default class Form extends Component {
                         let newProps = {
                             col: col,
                             beforeSubmit: this.state.beforeSubmit,
-                            formValidator: this.handleDisabled.bind(this)
+                            formValidator: stopValidate ? null : this.handleDisabled.bind(this)
                         };
                         if (!props.onChange) {
                             newProps.onChange = this.handleChange.bind(this, props);
@@ -255,6 +254,7 @@ Form.propTypes = {
     submitItems: PropTypes.any,
     requiredMark: PropTypes.any,
     novalidate: PropTypes.string,
+    stopValidate: PropTypes.bool,
     id: PropTypes.string.isRequired,
     hideSubmitButton: PropTypes.bool,
     submitButtonProps: PropTypes.object,

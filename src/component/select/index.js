@@ -283,7 +283,7 @@ export default class Select extends Component {
                 <ul ref={c => {
                     this.el_select_ul = c;
                 }}>
-                    {(searchable && data.length && !renderData.length) &&
+                    {(searchable && !!data.length && !renderData.length) &&
                     <li key="no-data" className="el-select-no-data">{noMatchText}</li>}
                     {hasSelectAll &&
                     <Option
