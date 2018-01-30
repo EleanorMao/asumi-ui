@@ -14,7 +14,7 @@ function isRequired({validate, required}) {
     }));
 }
 
-//TODO: 多个Form打字很卡
+//TODO#1: 多个Form打字很卡
 const validateMap = {
     "null": () => {
         return true;
