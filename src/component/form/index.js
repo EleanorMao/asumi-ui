@@ -140,9 +140,13 @@ export default class Form extends Component {
         if (this.props.preventDefault) {
             e.preventDefault();
         }
-        if (_disabled || this._pending) return;
-        this._pending = true;
-        this.setState({beforeSubmit: true});
+        if (this.props.formValidator) {
+            this.handleSubmit();
+        } else {
+            if (_disabled || this._pending) return;
+            this._pending = true;
+            this.setState({beforeSubmit: true});
+        }
     }
 
     handleSubmit() {

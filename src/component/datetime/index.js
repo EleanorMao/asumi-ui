@@ -354,7 +354,7 @@ DateTime.propTypes = {
     utc: PropTypes.bool,
     name: PropTypes.string,
     input: PropTypes.bool,
-    style: PropTypes.bool,
+    style: PropTypes.object,
     inputProps: PropTypes.object,
     timeConstraints: PropTypes.object,
     viewMode: PropTypes.oneOf(['years', 'months', 'days', 'time', 'weeks']),

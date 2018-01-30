@@ -57,7 +57,7 @@ export default class FormItem extends Component {
 
     componentWillReceiveProps(nextProps) {
         let {beforeSubmit, value, validate, formValidator} = nextProps;
-        if (!this._pending && beforeSubmit) {
+        if (!this._pending && beforeSubmit && formValidator) {
             let disabled = false;
             this._pending = true;
             if (validate && validate.length) {
@@ -130,51 +130,55 @@ export default class FormItem extends Component {
 
     handleBlur(e) {
         let {value, onBlur, validate, formValidator, required, validateType} = this.props;
-        let disabled = false;
-        let _value = e.value === undefined ? value : e.value;
-        if (validate && validate.length) {
-            validate.map(item => {
-                if (!disabled && item.trigger === "blur") {
-                    disabled = this.validator(item, _value);
-                }
-            });
+        if (formValidator) {
+            let disabled = false;
+            let _value = e.value === undefined ? value : e.value;
+            if (validate && validate.length) {
+                validate.map(item => {
+                    if (!disabled && item.trigger === "blur") {
+                        disabled = this.validator(item, _value);
+                    }
+                });
+            }
+            this._blurDisabled = disabled;
+            if (!this.isDisabled && this._msgSetted) {
+                this._form_item.classList.remove(`el-form-item-${validateType}`);
+                this._message.innerHTML = "";
+                this._msgSetted = false;
+            }
+            // let valueType = getType(_value);
+            // let func = validateMap[valueType];
+            // if (!this.isDisabled && required && func && func(_value)) {
+            //     disabled = true;
+            //     this._blurDisabled = disabled;
+            // }
+            formValidator(this.props, this.isDisabled, void 0, _value);
         }
-        this._blurDisabled = disabled;
-        if (!this.isDisabled && this._msgSetted) {
-            this._form_item.classList.remove(`el-form-item-${validateType}`);
-            this._message.innerHTML = "";
-            this._msgSetted = false;
-        }
-        // let valueType = getType(_value);
-        // let func = validateMap[valueType];
-        // if (!this.isDisabled && required && func && func(_value)) {
-        //     disabled = true;
-        //     this._blurDisabled = disabled;
-        // }
-        formValidator && formValidator(this.props, this.isDisabled, void 0, _value);
         onBlur && onBlur.apply(null, arguments);
 
     }
 
     handleChange(e) {
         let {value, onChange, validate, formValidator, validateType} = this.props;
-        let disabled = false;
-        let _value = e.value === undefined ? value : e.value;
-        if (validate && validate.length) {
-            validate.map(item => {
-                if (!disabled && item.trigger === "change") {
-                    disabled = this.validator(item, _value);
-                }
-            });
+        if (formValidator) {
+            let disabled = false;
+            let _value = e.value === undefined ? value : e.value;
+            if (validate && validate.length) {
+                validate.map(item => {
+                    if (!disabled && item.trigger === "change") {
+                        disabled = this.validator(item, _value);
+                    }
+                });
+            }
+            this._submitDisabled = false;
+            this._changeDisabled = disabled;
+            if (!this.isDisabled && this._msgSetted) {
+                this._form_item.classList.remove(`el-form-item-${validateType}`);
+                this._message.innerHTML = "";
+                this._msgSetted = false;
+            }
+            formValidator(this.props, this.isDisabled, void 0, _value);
         }
-        this._submitDisabled = false;
-        this._changeDisabled = disabled;
-        if (!this.isDisabled && this._msgSetted) {
-            this._form_item.classList.remove(`el-form-item-${validateType}`);
-            this._message.innerHTML = "";
-            this._msgSetted = false;
-        }
-        formValidator && formValidator(this.props, this.isDisabled, void 0, _value);
         onChange && onChange.apply(null, arguments);
     }
 
