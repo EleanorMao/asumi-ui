@@ -57,11 +57,13 @@ export default class Form extends Component {
 
     componentWillMount() {
         let {data, options, stopValidate, children} = this.props;
-        !stopValidate && this.validator(data, this.getOptions(options, children));
+        if (!stopValidate) return;
+        this.validator(data, this.getOptions(options, children));
     }
 
     componentWillReceiveProps({data, options, stopValidate, children}) {
-        !stopValidate && this.validator(data, this.getOptions(options, children));
+        if (!stopValidate) return;
+        this.validator(data, this.getOptions(options, children));
     }
 
     validator(data, options) {

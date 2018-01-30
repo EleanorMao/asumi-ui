@@ -57,7 +57,8 @@ export default class FormItem extends Component {
 
     componentWillReceiveProps(nextProps) {
         let {beforeSubmit, value, validate, formValidator} = nextProps;
-        if (!this._pending && beforeSubmit && formValidator) {
+        if (!formValidator) return;
+        if (!this._pending && beforeSubmit) {
             let disabled = false;
             this._pending = true;
             if (validate && validate.length) {
@@ -68,7 +69,7 @@ export default class FormItem extends Component {
                 });
             }
             this._submitDisabled = disabled;
-            formValidator && formValidator(nextProps, this.isDisabled, () => {
+            formValidator(nextProps, this.isDisabled, () => {
                 this._pending = false;
             }, nextProps.value);
         }
