@@ -3,6 +3,7 @@
 exports[`Radio Group create component 1`] = `
 <RadioGroup
   disableAll={false}
+  mode="group"
   onChange={[Function]}
   options={
     Array [
@@ -29,6 +30,7 @@ exports[`Radio Group create component 1`] = `
     >
       <Radio
         checked={false}
+        className=""
         disabled={false}
         key="0"
         label="选项1"
@@ -59,6 +61,7 @@ exports[`Radio Group create component 1`] = `
       </Radio>
       <Radio
         checked={false}
+        className=""
         disabled={false}
         key="1"
         label="选项2"
@@ -89,6 +92,7 @@ exports[`Radio Group create component 1`] = `
       </Radio>
       <Radio
         checked={false}
+        className=""
         disabled={false}
         key="2"
         label="选项3"
@@ -125,6 +129,7 @@ exports[`Radio Group create component 1`] = `
 exports[`Radio Group define disableAll 1`] = `
 <RadioGroup
   disableAll={true}
+  mode="group"
   onChange={[Function]}
   options={
     Array [
@@ -151,6 +156,7 @@ exports[`Radio Group define disableAll 1`] = `
     >
       <Radio
         checked={false}
+        className=""
         disabled={true}
         key="0"
         label="选项1"
@@ -181,6 +187,7 @@ exports[`Radio Group define disableAll 1`] = `
       </Radio>
       <Radio
         checked={false}
+        className=""
         disabled={true}
         key="1"
         label="选项2"
@@ -211,6 +218,7 @@ exports[`Radio Group define disableAll 1`] = `
       </Radio>
       <Radio
         checked={false}
+        className=""
         disabled={true}
         key="2"
         label="选项3"
@@ -247,6 +255,7 @@ exports[`Radio Group define disableAll 1`] = `
 exports[`Radio Group define options str 1`] = `
 <RadioGroup
   disableAll={true}
+  mode="group"
   onChange={[Function]}
   options={
     Array [
@@ -264,6 +273,7 @@ exports[`Radio Group define options str 1`] = `
     >
       <Radio
         checked={false}
+        className=""
         disabled={true}
         key="0"
         label={1}
@@ -296,6 +306,7 @@ exports[`Radio Group define options str 1`] = `
       </Radio>
       <Radio
         checked={false}
+        className=""
         disabled={true}
         key="1"
         label={2}
@@ -328,6 +339,7 @@ exports[`Radio Group define options str 1`] = `
       </Radio>
       <Radio
         checked={false}
+        className=""
         disabled={true}
         key="2"
         label={3}

@@ -2,10 +2,10 @@
  * Created by elly on 2017/4/10.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Radio from '../radio';
-import classnames from 'classnames';
-import {extend, noop} from "../util";
+import PropTypes          from 'prop-types';
+import classnames         from 'classnames';
+import Radio              from '../radio';
+import {noop}             from "../util";
 
 export default class RadioGroup extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ export default class RadioGroup extends Component {
                     {
                         !!options && options.map((item, index) => {
                             if (typeof item === 'string' || typeof item === "number") {
-                                item = {label: item, name: item, value: item, disabled: disableAll}
+                                item = {label: item, name: item, value: item, disabled: disableAll};
                             }
                             return (
                                 <Radio
@@ -34,12 +34,12 @@ export default class RadioGroup extends Component {
                                     checked={value === item.value}
                                     className={classnames({'el-checkbox-checked': value === item.value})}
                                 />
-                            )
+                            );
                         })
                     }
                 </div>
             </div>
-        )
+        );
     }
 }
 

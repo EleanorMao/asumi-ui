@@ -508,7 +508,7 @@ export const apiOfFormItem = [{
     property: "type",
     type: "string",
     'default': "text",
-    description: "type of form item. Options: text, color, number, editor, static, datetime, component, password, textarea, select, checkbox, radio, switch, upload, radiogroup, checkgroup, checkboxgroup, taginput, transfer"
+    description: "type of form item. Options: text, color, number, editor, static, datetime, component, password, textarea, select, checkbox, radio, switch, upload, radiogroup, checkgroup, checkboxgroup, taginput, transfer, custom"
 }, {
     property: "tips",
     type: "string | {title: string, content: any}",
