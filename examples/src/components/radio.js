@@ -8,7 +8,7 @@ import {
     Col
 } from '../../../src';
 import Panel from './panel';
-import {basic, _switch, disabled, radioGroup, api, apiofgroup} from '../constants/radio'
+import {basic, _switch, disabled, radioGroup, api, apiofgroup, radioButton} from '../constants/radio'
 
 export default class Main extends Component {
     constructor(props) {
@@ -17,7 +17,8 @@ export default class Main extends Component {
             swi: true,
             normal: true,
             groupValue: 1,
-            groupValue1: 1
+            groupValue1: 1,
+            groupValue2: 1
         }
     }
 
@@ -104,6 +105,38 @@ export default class Main extends Component {
                         onChange={this.handleSelect.bind(this)}
                     />
                     <Radio.Group
+                        options={[{
+                            label: '选项1',
+                            value: 1
+                        }, {
+                            label: '选项2',
+                            value: 2
+                        }, {
+                            label: '选项3',
+                            value: 3
+                        }]}
+                        disableAll={true}
+                    />
+                </Panel>
+                <Panel
+                    title="RadioButton"
+                    code={radioButton}
+                >
+                    <Radio.Button
+                        options={[{
+                            label: '选项1',
+                            value: 1
+                        }, {
+                            label: '选项2',
+                            value: 2
+                        }, {
+                            label: '选项3',
+                            value: 3
+                        }]}
+                        value={this.state.groupValue}
+                        onChange={this.handleSelect.bind(this)}
+                    />
+                    <Radio.Button
                         options={[{
                             label: '选项1',
                             value: 1

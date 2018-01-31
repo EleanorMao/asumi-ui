@@ -147,6 +147,57 @@ class Foo extends React.Component {
 }
 
 ReactDOM.render(<Foo />, div)`;
+export const radioButton = `import {Radio} from 'asumi';
+//import {RadioGroup} from 'asumi';
+
+class Foo extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            groupValue: 1
+        }
+    }
+    
+    handleSelect({value}) {
+        this.setState({groupValue: value});
+    }
+    
+    render(){
+        return (
+            <div>
+                 <Radio.Group
+                    options={[{
+                        label: '选项1',
+                        value: 1
+                    }, {
+                        label: '选项2',
+                        value: 2
+                    }, {
+                        label: '选项3',
+                        value: 3
+                    }]}
+                    value={this.state.groupValue}
+                    onChange={this.handleSelect.bind(this)}
+                />
+                <Radio.Group
+                    options={[{
+                        label: '选项1',
+                        value: 1
+                    }, {
+                        label: '选项2',
+                        value: 2
+                    }, {
+                        label: '选项3',
+                        value: 3
+                    }]}
+                    disableAll={true}
+                />
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(<Foo />, div)`;
 
 
 export const api = [{

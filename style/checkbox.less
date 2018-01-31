@@ -211,4 +211,43 @@
   }
 }
 
+.el-checkbox-button{
+  padding: 0.7692rem 0;
+  .el-checkbox-row {
+    padding-bottom: 0.3846rem;
+    .el-checkbox-wrapper{
+      border: 1px solid @border;
+      border-left: 0;
+      padding: 0 0.7692rem;
+      background-color: #fff;
+      &.el-checkbox-checked{
+        color: @primary;
+        border: 1px solid @primary;
+        &:first-child{
+          border-left: 1px solid @primary;
+        }
+        &:last-child{
+          border-right: 1px solid @primary;
+        }
+      }
+      .el-radio{
+        display: block;
+        width: 0;
+        height: 0;
+        span{
+          opacity: 0;
+        }
+      }
+      &:first-child{
+        border-left: 1px solid @border;
+        border-radius: 0.6153rem 0 0 0.6153rem;
+      }
+      &:last-child{
+        border-right: 1px solid @border;
+        border-radius: 0 0.6153rem 0.6153rem 0; 
+      }
+    }
+  }
+}
+
 
