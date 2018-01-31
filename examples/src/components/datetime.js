@@ -55,7 +55,7 @@ export default class Main extends Component {
                         onChange={this.handleChange.bind(this)}
                         dateFormat='YYYY年MM月'
                         value={date} name="date"
-                        viewMode='months' isValidDate={this.handleValidDate.bind(this)}/>
+                        viewMode='months'/>
                 </Panel>
 
 

@@ -7,7 +7,7 @@ class MonthView extends React.Component {
     }
 
     handleClick(item, e) {
-        let {updateOn, setDate, updateSelectedDate} = this.props;
+        let {updateOn, setDate, viewDate, updateSelectedDate} = this.props;
         if (!item.disabled) {
             updateOn === 'months' ? updateSelectedDate(item) : setDate('month', item)
         }

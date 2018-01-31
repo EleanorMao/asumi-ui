@@ -217,8 +217,9 @@ export default class DateTime extends React.Component {
                 .set({month: viewDate.month() + modifier, date: item.value.date()});
         }
         else if (updateOn === 'months') {
-            date = viewDate.clone()
-                .set({month: item.value, date: currentdate.date()});
+            date = moment.min(viewDate.clone()
+                .set({month: item.value, date: currentdate.date()}),
+                viewDate.clone().set({month: item.value}).endOf('month'));
         }
         else if (updateOn === 'years') {
             date = viewDate.clone()
