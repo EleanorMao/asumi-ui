@@ -166,6 +166,7 @@ class Foo extends React.Component {
         return (
             <div>
                  <Radio.Group
+                    mode = 'button'
                     options={[{
                         label: '选项1',
                         value: 1
@@ -180,6 +181,7 @@ class Foo extends React.Component {
                     onChange={this.handleSelect.bind(this)}
                 />
                 <Radio.Group
+                    mode = 'button'
                     options={[{
                         label: '选项1',
                         value: 1

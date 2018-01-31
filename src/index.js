@@ -52,7 +52,6 @@ import FormItem         from './component/form/formItem';
 import TabPanel         from './component/tabs/tabPanel';
 import NumberInput      from './component/numberInput';
 import RadioGroup       from './component/radio/radioGroup';
-import RadioButton       from './component/radio/radioButton';
 import CheckboxGroup    from './component/checkbox/checkGroup';
 import SimplePagination from './component/pagination/simplePagination';
 import DateTime         from './component/datetime';
@@ -71,7 +70,6 @@ Menu.MenuItem = MenuItem;
 Menu.MenuItemGroup = MenuItemGroup;
 
 Radio.Group = RadioGroup;
-Radio.Button = RadioButton;
 Checkbox.Group = CheckboxGroup;
 
 Form.FormItem = FormItem;

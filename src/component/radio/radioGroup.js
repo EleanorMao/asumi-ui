@@ -13,8 +13,9 @@ export default class RadioGroup extends Component {
     }
 
     render() {
-        let {disableAll, options, value, onChange, style, className, ...others} = this.props;
-        let _className = classnames('el-checkbox-group', className);
+        let {disableAll, options, value, onChange, style, className, mode, ...others} = this.props;
+        mode = mode || 'group';
+        let _className = classnames('el-checkbox-' + mode, className);
         return (
             <div className={_className} style={style}>
                 <div className="el-checkbox-row">
@@ -31,6 +32,7 @@ export default class RadioGroup extends Component {
                                     onChange={onChange}
                                     disabled={disableAll}
                                     checked={value === item.value}
+                                    className={classnames({'el-checkbox-checked': value === item.value})}
                                 />
                             )
                         })
@@ -51,5 +53,6 @@ RadioGroup.propTypes = {
 
 RadioGroup.defaultProps = {
     disableAll: false,
-    onChange: noop
+    onChange: noop,
+    mode: 'group'
 };

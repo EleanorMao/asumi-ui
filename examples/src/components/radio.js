@@ -122,7 +122,8 @@ export default class Main extends Component {
                     title="RadioButton"
                     code={radioButton}
                 >
-                    <Radio.Button
+                    <Radio.Group
+                        mode = 'button'
                         options={[{
                             label: '选项1',
                             value: 1
@@ -136,7 +137,8 @@ export default class Main extends Component {
                         value={this.state.groupValue}
                         onChange={this.handleSelect.bind(this)}
                     />
-                    <Radio.Button
+                    <Radio.Group
+                        mode = 'button'
                         options={[{
                             label: '选项1',
                             value: 1
