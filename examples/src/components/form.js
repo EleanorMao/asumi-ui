@@ -2,8 +2,8 @@
  * Created by elly on 2017/4/7.
  */
 import React, {Component, PropTypes} from 'react';
-import Panel from './panel';
-import {Form, FormItem, Table, Col} from '../../../src';
+import Panel                         from './panel';
+import {Form, FormItem, Table, Col}  from '../../../src';
 import {
     inline,
     horizontal,
@@ -14,7 +14,7 @@ import {
     api,
     apiOfFormItem,
     apiOfValidate
-} from "../constants/form";
+}                                    from "../constants/form";
 
 export default class Main extends Component {
     constructor(props) {
@@ -47,7 +47,7 @@ export default class Main extends Component {
                 markdown: "所有您定义在Form上的props都会传入FormItem, 当然您可以选择覆盖他",
                 description: "",
             }
-        }
+        };
     }
 
     handleChange(stateName, {name, value}) {
@@ -99,7 +99,7 @@ export default class Main extends Component {
                                 name: name,
                                 label: name,
                                 type: "text"
-                            }
+                            };
                         })}
                     />
                 </Panel>
@@ -192,7 +192,7 @@ export default class Main extends Component {
                                 name: "description",
                                 type: "static",
                                 dataFormat: (data) => {
-                                    return '您的个人简介是：' + data
+                                    return '您的个人简介是：' + data;
                                 }
                             }, {
                                 required: true,
@@ -322,6 +322,6 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

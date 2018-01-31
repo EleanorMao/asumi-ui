@@ -367,6 +367,7 @@ export default class Table extends Component {
             throw new Error('You need choose one configuration to set key field: `isKey` or `hashkey`!!');
         }
 
+        /* eslint-disable no-console */
         if (!isTree && hashKey) {
             console.warn('%c!Warning: If you set props `isTree` to `false`, `hashKey` need to be false and set props `isKey` instead!!', warning);
         }
@@ -386,6 +387,7 @@ export default class Table extends Component {
                 );
             }
         }
+        /* eslint-enable  no-console */
     }
 
     componentWillMount() {

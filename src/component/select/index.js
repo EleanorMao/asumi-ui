@@ -110,10 +110,12 @@ export default class Select extends Component {
         this.allValue = allValue;
         this.setState(prev => {
             prev.data = data;
-            prev.selectedValue = selectedValue;
-            prev.selectedLabel = selectedLabel;
-            prev.renderValue = selectedLabel.join(", ");
             prev.renderData = renderData;
+            prev.selectedLabel = selectedLabel;
+            prev.selectedValue = selectedValue;
+            if (!prev.visible) {
+                prev.renderValue = selectedLabel.join(", ");
+            }
             return prev;
         });
     }
@@ -172,6 +174,8 @@ export default class Select extends Component {
                 this.setPreSelect(length, true);
             } else if (keyCode === KeyCode.ENTER && preSelected >= 0) {
                 this.el_select_ul.children[preSelected].click();
+            } else if (keyCode === KeyCode.TAB) {
+                this.hideComponent(e);
             }
         } else if (keyCode === KeyCode.ENTER) {
             this.handleToggle(e);
@@ -270,7 +274,7 @@ export default class Select extends Component {
     optionsRender() {
         let allValue = this.allValue;
         let hasSelectAll = this.hasSelectAll();
-        let {renderData, selectedValue, preSelected, data} = this.state;
+        let {renderData, selectedValue, preSelected} = this.state;
         let {multiple, searchable, selectAllText, dropdownClassName, dropdownStyle, noMatchText} = this.props;
         let className = classnames("el-select-dropdown", dropdownClassName || "");
         return (
@@ -283,7 +287,7 @@ export default class Select extends Component {
                 <ul ref={c => {
                     this.el_select_ul = c;
                 }}>
-                    {(searchable && !!data.length && !renderData.length) &&
+                    {(searchable && !renderData.length) &&
                     <li key="no-data" className="el-select-no-data">{noMatchText}</li>}
                     {hasSelectAll &&
                     <Option

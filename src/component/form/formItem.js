@@ -1,24 +1,24 @@
 /**
  * Created by elly on 2017/4/13.
  */
-import React, {Component} from 'react';
-import PropTypes          from 'prop-types';
-import classnames         from 'classnames';
-import Input              from '../input';
-import Radio              from '../radio';
-import Upload             from '../upload';
-import Select             from '../select';
-import Editor             from '../editor';
-import Popover            from '../popover';
-import Datetime           from '../datetime';
-import Transfer           from '../transfer';
-import TagInput           from '../tagInput';
-import Option             from '../select/option';
-import NumberInput        from '../numberInput';
-import Checkbox           from "../checkbox/index";
-import RadioGroup         from '../radio/radioGroup';
-import CheckGroup         from '../checkbox/checkGroup';
-import {rules, getType}   from "../util";
+import React, {Component}       from 'react';
+import PropTypes                from 'prop-types';
+import classnames               from 'classnames';
+import Input                    from '../input';
+import Radio                    from '../radio';
+import Upload                   from '../upload';
+import Select                   from '../select';
+import Editor                   from '../editor';
+import Popover                  from '../popover';
+import Datetime                 from '../datetime';
+import Transfer                 from '../transfer';
+import TagInput                 from '../tagInput';
+import Option                   from '../select/option';
+import NumberInput              from '../numberInput';
+import Checkbox                 from "../checkbox/index";
+import RadioGroup               from '../radio/radioGroup';
+import CheckGroup               from '../checkbox/checkGroup';
+import {rules, getType, extend} from "../util";
 
 function isRequired(validate, required) {
     return required || (validate && validate.some(item => {
@@ -190,7 +190,7 @@ export default class FormItem extends Component {
             beforeSubmit, onChange, children, options, validate, validateType,
             formValidator, labelWidth, ...config
         } = this.props;
-        if (type !== "upload" && children) return children;
+        if (type !== "upload" && type !== "children" && children) return children;
         let output = null;
         switch (type) {
             case "textarea":
@@ -345,14 +345,14 @@ export default class FormItem extends Component {
                     {dataFormat ? dataFormat(content || value) : (content || value)}
                 </div>;
                 break;
-            case "component":
-                output = React.cloneElement(component, {
+            case "component":  //TODO#2 换成createElement效率更高
+                output = React.createElement(component, {
                     name,
                     value: value,
                     onBlur: this.handleBlur.bind(this),
                     onChange: this.handleChange.bind(this),
                     ...config
-                });
+                }, children);
                 break;
             default:
                 output =
@@ -370,30 +370,40 @@ export default class FormItem extends Component {
     }
 
     render() {
-        let props = this.props;
-        let {tips, label, colon, hidden, type, className, required, validate, requiredMark, labelWidth, col, colSpan} = props;
+        let {
+            tips, label, colon, hidden, type, className, labelClassName, controlClassName,
+            required, validate, requiredMark, labelWidth, col, colSpan
+        } = this.props;
+
         if (hidden || type === 'hidden') return null;
+
         let _className = classnames('el-form-item clearfix', col ? `el-col-${col * (colSpan || 1)} el-col-inline` : null, className);
+        let _labelClassName = classnames('el-form-label', labelClassName);
+        let _controlClassName = classnames('el-form-control', controlClassName);
+
         if (tips && typeof tips === "string") {
             tips = {title: tips};
         }
+
         let popover = tips ? (
             <Popover {...tips} trigger="hover" placement="top">
                 <span className="el-form-tips fa fa-question-circle-o"
                       style={{paddingLeft: 4, paddingRight: label ? null : 4}}/>
             </Popover>) : null;
+
         let _required = isRequired(validate, required);
+
         return (
             <div className={_className} ref={c => this._form_item = c}>
                 {!label && _required && <span className="el-required">{requiredMark}</span>}
                 {!label && popover}
                 {!!label &&
-                <label className="el-form-label" style={labelWidth ? {width: labelWidth, float: 'left'} : null}>
+                <label className={_labelClassName} style={labelWidth ? {width: labelWidth, float: 'left'} : null}>
                     {_required && <span className="el-required">{requiredMark}</span>}
                     {label}{colon && ":"}
                     {popover}
                 </label>}
-                <div className="el-form-control"
+                <div className={_controlClassName}
                      style={labelWidth ? {marginLeft: labelWidth, display: 'block'} : null}>
                     {this.itemRender()}
                     <div className="el-form-message" ref={c => this._message = c}/>
@@ -412,6 +422,10 @@ FormItem.propTypes = {
     required: PropTypes.bool,
     onChange: PropTypes.func,
     requiredMark: PropTypes.any,
+    // labelStyle: PropTypes.object,
+    // controlStyle: PropTypes.object,
+    labelClassName: PropTypes.string,
+    controlClassName: PropTypes.string,
     labelWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     dataFormat: PropTypes.func,
     tips: PropTypes.oneOfType([
@@ -436,7 +450,7 @@ FormItem.propTypes = {
         rule: PropTypes.oneOf(['color', 'price', 'nature', 'positiveInt']),
         type: PropTypes.oneOf(['boolean', 'array', 'string', 'object', 'number', 'moment']),
     })),
-    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput', 'hidden']),
+    type: PropTypes.oneOf(['text', 'color', 'editor', 'static', 'datetime', 'number', 'component', 'password', 'textarea', 'select', 'checkbox', 'radio', 'switch', 'upload', 'radiogroup', 'checkgroup', 'checkboxgroup', 'transfer', 'taginput', 'hidden', 'custom']),
 };
 
 FormItem.defaultProps = {
