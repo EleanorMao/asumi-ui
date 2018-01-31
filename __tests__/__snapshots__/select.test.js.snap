@@ -2,7 +2,6 @@
 
 exports[`Select create component 1`] = `
 <Select
-  closeAfterSelect={true}
   defaultValue=""
   noMatchText="暂无匹配数据"
   onChange={[Function]}
@@ -61,6 +60,7 @@ exports[`Select define closeAfterSelect 1`] = `
 >
   <Input
     autoComplete="off"
+    closeAfterSelect={false}
     icon={
       <i
         className="el-caret"
@@ -80,7 +80,6 @@ exports[`Select define closeAfterSelect 1`] = `
 
 exports[`Select define disabled 1`] = `
 <Select
-  closeAfterSelect={true}
   defaultValue=""
   disabled={true}
   noMatchText="暂无匹配数据"
@@ -138,7 +137,6 @@ exports[`Select define disabled 1`] = `
 
 exports[`Select define size[large] 1`] = `
 <Select
-  closeAfterSelect={true}
   defaultValue=""
   noMatchText="暂无匹配数据"
   onChange={[Function]}
@@ -195,7 +193,6 @@ exports[`Select define size[large] 1`] = `
 
 exports[`Select define size[small] 1`] = `
 <Select
-  closeAfterSelect={true}
   defaultValue=""
   noMatchText="暂无匹配数据"
   onChange={[Function]}

@@ -296,11 +296,6 @@ export const api = [{
     'default': "暂无匹配数据",
     description: "Text show when no match options",
 }, {
-    property: 'closeAfterSelect',
-    type: "bool",
-    'default': "true",
-    description: "Close menu after select or not"
-}, {
     property: "onMatch",
     type: "func",
     'default': "null",

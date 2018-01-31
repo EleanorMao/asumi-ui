@@ -15,7 +15,11 @@ import {basic, size, searchable, multiple, tag, api} from '../constants/select';
 export default class Main extends Component {
     constructor(props) {
         super(props);
+        this.lastFetchId = 0;
         this.state = {
+            data: [],
+            fetching: false,
+            remote: [],
             fruit1: "",
             fruit2: "",
             flower1: "",
@@ -28,9 +32,29 @@ export default class Main extends Component {
         };
     }
 
+    handleSearch(value) {
+        console.log('fetching user', value);
+        this.lastFetchId += 1;
+        const fetchId = this.lastFetchId;
+        this.setState({data: [], fetching: true});
+        fetch('https://randomuser.me/api/?results=5')
+            .then(response => response.json())
+            .then((body) => {
+                if (fetchId !== this.lastFetchId) { // for fetch callback order
+                    return;
+                }
+                const data = body.results.map(user => ({
+                    label: `${user.name.first} ${user.name.last}`,
+                    value: user.login.username,
+                }));
+                this.setState({data, fetching: false});
+            });
+    }
+
     handleChange({name, value}) {
         this.setState(prev => {
             prev[name] = value;
+            prev.fetching = false;
             return prev;
         });
     }
@@ -40,7 +64,7 @@ export default class Main extends Component {
             marginBottom: 10,
             verticalAlign: 'top'
         };
-        let {fruit1, fruit2, flower1, flower2, flower3, flower4, animal1, animal2, animal3} = this.state;
+        let {remote, data, fetching, fruit1, fruit2, flower1, flower2, flower3, flower4, animal1, animal2, animal3} = this.state;
         return (
             <div className="content">
                 <h1>Select 选择框</h1>
@@ -103,8 +127,7 @@ export default class Main extends Component {
                 >
                     <Group style={style}
                            multiple onChange={this.handleChange.bind(this)}>
-                        <Select placeholder="请选择" name="animal1"
-                                value={animal1} closeAfterSelect={false}>
+                        <Select placeholder="请选择" name="animal1" value={animal1}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
                             <Option value="elephant">Elephant</Option>
@@ -136,8 +159,7 @@ export default class Main extends Component {
                         </Select>
                         <Select
                             name="animal3" value={animal3}
-                            multiple selectAll closeAfterSelect={false}
-                            onChange={this.handleChange.bind(this)}>
+                            multiple selectAll onChange={this.handleChange.bind(this)}>
                             <Option value="monkey">Monkey</Option>
                             <Option value="lion">Lion</Option>
                             <Option value="elephant">Elephant</Option>
@@ -150,6 +172,14 @@ export default class Main extends Component {
                             <Option value="chicken6">Chicken6</Option>
                             <Option value="chicken7">Chicken7</Option>
                         </Select>
+                        <Select
+                            name="remote" value={remote} mode={"tag"}
+                            onSearch={this.handleSearch.bind(this)}
+                            onChange={this.handleChange.bind(this)}
+                            remote={true} noMatchText={fetching ? '搜索中...' : null}
+                        >
+                            {data.map(d => <Option key={d.value} {...d}/>)}
+                        </Select>
                     </Group>
                 </Panel>
                 <Panel
@@ -161,7 +191,7 @@ export default class Main extends Component {
                         searchable
                         style={style}
                         placeholder="请输入搜索"
-                        multiple selectAll closeAfterSelect={false}
+                        multiple selectAll
                     >
                         <Select
                             name="animal3" value={animal3}

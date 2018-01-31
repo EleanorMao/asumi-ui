@@ -428,6 +428,7 @@ FormItem.propTypes = {
     controlClassName: PropTypes.string,
     labelWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     dataFormat: PropTypes.func,
+    component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     tips: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({

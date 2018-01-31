@@ -22,7 +22,7 @@ exports[`Datetime create component 1`] = `
 >
   <div
     className="el-datetime el-static"
-    data-value="days1517374811221.1318"
+    data-value="days1517414658926.7375"
   >
     <Input
       autoComplete="off"
@@ -84,12 +84,12 @@ exports[`Datetime create component 1`] = `
             "showWeeks": false,
             "timeConstraints": Object {},
             "timeFormat": "h:mm A",
-            "uid": "days1517374811221.1318",
+            "uid": "days1517414658926.7375",
             "updateOn": "days",
             "updateSelectedDate": [Function],
             "updateTime": [Function],
             "value": undefined,
-            "viewDate": "2017-12-31T16:00:00.000Z",
+            "viewDate": "2018-01-31T16:00:00.000Z",
           }
         }
       >
@@ -107,15 +107,15 @@ exports[`Datetime create component 1`] = `
           showWeeks={false}
           timeConstraints={Object {}}
           timeFormat="h:mm A"
-          uid="days1517374811221.1318"
+          uid="days1517414658926.7375"
           updateOn="days"
           updateSelectedDate={[Function]}
           updateTime={[Function]}
-          viewDate={"2017-12-31T16:00:00.000Z"}
+          viewDate={"2018-01-31T16:00:00.000Z"}
         >
           <div
             className="el-datetime-days"
-            data-value="days1517374811221.1318"
+            data-value="days1517414658926.7375"
           >
             <table>
               <thead
@@ -137,11 +137,11 @@ exports[`Datetime create component 1`] = `
                   <th
                     className="el-datetime-switch"
                     colSpan="5"
-                    data-value={0}
+                    data-value={1}
                     key="s"
                     onClick={[Function]}
                   >
-                    January 2018
+                    February 2018
                   </th>
                   <th
                     className="el-datetime-next"
@@ -209,52 +209,52 @@ exports[`Datetime create component 1`] = `
                 >
                   <td
                     className="el-datetime-day el-datetime-old"
-                    key="12_31"
+                    key="1_28"
+                    onClick={[Function]}
+                  >
+                    28
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_29"
+                    onClick={[Function]}
+                  >
+                    29
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_30"
+                    onClick={[Function]}
+                  >
+                    30
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_31"
                     onClick={[Function]}
                   >
                     31
                   </td>
                   <td
-                    className="el-datetime-day"
-                    key="1_1"
+                    className="el-datetime-day el-datetime-today"
+                    key="2_1"
                     onClick={[Function]}
                   >
                     1
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_2"
+                    key="2_2"
                     onClick={[Function]}
                   >
                     2
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_3"
+                    key="2_3"
                     onClick={[Function]}
                   >
                     3
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_4"
-                    onClick={[Function]}
-                  >
-                    4
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_5"
-                    onClick={[Function]}
-                  >
-                    5
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_6"
-                    onClick={[Function]}
-                  >
-                    6
                   </td>
                 </tr>
                 <tr
@@ -262,52 +262,52 @@ exports[`Datetime create component 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_7"
+                    key="2_4"
+                    onClick={[Function]}
+                  >
+                    4
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_5"
+                    onClick={[Function]}
+                  >
+                    5
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_6"
+                    onClick={[Function]}
+                  >
+                    6
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_7"
                     onClick={[Function]}
                   >
                     7
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_8"
+                    key="2_8"
                     onClick={[Function]}
                   >
                     8
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_9"
+                    key="2_9"
                     onClick={[Function]}
                   >
                     9
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_10"
+                    key="2_10"
                     onClick={[Function]}
                   >
                     10
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_11"
-                    onClick={[Function]}
-                  >
-                    11
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_12"
-                    onClick={[Function]}
-                  >
-                    12
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_13"
-                    onClick={[Function]}
-                  >
-                    13
                   </td>
                 </tr>
                 <tr
@@ -315,52 +315,52 @@ exports[`Datetime create component 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_14"
+                    key="2_11"
+                    onClick={[Function]}
+                  >
+                    11
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_12"
+                    onClick={[Function]}
+                  >
+                    12
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_13"
+                    onClick={[Function]}
+                  >
+                    13
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_14"
                     onClick={[Function]}
                   >
                     14
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_15"
+                    key="2_15"
                     onClick={[Function]}
                   >
                     15
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_16"
+                    key="2_16"
                     onClick={[Function]}
                   >
                     16
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_17"
+                    key="2_17"
                     onClick={[Function]}
                   >
                     17
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_18"
-                    onClick={[Function]}
-                  >
-                    18
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_19"
-                    onClick={[Function]}
-                  >
-                    19
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_20"
-                    onClick={[Function]}
-                  >
-                    20
                   </td>
                 </tr>
                 <tr
@@ -368,52 +368,52 @@ exports[`Datetime create component 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_21"
+                    key="2_18"
+                    onClick={[Function]}
+                  >
+                    18
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_19"
+                    onClick={[Function]}
+                  >
+                    19
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_20"
+                    onClick={[Function]}
+                  >
+                    20
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_21"
                     onClick={[Function]}
                   >
                     21
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_22"
+                    key="2_22"
                     onClick={[Function]}
                   >
                     22
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_23"
+                    key="2_23"
                     onClick={[Function]}
                   >
                     23
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_24"
+                    key="2_24"
                     onClick={[Function]}
                   >
                     24
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_25"
-                    onClick={[Function]}
-                  >
-                    25
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_26"
-                    onClick={[Function]}
-                  >
-                    26
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_27"
-                    onClick={[Function]}
-                  >
-                    27
                   </td>
                 </tr>
                 <tr
@@ -421,49 +421,49 @@ exports[`Datetime create component 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_28"
+                    key="2_25"
+                    onClick={[Function]}
+                  >
+                    25
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_26"
+                    onClick={[Function]}
+                  >
+                    26
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_27"
+                    onClick={[Function]}
+                  >
+                    27
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_28"
                     onClick={[Function]}
                   >
                     28
                   </td>
                   <td
-                    className="el-datetime-day"
-                    key="1_29"
-                    onClick={[Function]}
-                  >
-                    29
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_30"
-                    onClick={[Function]}
-                  >
-                    30
-                  </td>
-                  <td
-                    className="el-datetime-day el-datetime-today"
-                    key="1_31"
-                    onClick={[Function]}
-                  >
-                    31
-                  </td>
-                  <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_1"
+                    key="3_1"
                     onClick={[Function]}
                   >
                     1
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_2"
+                    key="3_2"
                     onClick={[Function]}
                   >
                     2
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_3"
+                    key="3_3"
                     onClick={[Function]}
                   >
                     3
@@ -474,49 +474,49 @@ exports[`Datetime create component 1`] = `
                 >
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_4"
+                    key="3_4"
                     onClick={[Function]}
                   >
                     4
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_5"
+                    key="3_5"
                     onClick={[Function]}
                   >
                     5
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_6"
+                    key="3_6"
                     onClick={[Function]}
                   >
                     6
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_7"
+                    key="3_7"
                     onClick={[Function]}
                   >
                     7
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_8"
+                    key="3_8"
                     onClick={[Function]}
                   >
                     8
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_9"
+                    key="3_9"
                     onClick={[Function]}
                   >
                     9
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_10"
+                    key="3_10"
                     onClick={[Function]}
                   >
                     10
@@ -567,7 +567,7 @@ exports[`Datetime define dateFormat 1`] = `
 >
   <div
     className="el-datetime el-static"
-    data-value="days1517374811499.5142"
+    data-value="days1517414659206.4988"
   >
     <Input
       autoComplete="off"
@@ -629,12 +629,12 @@ exports[`Datetime define dateFormat 1`] = `
             "showWeeks": false,
             "timeConstraints": Object {},
             "timeFormat": "h:mm A",
-            "uid": "days1517374811499.5142",
+            "uid": "days1517414659206.4988",
             "updateOn": "days",
             "updateSelectedDate": [Function],
             "updateTime": [Function],
             "value": undefined,
-            "viewDate": "2017-12-31T16:00:00.000Z",
+            "viewDate": "2018-01-31T16:00:00.000Z",
           }
         }
       >
@@ -652,15 +652,15 @@ exports[`Datetime define dateFormat 1`] = `
           showWeeks={false}
           timeConstraints={Object {}}
           timeFormat="h:mm A"
-          uid="days1517374811499.5142"
+          uid="days1517414659206.4988"
           updateOn="days"
           updateSelectedDate={[Function]}
           updateTime={[Function]}
-          viewDate={"2017-12-31T16:00:00.000Z"}
+          viewDate={"2018-01-31T16:00:00.000Z"}
         >
           <div
             className="el-datetime-days"
-            data-value="days1517374811499.5142"
+            data-value="days1517414659206.4988"
           >
             <table>
               <thead
@@ -682,11 +682,11 @@ exports[`Datetime define dateFormat 1`] = `
                   <th
                     className="el-datetime-switch"
                     colSpan="5"
-                    data-value={0}
+                    data-value={1}
                     key="s"
                     onClick={[Function]}
                   >
-                    January 2018
+                    February 2018
                   </th>
                   <th
                     className="el-datetime-next"
@@ -754,52 +754,52 @@ exports[`Datetime define dateFormat 1`] = `
                 >
                   <td
                     className="el-datetime-day el-datetime-old"
-                    key="12_31"
+                    key="1_28"
+                    onClick={[Function]}
+                  >
+                    28
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_29"
+                    onClick={[Function]}
+                  >
+                    29
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_30"
+                    onClick={[Function]}
+                  >
+                    30
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_31"
                     onClick={[Function]}
                   >
                     31
                   </td>
                   <td
-                    className="el-datetime-day"
-                    key="1_1"
+                    className="el-datetime-day el-datetime-today"
+                    key="2_1"
                     onClick={[Function]}
                   >
                     1
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_2"
+                    key="2_2"
                     onClick={[Function]}
                   >
                     2
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_3"
+                    key="2_3"
                     onClick={[Function]}
                   >
                     3
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_4"
-                    onClick={[Function]}
-                  >
-                    4
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_5"
-                    onClick={[Function]}
-                  >
-                    5
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_6"
-                    onClick={[Function]}
-                  >
-                    6
                   </td>
                 </tr>
                 <tr
@@ -807,52 +807,52 @@ exports[`Datetime define dateFormat 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_7"
+                    key="2_4"
+                    onClick={[Function]}
+                  >
+                    4
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_5"
+                    onClick={[Function]}
+                  >
+                    5
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_6"
+                    onClick={[Function]}
+                  >
+                    6
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_7"
                     onClick={[Function]}
                   >
                     7
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_8"
+                    key="2_8"
                     onClick={[Function]}
                   >
                     8
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_9"
+                    key="2_9"
                     onClick={[Function]}
                   >
                     9
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_10"
+                    key="2_10"
                     onClick={[Function]}
                   >
                     10
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_11"
-                    onClick={[Function]}
-                  >
-                    11
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_12"
-                    onClick={[Function]}
-                  >
-                    12
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_13"
-                    onClick={[Function]}
-                  >
-                    13
                   </td>
                 </tr>
                 <tr
@@ -860,52 +860,52 @@ exports[`Datetime define dateFormat 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_14"
+                    key="2_11"
+                    onClick={[Function]}
+                  >
+                    11
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_12"
+                    onClick={[Function]}
+                  >
+                    12
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_13"
+                    onClick={[Function]}
+                  >
+                    13
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_14"
                     onClick={[Function]}
                   >
                     14
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_15"
+                    key="2_15"
                     onClick={[Function]}
                   >
                     15
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_16"
+                    key="2_16"
                     onClick={[Function]}
                   >
                     16
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_17"
+                    key="2_17"
                     onClick={[Function]}
                   >
                     17
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_18"
-                    onClick={[Function]}
-                  >
-                    18
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_19"
-                    onClick={[Function]}
-                  >
-                    19
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_20"
-                    onClick={[Function]}
-                  >
-                    20
                   </td>
                 </tr>
                 <tr
@@ -913,52 +913,52 @@ exports[`Datetime define dateFormat 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_21"
+                    key="2_18"
+                    onClick={[Function]}
+                  >
+                    18
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_19"
+                    onClick={[Function]}
+                  >
+                    19
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_20"
+                    onClick={[Function]}
+                  >
+                    20
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_21"
                     onClick={[Function]}
                   >
                     21
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_22"
+                    key="2_22"
                     onClick={[Function]}
                   >
                     22
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_23"
+                    key="2_23"
                     onClick={[Function]}
                   >
                     23
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_24"
+                    key="2_24"
                     onClick={[Function]}
                   >
                     24
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_25"
-                    onClick={[Function]}
-                  >
-                    25
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_26"
-                    onClick={[Function]}
-                  >
-                    26
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_27"
-                    onClick={[Function]}
-                  >
-                    27
                   </td>
                 </tr>
                 <tr
@@ -966,49 +966,49 @@ exports[`Datetime define dateFormat 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_28"
+                    key="2_25"
+                    onClick={[Function]}
+                  >
+                    25
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_26"
+                    onClick={[Function]}
+                  >
+                    26
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_27"
+                    onClick={[Function]}
+                  >
+                    27
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_28"
                     onClick={[Function]}
                   >
                     28
                   </td>
                   <td
-                    className="el-datetime-day"
-                    key="1_29"
-                    onClick={[Function]}
-                  >
-                    29
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_30"
-                    onClick={[Function]}
-                  >
-                    30
-                  </td>
-                  <td
-                    className="el-datetime-day el-datetime-today"
-                    key="1_31"
-                    onClick={[Function]}
-                  >
-                    31
-                  </td>
-                  <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_1"
+                    key="3_1"
                     onClick={[Function]}
                   >
                     1
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_2"
+                    key="3_2"
                     onClick={[Function]}
                   >
                     2
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_3"
+                    key="3_3"
                     onClick={[Function]}
                   >
                     3
@@ -1019,49 +1019,49 @@ exports[`Datetime define dateFormat 1`] = `
                 >
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_4"
+                    key="3_4"
                     onClick={[Function]}
                   >
                     4
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_5"
+                    key="3_5"
                     onClick={[Function]}
                   >
                     5
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_6"
+                    key="3_6"
                     onClick={[Function]}
                   >
                     6
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_7"
+                    key="3_7"
                     onClick={[Function]}
                   >
                     7
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_8"
+                    key="3_8"
                     onClick={[Function]}
                   >
                     8
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_9"
+                    key="3_9"
                     onClick={[Function]}
                   >
                     9
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_10"
+                    key="3_10"
                     onClick={[Function]}
                   >
                     10
@@ -1096,7 +1096,7 @@ exports[`Datetime define defaultValue 1`] = `
   closeOnSelect={false}
   closeOnTab={true}
   dateFormat={true}
-  defaultValue={"2018-01-31T05:00:11.378Z"}
+  defaultValue={"2018-01-31T16:04:19.082Z"}
   input={true}
   inputProps={Object {}}
   isWeek={false}
@@ -1112,7 +1112,7 @@ exports[`Datetime define defaultValue 1`] = `
 >
   <div
     className="el-datetime el-static"
-    data-value="days1517374811381.363"
+    data-value="days1517414659085.898"
   >
     <Input
       autoComplete="off"
@@ -1128,7 +1128,7 @@ exports[`Datetime define defaultValue 1`] = `
       onKeyPress={[Function]}
       onPressEnter={[Function]}
       type="text"
-      value="01/31/2018 1:00 PM"
+      value="02/01/2018 12:04 AM"
     >
       <div
         className="el-input"
@@ -1147,7 +1147,7 @@ exports[`Datetime define defaultValue 1`] = `
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           type="text"
-          value="01/31/2018 1:00 PM"
+          value="02/01/2018 12:04 AM"
         />
       </div>
     </Input>
@@ -1166,7 +1166,7 @@ exports[`Datetime define defaultValue 1`] = `
             "renderDay": undefined,
             "renderMonth": undefined,
             "renderYear": undefined,
-            "selectedDate": "2018-01-31T05:00:11.378Z",
+            "selectedDate": "2018-01-31T16:04:19.082Z",
             "setDate": [Function],
             "setTime": [Function],
             "shortcuts": Array [],
@@ -1174,12 +1174,12 @@ exports[`Datetime define defaultValue 1`] = `
             "showWeeks": false,
             "timeConstraints": Object {},
             "timeFormat": "h:mm A",
-            "uid": "days1517374811381.363",
+            "uid": "days1517414659085.898",
             "updateOn": "days",
             "updateSelectedDate": [Function],
             "updateTime": [Function],
             "value": undefined,
-            "viewDate": "2017-12-31T16:00:00.000Z",
+            "viewDate": "2018-01-31T16:00:00.000Z",
           }
         }
       >
@@ -1190,7 +1190,7 @@ exports[`Datetime define defaultValue 1`] = `
           localMoment={[Function]}
           renderDay={[Function]}
           renderWeeksTitle={[Function]}
-          selectedDate={"2018-01-31T05:00:11.378Z"}
+          selectedDate={"2018-01-31T16:04:19.082Z"}
           setDate={[Function]}
           setTime={[Function]}
           shortcuts={Array []}
@@ -1198,15 +1198,15 @@ exports[`Datetime define defaultValue 1`] = `
           showWeeks={false}
           timeConstraints={Object {}}
           timeFormat="h:mm A"
-          uid="days1517374811381.363"
+          uid="days1517414659085.898"
           updateOn="days"
           updateSelectedDate={[Function]}
           updateTime={[Function]}
-          viewDate={"2017-12-31T16:00:00.000Z"}
+          viewDate={"2018-01-31T16:00:00.000Z"}
         >
           <div
             className="el-datetime-days"
-            data-value="days1517374811381.363"
+            data-value="days1517414659085.898"
           >
             <table>
               <thead
@@ -1228,11 +1228,11 @@ exports[`Datetime define defaultValue 1`] = `
                   <th
                     className="el-datetime-switch"
                     colSpan="5"
-                    data-value={0}
+                    data-value={1}
                     key="s"
                     onClick={[Function]}
                   >
-                    January 2018
+                    February 2018
                   </th>
                   <th
                     className="el-datetime-next"
@@ -1300,52 +1300,52 @@ exports[`Datetime define defaultValue 1`] = `
                 >
                   <td
                     className="el-datetime-day el-datetime-old"
-                    key="12_31"
+                    key="1_28"
+                    onClick={[Function]}
+                  >
+                    28
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_29"
+                    onClick={[Function]}
+                  >
+                    29
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_30"
+                    onClick={[Function]}
+                  >
+                    30
+                  </td>
+                  <td
+                    className="el-datetime-day el-datetime-old"
+                    key="1_31"
                     onClick={[Function]}
                   >
                     31
                   </td>
                   <td
-                    className="el-datetime-day"
-                    key="1_1"
+                    className="el-datetime-day el-datetime-active el-datetime-today"
+                    key="2_1"
                     onClick={[Function]}
                   >
                     1
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_2"
+                    key="2_2"
                     onClick={[Function]}
                   >
                     2
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_3"
+                    key="2_3"
                     onClick={[Function]}
                   >
                     3
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_4"
-                    onClick={[Function]}
-                  >
-                    4
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_5"
-                    onClick={[Function]}
-                  >
-                    5
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_6"
-                    onClick={[Function]}
-                  >
-                    6
                   </td>
                 </tr>
                 <tr
@@ -1353,52 +1353,52 @@ exports[`Datetime define defaultValue 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_7"
+                    key="2_4"
+                    onClick={[Function]}
+                  >
+                    4
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_5"
+                    onClick={[Function]}
+                  >
+                    5
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_6"
+                    onClick={[Function]}
+                  >
+                    6
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_7"
                     onClick={[Function]}
                   >
                     7
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_8"
+                    key="2_8"
                     onClick={[Function]}
                   >
                     8
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_9"
+                    key="2_9"
                     onClick={[Function]}
                   >
                     9
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_10"
+                    key="2_10"
                     onClick={[Function]}
                   >
                     10
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_11"
-                    onClick={[Function]}
-                  >
-                    11
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_12"
-                    onClick={[Function]}
-                  >
-                    12
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_13"
-                    onClick={[Function]}
-                  >
-                    13
                   </td>
                 </tr>
                 <tr
@@ -1406,52 +1406,52 @@ exports[`Datetime define defaultValue 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_14"
+                    key="2_11"
+                    onClick={[Function]}
+                  >
+                    11
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_12"
+                    onClick={[Function]}
+                  >
+                    12
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_13"
+                    onClick={[Function]}
+                  >
+                    13
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_14"
                     onClick={[Function]}
                   >
                     14
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_15"
+                    key="2_15"
                     onClick={[Function]}
                   >
                     15
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_16"
+                    key="2_16"
                     onClick={[Function]}
                   >
                     16
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_17"
+                    key="2_17"
                     onClick={[Function]}
                   >
                     17
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_18"
-                    onClick={[Function]}
-                  >
-                    18
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_19"
-                    onClick={[Function]}
-                  >
-                    19
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_20"
-                    onClick={[Function]}
-                  >
-                    20
                   </td>
                 </tr>
                 <tr
@@ -1459,52 +1459,52 @@ exports[`Datetime define defaultValue 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_21"
+                    key="2_18"
+                    onClick={[Function]}
+                  >
+                    18
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_19"
+                    onClick={[Function]}
+                  >
+                    19
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_20"
+                    onClick={[Function]}
+                  >
+                    20
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_21"
                     onClick={[Function]}
                   >
                     21
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_22"
+                    key="2_22"
                     onClick={[Function]}
                   >
                     22
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_23"
+                    key="2_23"
                     onClick={[Function]}
                   >
                     23
                   </td>
                   <td
                     className="el-datetime-day"
-                    key="1_24"
+                    key="2_24"
                     onClick={[Function]}
                   >
                     24
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_25"
-                    onClick={[Function]}
-                  >
-                    25
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_26"
-                    onClick={[Function]}
-                  >
-                    26
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_27"
-                    onClick={[Function]}
-                  >
-                    27
                   </td>
                 </tr>
                 <tr
@@ -1512,49 +1512,49 @@ exports[`Datetime define defaultValue 1`] = `
                 >
                   <td
                     className="el-datetime-day"
-                    key="1_28"
+                    key="2_25"
+                    onClick={[Function]}
+                  >
+                    25
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_26"
+                    onClick={[Function]}
+                  >
+                    26
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_27"
+                    onClick={[Function]}
+                  >
+                    27
+                  </td>
+                  <td
+                    className="el-datetime-day"
+                    key="2_28"
                     onClick={[Function]}
                   >
                     28
                   </td>
                   <td
-                    className="el-datetime-day"
-                    key="1_29"
-                    onClick={[Function]}
-                  >
-                    29
-                  </td>
-                  <td
-                    className="el-datetime-day"
-                    key="1_30"
-                    onClick={[Function]}
-                  >
-                    30
-                  </td>
-                  <td
-                    className="el-datetime-day el-datetime-active el-datetime-today"
-                    key="1_31"
-                    onClick={[Function]}
-                  >
-                    31
-                  </td>
-                  <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_1"
+                    key="3_1"
                     onClick={[Function]}
                   >
                     1
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_2"
+                    key="3_2"
                     onClick={[Function]}
                   >
                     2
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_3"
+                    key="3_3"
                     onClick={[Function]}
                   >
                     3
@@ -1565,49 +1565,49 @@ exports[`Datetime define defaultValue 1`] = `
                 >
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_4"
+                    key="3_4"
                     onClick={[Function]}
                   >
                     4
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_5"
+                    key="3_5"
                     onClick={[Function]}
                   >
                     5
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_6"
+                    key="3_6"
                     onClick={[Function]}
                   >
                     6
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_7"
+                    key="3_7"
                     onClick={[Function]}
                   >
                     7
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_8"
+                    key="3_8"
                     onClick={[Function]}
                   >
                     8
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_9"
+                    key="3_9"
                     onClick={[Function]}
                   >
                     9
                   </td>
                   <td
                     className="el-datetime-day el-datetime-new"
-                    key="2_10"
+                    key="3_10"
                     onClick={[Function]}
                   >
                     10
@@ -1623,7 +1623,7 @@ exports[`Datetime define defaultValue 1`] = `
                     colSpan="7"
                     onClick={[Function]}
                   >
-                    1:00 PM
+                    12:04 AM
                   </td>
                 </tr>
               </tfoot>
@@ -1636,4 +1636,4 @@ exports[`Datetime define defaultValue 1`] = `
 </DateTime>
 `;
 
-exports[`Datetime define timeFormat 1`] = `"2018-01-30T16:00:00.000Z"`;
+exports[`Datetime define timeFormat 1`] = `"2018-01-31T16:00:00.000Z"`;

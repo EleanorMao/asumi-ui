@@ -121,20 +121,6 @@ describe('Select change', () => {
             component.instance().handleToggle(true);
             expect(component.instance().el_select_menu.classList.contains("jest")).toBe(true);
         });
-        it('closeAfterSelect[true]', () => {
-            const component = mount(<Select closeAfterSelect><Option
-                value={1}>1</Option></Select>, {attachTo: container});
-            component.instance().handleToggle(true);
-            component.instance().el_select_ul.children[0].click();
-            expect(component.instance().state.visible).toBe(false);
-        });
-        it('closeAfterSelect[false]', () => {
-            const component = mount(<Select closeAfterSelect={false}><Option
-                value={1}>1</Option></Select>, {attachTo: container});
-            component.instance().handleToggle(true);
-            component.instance().el_select_ul.children[0].click();
-            expect(component.instance().state.visible).toBe(true);
-        });
         it('onChange', () => {
             class Demo extends Component {
                 constructor() {
@@ -193,13 +179,11 @@ describe('Select change', () => {
         it('multiple', () => {
             const wrapper = mount(<Demo/>, {attachTo: container});
             wrapper.find('input').simulate('focus');
-            wrapper.instance()._c.el_select_ul.children[0].click();
+            wrapper.instance()._c.el_select_ul.children.item(0).click();
             expect(wrapper.instance().state.value).toEqual([1]);
-            wrapper.find('input').simulate('focus');
-            wrapper.instance()._c.el_select_ul.children[1].click();
+            wrapper.instance()._c.el_select_ul.children.item(1).click();
             expect(wrapper.instance().state.value).toEqual([1, 2]);
-            wrapper.find('input').simulate('focus');
-            wrapper.instance()._c.el_select_ul.children[1].click();
+            wrapper.instance()._c.el_select_ul.children.item(1).click();
             expect(wrapper.instance().state.value).toEqual([1]);
         });
         it('selectAll', () => {
@@ -208,7 +192,6 @@ describe('Select change', () => {
             wrapper.find('Select Option').at(0).instance().handleClick();
             jest.runAllTimers();
             expect(wrapper.state().value).toEqual([1, 2]);
-            wrapper.find('input').simulate('focus');
             wrapper.find('Select Option').at(0).instance().handleClick();
             jest.runAllTimers();
             expect(wrapper.state().value).toEqual([]);

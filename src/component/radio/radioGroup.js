@@ -49,6 +49,7 @@ RadioGroup.propTypes = {
     options: PropTypes.array,
     disableAll: PropTypes.bool,
     className: PropTypes.string,
+    mode: PropTypes.oneOf(["group", "button"])
 };
 
 RadioGroup.defaultProps = {
