@@ -18,6 +18,7 @@ export default class Main extends Component {
         this.lastFetchId = 0;
         this.state = {
             data: [],
+            picked: [],
             fetching: false,
             remote: [],
             fruit1: "",
@@ -172,14 +173,14 @@ export default class Main extends Component {
                             <Option value="chicken6">Chicken6</Option>
                             <Option value="chicken7">Chicken7</Option>
                         </Select>
-                        <Select
-                            name="remote" value={remote} mode={"tag"}
-                            onSearch={this.handleSearch.bind(this)}
-                            onChange={this.handleChange.bind(this)}
-                            remote={true} noMatchText={fetching ? '搜索中...' : null}
-                        >
-                            {data.map(d => <Option key={d.value} {...d}/>)}
-                        </Select>
+                        {/*<Select*/}
+                        {/*name="remote" value={remote} mode={"tag"}*/}
+                        {/*onSearch={this.handleSearch.bind(this)}*/}
+                        {/*onChange={this.handleChange.bind(this)}*/}
+                        {/*remote={true} noMatchText={fetching ? '搜索中...' : null}*/}
+                        {/*>*/}
+                        {/*{data.map(d => <Option key={d.value} {...d}/>)}*/}
+                        {/*</Select>*/}
                     </Group>
                 </Panel>
                 <Panel
