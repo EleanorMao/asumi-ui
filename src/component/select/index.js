@@ -224,7 +224,7 @@ export default class Select extends Component {
         let {mode, name, multiple, onChange, readOnly} = this.props;
         if (readOnly) return;
         if (mode === 'tag') {
-            this.el_select_tag_input.setState({input: ''});
+            this._el_select_tag_input.setState({input: ''});
         }
         if (multiple) {
             this.setState({preSelected});
@@ -285,6 +285,7 @@ export default class Select extends Component {
             prev.renderValue = selectAll && selectAllText && this.isSelectAll(prev.selectedValue) ? selectAllText : prev.selectedLabel.join(", ");
             return prev;
         });
+        this._el_select_input && this._el_select_input._el_input && this._el_select_input._el_input.blur();
         this.props.onBlur && this.props.onBlur({e});
     }
 
@@ -352,7 +353,7 @@ export default class Select extends Component {
             }}>
                 {mode === "tag" ?
                     <TagInput
-                        ref={c => this.el_select_tag_input = c}
+                        ref={c => this._el_select_tag_input = c}
                         onSeparate={this.handleSeparate.bind(this)}
                         {...other}
                         size={size}
@@ -372,6 +373,7 @@ export default class Select extends Component {
                         autoComplete="off"
                         value={renderValue}
                         readOnly={readOnly || !searchable}
+                        ref={c => this._el_select_input = c}
                         onFocus={this.handleFocus.bind(this)}
                         onChange={this.handleChange.bind(this)}
                         onKeyDown={this.handleKeyDown.bind(this)}

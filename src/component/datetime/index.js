@@ -218,7 +218,7 @@ export default class DateTime extends React.Component {
         }
         else if (updateOn === 'months') {
             date = moment.min(viewDate.clone()
-                .set({month: item.value, date: currentdate.date()}),
+                    .set({month: item.value, date: currentdate.date()}),
                 viewDate.clone().set({month: item.value}).endOf('month'));
         }
         else if (updateOn === 'years') {
@@ -328,14 +328,14 @@ export default class DateTime extends React.Component {
     }
 
     render() {
-        let {className, input, shortcuts, style} = this.props,
+        let {className, input, shortcuts, inputProps, style} = this.props,
             {inputValue, open, currentView, updateOn} = this.state;
         return (
             <div className={classnames('el-datetime', className, {'el-static': input}, {'el-datetime-open': open})}
                  ref={c => this._el_datetime = c} style={style}
                  data-value={updateOn + this.uid}>
                 {input &&
-                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>} autoComplete="off"
+                <Input key='i' icon={<i className="fa fa-calendar-minus-o"/>} autoComplete="off" {...inputProps}
                        onFocus={this.openCalendar.bind(this)} onChange={this.onInputChange.bind(this)}
                        onKeyDown={this.onInputKey.bind(this)} value={this.renderInput(inputValue)}/>}
                 <div key='dt' className='el-datetime-picker'>

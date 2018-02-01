@@ -100,6 +100,7 @@ export default class Input extends Component {
                         {...other}
                         type={type}
                         style={inputStyle}
+                        ref={c => this._el_input = c}
                         onChange={this.handleChange.bind(this)}
                         onKeyPress={this.handleKeyPress.bind(this)}
                     />
