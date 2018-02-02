@@ -283,7 +283,7 @@ export default class Select extends Component {
     }
 
     hideComponent(e) {
-        let {mode, selectAll, selectAllText} = this.props;
+        let {selectAll, selectAllText} = this.props;
         this.isOverDropDown = false;
         this.setState(prev => {
             prev.visible = false;
@@ -291,7 +291,6 @@ export default class Select extends Component {
             prev.renderValue = selectAll && selectAllText && this.isSelectAll(prev.selectedValue) ? selectAllText : prev.selectedLabel.join(", ");
             return prev;
         });
-        this.focus(mode);
         this.props.onBlur && this.props.onBlur({e});
     }
 
