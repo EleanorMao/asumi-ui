@@ -268,7 +268,6 @@ export default class Select extends Component {
 
     showComponent() {
         let {mode, readOnly, searchable} = this.props;
-        this.focus(mode);
         this.setState(prev => {
             prev.visible = true;
             if (!prev.renderData.length) {
@@ -278,6 +277,8 @@ export default class Select extends Component {
                 prev.renderValue = '';
             }
             return prev;
+        }, () => {
+            setTimeout(() => {this.focus(mode);}, 0);
         });
     }
 
