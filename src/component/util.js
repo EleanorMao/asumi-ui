@@ -123,7 +123,8 @@ export let KeyCode = {
     ENTER: 13,
     DOWN: 40,
     UP: 38,
-    TAB: 9
+    TAB: 9,
+    ESC: 27
 };
 
 export let rules = {

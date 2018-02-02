@@ -180,8 +180,9 @@ export default class Select extends Component {
                 e.preventDefault();
                 this.setPreSelect(length, true);
             } else if (keyCode === KeyCode.ENTER && preSelected >= 0) {
+                e.preventDefault();
                 this.el_select_ul.children.item(preSelected).click();
-            } else if (keyCode === KeyCode.TAB) {
+            } else if (keyCode === KeyCode.TAB || keyCode === KeyCode.ESC) {
                 this.hideComponent(e);
             }
         } else if (keyCode === KeyCode.ENTER) {
