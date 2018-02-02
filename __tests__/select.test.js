@@ -145,7 +145,7 @@ describe('Select change', () => {
             }
 
             const component = mount(<Demo/>, {attachTo: container});
-            component.find('input').simulate('focus');
+            component.find('input').simulate('click');
             component.instance()._c.el_select_ul.children[0].click();
             expect(component.instance().state.value).toBe(1);
         });
@@ -178,7 +178,7 @@ describe('Select change', () => {
 
         it('multiple', () => {
             const wrapper = mount(<Demo/>, {attachTo: container});
-            wrapper.find('input').simulate('focus');
+            wrapper.find('input').simulate('click');
             wrapper.instance()._c.el_select_ul.children.item(0).click();
             expect(wrapper.instance().state.value).toEqual([1]);
             wrapper.instance()._c.el_select_ul.children.item(1).click();
@@ -188,7 +188,7 @@ describe('Select change', () => {
         });
         it('selectAll', () => {
             const wrapper = mount(<Demo selectAll/>);
-            wrapper.find('input').simulate('focus');
+            wrapper.find('input').simulate('click');
             wrapper.find('Select Option').at(0).instance().handleClick();
             jest.runAllTimers();
             expect(wrapper.state().value).toEqual([1, 2]);

@@ -136,11 +136,6 @@ export default class Select extends Component {
         }
     }
 
-    handleFocus(e) {
-        this.handleToggle(e);
-        this.props.onFocus && this.props.onFocus(e);
-    }
-
     handleToggle(e) {
         if (this.props.disabled) return;
         if (this.state.visible) {
@@ -277,7 +272,7 @@ export default class Select extends Component {
     }
 
     hideComponent(e) {
-        let {selectAll, selectAllText} = this.props;
+        let {mode, selectAll, selectAllText} = this.props;
         this.isOverDropDown = false;
         this.setState(prev => {
             prev.visible = false;
@@ -285,7 +280,11 @@ export default class Select extends Component {
             prev.renderValue = selectAll && selectAllText && this.isSelectAll(prev.selectedValue) ? selectAllText : prev.selectedLabel.join(", ");
             return prev;
         });
-        this._el_select_input && this._el_select_input._el_input && this._el_select_input._el_input.blur();
+        if (mode === 'tag') {
+            this._el_select_tag_input && this._el_select_tag_input._el_separate_input && this._el_select_tag_input._el_separate_input.focus();
+        } else {
+            this._el_select_input && this._el_select_input._el_input && this._el_select_input._el_input.focus();
+        }
         this.props.onBlur && this.props.onBlur({e});
     }
 
@@ -345,7 +344,12 @@ export default class Select extends Component {
             value, noMatchText, matchCase, onMatch, onSearch, mode,
             dropdownStyle, multiple, onChange, children, ...other
         } = this.props;
-        let _className = classnames('el-select-wrapper', className, size ? `el-${size}` : '');
+        let _className = classnames({
+            'el-select-wrapper': true,
+            'el-select-options-visible': visible,
+            [className]: className,
+            [`el-${size}`]: size
+        });
         let _tagProps = multiple ? tagProps : extend(tagProps || {}, {closeable: false});
         return (
             <div className={_className} style={style} ref={(c) => {
@@ -360,7 +364,7 @@ export default class Select extends Component {
                         tagProps={_tagProps}
                         value={selectedLabel}
                         remainTagValue={false}
-                        onFocus={this.handleFocus.bind(this)}
+                        onClick={this.handleToggle.bind(this)}
                         onInput={this.handleChange.bind(this)}
                         disabledInput={readOnly || !searchable}
                         onKeyDown={this.handleKeyDown.bind(this)}
@@ -374,7 +378,7 @@ export default class Select extends Component {
                         value={renderValue}
                         readOnly={readOnly || !searchable}
                         ref={c => this._el_select_input = c}
-                        onFocus={this.handleFocus.bind(this)}
+                        onClick={this.handleToggle.bind(this)}
                         onChange={this.handleChange.bind(this)}
                         onKeyDown={this.handleKeyDown.bind(this)}
                     />}

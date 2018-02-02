@@ -330,7 +330,7 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1517501321031.7046"
+              data-value="days1517557555009.2551"
             >
               <Input
                 autoComplete="off"
@@ -392,7 +392,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1517501321031.7046",
+                      "uid": "days1517557555009.2551",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -416,7 +416,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1517501321031.7046"
+                    uid="days1517557555009.2551"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -425,7 +425,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1517501321031.7046"
+                      data-value="days1517557555009.2551"
                     >
                       <table>
                         <thead
@@ -1087,7 +1087,7 @@ exports[`Form create form by form items 1`] = `
                 name="select"
                 onBlur={[Function]}
                 onChange={[Function]}
-                onFocus={[Function]}
+                onClick={[Function]}
                 onKeyDown={[Function]}
                 onKeyPress={[Function]}
                 onPressEnter={[Function]}
@@ -1100,6 +1100,7 @@ exports[`Form create form by form items 1`] = `
                 >
                   <span
                     className="el-input-icon"
+                    onClick={[Function]}
                   >
                     <i
                       className="el-caret"
@@ -1110,7 +1111,7 @@ exports[`Form create form by form items 1`] = `
                     name="select"
                     onBlur={[Function]}
                     onChange={[Function]}
-                    onFocus={[Function]}
+                    onClick={[Function]}
                     onKeyDown={[Function]}
                     onKeyPress={[Function]}
                     readOnly={true}
@@ -1900,7 +1901,7 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1517501320142.5024"
+              data-value="days1517557554614.857"
             >
               <Input
                 autoComplete="off"
@@ -1962,7 +1963,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1517501320142.5024",
+                      "uid": "days1517557554614.857",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1986,7 +1987,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1517501320142.5024"
+                    uid="days1517557554614.857"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1995,7 +1996,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1517501320142.5024"
+                      data-value="days1517557554614.857"
                     >
                       <table>
                         <thead
@@ -2657,7 +2658,7 @@ exports[`Form create form by options 1`] = `
                 name="select"
                 onBlur={[Function]}
                 onChange={[Function]}
-                onFocus={[Function]}
+                onClick={[Function]}
                 onKeyDown={[Function]}
                 onKeyPress={[Function]}
                 onPressEnter={[Function]}
@@ -2670,6 +2671,7 @@ exports[`Form create form by options 1`] = `
                 >
                   <span
                     className="el-input-icon"
+                    onClick={[Function]}
                   >
                     <i
                       className="el-caret"
@@ -2680,7 +2682,7 @@ exports[`Form create form by options 1`] = `
                     name="select"
                     onBlur={[Function]}
                     onChange={[Function]}
-                    onFocus={[Function]}
+                    onClick={[Function]}
                     onKeyDown={[Function]}
                     onKeyPress={[Function]}
                     readOnly={true}
