@@ -75,6 +75,14 @@ export default class Select extends Component {
         this.handleAddPreSelect(preSelected);
     }
 
+    focus(mode) {
+        if (mode === 'tag') {
+            this._el_select_tag_input && this._el_select_tag_input._el_separate_input && this._el_select_tag_input._el_separate_input.focus();
+        } else {
+            this._el_select_input && this._el_select_input._el_input && this._el_select_input._el_input.focus();
+        }
+    }
+
     hasSelectAll() {
         let {data, renderData} = this.state;
         let {multiple, selectAll} = this.props;
@@ -259,7 +267,8 @@ export default class Select extends Component {
     }
 
     showComponent() {
-        let {readOnly, searchable} = this.props;
+        let {mode, readOnly, searchable} = this.props;
+        this.focus(mode);
         this.setState(prev => {
             prev.visible = true;
             if (!prev.renderData.length) {
@@ -281,11 +290,7 @@ export default class Select extends Component {
             prev.renderValue = selectAll && selectAllText && this.isSelectAll(prev.selectedValue) ? selectAllText : prev.selectedLabel.join(", ");
             return prev;
         });
-        if (mode === 'tag') {
-            this._el_select_tag_input && this._el_select_tag_input._el_separate_input && this._el_select_tag_input._el_separate_input.focus();
-        } else {
-            this._el_select_input && this._el_select_input._el_input && this._el_select_input._el_input.focus();
-        }
+        this.focus(mode);
         this.props.onBlur && this.props.onBlur({e});
     }
 
