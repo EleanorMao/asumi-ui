@@ -88,14 +88,22 @@ function getLastChild(data, selectRow) {
     return cellIndex;
 }
 
-function getDefLength(props) {
+function getDefLength(props, length = 10) {
     if (props.pagination || props.topPagination) {
         if (props.options) {
             let {sizePerPage, sizePageList} = props.options;
-            return sizePerPage || (sizePageList && sizePageList.length ? sizePageList[0] : 10);
+            if ('sizePerPage' in props.options) {
+                return sizePerPage;
+            } else {
+                if (props.remote) {
+                    return sizePageList && sizePageList.length ? sizePageList[0] : length;
+                } else {
+                    return length;
+                }
+            }
         }
     }
-    return 10;
+    return length;
 }
 
 export default class Table extends Component {
@@ -429,7 +437,7 @@ export default class Table extends Component {
         this.setState(prevState => {
             prevState.renderedList = data;
             prevState.dictionary = dictionary;
-            prevState.length = getDefLength(nextProps);
+            prevState.length = getDefLength(nextProps, prevState.length);
             prevState.allChecked = this._isAllChecked(data, nextProps.selectRow);
             prevState.currentPage = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
             return prevState;
