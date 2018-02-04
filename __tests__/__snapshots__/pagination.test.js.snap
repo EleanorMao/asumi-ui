@@ -42,7 +42,7 @@ exports[`Pagination create component 1`] = `
       pgBtn={true}
     />
     <PageButton
-      disabled={true}
+      disabled={false}
       hidden={false}
       key="end"
       label="尾页"
@@ -94,7 +94,7 @@ exports[`Pagination define current & dataSize 1`] = `
       className="el-pagination"
     >
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={false}
         key="start"
         label="首页"
@@ -102,7 +102,7 @@ exports[`Pagination define current & dataSize 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-disabled"
+          className="el-pg-btn"
         >
           <a
             href="#"
@@ -274,7 +274,7 @@ exports[`Pagination define current & dataSize 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={false}
         key="end"
         label="尾页"
@@ -282,7 +282,7 @@ exports[`Pagination define current & dataSize 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-disabled"
+          className="el-pg-btn"
         >
           <a
             href="#"
@@ -425,7 +425,7 @@ exports[`Pagination define hideEndLabel & hideStartLabel 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={true}
         key="end"
         label="尾页"
@@ -433,7 +433,7 @@ exports[`Pagination define hideEndLabel & hideStartLabel 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-hidden el-disabled"
+          className="el-pg-btn el-hidden"
         >
           <a
             href="#"
@@ -491,7 +491,7 @@ exports[`Pagination define paginationSize 1`] = `
       className="el-pagination"
     >
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={false}
         key="start"
         label="首页"
@@ -499,7 +499,7 @@ exports[`Pagination define paginationSize 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-disabled"
+          className="el-pg-btn"
         >
           <a
             href="#"
@@ -671,7 +671,7 @@ exports[`Pagination define paginationSize 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={false}
         key="end"
         label="尾页"
@@ -679,7 +679,7 @@ exports[`Pagination define paginationSize 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-disabled"
+          className="el-pg-btn"
         >
           <a
             href="#"
@@ -822,7 +822,7 @@ exports[`Pagination define showTotalPages 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={false}
         key="end"
         label="尾页"
@@ -830,7 +830,7 @@ exports[`Pagination define showTotalPages 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-disabled"
+          className="el-pg-btn"
         >
           <a
             href="#"
@@ -881,7 +881,7 @@ exports[`Pagination define sizePerPage 1`] = `
       className="el-pagination"
     >
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={false}
         key="start"
         label="首页"
@@ -889,7 +889,7 @@ exports[`Pagination define sizePerPage 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-disabled"
+          className="el-pg-btn"
         >
           <a
             href="#"
@@ -1193,7 +1193,7 @@ exports[`Pagination define startLabel prevLabel nextLabel endLabel 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={true}
+        disabled={false}
         hidden={false}
         key="end"
         label="4"
@@ -1201,7 +1201,7 @@ exports[`Pagination define startLabel prevLabel nextLabel endLabel 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-disabled"
+          className="el-pg-btn"
         >
           <a
             href="#"

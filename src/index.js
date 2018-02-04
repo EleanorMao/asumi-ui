@@ -30,6 +30,7 @@ import Tag              from './component/tag';
 import Grid             from './component/grid';
 import Form             from './component/form';
 import Tabs             from './component/tabs';
+import Panel            from './component/panel';
 import Radio            from './component/radio';
 import Group            from './component/group';
 import Input            from './component/input';
@@ -113,5 +114,6 @@ export {
     MenuItemGroup,
     SimplePagination,
     TagInput,
-    Transfer
+    Transfer,
+    Panel
 };

@@ -279,6 +279,7 @@ Form.propTypes = {
         name: PropTypes.string,
         dataFormat: PropTypes.func,
         labelWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+        component: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
         tips: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.shape({

@@ -1,0 +1,33 @@
+.el-panel {
+  margin-bottom: 50px;
+  border: 1px solid @border;
+  border-radius: @borderRadio;
+  background: rgba(255, 255, 255, .8);
+  .el-panel-title {
+    padding: 10/13rem 14/13rem;
+    position: relative;
+    font-weight: 700;
+    font-size: 1.2307rem;
+    border-bottom: 1px solid @border;
+    .el-panel-button {
+      cursor: pointer;
+      margin-left: 1rem;
+      font-weight: 700;
+      transition: transform 0.2s ease-in;
+      -webkit-transition: -webkit-transform 0.2s ease-in;
+      &:hover {
+        color: @primary;
+      }
+    }
+  }
+  &.el-expand {
+    .el-panel-title .el-panel-button {
+      transform: rotate(-90deg);
+      -webkit-transform: -webkit-rotate(-90deg);
+    }
+  }
+  .el-panel-body {
+    position: relative;
+    padding: 20/13rem 14/13rem;
+  }
+}

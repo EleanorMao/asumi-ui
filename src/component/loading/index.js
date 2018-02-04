@@ -1,16 +1,34 @@
 /**
  * Created by elly on 2017/4/11.
  */
-import ReactDOM from 'react-dom';
+import ReactDOM           from 'react-dom';
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import ChaseDot from './chaseDot';
-import Stretch from './stretch';
+import PropTypes          from 'prop-types';
+import classnames         from 'classnames';
+import ChaseDot           from './chaseDot';
+import Stretch            from './stretch';
+import Bounce             from './bounce';
 
 export default class Loading extends Component {
     constructor(props) {
         super(props);
+    }
+
+    childRender(type) {
+        let output;
+        switch (type) {
+            case 'chase-dots':
+                output = <ChaseDot/>;
+                break;
+            case 'bounce':
+                output = <Bounce/>;
+                break;
+            default:
+                output = <Stretch/>;
+                break;
+        }
+
+        return output;
     }
 
     render() {
@@ -21,7 +39,7 @@ export default class Loading extends Component {
                 <div className={`el-loading-body ${mask ? 'el-loading-mask' : ''}`}>
                     <div className="el-loading-nest">
                         <div className="el-loading-content">
-                            {type === "chase-dots" ? <ChaseDot/> : <Stretch/>}
+                            {this.childRender(type)}
                             {!!title &&
                             <div className="el-loading-title">{title}</div>}
                         </div>
@@ -32,7 +50,7 @@ export default class Loading extends Component {
                     {children}
                 </div>}
             </div>
-        )
+        );
     }
 }
 
@@ -64,7 +82,7 @@ Loading.propTypes = {
     fullScreen: PropTypes.bool,
     className: PropTypes.string,
     size: PropTypes.oneOf(['small', 'large']),
-    type: PropTypes.oneOf(['chase-dots', 'stretch'])
+    type: PropTypes.oneOf(['chase-dots', 'stretch', 'bounce'])
 };
 
 Loading.defaultProps = {

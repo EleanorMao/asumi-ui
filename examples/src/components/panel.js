@@ -2,19 +2,18 @@
  * Created by elly on 2017/4/18.
  */
 import React, {Component, PropTypes} from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import github from 'react-syntax-highlighter/styles/hljs/github'
+import SyntaxHighlighter             from 'react-syntax-highlighter';
+import github                        from 'react-syntax-highlighter/styles/hljs/github';
 import {
     Tooltip
-} from '../../../src';
-
+}                                    from '../../../src';
 
 export default class Panel extends Component {
     constructor(props) {
         super(props);
         this.state = {
             toggle: false
-        }
+        };
     }
 
     handleToggle() {
@@ -29,7 +28,7 @@ export default class Panel extends Component {
                 <div className="el-panel-title">
                     {title}
                     <Tooltip title={`点击查看/关闭例子`} trigger="hover" placement="top">
-                        <span className="el-panel-toggle fa fa-code" onClick={this.handleToggle.bind(this)}/>
+                        <span className="el-panel-button fa fa-code" onClick={this.handleToggle.bind(this)}/>
                     </Tooltip>
                 </div>
                 <div className="el-panel-body">
@@ -41,7 +40,7 @@ export default class Panel extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 

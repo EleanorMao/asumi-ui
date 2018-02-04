@@ -139,7 +139,7 @@ export default class Select extends Component {
         if (this.state.visible && this.el_select && !contains(this.el_select, e.target)) {
             let multiple = this.props.multiple;
             if (!multiple || (multiple && !contains(this.el_select_ul, e.target))) {
-                this.hideComponent(e);
+                this.hideComponent(e, true);
             }
         }
     }
@@ -282,8 +282,8 @@ export default class Select extends Component {
         });
     }
 
-    hideComponent(e) {
-        let {selectAll, selectAllText} = this.props;
+    hideComponent(e, noFocus) {
+        let {mode, selectAll, selectAllText} = this.props;
         this.isOverDropDown = false;
         this.setState(prev => {
             prev.visible = false;
@@ -291,7 +291,11 @@ export default class Select extends Component {
             prev.renderValue = selectAll && selectAllText && this.isSelectAll(prev.selectedValue) ? selectAllText : prev.selectedLabel.join(", ");
             return prev;
         });
-        this.props.onBlur && this.props.onBlur({e});
+        if (noFocus) {
+            this.props.onBlur && this.props.onBlur({e});
+        } else {
+            this.focus(mode);
+        }
     }
 
     optionsRender() {

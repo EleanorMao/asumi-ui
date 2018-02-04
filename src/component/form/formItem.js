@@ -422,8 +422,6 @@ FormItem.propTypes = {
     required: PropTypes.bool,
     onChange: PropTypes.func,
     requiredMark: PropTypes.any,
-    // labelStyle: PropTypes.object,
-    // controlStyle: PropTypes.object,
     labelClassName: PropTypes.string,
     controlClassName: PropTypes.string,
     labelWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

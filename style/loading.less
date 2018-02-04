@@ -147,4 +147,27 @@
       animation: bounce -1.0s infinite ease-in-out;
     }
   }
+  .el-bounce {
+    text-align: center;
+    position: relative;
+    > i {
+      width: 18/13rem;
+      height: 18/13rem;
+      display: inline-block;
+      border-radius: 100%;
+      margin-left: 3px;
+      margin-right: 3px;
+      background-color: @primary;
+      -webkit-animation: bouncedelay 1.4s infinite ease-in-out both;
+      animation: bouncedelay 1.4s infinite ease-in-out both
+    }
+    .el-bounce-1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s
+    }
+    .el-bounce-2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s
+    }
+  }
 }

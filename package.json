@@ -1,6 +1,6 @@
 {
   "name": "asumi",
-  "version": "0.1.3-rc.9",
+  "version": "0.1.3-rc.10",
   "description": "light react ui design",
   "main": "lib/index.js",
   "files": [

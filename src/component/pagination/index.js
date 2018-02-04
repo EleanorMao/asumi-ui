@@ -2,9 +2,9 @@
  * Created by elly on 2017/4/28.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import PageButton from './pageButton';
-import {noop} from "../util";
+import PropTypes          from 'prop-types';
+import PageButton         from './pageButton';
+import {noop}             from "../util";
 
 export default class Pagination extends Component {
     constructor(props) {
@@ -51,7 +51,7 @@ export default class Pagination extends Component {
         }
         let PageButtons = [
             <PageButton
-                disabled={this.startPage === 1}
+                disabled={current === 1}
                 label={startLabel} hidden={hideStartLabel} pgBtn={true}
                 key='start' onClick={() => onPageChange(1, sizePerPage)}/>,
             <PageButton
@@ -70,7 +70,7 @@ export default class Pagination extends Component {
         PageButtons.push(
             <PageButton
                 label={endLabel} hidden={hideEndLabel}
-                disabled={this.lastPage === totalPages} pgBtn={true}
+                disabled={this.lastPage === current} pgBtn={true}
                 key='end' onClick={() => onPageChange(totalPages, sizePerPage)}/>
         );
 
@@ -82,7 +82,7 @@ export default class Pagination extends Component {
                 {showTotalPages &&
                 <span className="el-totalPages">共 {totalPages} 页</span>}
             </div>
-        )
+        );
     }
 }
 
