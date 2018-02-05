@@ -72,7 +72,7 @@ export default class Pagination extends Component {
         PageButtons.push(
             <PageButton
                 label={endLabel} hidden={hideEndLabel}
-                disabled={this.lastPage === current && totalPages < 1} pgBtn={true}
+                disabled={this.lastPage === current || totalPages < 1} pgBtn={true}
                 key='end' onClick={() => onPageChange(totalPages, sizePerPage)}/>
         );
 
