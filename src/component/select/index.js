@@ -278,11 +278,10 @@ export default class Select extends Component {
             }
             return prev;
         }, () => {
-            this.focus(mode);
+            setTimeout(() => {this.focus(mode);}, 0);
         });
     }
 
-    //如果点击外部关闭的弹窗，则触发blur，如果是键盘关闭或者是选中后关闭，则仍focus在输入框(同原生)
     hideComponent(e, noFocus) {
         let {mode, selectAll, selectAllText} = this.props;
         this.isOverDropDown = false;

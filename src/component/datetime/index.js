@@ -39,9 +39,7 @@ export default class DateTime extends React.Component {
             selectedDate.clone().startOf('month') : this.localMoment().startOf('month');
         updateOn = this.getUpdateOn(formats);
 
-        if (props.inputEditable) {
-            inputValue = (date.isValid && date.isValid()) ? date.format(formats.datetime) : date;
-        } else if (selectedDate) {
+        if (selectedDate) {
             inputValue = selectedDate.format(formats.datetime);
         } else if (date.isValid && !date.isValid()) {
             inputValue = '';
@@ -309,7 +307,6 @@ export default class DateTime extends React.Component {
         let value = e.value,
             localMoment = this.localMoment(value, this.state.inputFormat),
             update = {inputValue: value};
-        if (!this.props.inputEditable) {
             if (localMoment.isValid() && !this.props.value) {
                 update.selectedDate = localMoment;
                 update.viewDate = localMoment.clone().startOf('month');
@@ -322,14 +319,6 @@ export default class DateTime extends React.Component {
                     name: this.props.name
                 });
             });
-        } else {
-            return this.setState(update, () => {
-                return this.props.onChange({
-                    value: value,
-                    name: this.props.name
-                });
-            });
-        }
     }
 
     renderInput(value) {
@@ -383,7 +372,6 @@ DateTime.defaultProps = {
     className: '',
     defaultValue: '',
     inputProps: {},
-    inputEditable: true,
     input: true,
     onFocus: noop,
     onBlur: noop,

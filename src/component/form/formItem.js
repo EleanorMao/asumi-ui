@@ -345,7 +345,7 @@ export default class FormItem extends Component {
                     {dataFormat ? dataFormat(content || value) : (content || value)}
                 </div>;
                 break;
-            case "component":  //换成createElement效率更高，否则容易卡卡der
+            case "component":  //换成createElement效率更高
                 output = React.createElement(component, {
                     name,
                     value: value,
