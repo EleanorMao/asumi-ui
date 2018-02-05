@@ -49,6 +49,7 @@ export default class Pagination extends Component {
             this.startPage = 1;
             this.lastPage = Math.min(totalPages, paginationSize);
         }
+        //逻辑修改为只要当前页不是首页，则可点击(原逻辑：看不见首页才能点击首页)
         let PageButtons = [
             <PageButton
                 disabled={current === 1}
@@ -67,10 +68,11 @@ export default class Pagination extends Component {
                 label={nextLabel} disabled={current === totalPages || totalPages < 1} pgBtn={true}
                 key='next' onClick={() => onPageChange(current + 1, sizePerPage)}/>
         );
+        //逻辑修改为只要当前页不是尾页，则可点击(原逻辑：看不见尾页才能点击尾页)
         PageButtons.push(
             <PageButton
                 label={endLabel} hidden={hideEndLabel}
-                disabled={this.lastPage === current} pgBtn={true}
+                disabled={this.lastPage === current && totalPages < 1} pgBtn={true}
                 key='end' onClick={() => onPageChange(totalPages, sizePerPage)}/>
         );
 
