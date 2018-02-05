@@ -185,6 +185,7 @@ export default class Table extends Component {
         }
     }
 
+    //chrome 61.0.3163.100 如果表格里的a标签设为inline-block，则会在拉动表格宽度过程中消失
     _stretchWidth() {
         const refs = this._instance;
         if (!refs.colgroup || !refs.table_wrapper) return;
@@ -854,6 +855,7 @@ export default class Table extends Component {
         );
     }
 
+    //如果没有要求没有数据时隐藏分页，则显示(测试梅梅要求)
     pagingRowRender() {
         let {pagination, options, data} = this.props;
         if (!pagination) return null;

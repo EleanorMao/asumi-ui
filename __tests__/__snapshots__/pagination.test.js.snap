@@ -42,7 +42,7 @@ exports[`Pagination create component 1`] = `
       pgBtn={true}
     />
     <PageButton
-      disabled={false}
+      disabled={true}
       hidden={false}
       key="end"
       label="尾页"
@@ -425,7 +425,7 @@ exports[`Pagination define hideEndLabel & hideStartLabel 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={false}
+        disabled={true}
         hidden={true}
         key="end"
         label="尾页"
@@ -433,7 +433,7 @@ exports[`Pagination define hideEndLabel & hideStartLabel 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn el-hidden"
+          className="el-pg-btn el-hidden el-disabled"
         >
           <a
             href="#"
@@ -822,7 +822,7 @@ exports[`Pagination define showTotalPages 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={false}
+        disabled={true}
         hidden={false}
         key="end"
         label="尾页"
@@ -830,7 +830,7 @@ exports[`Pagination define showTotalPages 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn"
+          className="el-pg-btn el-disabled"
         >
           <a
             href="#"
@@ -1193,7 +1193,7 @@ exports[`Pagination define startLabel prevLabel nextLabel endLabel 1`] = `
         </li>
       </PageButton>
       <PageButton
-        disabled={false}
+        disabled={true}
         hidden={false}
         key="end"
         label="4"
@@ -1201,7 +1201,7 @@ exports[`Pagination define startLabel prevLabel nextLabel endLabel 1`] = `
         pgBtn={true}
       >
         <li
-          className="el-pg-btn"
+          className="el-pg-btn el-disabled"
         >
           <a
             href="#"
