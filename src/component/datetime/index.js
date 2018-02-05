@@ -27,10 +27,13 @@ export default class DateTime extends React.Component {
         let formats = this.getFormats(props),
             date = props.value || props.defaultValue,
             selectedDate, viewDate, updateOn, inputValue;
-
-        if (date) {
-            selectedDate = this.localMoment(date, date === 'string' ? formats.datetime : undefined);
+           
+        if ( date && typeof date === 'string' ){
+            selectedDate = this.localMoment( date, formats.datetime );
         }
+		else if ( date ){
+            selectedDate = this.localMoment( date );            
+        }           
 
         if (selectedDate && !selectedDate.isValid()) {
             selectedDate = null;
@@ -307,18 +310,18 @@ export default class DateTime extends React.Component {
         let value = e.value,
             localMoment = this.localMoment(value, this.state.inputFormat),
             update = {inputValue: value};
-            if (localMoment.isValid() && !this.props.value) {
-                update.selectedDate = localMoment;
-                update.viewDate = localMoment.clone().startOf('month');
-            } else {
-                update.selectedDate = null;
-            }
-            return this.setState(update, () => {
-                return this.props.onChange({
-                    value: localMoment.isValid() ? localMoment : this.state.inputValue,
-                    name: this.props.name
-                });
+        if (localMoment.isValid() && !this.props.value) {
+            update.selectedDate = localMoment;
+            update.viewDate = localMoment.clone().startOf('month');
+        } else {
+            update.selectedDate = null;
+        }
+        return this.setState(update, () => {
+            return this.props.onChange({
+                value: localMoment.isValid() ? localMoment : this.state.inputValue,
+                name: this.props.name
             });
+        });
     }
 
     renderInput(value) {
