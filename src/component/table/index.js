@@ -753,11 +753,10 @@ export default class Table extends Component {
         const {
             remote,
             options,
-            pagination
         } = this.props;
         const sizePageList = options.sizePageList;
         const length = sizePageList && sizePageList.length;
-        if (pagination && (length > 1 || length === 1 && sizePageList[0] !== options.sizePerPage)) {
+        if (length > 1 || length === 1 && sizePageList[0] !== options.sizePerPage) {
             if (remote) {
                 return (
                     <Dropdown
@@ -856,7 +855,9 @@ export default class Table extends Component {
     }
 
     pagingRowRender() {
-        if (!this.props.pagination || !this.props.data.length) return null;
+        let {pagination, options, data} = this.props;
+        if (!pagination) return null;
+        if (!data.length && options && options.hidePaginationWhileNoData) return null;
         return (
             <div className="el-row">
                 <div className="el-fl">
@@ -871,7 +872,9 @@ export default class Table extends Component {
     }
 
     topPagingRowRender() {
-        if (!this.props.topPagination || !this.props.data.length) return null;
+        let {topPagination, options, data} = this.props;
+        if (!topPagination) return null;
+        if (!data.length && options && options.hidePaginationWhileNoData) return null;
         return (
             <div className="el-row">
                 {this.topPagingRender()}
@@ -1105,6 +1108,7 @@ Table.propTypes = {
         sizePageList: PropTypes.array,
         onSizePageChange: PropTypes.func,
         paginationSize: PropTypes.number,
+        hidePaginationWhileNoData: PropTypes.bool,
         dropdownPlacement: PropTypes.oneOf(['auto', 'top', 'bottom']),
         paginationShowsTotal: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])
     })
