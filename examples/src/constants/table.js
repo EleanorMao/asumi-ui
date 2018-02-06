@@ -32,6 +32,38 @@ class Foo extends Component {
         )
     }
 }`;
+export const stretchable = `import {Table, Col} from 'asumi';
+import {list} from './data';
+
+class Foo extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    timeRender(cell) {
+        return new Date(cell).toDateString();
+    }
+     
+    render(){
+        return (
+            <div>
+                <Table
+                    isKey="id"
+                    data={list}
+                    hover
+                    striped
+                    stretchable
+                >
+                    <Col dataField="id" dataAlign="center" hidden={true}>ID</Col>
+                    <Col dataAlign="center" dataField="regionRoleName" width={150}>区域角色</Col>
+                    <Col dataAlign="center" dataField="systemRoleName">系统角色</Col>
+                    <Col dataAlign="center" dataField="createTime"
+                         dataFormat={this.timeRender.bind(this)}>创建时间</Col>
+                </Table>
+            </div>
+        )
+    }
+}`;
 
 export const pagination = `import {Table, Col} from 'asumi';
 import {list} from './data';

@@ -265,6 +265,11 @@ export const apiofgroup = [{
     'default': "",
     description: "value of radio group"
 }, {
+    property: "mode",
+    type: "string",
+    'default': "group",
+    description: "Options: group, button"
+}, {
     property: "onChange",
     type: "function",
     'default': "({e, name, value, checked})=>{}",

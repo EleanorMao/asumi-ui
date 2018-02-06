@@ -111,6 +111,11 @@ export const api = [{
     'default': "default",
     description: "Style of dropdown. Options: default, text, danger, success, primary, secondary, warning, error."
 }, {
+    property: 'placement',
+    type: "string",
+    'default': 'auto',
+    description: 'Options: auto, top, bottom'
+}, {
     property: "style",
     type: "bool",
     'default': "null",

@@ -306,6 +306,11 @@ export const api = [{
     'default': "null",
     description: "Tell if matchCase when search",
 }, {
+    property: "remote",
+    type: "bool",
+    'default': "null",
+    description: "",
+}, {
     property: "dropdownClassName",
     type: "string",
     'default': "null",
