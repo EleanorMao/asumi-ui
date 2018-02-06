@@ -556,7 +556,7 @@ export const apiOfFormItem = [{
     description: "content of static form item"
 }, {
     property: "component",
-    type: "any",
+    type: "string | function",
     'default': "",
     description: "define custom component, when form item type is component. FormItem will give component props {name, value, data, onBlur, onChange}, and you can cover it, if you want"
 }, {

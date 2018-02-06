@@ -124,5 +124,5 @@ export const api = [{
     property: "type",
     type: "string",
     'default': "stretch",
-    description: "Options: stretch, chase-dots"
+    description: "Options: stretch, chase-dots, bounce"
 }];

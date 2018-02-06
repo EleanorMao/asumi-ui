@@ -75,6 +75,14 @@ a.el-btn {
       color: @d_primary;
       background-color: transparent;
     }
+    &.el-disabled {
+      color: @disabledText;
+      background: transparent;
+      &:active, &:focus, &:hover {
+        color: @disabledText;
+        background: transparent;
+      }
+    }
   }
   &.el-disabled, &:disabled {
     color: #fff;
