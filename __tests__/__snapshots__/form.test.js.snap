@@ -330,7 +330,7 @@ exports[`Form create form by form items 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1517820358188.9683"
+              data-value="days1517895101665.7686"
             >
               <Input
                 autoComplete="off"
@@ -392,7 +392,7 @@ exports[`Form create form by form items 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1517820358188.9683",
+                      "uid": "days1517895101665.7686",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -416,7 +416,7 @@ exports[`Form create form by form items 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1517820358188.9683"
+                    uid="days1517895101665.7686"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -425,7 +425,7 @@ exports[`Form create form by form items 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1517820358188.9683"
+                      data-value="days1517895101665.7686"
                     >
                       <table>
                         <thead
@@ -1901,7 +1901,7 @@ exports[`Form create form by options 1`] = `
           >
             <div
               className="el-datetime el-static"
-              data-value="days1517820357988.2566"
+              data-value="days1517895101465.172"
             >
               <Input
                 autoComplete="off"
@@ -1963,7 +1963,7 @@ exports[`Form create form by options 1`] = `
                       "showWeeks": false,
                       "timeConstraints": Object {},
                       "timeFormat": "h:mm A",
-                      "uid": "days1517820357988.2566",
+                      "uid": "days1517895101465.172",
                       "updateOn": "days",
                       "updateSelectedDate": [Function],
                       "updateTime": [Function],
@@ -1987,7 +1987,7 @@ exports[`Form create form by options 1`] = `
                     showWeeks={false}
                     timeConstraints={Object {}}
                     timeFormat="h:mm A"
-                    uid="days1517820357988.2566"
+                    uid="days1517895101465.172"
                     updateOn="days"
                     updateSelectedDate={[Function]}
                     updateTime={[Function]}
@@ -1996,7 +1996,7 @@ exports[`Form create form by options 1`] = `
                   >
                     <div
                       className="el-datetime-days"
-                      data-value="days1517820357988.2566"
+                      data-value="days1517895101465.172"
                     >
                       <table>
                         <thead

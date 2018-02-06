@@ -1,17 +1,17 @@
 /**
  * Created by elly on 2017/4/5.
  */
-import React, {Component} from 'react';
+import React, {Component}       from 'react';
 import {
     Group,
     Button,
     Table,
     Col
-} from '../../../src';
-import Panel from './panel';
-import {basic, link, size, api}from'../constants/button'
+}                               from '../../../src';
+import Panel                    from './panel';
+import {basic, link, size, api} from '../constants/button';
 
-export default  class Main extends Component {
+export default class Main extends Component {
     constructor(props) {
         super(props);
     }
@@ -68,7 +68,7 @@ export default  class Main extends Component {
                         <Button type="text">text large</Button>
                     </Group>
                     <Group style={{marginBottom: 10}}>
-                        <Button >default default</Button>
+                        <Button>default default</Button>
                         <Button type="secondary">secondary default</Button>
                         <Button type="warning">warning default</Button>
                         <Button type="primary">primary default</Button>
@@ -79,7 +79,7 @@ export default  class Main extends Component {
                         <Button type="text">text default</Button>
                     </Group>
                     <Group size="small" style={{marginBottom: 10}}>
-                        <Button >default small</Button>
+                        <Button>default small</Button>
                         <Button type="secondary">secondary small</Button>
                         <Button type="warning">warning small</Button>
                         <Button type="primary">primary small</Button>
@@ -98,6 +98,6 @@ export default  class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

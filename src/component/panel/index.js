@@ -35,10 +35,9 @@ export default class Panel extends Component {
                 hoverTips = {title: hoverTips};
             }
 
-            popover = hoverTips ? (
-                <Popover {...hoverTips} trigger="hover" placement="top">
-                    <Icon className="el-panel-button" type="angle-down"/>
-                </Popover>) : <Icon className="el-panel-button" type={"angle-down"}/>;
+            popover = hoverTips ? <Popover {...hoverTips} trigger="hover" placement="top">
+                <Icon className="el-panel-button" type="angle-down"/>
+            </Popover> : <Icon className="el-panel-button" type={"angle-down"}/>;
         }
 
         return (
