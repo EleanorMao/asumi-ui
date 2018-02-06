@@ -123,6 +123,11 @@ export const api = [{
     'default': "({name, value})=>{}",
     description: "invoke when tag create or delete"
 }, {
+    property: "onRemove",
+    type: "func",
+    'default': "({value, index, e})=>{}",
+    description: "invoke when tag removed"
+}, {
     property: "onKeyDown",
     type: "func",
     'default': "(e)=>{}",

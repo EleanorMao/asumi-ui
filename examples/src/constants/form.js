@@ -505,6 +505,16 @@ export const apiOfFormItem = [{
     'default': "",
     description: "label width"
 }, {
+    property: "labelClassName",
+    type: "string",
+    'default': "",
+    description: "label class name"
+}, {
+    property: "controlClassName",
+    type: "string",
+    'default': "",
+    description: "control class name"
+}, {
     property: "type",
     type: "string",
     'default': "text",

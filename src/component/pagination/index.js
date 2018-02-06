@@ -52,7 +52,7 @@ export default class Pagination extends Component {
         //逻辑修改为只要当前页不是首页，则可点击(原逻辑：看不见首页才能点击首页)
         let PageButtons = [
             <PageButton
-                disabled={current === 1}
+                disabled={current === 1 || totalPages < 1}
                 label={startLabel} hidden={hideStartLabel} pgBtn={true}
                 key='start' onClick={() => onPageChange(1, sizePerPage)}/>,
             <PageButton

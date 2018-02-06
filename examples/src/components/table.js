@@ -1,8 +1,8 @@
-import React, {Component}                                                      from "react";
-import {Table, Col}                                                            from "../../../src";
-import {data, list, noKeyData,}                                                from "../mock/data";
-import Panel                                                                   from "./panel";
-import {basic, sort, fixed, tree, pagination, colspan_rowspan, checkbox_radio} from "../constants/table";
+import React, {Component}                                                                   from "react";
+import {Table, Col}                                                                         from "../../../src";
+import {data, list, noKeyData,}                                                             from "../mock/data";
+import Panel                                                                                from "./panel";
+import {basic, sort, fixed, tree, pagination, stretchable, colspan_rowspan, checkbox_radio} from "../constants/table";
 
 export default class Main extends Component {
     constructor() {
@@ -283,11 +283,31 @@ export default class Main extends Component {
                         <Col dataField="d">第七列</Col>
                     </Table>
                 </Panel>
+                <Panel
+                    title="stretchable"
+                    code={stretchable}
+                >
+                    <Table
+                        isKey="id"
+                        data={list}
+                        hover={true}
+                        striped={true}
+                        stretchable={true}
+                    >
+                        <Col dataField="id" dataAlign="center" hidden={true}>ID</Col>
+                        <Col dataAlign="center" dataField="regionRoleName" width={150}>区域角色</Col>
+                        <Col dataAlign="center" dataField="systemRoleName">系统角色</Col>
+                        <Col dataAlign="center" dataField="createTime"
+                             dataFormat={this.timeRender.bind(this)}>创建时间</Col>
+                    </Table>
+                </Panel>
                 <h1>API</h1>
                 <div>
-                    Almost same as <a
-                    href="https://github.com/EleanorMao/React-TreeTable/blob/master/README.md">React-TreeTable</a>.
-                    But, 'isTree' default value is false.
+                    <p>Almost same as <a
+                        href="https://github.com/EleanorMao/React-TreeTable/blob/master/README.md">React-TreeTable</a>.
+                    </p>
+                    <p>But, 'isTree' default value is false.</p>
+                    <p>'stretchable': if column stretchable</p>
                 </div>
             </div>
         );
