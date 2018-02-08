@@ -1,14 +1,9 @@
 /**
  * Created by elly on 2017/4/7.
  */
-import React, {Component, PropTypes} from 'react';
-import {
-    Modal,
-    Button,
-    Table,
-    Col
-} from '../../../src';
-import Panel from './panel';
+import React, {Component, PropTypes}             from 'react';
+import Panel                                     from './panel';
+import {Modal, Button, Table, Col}               from '../../../src';
 import {confirm, basic, size, footer, mask, api} from "../constants/modal";
 
 export default class Main extends Component {
@@ -20,14 +15,14 @@ export default class Main extends Component {
             visible3: false,
             visible4: false,
             visible5: false
-        }
+        };
     }
 
     handleClick(name, visible) {
         this.setState(prev => {
             prev[name] = visible;
             return prev;
-        })
+        });
     }
 
     handleShow() {
@@ -35,10 +30,10 @@ export default class Main extends Component {
             title: 'Confirm Title',
             content: '今天吃不吃龙虾饭？',
             onOk: () => {
-                alert('没毛病！')
+                alert('没毛病！');
             },
             onClose: () => {
-                alert('╮(╯_╰)╭')
+                alert('╮(╯_╰)╭');
             },
             okText: '吃',
             closeText: '( *^-^)ρ(*╯^╰)不吃'
@@ -168,6 +163,6 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

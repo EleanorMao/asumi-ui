@@ -2,11 +2,11 @@
  * Created by elly on 2017/4/7.
  */
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import Animate from '../animate';
-import classnames from 'classnames';
-import {extend} from '../util';
+import PropTypes          from 'prop-types';
+import ReactDOM           from 'react-dom';
+import Animate            from '../animate';
+import classnames         from 'classnames';
+import {extend}           from '../util';
 
 let uuid = 1;
 let _el_message_content = null;
@@ -19,7 +19,7 @@ export default class Message extends Component {
     componentDidMount() {
         let {duration, onDestroy} = this.props;
         setTimeout(() => {
-            onDestroy()
+            onDestroy();
         }, duration);
     }
 
@@ -29,9 +29,9 @@ export default class Message extends Component {
         return (
             <div className={_className}>
                 {!!icon && <span className="el-message-icon">{icon}</span>}
-                <span className="el-message-content" dangerouslySetInnerHTML={{__html: content}} />
+                <span className="el-message-content" dangerouslySetInnerHTML={{__html: content}}/>
             </div>
-        )
+        );
     }
 }
 
@@ -56,7 +56,7 @@ class MessageGroup extends Component {
     }
 
     componentDidMount() {
-        this.props.getRef(this)
+        this.props.getRef(this);
     }
 
     removeMessage({key, onClose}) {
@@ -90,11 +90,11 @@ class MessageGroup extends Component {
                                 key={props.key}
                                 onDestroy={this.removeMessage.bind(this, props)}
                             />
-                        )
+                        );
                     })}
                 </Animate>
             </div>
-        )
+        );
     }
 }
 
@@ -127,47 +127,47 @@ function pushMessage(props) {
 
 Message.confirm = (props) => {
     if (typeof props === "string") {
-        props = {content: props}
+        props = {content: props};
     }
-    return confirm(props)
+    return confirm(props);
 };
 
 Message.info = (props) => {
     if (typeof props === "string") {
-        props = {content: props}
+        props = {content: props};
     }
     props = extend({type: 'info', icon: <i className="fa fa-info-circle"/>,}, props);
-    return confirm(props)
+    return confirm(props);
 };
 
 Message.warning = (props) => {
     if (typeof props === "string") {
-        props = {content: props}
+        props = {content: props};
     }
     props = extend({type: 'warning', icon: <i className="fa fa-exclamation-triangle"/>,}, props);
-    return confirm(props)
+    return confirm(props);
 };
 
 Message.success = (props) => {
     if (typeof props === "string") {
-        props = {content: props}
+        props = {content: props};
     }
     props = extend({type: 'success', icon: <i className="fa fa-smile-o"/>,}, props);
-    return confirm(props)
+    return confirm(props);
 };
 
 Message.danger = Message.error = (props) => {
     if (typeof props === "string") {
-        props = {content: props}
+        props = {content: props};
     }
     props = extend({type: 'danger', icon: <i className="fa fa-close"/>,}, props);
-    return confirm(props)
+    return confirm(props);
 };
 
 Message.loading = (props) => {
     if (typeof props === "string") {
-        props = {content: props}
+        props = {content: props};
     }
     props = extend({icon: <i className="fa fa-circle-o-notch fa-spin"/>}, props);
-    return confirm(props)
+    return confirm(props);
 };
