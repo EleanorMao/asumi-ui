@@ -1,15 +1,27 @@
 /**
  * Created by elly on 2017/4/7.
  */
-import React, {Component} from 'react';
-import PropTypes          from 'prop-types';
-import Button             from '../button';
-import classnames         from 'classnames';
-import {noop}             from "../util";
+import React, {Component}        from 'react';
+import PropTypes                 from 'prop-types';
+import Button                    from '../button';
+import classnames                from 'classnames';
+import {noop, getScrollBarWidth} from "../util";
 
 export default class Modal extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        if ((window.innerHeight || document.documentElement.clientHeight) < document.body.scrollHeight) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = getScrollBarWidth() + 'px';
+        }
+    }
+
+    componentWillUnmount() {
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
     }
 
     render() {

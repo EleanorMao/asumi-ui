@@ -15,7 +15,6 @@ export default function confirm(props) {
     props.onOk = ok;
 
     function remove() {
-        document.body.style.overflow = "";
         if (ReactDOM.unmountComponentAtNode(div) && div) {
             document.body.removeChild(div);
         }
@@ -32,7 +31,6 @@ export default function confirm(props) {
     }
 
     const renderToDom = ReactDOM.render || ReactDOM.hydrate;
-    document.body.style.overflow = 'hidden';
     renderToDom(
         <Modal {...props}>
             {props.content}

@@ -10,7 +10,6 @@ import confirm            from './confirm';
 
 function renderComponent(instance) {
     if (instance.props.visible) {
-        document.body.style.overflow = 'hidden';
         if (!instance.container) {
             instance.container = instance.getContainer();
         }
@@ -53,7 +52,6 @@ export default class Wrap extends Component {
     }
 
     removeComponent() {
-        document.body.style.overflow = "";
         if (this.container) {
             ReactDOM.unmountComponentAtNode(this.container);
             document.body.removeChild(this.container);
