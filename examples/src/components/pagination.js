@@ -6,8 +6,8 @@ import {
     Pagination,
     SimplePagination,
     Table, Col
-} from '../../../src';
-import Panel from './panel';
+}                         from '../../../src';
+import Panel              from './panel';
 import {
     api,
     basic,
@@ -17,7 +17,7 @@ import {
     customersButton,
     hideButton,
     apiOfSimple
-} from "../constants/pagination";
+}                         from "../constants/pagination";
 
 export default class Main extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ export default class Main extends Component {
             current: 1,
             dataSize: 100,
             sizePerPage: 6
-        }
+        };
     }
 
     handlePageChange(current, sizePerPage) {
@@ -144,6 +144,6 @@ export default class Main extends Component {
                     <Col dataField="default">Default</Col>
                 </Table>
             </div>
-        )
+        );
     }
 }

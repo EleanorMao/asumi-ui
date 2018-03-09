@@ -37,7 +37,7 @@ export default class Pagination extends Component {
             showTotalPages
         } = this.props;
         const totalPages = Math.ceil(dataSize / sizePerPage);
-        if (current > paginationSize - 1) {
+        if (current > paginationSize - 1 && current <= totalPages) {
             this.lastPage = Math.min(totalPages, current + paginationSize - this.center - 1);
             if (current > this.finalStartPage) {
                 this.startPage = this.finalStartPage;
@@ -56,7 +56,7 @@ export default class Pagination extends Component {
                 label={startLabel} hidden={hideStartLabel} pgBtn={true}
                 key='start' onClick={() => onPageChange(1, sizePerPage)}/>,
             <PageButton
-                label={prevLabel} disabled={current === 1} pgBtn={true}
+                label={prevLabel} disabled={current <= 1 || !dataSize} pgBtn={true}
                 key='prev' onClick={() => onPageChange(current - 1, sizePerPage)}/>
         ];
         for (let i = this.startPage; i < this.lastPage + 1; i++) {
