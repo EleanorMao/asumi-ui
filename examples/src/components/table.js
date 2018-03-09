@@ -35,6 +35,7 @@ export default class Main extends Component {
         const options = {
             page: 1,
             sizePerPage: 3,
+            paginationShowsTotal: true,
             onPageChange: function (page, sizePerPage) {
                 console.log(page, sizePerPage);
             }

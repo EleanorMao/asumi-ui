@@ -738,11 +738,12 @@ export default class Table extends Component {
             const current = remote ? (options.page - 1) * len : (this.state.currentPage - 1) * len;
             const start = remote ? current + 1 : Math.min(data.length, current + 1);
             const to = remote ? current + data.length : Math.min(data.length, current + len);
+            const length = remote ? dataSize : data.length;
             return (
-                <div style={{margin: '20px 0 0 20px ', display: 'inline-block'}}>
+                <div style={{margin: '20px 0 0 0', display: 'inline-block'}}>
                     {
                         options.paginationShowsTotal === true ?
-                            <div>显示 {start} 至 {to}条 共{remote ? dataSize : data.length}条</div> :
+                            <div>{length > 0 ? `显示 ${start} 至 ${to}条` : `显示 0 条`} 共{length}条</div> :
                             options.paginationShowsTotal(start, to, dataSize)
                     }
                 </div>
