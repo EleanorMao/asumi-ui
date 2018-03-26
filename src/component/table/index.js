@@ -88,10 +88,18 @@ function getLastChild(data, selectRow) {
     return cellIndex;
 }
 
+function getNextPage(page, size, total) {
+    let start = (page - 1) * size;
+    if (start > total) {
+        return Math.ceil(total / size);
+    }
+    return page;
+}
+
 function getDefLength(props, length = 10) {
     if (props.pagination || props.topPagination) {
         if (props.options) {
-            let {sizePerPage, sizePageList} = props.options;
+            let { sizePerPage, sizePageList } = props.options;
             if ('sizePerPage' in props.options) {
                 return sizePerPage;
             } else {
@@ -113,7 +121,7 @@ export default class Table extends Component {
         this.lastChild = 0;
         this._instance = {};
         this.currentCell = null;
-        let {data, dictionary} = initDictionary(props);
+        let { data, dictionary } = initDictionary(props);
         this.state = {
             dictionary,
             isHover: null,
@@ -164,7 +172,7 @@ export default class Table extends Component {
     }
 
     _getKeyName() {
-        const {hashKey, isKey, uid} = this.props;
+        const { hashKey, isKey, uid } = this.props;
         return hashKey ? uid : isKey;
     }
 
@@ -368,8 +376,8 @@ export default class Table extends Component {
     }
 
     _tryRender() {
-        const {isTree, isKey, hashKey, selectRow, nestedHead} = this.props;
-        const {leftColumnData, rightColumnData} = this.state;
+        const { isTree, isKey, hashKey, selectRow, nestedHead } = this.props;
+        const { leftColumnData, rightColumnData } = this.state;
         const warning = 'color:red';
 
         if (isTree && !(isKey || hashKey)) {
@@ -408,7 +416,7 @@ export default class Table extends Component {
         this._adjustWidth();
         if (this.props.stretchable) this._stretchWidth();
         addEvent(window, 'resize', this._adjustWidth.bind(this));
-        let {rightContainer, container} = this._instance;
+        let { rightContainer, container } = this._instance;
         addEvent(container, 'scroll', this._scrollHeader.bind(this));
         addEvent(container, 'scroll', this._scrollHeight.bind(this));
         addEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
@@ -417,7 +425,7 @@ export default class Table extends Component {
     componentWillUnmount() {
         this._removeStretchWidth();
         removeEvent(window, 'resize', this._adjustWidth.bind(this));
-        let {rightContainer, container} = this._instance;
+        let { rightContainer, container } = this._instance;
         removeEvent(container, 'scroll', this._scrollHeader.bind(this));
         removeEvent(container, 'scroll', this._scrollHeight.bind(this));
         removeEvent(rightContainer, 'scroll', this._scrollHeight.bind(this));
@@ -434,13 +442,14 @@ export default class Table extends Component {
 
     componentWillReceiveProps(nextProps) {
         this._initColumnData(nextProps);
-        let {data, dictionary} = initDictionary(nextProps);
+        let { data, dictionary } = initDictionary(nextProps);
         this.setState(prevState => {
             prevState.renderedList = data;
             prevState.dictionary = dictionary;
             prevState.length = getDefLength(nextProps, prevState.length);
             prevState.allChecked = this._isAllChecked(data, nextProps.selectRow);
-            prevState.currentPage = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
+            let page = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
+            prevState.currentPage = getNextPage(page, prevState.length, prevState.length);
             return prevState;
         });
     }
@@ -452,7 +461,7 @@ export default class Table extends Component {
             parent
         } = option;
         const that = this;
-        const {hashKey, clickToCloseAll, childrenPropertyName} = this.props;
+        const { hashKey, clickToCloseAll, childrenPropertyName } = this.props;
         const keyName = this._getKeyName();
         let callback = (data) => {
             let childList = data && data[childrenPropertyName] || [];
@@ -539,13 +548,14 @@ export default class Table extends Component {
     handleFlip(length) {
         const {
             remote,
-            options
+            options,
+            dataSize
         } = this.props;
-        const page = remote ? options.page : this.state.currentPage;
+        const page = remote ? getNextPage(options.page, length, dataSize) : this.state.currentPage;
         if (!remote) {
             this.setState(prevState => {
                 prevState.length = length;
-                if (!remote && (page - 1) * length > prevState.renderedList.length) {
+                if ((page - 1) * length > prevState.renderedList.length) {
                     prevState.currentPage = 1;
                 }
                 return prevState;
@@ -566,7 +576,7 @@ export default class Table extends Component {
     colgroupRender(data, mode) {
         let output = [];
         if (mode && mode !== 'none') {
-            output.push(<col key="select" style={{textAlign: 'center', width: 46}}/>);
+            output.push(<col key="select" style={{ textAlign: 'center', width: 46 }} />);
         }
         data.map((item, index) => {
             let style = {
@@ -576,7 +586,7 @@ export default class Table extends Component {
                 display: item.hidden && 'none'
             };
             output.push(
-                <col style={style} key={index}/>
+                <col style={style} key={index} />
             );
         });
         return output;
@@ -657,7 +667,7 @@ export default class Table extends Component {
     bodyRender(data, className, height, selectRow) {
         let columnData = this.state.columnData;
         return (
-            <div className="el-table-container el-table-body-container" style={{height: height || 'auto'}}
+            <div className="el-table-container el-table-body-container" style={{ height: height || 'auto' }}
                  ref={(c) => {
                      this._instance.container = c;
                  }}>
@@ -740,7 +750,7 @@ export default class Table extends Component {
             const to = remote ? current + data.length : Math.min(data.length, current + len);
             const length = remote ? dataSize : data.length;
             return (
-                <div style={{margin: '20px 0 0 0', display: 'inline-block'}}>
+                <div style={{ margin: '20px 0 0 0', display: 'inline-block' }}>
                     {
                         options.paginationShowsTotal === true ?
                             <div>{length > 0 ? `显示 ${start} 至 ${to}条` : `显示 0 条`} 共{length}条</div> :
@@ -858,7 +868,7 @@ export default class Table extends Component {
 
     //如果没有要求没有数据时隐藏分页，则显示(测试梅梅要求)
     pagingRowRender() {
-        let {pagination, options, data} = this.props;
+        let { pagination, options, data } = this.props;
         if (!pagination) return null;
         if (!data.length && options && options.hidePaginationWhileNoData) return null;
         return (
@@ -875,7 +885,7 @@ export default class Table extends Component {
     }
 
     topPagingRowRender() {
-        let {topPagination, options, data} = this.props;
+        let { topPagination, options, data } = this.props;
         if (!topPagination) return null;
         if (!data.length && options && options.hidePaginationWhileNoData) return null;
         return (
@@ -951,7 +961,7 @@ export default class Table extends Component {
                     selectRow={selectRow} lineWrap={lineWrap}
                     cols={columnData}
                 />}
-                <div className="el-table-wrapper" style={{width: width || '100%'}}
+                <div className="el-table-wrapper" style={{ width: width || '100%' }}
                      ref={c => this._instance.table_wrapper = c}>
                     <div className="el-table">
                         <Header
@@ -987,7 +997,7 @@ export default class Table extends Component {
                             ref={(c) => {
                                 this._instance.leftContainer = c;
                             }} className="el-table-container el-table-body-container"
-                            style={{height: height || 'auto'}}>
+                            style={{ height: height || 'auto' }}>
                             {this.leftBodyRender(renderList, className, selectRow)}
                         </div>
                     </div>
@@ -1006,7 +1016,7 @@ export default class Table extends Component {
                         <div ref={(c) => {
                             this._instance.rightContainer = c;
                         }} className="el-table-container el-table-body-container"
-                             style={{height: height || 'auto'}}>
+                             style={{ height: height || 'auto' }}>
                             {this.rightBodyRender(renderList, className)}
                         </div>
                     </div>
