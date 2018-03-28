@@ -1,4 +1,4 @@
-#ASUMI
+# ASUMI
 
 ## HOMEPAGE
 [homepage](http://chashaobao.net/asumi-ui)
@@ -19,38 +19,38 @@
 asumi icons use <a href="http://fontawesome.io/">Font Awesome</a>
 
 ## Component
-* <input type="checkbox" checked/> Grid
-* <input type="checkbox" checked/> Button
-* <input type="checkbox" checked/> Tag
-* <input type="checkbox" checked/> Tab
-* <input type="checkbox" checked/> Input
-* <input type="checkbox" checked/> NumberInput
-* <input type="checkbox" checked/> TagInput
-* <input type="checkbox" checked/> Select
-* <input type="checkbox" checked/> Radio
-* <input type="checkbox" checked/> Checkbox
-* <input type="checkbox" checked/> Switch
-* <input type="checkbox" checked/> RadioGroup
-* <input type="checkbox" checked/> CheckboxGroup
-* <input type="checkbox" checked/> Markdown Editor
-* <input type="checkbox" checked/> Upload
-* <input type="checkbox" checked/> DateTime
-* <input type="checkbox" checked/> Form
-* <input type="checkbox" checked/> FormIem
-* <input type="checkbox" checked/> Table
-* <input type="checkbox" checked/> Pagination
-* <input type="checkbox" checked/> Tooltip
-* <input type="checkbox" checked/> Popover
-* <input type="checkbox" checked/> Message
-* <input type="checkbox" checked/> Modal
-* <input type="checkbox" checked/> Dropdown
-* <input type="checkbox" checked/> Menu
-* <input type="checkbox" checked/> MenuItem
-* <input type="checkbox" checked/> MenuItemGroup
-* <input type="checkbox" checked/> SubMenu
-* <input type="checkbox" checked/> Animate
-* <input type="checkbox" checked/> Loading
-* <input type="checkbox" checked/> Transfer
+* [x] Grid
+* [x] Button
+* [x] Tag
+* [x] Tab
+* [x] Input
+* [x] NumberInput
+* [x] TagInput
+* [x] Select
+* [x] Radio
+* [x] Checkbox
+* [x] Switch
+* [x] RadioGroup
+* [x] CheckboxGroup
+* [x] Markdown Editor
+* [x] Upload
+* [x] DateTime
+* [x] Form
+* [x] FormIem
+* [x] Table
+* [x] Pagination
+* [x] Tooltip
+* [x] Popover
+* [x] Message
+* [x] Modal
+* [x] Dropdown
+* [x] Menu
+* [x] MenuItem
+* [x] MenuItemGroup
+* [x] SubMenu
+* [x] Animate
+* [x] Loading
+* [x] Transfer
 
 ## Theme
 default font-size is **13px**.
