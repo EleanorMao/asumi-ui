@@ -21,6 +21,7 @@ asumi icons use <a href="http://fontawesome.io/">Font Awesome</a>
 ## Component
 * [x] Grid
 * [x] Button
+* [x] Panel
 * [x] Tag
 * [x] Tab
 * [x] Input
