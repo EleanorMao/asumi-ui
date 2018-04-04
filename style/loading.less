@@ -1,5 +1,4 @@
 .el-loading-wrapper {
-  display: none;
   min-height: 180px;
   position: relative;
   &.el-loading-fixed {
@@ -20,12 +19,13 @@
     color: @d_primary;
   }
   .el-loading-children {
+    &.el-loading-blur {
+      opacity: .8;
+      filter: blur(.7px);
+      -webkit-filter: blur(.7px);
+    }
     z-index: 0;
-    opacity: .8;
-    padding: 0.7692rem;
-    filter: blur(.7px);
     position: relative;
-    -webkit-filter: blur(.7px);
   }
   .el-loading-body {
     top: 0;

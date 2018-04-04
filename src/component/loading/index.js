@@ -1,13 +1,13 @@
 /**
  * Created by elly on 2017/4/11.
  */
-import ReactDOM           from 'react-dom';
-import React, {Component} from 'react';
-import PropTypes          from 'prop-types';
-import classnames         from 'classnames';
-import ChaseDot           from './chaseDot';
-import Stretch            from './stretch';
-import Bounce             from './bounce';
+import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import ChaseDot from './chaseDot';
+import Stretch from './stretch';
+import Bounce from './bounce';
 
 export default class Loading extends Component {
     constructor(props) {
@@ -18,13 +18,13 @@ export default class Loading extends Component {
         let output;
         switch (type) {
             case 'chase-dots':
-                output = <ChaseDot/>;
+                output = <ChaseDot />;
                 break;
             case 'bounce':
-                output = <Bounce/>;
+                output = <Bounce />;
                 break;
             default:
-                output = <Stretch/>;
+                output = <Stretch />;
                 break;
         }
 
@@ -32,11 +32,12 @@ export default class Loading extends Component {
     }
 
     render() {
-        let {size, title, mask, type, fullScreen, loading, className, children} = this.props;
+        let { size, title, mask, type, fullScreen, loading, className, children } = this.props;
         let _className = classnames('el-loading-wrapper', className, fullScreen ? 'el-loading-fixed' : null, size ? `el-${size}` : null);
         return (
-            <div className={_className} style={loading ? {display: 'block'} : {display: 'none'}}>
-                <div className={`el-loading-body ${mask ? 'el-loading-mask' : ''}`}>
+            <div className={_className} style={{ display: ((mask && !fullScreen) || loading ? 'block' : 'none') }}>
+                <div className={`el-loading-body ${mask ? 'el-loading-mask' : ''}`}
+                     style={(mask && !fullScreen) ? { display: loading ? 'block' : 'none' } : null}>
                     <div className="el-loading-nest">
                         <div className="el-loading-content">
                             {this.childRender(type)}
@@ -46,7 +47,7 @@ export default class Loading extends Component {
                     </div>
                 </div>
                 {!!children &&
-                <div className="el-loading-children">
+                <div className={`el-loading-children ${mask && loading ? 'el-loading-blur' : ''}`}>
                     {children}
                 </div>}
             </div>
@@ -64,7 +65,7 @@ Loading.loading = (props = {}) => {
         document.body.appendChild(_el_loading_content);
     }
     const renderToDom = ReactDOM.render || ReactDOM.hydrate;
-    renderToDom(<Loading {...props}/>, _el_loading_content);
+    renderToDom(<Loading {...props} />, _el_loading_content);
 };
 
 Loading.close = () => {
