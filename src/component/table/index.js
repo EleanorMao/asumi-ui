@@ -449,7 +449,7 @@ export default class Table extends Component {
             prevState.length = getDefLength(nextProps, prevState.length);
             prevState.allChecked = this._isAllChecked(data, nextProps.selectRow);
             let page = (nextProps.pagination || nextProps.topPagination) && nextProps.options.page || this.state.currentPage;
-            prevState.currentPage = getNextPage(page, prevState.length, prevState.length);
+            prevState.currentPage = getNextPage(page, prevState.length, data.length);
             return prevState;
         });
     }
