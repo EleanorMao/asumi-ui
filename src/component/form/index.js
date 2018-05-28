@@ -188,7 +188,7 @@ export default class Form extends Component {
                     let {onChange, value, name, ...others} = props;
                     return (
                         <FormItem
-                            value={value in props ? value : data && data[name]}
+                            value={'value' in props ? value : data && data[name]}
                             onChange={onChange || this.handleChange.bind(this, props)}
                             key={name + '.' + index}
                             requiredMark={requiredMark}
