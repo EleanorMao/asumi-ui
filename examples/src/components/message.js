@@ -50,16 +50,6 @@ export default class Main extends Component {
                         <Button type="danger" onClick={() => {
                             Message.danger({content: 'danger'})
                         }}>danger</Button>
-                        <pre><code>{`Message.error({content: 'error', duration: 2000, onClose: ()=>{console.log('closed')}})`}</code></pre>
-                        <Button type="error" onClick={() => {
-                            Message.error({
-                                content: 'error. and duration is 2000',
-                                duration: 2000,
-                                onClose: () => {
-                                    console.log('closed')
-                                }
-                            })
-                        }}>danger</Button>
                         <pre><code>{`Message.success({content: 'success'})`}</code></pre>
                         <pre><code>{`Message.success('success')`}</code></pre>
                         <Button type="success" onClick={() => {
@@ -70,6 +60,20 @@ export default class Main extends Component {
                         <Button type="warning" onClick={() => {
                             Message.loading({content: 'loading'})
                         }}><i className="fa fa-circle-o-notch fa-spin"/></Button>
+                        <pre><code>{`Message.info({content: 'info',duration: null})`}</code></pre>
+                        <Button type="primary" onClick={() => {
+                            Message.info({content: 'info',duration: null})
+                        }}>primary</Button>
+                        <pre><code>{`Message.error({content: 'error', duration: 2000, onClose: ()=>{console.log('closed')}})`}</code></pre>
+                        <Button type="error" onClick={() => {
+                            Message.error({
+                                content: 'error. and duration is 2000',
+                                duration: 2000,
+                                onClose: () => {
+                                    console.log('closed')
+                                }
+                            })
+                        }}>danger</Button>
                     </Group>
                 </Panel>
                 <h1>API</h1>

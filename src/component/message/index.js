@@ -14,20 +14,31 @@ let _el_message_content = null;
 export default class Message extends Component {
     constructor(props) {
         super(props);
+        this.timer = null;
     }
 
     componentDidMount() {
-        let {duration, onDestroy} = this.props;
-        setTimeout(() => {
-            onDestroy();
-        }, duration);
+        let {duration} = this.props;
+        if (duration) {
+            this.timer = setTimeout(() => {
+                if (this.timer) {
+                    this.handleDestroy();
+                }
+            }, duration);
+        }
+    }
+
+    handleDestroy(){
+        this.props.onDestroy();
+        window.clearTimeout(this.timer);
+        this.timer = null;
     }
 
     render() {
         let {icon, type, content} = this.props;
         let _className = classnames('el-message', 'el-move-down', type ? `el-${type}` : '');
         return (
-            <div className={_className}>
+            <div className={_className} onClick={this.handleDestroy.bind(this)}>
                 {!!icon && <span className="el-message-icon">{icon}</span>}
                 <span className="el-message-content" dangerouslySetInnerHTML={{__html: content}}/>
             </div>
